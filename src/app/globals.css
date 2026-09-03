@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- Brand palette: purple · pink · cream ---- */
+  --color-grape-50: #f6f1fe;
+  --color-grape-100: #ede4fb;
+  --color-grape-200: #ddccf7;
+  --color-grape-300: #c6a9f0;
+  --color-grape-400: #ab7fe6;
+  --color-grape-500: #9257da;
+  --color-grape-600: #7c3fc4;
+  --color-grape-700: #6831a2;
+  --color-grape-800: #562b84;
+  --color-grape-900: #47256b;
+
+  --color-blossom-50: #fef1f7;
+  --color-blossom-100: #fde3ef;
+  --color-blossom-200: #fbc7df;
+  --color-blossom-300: #f89bc4;
+  --color-blossom-400: #f265a2;
+  --color-blossom-500: #e8408a;
+  --color-blossom-600: #d3236e;
+
+  --color-cream-50: #fffdf8;
+  --color-cream-100: #fdf6ec;
+  --color-cream-200: #faedd8;
+  --color-cream-white: #fff8ee;
+
+  /* หมึกดำอมม่วง + ม่วงเข้มสำหรับปุ่ม/ตัวอักษรหลัก */
+  --color-ink: #29212e;
+  --color-ink-soft: #575062;
+  --color-grape-deep: #6d3aa8;
+
+  --font-display: var(--font-mitr), system-ui, sans-serif;
+  --font-body: var(--font-prompt), system-ui, sans-serif;
+
+  --shadow-soft: 0 12px 30px -12px rgba(124, 63, 196, 0.28);
+  --shadow-card: 0 18px 40px -20px rgba(124, 63, 196, 0.35);
+}
+
+:root {
+  --page-top: #fbf7f1;
+  --page-bottom: #fbf6f3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background:
+    radial-gradient(900px 480px at 12% -8%, rgba(168, 124, 224, 0.14) 0%, transparent 55%),
+    radial-gradient(760px 420px at 100% -6%, rgba(240, 130, 180, 0.12) 0%, transparent 52%),
+    linear-gradient(180deg, var(--page-top) 0%, #f8f4fa 45%, var(--page-bottom) 100%);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Cute utility helpers */
+.glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.text-gradient {
+  background: linear-gradient(120deg, #7c3fc4 0%, #e8408a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hover-lift {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes floaty-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(4deg);
+  }
+}
+.animate-floaty-slow {
+  animation: floaty-slow 8s ease-in-out infinite;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-pop-in {
+  animation: pop-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* thin, cute scrollbar for the menu rail */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
