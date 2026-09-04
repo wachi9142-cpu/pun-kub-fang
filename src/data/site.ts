@@ -34,6 +34,7 @@ export type SmoothiePalette = {
 /* ---------- หมวดหมู่เครื่องดื่ม ---------- */
 export type CategoryId =
   | "fruit"
+  | "seasonal"
   | "soda"
   | "bearmilk"
   | "tea"
@@ -98,6 +99,14 @@ export const DRINK_CATEGORIES: DrinkCategory[] = [
     palette: { foam: "#f3ecff", top: "#b98cf0", bottom: "#7c3fc4" },
     tint: "from-grape-100 to-grape-200/60",
   },
+  {
+    id: "seasonal",
+    label: "ผลไม้ปั่นตามฤดูกาล",
+    emoji: "🍉",
+    desc: "ผลไม้ตามฤดู สดใหม่หมุนเวียน",
+    palette: { foam: "#fff0f2", top: "#ff8faa", bottom: "#e8455f" },
+    tint: "from-lime-100 to-rose-200/50",
+  },
 ];
 
 /* ---------- เมนูเครื่องดื่มทั้งหมด ---------- */
@@ -159,6 +168,51 @@ export const MENU_ITEMS: MenuItem[] = [
     emoji: "🔵",
     category: "fruit",
     palette: { foam: "#eef0ff", top: "#8f9bf0", bottom: "#5257c9" },
+  },
+
+  /* 🍉 ผลไม้ปั่นตามฤดูกาล */
+  {
+    id: "watermelon-smoothie",
+    name: "แตงโมปั่น",
+    tagline: "แตงโมหวานฉ่ำ เย็นชื่นใจ",
+    price: 50,
+    likes: 118,
+    emoji: "🍉",
+    category: "seasonal",
+    badge: "ตามฤดู",
+    popular: true,
+    palette: { foam: "#fff0f2", top: "#ff8faa", bottom: "#e8455f" },
+  },
+  {
+    id: "cantaloupe-milk",
+    name: "แคนตาลูปนมสดปั่น",
+    tagline: "แคนตาลูปหอมหวาน + นมสด",
+    price: 55,
+    likes: 84,
+    emoji: "🍈",
+    category: "seasonal",
+    palette: { foam: "#fdfbe8", top: "#ffe08a", bottom: "#f2a52c" },
+  },
+  {
+    id: "pineapple-smoothie",
+    name: "สับปะรดปั่น",
+    tagline: "สับปะรดหวานอมเปรี้ยว สดชื่น",
+    price: 50,
+    likes: 72,
+    emoji: "🍍",
+    category: "seasonal",
+    palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" },
+  },
+  {
+    id: "lychee-smoothie",
+    name: "ลิ้นจี่ปั่น",
+    tagline: "ลิ้นจี่หอมหวาน เนื้อนุ่มละมุน",
+    price: 55,
+    likes: 90,
+    emoji: "🌸",
+    category: "seasonal",
+    badge: "ตามฤดู",
+    palette: { foam: "#fff5fb", top: "#ffc0e6", bottom: "#e86fb0" },
   },
 
   /* อิตาเลียนโซดา */
