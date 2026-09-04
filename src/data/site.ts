@@ -121,6 +121,8 @@ export type MenuItem = {
   palette: SmoothiePalette;
   badge?: string;
   popular?: boolean;
+  /** รูปจริงของเมนู เช่น "/menu/grape-yogurt.webp" — ถ้าไม่ใส่จะใช้แก้ว SVG อัตโนมัติ */
+  image?: string;
 };
 
 export const MENU_ITEMS: MenuItem[] = [

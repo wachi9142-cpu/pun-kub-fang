@@ -16,6 +16,9 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
   const { addItem } = useCart();
   const [liked, setLiked] = useState(false);
   const [added, setAdded] = useState(false);
+  const [imgFailed, setImgFailed] = useState(false);
+
+  const showImage = Boolean(item.image) && !imgFailed;
 
   const handleAdd = () => {
     addItem({ id: item.id, name: item.name, price: item.price });
@@ -39,10 +42,20 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
         <Heart size={16} fill={liked ? "#f0507f" : "transparent"} />
       </button>
 
-      <div className="relative grid h-44 place-items-center rounded-2xl bg-gradient-to-b from-grape-50 to-blossom-50/70">
-        <div className="transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3">
-          <SmoothieCup palette={item.palette} emoji={item.emoji} size={128} />
-        </div>
+      <div className="relative grid h-44 place-items-center overflow-hidden rounded-2xl bg-gradient-to-b from-grape-50 to-blossom-50/70">
+        {showImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={item.image}
+            alt={item.name}
+            onError={() => setImgFailed(true)}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3">
+            <SmoothieCup palette={item.palette} emoji={item.emoji} size={128} />
+          </div>
+        )}
       </div>
 
       <div className="mt-3 flex flex-1 flex-col">
