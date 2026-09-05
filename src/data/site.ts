@@ -5,6 +5,7 @@ export type NavItem = { label: string; href: string };
 export const NAV_ITEMS: NavItem[] = [
   { label: "หน้าแรก", href: "#home" },
   { label: "เมนูเครื่องดื่ม", href: "#menu" },
+  { label: "ท็อปปิ้ง", href: "#toppings" },
   { label: "มิกซ์กับฟ่าง ✨", href: "#mix" },
   { label: "โปรโมชั่น", href: "#promo" },
   { label: "เกี่ยวกับร้าน", href: "#about" },
@@ -15,6 +16,8 @@ export const NAV_ITEMS: NavItem[] = [
 export const FOOTER_LINKS: NavItem[] = [
   { label: "หน้าแรก", href: "#home" },
   { label: "เมนูเครื่องดื่ม", href: "#menu" },
+  { label: "ท็อปปิ้ง", href: "#toppings" },
+  { label: "ราคาเมนู", href: "#pricing" },
   { label: "มิกซ์กับฟ่าง", href: "#mix" },
   { label: "โปรโมชั่น", href: "#promo" },
   { label: "รีวิวลูกค้า", href: "#reviews" },
@@ -39,7 +42,8 @@ export type CategoryId =
   | "bearmilk"
   | "tea"
   | "coffee"
-  | "soft";
+  | "soft"
+  | "herbal";
 
 export type DrinkCategory = {
   id: CategoryId;
@@ -98,6 +102,14 @@ export const DRINK_CATEGORIES: DrinkCategory[] = [
     desc: "ซ่า เย็น ดับกระหาย",
     palette: { foam: "#f3ecff", top: "#b98cf0", bottom: "#7c3fc4" },
     tint: "from-grape-100 to-grape-200/60",
+  },
+  {
+    id: "herbal",
+    label: "น้ำสมุนไพรโฮมเมด",
+    emoji: "🌿",
+    desc: "โฮมเมด สดชื่น ราคาเบา ๆ",
+    palette: { foam: "#eef7ea", top: "#9ec97e", bottom: "#4f8a3c" },
+    tint: "from-lime-100 to-emerald-200/50",
   },
   {
     id: "seasonal",
@@ -435,6 +447,7 @@ export const MENU_ITEMS: MenuItem[] = [
     category: "soft",
     palette: { foam: "#f3ecff", top: "#b98cf0", bottom: "#7c3fc4" },
   },
+
 ];
 
 /* ---------- มิกซ์กับฟ่าง (ปั่นเอง) ---------- */
@@ -465,6 +478,189 @@ export const MIX_TOPPINGS: MixOption[] = [
   { id: "cookie", label: "คุกกี้", emoji: "🍪" },
   { id: "whip", label: "วิปครีม", emoji: "🍨" },
 ];
+
+/* ---------- 🧋 ท็อปปิ้ง | Toppings ---------- */
+export type ToppingItem = {
+  nameTh: string;
+  nameEn: string;
+  /** ราคาเพิ่มต่อ 1 ท็อปปิ้ง (บาท) */
+  price: number;
+};
+
+export type ToppingGroup = {
+  id: string;
+  titleTh: string;
+  titleEn: string;
+  emoji: string;
+  items: ToppingItem[];
+  /** หมายเหตุพิเศษของกลุ่ม (เช่น เรื่องฤดูกาล) */
+  note?: string;
+  noteEn?: string;
+};
+
+export const TOPPING_GROUPS: ToppingGroup[] = [
+  {
+    id: "tapioca",
+    titleTh: "ไข่มุกแป้งมันสำปะหลัง",
+    titleEn: "Tapioca Pearls",
+    emoji: "🟤",
+    items: [
+      { nameTh: "ไข่มุกดำ / ไข่มุกคลาสสิก", nameEn: "Classic Black Tapioca Pearls", price: 5 },
+      { nameTh: "ไข่มุกสีทอง", nameEn: "Golden Tapioca Pearls", price: 5 },
+      { nameTh: "ไข่มุกสีมรกต", nameEn: "Emerald Tapioca Pearls", price: 5 },
+      { nameTh: "ไข่มุกบราวน์ชูการ์", nameEn: "Brown Sugar Tapioca Pearls", price: 10 },
+    ],
+  },
+  {
+    id: "popping",
+    titleTh: "ไข่มุกป๊อป",
+    titleEn: "Popping Boba",
+    emoji: "🟣",
+    items: [
+      { nameTh: "ไข่มุกป๊อปรสสตรอว์เบอร์รี", nameEn: "Strawberry Popping Boba", price: 10 },
+      { nameTh: "ไข่มุกป๊อปรสลิ้นจี่", nameEn: "Lychee Popping Boba", price: 10 },
+      { nameTh: "ไข่มุกป๊อปรสมะม่วง", nameEn: "Mango Popping Boba", price: 10 },
+      { nameTh: "ไข่มุกป๊อปรสเสาวรส", nameEn: "Passion Fruit Popping Boba", price: 10 },
+    ],
+  },
+  {
+    id: "konjac",
+    titleTh: "บุกและคริสตัล",
+    titleEn: "Konjac & Crystal Jelly",
+    emoji: "🟢",
+    items: [
+      { nameTh: "บุกใส / บุกเพชร", nameEn: "Crystal Konjac Jelly", price: 5 },
+      { nameTh: "บุกบราวน์ชูการ์", nameEn: "Brown Sugar Konjac Jelly", price: 5 },
+    ],
+  },
+  {
+    id: "jelly",
+    titleTh: "เยลลี่และวุ้น",
+    titleEn: "Jelly & Jelly Toppings",
+    emoji: "🍮",
+    items: [
+      { nameTh: "วุ้นมะพร้าว", nameEn: "Coconut Jelly", price: 5 },
+      { nameTh: "วุ้นคาราเมล", nameEn: "Caramel Jelly", price: 5 },
+      { nameTh: "เฉาก๊วย", nameEn: "Grass Jelly", price: 5 },
+      { nameTh: "เยลลี่ฟรุตสลัด", nameEn: "Fruit Cocktail Jelly", price: 5 },
+      { nameTh: "เยลลี่องุ่น", nameEn: "Grape Jelly", price: 5 },
+      { nameTh: "เยลลี่สตรอว์เบอร์รี", nameEn: "Strawberry Jelly", price: 5 },
+    ],
+  },
+  {
+    id: "premium",
+    titleTh: "ท็อปปิ้งพรีเมียม",
+    titleEn: "Premium Toppings",
+    emoji: "🍨",
+    items: [
+      { nameTh: "พุดดิ้ง", nameEn: "Pudding", price: 10 },
+      { nameTh: "ครีมชีส", nameEn: "Cream Cheese", price: 10 },
+      { nameTh: "วิปครีม", nameEn: "Whipped Cream", price: 10 },
+      { nameTh: "ไอศกรีม", nameEn: "Ice Cream", price: 10 },
+    ],
+  },
+  {
+    id: "extra-fruit",
+    titleTh: "เพิ่มเนื้อผลไม้",
+    titleEn: "Extra Fruit",
+    emoji: "🥥",
+    note: "เนื้อผลไม้สดบางชนิดมีจำหน่ายตามฤดูกาลและอาจไม่มีให้บริการตลอดเวลา กรุณาสอบถามก่อนสั่ง",
+    noteEn:
+      "Fresh fruit availability may vary by season and may not always be available. Please check with us before ordering.",
+    items: [
+      { nameTh: "เนื้อมะพร้าว", nameEn: "Fresh Coconut Meat", price: 5 },
+      { nameTh: "เนื้อมะม่วง", nameEn: "Fresh Mango", price: 5 },
+      { nameTh: "เนื้อสตรอว์เบอร์รี", nameEn: "Fresh Strawberry", price: 5 },
+      { nameTh: "เนื้อกล้วย", nameEn: "Fresh Banana", price: 5 },
+      { nameTh: "เนื้ออะโวคาโด", nameEn: "Extra Avocado", price: 10 },
+    ],
+  },
+];
+
+/* ---------- 💰 โครงสร้างราคาเมนู | Menu Pricing ---------- */
+export type PriceTier = {
+  emoji: string;
+  labelTh: string;
+  labelEn: string;
+  price: string;
+  note?: string;
+};
+
+export const PRICE_TIERS: PriceTier[] = [
+  { emoji: "🥤", labelTh: "เมนูธรรมดา", labelEn: "Regular Drinks", price: "เริ่มต้น 30฿" },
+  { emoji: "🥛", labelTh: "เมนูนม", labelEn: "Milk Drinks", price: "35–40฿" },
+  {
+    emoji: "🍓",
+    labelTh: "เมนูปั่น",
+    labelEn: "Smoothies",
+    price: "45 / 50 / 60฿",
+    note: "ตามชนิดและต้นทุนวัตถุดิบ",
+  },
+  { emoji: "🥑", labelTh: "อะโวคาโดปั่น", labelEn: "Avocado Smoothie", price: "50฿" },
+  { emoji: "🌿", labelTh: "น้ำสมุนไพรโฮมเมด", labelEn: "Homemade Herbal Drinks", price: "20฿" },
+  { emoji: "🧊", labelTh: "น้ำสมุนไพรปั่น", labelEn: "Blended Herbal Drinks", price: "30฿" },
+  {
+    emoji: "🥥",
+    labelTh: "เพิ่มเนื้อผลไม้ / ท็อปปิ้ง",
+    labelEn: "Extra Fruit / Toppings",
+    price: "+5 / +10฿",
+    note: "ต่ออย่าง",
+  },
+];
+
+/* ---------- 🌿 น้ำสมุนไพรโฮมเมด | Homemade Herbal Drinks ---------- */
+export type HomemadeDrink = {
+  emoji: string;
+  nameTh: string;
+  nameEn: string;
+  price: number;
+  /** true = หมดวันนี้ (แสดงป้าย "หมดวันนี้ · Sold Out" แทนการลบเมนู) */
+  soldOut?: boolean;
+};
+
+/* 🧴 น้ำโฮมเมดใส่ขวด — 20 บาท/ขวด (ยกเว้นที่ระบุ) */
+export const HOMEMADE_BOTTLED: HomemadeDrink[] = [
+  { emoji: "🌼", nameTh: "น้ำเก๊กฮวย", nameEn: "Chrysanthemum Tea", price: 20 },
+  { emoji: "🌺", nameTh: "น้ำกระเจี๊ยบ", nameEn: "Roselle Juice", price: 20, soldOut: true },
+  { emoji: "🦋", nameTh: "น้ำอัญชันมะนาว", nameEn: "Butterfly Pea Lemonade", price: 20 },
+  { emoji: "🌿", nameTh: "น้ำใบเตย", nameEn: "Pandan Drink", price: 20 },
+  { emoji: "❤️", nameTh: "น้ำมะม่วงหาวมะนาวโห่", nameEn: "Karonda Juice", price: 20 },
+  { emoji: "🥭", nameTh: "น้ำเสาวรส", nameEn: "Passion Fruit Juice", price: 20 },
+  { emoji: "🍋", nameTh: "มะนาวน้ำผึ้ง", nameEn: "Honey Lemon Drink", price: 20 },
+  { emoji: "🖤", nameTh: "น้ำเฉาก๊วย", nameEn: "Grass Jelly Drink", price: 20 },
+  { emoji: "🍵", nameTh: "ชาดำเย็น", nameEn: "Iced Black Tea", price: 20 },
+  { emoji: "🌰", nameTh: "น้ำลำไย", nameEn: "Longan Drink", price: 20 },
+  { emoji: "🥤", nameTh: "น้ำลำไยพร้อมเนื้อ", nameEn: "Longan Drink with Pulp", price: 30 },
+  { emoji: "🌳", nameTh: "น้ำมะตูม", nameEn: "Bael Fruit Drink", price: 20 },
+  { emoji: "🫚", nameTh: "น้ำขิง", nameEn: "Ginger Drink", price: 20 },
+  { emoji: "🌿", nameTh: "น้ำใบบัวบก", nameEn: "Centella Juice", price: 20 },
+];
+
+/* 🥤 เมนูปั่น — เริ่มต้น 30 บาท (บางรสทำแบบปั่นได้) */
+export const HOMEMADE_BLENDED: HomemadeDrink[] = [
+  { emoji: "🥭", nameTh: "น้ำเสาวรสปั่น", nameEn: "Blended Passion Fruit", price: 30 },
+  { emoji: "❤️", nameTh: "น้ำมะม่วงหาวมะนาวโห่ปั่น", nameEn: "Blended Karonda", price: 30 },
+  { emoji: "🍋", nameTh: "น้ำมะนาวน้ำผึ้งปั่น", nameEn: "Blended Honey Lemon", price: 30 },
+  { emoji: "🌰", nameTh: "น้ำลำไยปั่น", nameEn: "Blended Longan", price: 30 },
+];
+
+export const HOMEMADE_SWEETNESS: { th: string; en: string }[] = [
+  { th: "หวานปกติ", en: "Regular Sweet" },
+  { th: "ไม่หวาน", en: "No Added Sugar" },
+];
+
+/* สรุปราคาแบบย่อของหมวดน้ำโฮมเมด */
+export const HOMEMADE_PRICE_SUMMARY: { label: string; price: string }[] = [
+  { label: "น้ำโฮมเมดทั่วไป", price: "20 บาท" },
+  { label: "น้ำลำไย + เนื้อลำไย", price: "30 บาท" },
+  { label: "น้ำสมุนไพร/ผลไม้ปั่น", price: "เริ่ม 30 บาท" },
+  { label: "เพิ่มท็อปปิ้ง", price: "+5 / +10 บาท" },
+];
+
+export const HOMEMADE_NOTE = {
+  th: "น้ำโฮมเมดของทางร้านทำสดและบรรจุขวดเป็นรอบ ๆ เมนูจึงหมุนเวียนแตกต่างกันในแต่ละวัน และอาจมีบางรายการที่ไม่มีจำหน่ายในวันนั้น",
+  en: "Our homemade drinks are freshly prepared and bottled in small batches. Available flavors may vary from day to day and some items may not be available every day.",
+};
 
 /* ---------- โปรโมชั่น ---------- */
 export type Promotion = {
