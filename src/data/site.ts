@@ -966,12 +966,23 @@ export const MIX_TEA_TYPES: MixOption[] = [
   { id: "honey", label: "ชาน้ำผึ้ง", emoji: "🍯", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#d9a520" } },
 ];
 
+/* 🍬 รสชาติ/ไซรัป (ไม่ใช่ผลไม้สด) — ใช้ชื่อผลไม้เฉย ๆ ไม่ต้องมีคำว่า "ไซรัป" */
+export const MIX_SYRUPS: MixOption[] = [
+  { id: "apple", label: "แอปเปิ้ล", emoji: "🍏" },
+  { id: "peach", label: "พีช", emoji: "🍑" },
+  { id: "strawberry-syrup", label: "สตรอว์เบอร์รี", emoji: "🍓" },
+  { id: "lychee", label: "ลิ้นจี่", emoji: "🌸" },
+  { id: "mango-syrup", label: "มะม่วง", emoji: "🥭" },
+  { id: "blueberry-syrup", label: "บลูเบอร์รี", emoji: "🫐" },
+];
+
+/* 🍓 ผลไม้สด */
 export const MIX_FRUITS: MixOption[] = [
   { id: "strawberry", label: "สตรอว์เบอร์รี", emoji: "🍓" },
-  { id: "mango", label: "มะม่วง", emoji: "🥭" },
   { id: "grape", label: "องุ่น", emoji: "🍇" },
-  { id: "blueberry", label: "บลูเบอร์รี", emoji: "🔵" },
-  { id: "apple", label: "แอปเปิ้ล", emoji: "🍏" },
+  { id: "mango", label: "มะม่วง", emoji: "🥭" },
+  { id: "blueberry", label: "บลูเบอร์รี", emoji: "🫐" },
+  { id: "kiwi", label: "กีวี", emoji: "🥝" },
 ];
 
 export const MIX_TOPPINGS: MixOption[] = [

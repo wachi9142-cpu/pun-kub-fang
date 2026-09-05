@@ -2,7 +2,13 @@
 
 import { useMemo, useState } from "react";
 import { Check, Plus, Sparkles } from "lucide-react";
-import { MIX_BASES, MIX_TEA_TYPES, MIX_FRUITS, TOPPING_GROUPS } from "@/data/site";
+import {
+  MIX_BASES,
+  MIX_TEA_TYPES,
+  MIX_SYRUPS,
+  MIX_FRUITS,
+  TOPPING_GROUPS,
+} from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
 import SmoothieCup from "@/components/SmoothieCup";
 
@@ -119,6 +125,7 @@ export default function MixYourOwn({
       ? initialFruitId!
       : MIX_FRUITS[0].id,
   ]);
+  const [syrupIds, setSyrupIds] = useState<string[]>([]);
   const [teaType, setTeaType] = useState<string>("");
   const [teaOpen, setTeaOpen] = useState(false);
   const [freeBoba, setFreeBoba] = useState<string>("");
@@ -157,6 +164,10 @@ export default function MixYourOwn({
     setFruitIds((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
     );
+  const toggleSyrup = (id: string) =>
+    setSyrupIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+    );
   const toggleExtra = (nameEn: string) =>
     setExtras((prev) =>
       prev.includes(nameEn) ? prev.filter((t) => t !== nameEn) : [...prev, nameEn],
@@ -167,6 +178,7 @@ export default function MixYourOwn({
     ...(teaType ? [MIX_TEA_TYPES.find((t) => t.id === teaType)!] : []),
   ];
   const teaLabel = MIX_TEA_TYPES.find((t) => t.id === teaType)?.label;
+  const syrups = syrupIds.map((id) => MIX_SYRUPS.find((s) => s.id === id)!);
   const fruits = fruitIds.map((id) => MIX_FRUITS.find((f) => f.id === id)!);
 
   const extraPrice = useMemo(
@@ -180,6 +192,7 @@ export default function MixYourOwn({
   const price =
     BASE_PRICE +
     extraBaseCount * EXTRA_BASE_PRICE +
+    syrups.length * FRUIT_PRICE +
     fruits.length * FRUIT_PRICE +
     extraPrice;
 
@@ -187,11 +200,14 @@ export default function MixYourOwn({
   const extraLabels = extraItems
     .filter((i) => extras.includes(i.nameEn))
     .map((i) => i.nameTh);
+  const syrupLabels = syrups.map((s) => s.label);
+  const fruitLabels = fruits.map((f) => f.label);
 
   const previewPalette = selectedBases[0]?.palette ?? MIX_BASES[0].palette!;
-  const previewEmoji = fruits[0]?.emoji ?? "🥤";
-  const drinkName = `${fruits.map((f) => f.label).join(" + ")}${
-    fruits.length ? " " : ""
+  const previewEmoji = syrups[0]?.emoji ?? fruits[0]?.emoji ?? "🥤";
+  const flavorPrefix = [...syrupLabels, ...fruitLabels].join(" + ");
+  const drinkName = `${flavorPrefix}${
+    flavorPrefix ? " " : ""
   }${selectedBases.map((b) => b.label).join(" + ")}ปั่น`;
 
   // ⭐ เมนูแนะนำจากฟ่าง — เลือกส่วนผสมให้อัตโนมัติ
@@ -199,7 +215,8 @@ export default function MixYourOwn({
     setBaseIds([]);
     setTeaType("green");
     setTeaOpen(true);
-    setFruitIds(["apple"]);
+    setSyrupIds(["apple"]);
+    setFruitIds([]);
     setFreeBoba("");
     setExtras(["Strawberry Popping Boba"]);
     setSweet("regular");
@@ -208,6 +225,8 @@ export default function MixYourOwn({
 
   const handleAdd = () => {
     const options: string[] = [];
+    if (syrupLabels.length) options.push(`ไซรัป: ${syrupLabels.join(", ")}`);
+    if (fruitLabels.length) options.push(`ผลไม้สด: ${fruitLabels.join(", ")}`);
     if (sweetLabel) options.push(sweetLabel);
     if (iceLabel) options.push(iceLabel);
     if (freeBobaLabel) options.push(`ไข่มุกฟรี: ${freeBobaLabel}`);
@@ -348,13 +367,35 @@ export default function MixYourOwn({
                   )}
                 </div>
 
-                {/* 2. ผลไม้ */}
+                {/* 2. รสชาติ/ไซรัป */}
                 <div>
                   <p className="mb-1 text-sm font-semibold text-white/90">
-                    2. เลือกผลไม้ (เลือกได้หลายอย่าง)
+                    2. เลือกรสชาติ / ไซรัป (เลือกได้หลายอย่าง)
                   </p>
                   <p className="mb-2.5 text-xs text-white/70">
-                    +฿{FRUIT_PRICE} ต่อผลไม้ 1 อย่าง
+                    ไซรัปกลิ่น/รสผลไม้ (ไม่ใช่ผลไม้สด) · +฿{FRUIT_PRICE} ต่ออย่าง
+                  </p>
+                  <div className="flex flex-wrap gap-2.5">
+                    {MIX_SYRUPS.map((o) => (
+                      <Chip
+                        key={o.id}
+                        emoji={o.emoji}
+                        label={o.label}
+                        priceLabel={`+฿${FRUIT_PRICE}`}
+                        active={syrupIds.includes(o.id)}
+                        onClick={() => toggleSyrup(o.id)}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* 3. ผลไม้สด */}
+                <div>
+                  <p className="mb-1 text-sm font-semibold text-white/90">
+                    3. เลือกผลไม้สด (เลือกได้หลายอย่าง)
+                  </p>
+                  <p className="mb-2.5 text-xs text-white/70">
+                    ผลไม้สดจริง ๆ · +฿{FRUIT_PRICE} ต่ออย่าง
                   </p>
                   <div className="flex flex-wrap gap-2.5">
                     {MIX_FRUITS.map((o) => (
@@ -457,7 +498,7 @@ export default function MixYourOwn({
                 {/* 3. ท็อปปิ้งเพิ่มเติม */}
                 <div>
                   <p className="mb-1 text-sm font-semibold text-white/90">
-                    3. เลือกท็อปปิ้ง (เลือกได้หลายอย่าง)
+                    4. เลือกท็อปปิ้ง (เลือกได้หลายอย่าง)
                   </p>
                   <p className="mb-2.5 text-xs text-white/70">
                     คิดราคาตามปกติ +฿5 / +฿10 ต่ออย่าง
@@ -523,8 +564,12 @@ export default function MixYourOwn({
                   value={selectedBases.map((b) => b.label).join(", ")}
                 />
                 <SummaryRow
-                  label="ผลไม้"
-                  value={fruits.length ? fruits.map((f) => f.label).join(", ") : "—"}
+                  label="ไซรัป"
+                  value={syrupLabels.length ? syrupLabels.join(", ") : "—"}
+                />
+                <SummaryRow
+                  label="ผลไม้สด"
+                  value={fruitLabels.length ? fruitLabels.join(", ") : "—"}
                 />
                 <SummaryRow label="ความหวาน" value={sweetLabel ?? "—"} />
                 <SummaryRow label="น้ำแข็ง" value={iceLabel ?? "ปกติ"} />
