@@ -77,7 +77,7 @@ export default function HomemadeHerbal() {
                 </span>
               </h3>
               <span className="shrink-0 rounded-full bg-grape-50 px-3 py-1 text-xs font-semibold text-grape-deep">
-                20 ฿/แก้ว
+                25 ฿/แก้ว
               </span>
             </div>
             <div className="grid gap-2.5 sm:grid-cols-2">

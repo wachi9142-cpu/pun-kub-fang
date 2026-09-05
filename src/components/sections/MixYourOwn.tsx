@@ -63,6 +63,31 @@ function Chip({
   );
 }
 
+/* ปุ่มตัวเลือกน้ำแข็ง/ความหวาน (อยู่บนพื้นม่วง) */
+function PrefPill({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 active:scale-95 ${
+        active
+          ? "scale-105 border-white bg-white text-grape-700 shadow-soft"
+          : "border-white/40 bg-white/10 text-white hover:scale-105 hover:bg-white/20"
+      }`}
+    >
+      {active && <Check size={14} />}
+      {label}
+    </button>
+  );
+}
+
 type MixYourOwnProps = {
   initialBaseId?: string;
   initialFruitId?: string;
@@ -99,7 +124,21 @@ export default function MixYourOwn({
   const [freeBoba, setFreeBoba] = useState<string>("");
   const [extras, setExtras] = useState<string[]>([]);
   const [other, setOther] = useState("");
+  const [ice, setIce] = useState<string>(""); // "" = ปกติ
+  const [sweet, setSweet] = useState<string>("regular");
   const [added, setAdded] = useState(false);
+
+  const ICE_OPTIONS = [
+    { id: "less", label: "น้ำแข็งน้อย" },
+    { id: "extra", label: "น้ำแข็งมาก" },
+  ];
+  const SWEET_OPTIONS = [
+    { id: "less", label: "หวานน้อย" },
+    { id: "50", label: "หวาน 50%" },
+    { id: "regular", label: "หวานปกติ" },
+  ];
+  const iceLabel = ICE_OPTIONS.find((o) => o.id === ice)?.label;
+  const sweetLabel = SWEET_OPTIONS.find((o) => o.id === sweet)?.label;
 
   const totalBases = baseIds.length + (teaType ? 1 : 0);
 
@@ -157,6 +196,8 @@ export default function MixYourOwn({
 
   const handleAdd = () => {
     const parts = [`${drinkName} (มิกซ์เอง)`];
+    if (sweetLabel) parts.push(sweetLabel);
+    if (iceLabel) parts.push(iceLabel);
     if (freeBobaLabel) parts.push(`ไข่มุกฟรี: ${freeBobaLabel}`);
     if (extraLabels.length) parts.push(`เพิ่ม: ${extraLabels.join(", ")}`);
     if (other.trim()) parts.push(`อื่นๆ: ${other.trim()}`);
@@ -274,6 +315,42 @@ export default function MixYourOwn({
                         onClick={() => toggleFruit(o.id)}
                       />
                     ))}
+                  </div>
+                </div>
+
+                {/* 🧊 ปริมาณน้ำแข็ง + 🍯 ความหวาน */}
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <p className="mb-2 text-sm font-semibold text-white/90">
+                      🧊 ปริมาณน้ำแข็ง
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {ICE_OPTIONS.map((o) => (
+                        <PrefPill
+                          key={o.id}
+                          label={o.label}
+                          active={ice === o.id}
+                          onClick={() =>
+                            setIce((prev) => (prev === o.id ? "" : o.id))
+                          }
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="mb-2 text-sm font-semibold text-white/90">
+                      🍯 ระดับความหวาน
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {SWEET_OPTIONS.map((o) => (
+                        <PrefPill
+                          key={o.id}
+                          label={o.label}
+                          active={sweet === o.id}
+                          onClick={() => setSweet(o.id)}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -397,6 +474,8 @@ export default function MixYourOwn({
                   label="ผลไม้"
                   value={fruits.length ? fruits.map((f) => f.label).join(", ") : "—"}
                 />
+                <SummaryRow label="ความหวาน" value={sweetLabel ?? "—"} />
+                <SummaryRow label="น้ำแข็ง" value={iceLabel ?? "ปกติ"} />
                 <SummaryRow
                   label="ไข่มุกฟรี"
                   value={freeBobaLabel ?? "ไม่รับ"}

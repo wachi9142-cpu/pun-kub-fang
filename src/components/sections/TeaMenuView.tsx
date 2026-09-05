@@ -32,8 +32,10 @@ const TEA_GROUP: Record<string, Exclude<Group, "all">> = {
   "honey-tea": "clear",
   // ชาผลไม้
   "peach-tea": "fruit",
+  "black-peach-tea": "fruit",
   "apple-tea": "fruit",
   "lemon-tea-plain": "fruit",
+  "lemon-tea": "fruit",
   // ชาอื่น ๆ
   "green-lemon-tea": "other",
   "honey-lemon-tea": "other",

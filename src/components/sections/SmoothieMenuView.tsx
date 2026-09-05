@@ -20,6 +20,7 @@ const SMOOTHIE_GROUP: Record<string, Exclude<Group, "all">> = {
   "watermelon-smoothie": "fruit",
   "pineapple-smoothie": "fruit",
   "lychee-smoothie": "fruit",
+  "avocado-smoothie": "fruit",
   "strawberry-milk": "milk",
   "mango-milk": "milk",
   "cantaloupe-milk": "milk",

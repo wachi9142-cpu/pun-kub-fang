@@ -14,7 +14,7 @@ export default function MenuHubPage() {
       <div className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
         <div className="mb-8 text-center">
           <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-            เมนูทั้งหมด <span className="text-blossom-400">🥤</span>
+            วันนี้ฟ่างปั่นอะไร? <span className="text-blossom-400">👀</span>
           </h1>
           <p className="mt-2 text-ink/60">
             เลือกหมวดที่ชอบ แล้วไปดูเมนูของหมวดนั้นได้เลย

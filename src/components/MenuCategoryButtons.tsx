@@ -27,6 +27,9 @@ export default function MenuCategoryButtons() {
           <span className="text-[11px] font-medium uppercase tracking-wide text-ink/40">
             {sec.labelEn}
           </span>
+          <span className="text-xs font-medium text-blossom-500">
+            {sec.desc}
+          </span>
           <span className="mt-1 rounded-full bg-grape-50 px-3.5 py-1 text-[11px] font-semibold text-grape-deep transition-colors group-hover:bg-grape-deep group-hover:text-white">
             ดูเมนู →
           </span>

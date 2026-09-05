@@ -56,9 +56,9 @@ export type DrinkCategory = {
 export const DRINK_CATEGORIES: DrinkCategory[] = [
   {
     id: "drinks",
-    label: "เครื่องดื่ม",
-    emoji: "🥤",
-    desc: "ชา กาแฟ และเครื่องดื่มทั่วไป",
+    label: "เมนูกาแฟ",
+    emoji: "☕",
+    desc: "กาแฟหอมกรุ่น เข้มกำลังดี",
     palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" },
     tint: "from-amber-100 to-orange-200/40",
   },
@@ -119,11 +119,11 @@ export type MenuSection = {
 export const MENU_SECTIONS: MenuSection[] = [
   {
     id: "drinks",
-    label: "เครื่องดื่ม",
-    labelEn: "Drinks",
-    emoji: "🥤",
+    label: "เมนูกาแฟ",
+    labelEn: "Coffee",
+    emoji: "☕",
     href: "/menu/drinks",
-    desc: "ชา กาแฟ ทั่วไป",
+    desc: "กาแฟปลุกฟ่าง ☕",
     palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" },
   },
   {
@@ -132,7 +132,7 @@ export const MENU_SECTIONS: MenuSection[] = [
     labelEn: "Milk Drinks",
     emoji: "🥛",
     href: "/menu/milk",
-    desc: "นมสด นมหมี ชานม",
+    desc: "นมละมุนกอดใจ 🥛",
     palette: { foam: "#fffaf0", top: "#ffe3c2", bottom: "#f3c17e" },
   },
   {
@@ -141,7 +141,7 @@ export const MENU_SECTIONS: MenuSection[] = [
     labelEn: "Tea Drinks",
     emoji: "🍵",
     href: "/menu/tea",
-    desc: "ชาดำ ชาเขียว หอมกลมกล่อม",
+    desc: "ชาหอม ๆ มู้ดดี 🍵",
     palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" },
   },
   {
@@ -150,7 +150,7 @@ export const MENU_SECTIONS: MenuSection[] = [
     labelEn: "Smoothies",
     emoji: "🍓",
     href: "/menu/smoothie",
-    desc: "ผลไม้ปั่นสดใหม่",
+    desc: "เติมความจึ้ง ✨",
     palette: { foam: "#fff2f6", top: "#ff9ec0", bottom: "#f0507f" },
   },
   {
@@ -159,7 +159,7 @@ export const MENU_SECTIONS: MenuSection[] = [
     labelEn: "Soda",
     emoji: "🫧",
     href: "/menu/soda",
-    desc: "อิตาเลียนโซดา ซ่า",
+    desc: "ซ่าจนใจสั่น 🫧",
     palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" },
   },
   {
@@ -168,7 +168,7 @@ export const MENU_SECTIONS: MenuSection[] = [
     labelEn: "Hot Drinks",
     emoji: "☕",
     href: "/menu/hot",
-    desc: "กาแฟ ชา นม ร้อน ๆ",
+    desc: "อุ่น ๆ ฮีลใจ 🔥",
     palette: { foam: "#efe2d6", top: "#c39a70", bottom: "#7a4f2e" },
   },
   {
@@ -177,7 +177,7 @@ export const MENU_SECTIONS: MenuSection[] = [
     labelEn: "Homemade Herbal",
     emoji: "🌿",
     href: "/menu/herbal",
-    desc: "โฮมเมด หมุนเวียนรายวัน",
+    desc: "จิบสดชื่นจากบ้านฟ่าง 🌿",
     palette: { foam: "#eef7ea", top: "#9ec97e", bottom: "#4f8a3c" },
   },
   {
@@ -186,7 +186,7 @@ export const MENU_SECTIONS: MenuSection[] = [
     labelEn: "Whipped Cream Cups",
     emoji: "🍦",
     href: "/menu/whipped",
-    desc: "วิปครีม + ผลไม้/ท็อปปิ้ง",
+    desc: "วิปฟู ๆ ใจฟู 🍦",
     palette: { foam: "#fff6fa", top: "#ffe0ee", bottom: "#f9b6d4" },
   },
   {
@@ -195,7 +195,7 @@ export const MENU_SECTIONS: MenuSection[] = [
     labelEn: "Soft Drinks",
     emoji: "🥤",
     href: "/menu/soft",
-    desc: "น้ำอัดลมขวด พร้อมดื่ม",
+    desc: "ซ่าซ่าเลือกเลย! 🥤",
     palette: { foam: "#e6f3ff", top: "#5ab0f0", bottom: "#1f6fc4" },
   },
   {
@@ -230,7 +230,8 @@ export const MENU_ITEMS: MenuItem[] = [
   /* ผลไม้สด */
   {
     id: "grape-yogurt",
-    name: "องุ่นโยเกิร์ตปั่น",
+    name: "ม่วงแบบตะโกน",
+    nameEn: "Grape Yogurt",
     tagline: "องุ่นม่วงหวานฉ่ำ + โยเกิร์ต",
     price: 65,
     likes: 125,
@@ -242,7 +243,8 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "strawberry-milk",
-    name: "สตรอว์เบอร์รีนมสดปั่น",
+    name: "น้องสตรอว์ตัวตึง",
+    nameEn: "Strawberry Yogurt",
     tagline: "สตรอว์เบอร์รีสด + นมสดเข้มข้น",
     price: 60,
     likes: 98,
@@ -253,7 +255,8 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "mango-milk",
-    name: "มะม่วงนมสดปั่น",
+    name: "มะม่วงจึ้งมาก",
+    nameEn: "Mango Smoothie",
     tagline: "มะม่วงสุกหวาน + นมสด",
     price: 65,
     likes: 112,
@@ -264,7 +267,8 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "blueberry-yogurt",
-    name: "บลูเบอร์รีโยเกิร์ตปั่น",
+    name: "บลูเบอร์รีมันจึ้ง",
+    nameEn: "Blueberry Yogurt",
     tagline: "บลูเบอร์รี + โยเกิร์ตเปรี้ยวหวาน",
     price: 65,
     likes: 103,
@@ -276,7 +280,8 @@ export const MENU_ITEMS: MenuItem[] = [
   /* 🍉 ผลไม้ปั่นตามฤดูกาล */
   {
     id: "watermelon-smoothie",
-    name: "แตงโมปั่น",
+    name: "แตงโมตัวตึง",
+    nameEn: "Watermelon",
     tagline: "แตงโมหวานฉ่ำ เย็นชื่นใจ",
     price: 50,
     likes: 118,
@@ -360,6 +365,17 @@ export const MENU_ITEMS: MenuItem[] = [
     emoji: "🍇",
     category: "smoothie",
     palette: { foam: "#f3ecff", top: "#b98cf0", bottom: "#7c3fc4" },
+  },
+  {
+    id: "avocado-smoothie",
+    name: "อะโวคาโดเขียวเหนี่ยวใจ",
+    nameEn: "Avocado Smoothie",
+    tagline: "อะโวคาโดปั่นเนียนนุ่ม เขียวมันละมุน",
+    price: 50,
+    likes: 72,
+    emoji: "🥑",
+    category: "smoothie",
+    palette: { foam: "#eef7e0", top: "#a7cf6a", bottom: "#5f8a2e" },
   },
 
   /* 🫧 โซดา — เริ่มต้น 30 บาท */
@@ -485,6 +501,17 @@ export const MENU_ITEMS: MenuItem[] = [
     badge: "พิเศษ",
     palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#d9a520" },
   },
+  {
+    id: "italian-soda",
+    name: "โซดาซ่าจนงง",
+    nameEn: "Italian Soda",
+    tagline: "อิตาเลียนโซดาซ่า สีสันสดใส เลือกรสได้",
+    price: 40,
+    likes: 61,
+    emoji: "🫧",
+    category: "soda",
+    palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" },
+  },
 
   /* นมหมี */
   {
@@ -530,12 +557,34 @@ export const MENU_ITEMS: MenuItem[] = [
     category: "milk",
     palette: { foam: "#f3e9e0", top: "#b98a63", bottom: "#7a5334" },
   },
+  {
+    id: "banana-milk",
+    name: "กล้วยนะ แต่ไม่กล้วย",
+    nameEn: "Banana Milk",
+    tagline: "นมกล้วยหอมหวาน นุ่มละมุน ดื่มง่าย",
+    price: 40,
+    likes: 64,
+    emoji: "🍌",
+    category: "milk",
+    palette: { foam: "#fffbe8", top: "#ffe07a", bottom: "#e8b53a" },
+  },
+  {
+    id: "coconut-milk",
+    name: "มะพร้าวนัวเวอร์",
+    nameEn: "Coconut Milk",
+    tagline: "นมมะพร้าวหอมมัน นัวลงตัว",
+    price: 40,
+    likes: 58,
+    emoji: "🥥",
+    category: "milk",
+    palette: { foam: "#fffdf8", top: "#f0ead8", bottom: "#cbbf9e" },
+  },
 
   /* ชา */
   {
     id: "thai-milk-tea",
-    name: "ชานมไทยปั่น",
-    nameEn: "Thai Milk Tea",
+    name: "ชานมคนโปรด",
+    nameEn: "Milk Tea",
     tagline: "ชาไทยแท้ หวานมันกลมกล่อม",
     price: 55,
     likes: 96,
@@ -546,8 +595,8 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "matcha-milk",
-    name: "มัทฉะนมสดปั่น",
-    nameEn: "Matcha Latte",
+    name: "มัทฉะมู้ดดี",
+    nameEn: "Matcha",
     tagline: "มัทฉะแท้ + นมสดหอมมัน",
     price: 65,
     likes: 89,
@@ -559,11 +608,12 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "lemon-tea",
     name: "ชามะนาวปั่น",
+    nameEn: "Lemon Tea (Blended)",
     tagline: "ชาหอม + มะนาวสด เปรี้ยวซ่า",
     price: 50,
     likes: 61,
     emoji: "🍋",
-    category: "drinks",
+    category: "tea",
     palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" },
   },
   {
@@ -625,7 +675,8 @@ export const MENU_ITEMS: MenuItem[] = [
   /* 🍵 เมนูชา */
   {
     id: "thai-tea",
-    name: "ชาไทย",
+    name: "ชาไทยตัวจี๊ด",
+    nameEn: "Thai Tea",
     tagline: "ชาไทยหอมเข้ม รสหวานมัน กลิ่นชาโดดเด่น",
     price: 25,
     likes: 96,
@@ -667,7 +718,8 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "lemon-tea-plain",
-    name: "ชามะนาว",
+    name: "เลมอนตื่นยัง",
+    nameEn: "Lemon Tea",
     tagline: "ชาหอม + มะนาวสด เปรี้ยวสดชื่น",
     price: 25,
     likes: 71,
@@ -677,13 +729,25 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "peach-tea",
-    name: "ชาพีช",
+    name: "พีชนี้มีใจ",
+    nameEn: "Peach Tea",
     tagline: "ชากลิ่นพีชหอมหวาน ละมุน",
     price: 30,
     likes: 64,
     emoji: "🍑",
     category: "tea",
     palette: { foam: "#fff1ea", top: "#ffb99a", bottom: "#f77e4f" },
+  },
+  {
+    id: "black-peach-tea",
+    name: "ชาดำพีช",
+    nameEn: "Black Peach Tea",
+    tagline: "ชาดำหอมเข้ม + กลิ่นพีชหวานละมุน",
+    price: 30,
+    likes: 57,
+    emoji: "🍑",
+    category: "tea",
+    palette: { foam: "#f3e2d2", top: "#d0895f", bottom: "#7a4326" },
   },
   {
     id: "apple-tea",
@@ -789,7 +853,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "hot-cocoa",
-    name: "โกโก้ร้อน",
+    name: "โกโก้คนโปรด",
     nameEn: "Hot Cocoa",
     tagline: "โกโก้เข้มข้น หอมหวาน อุ่นใจ",
     price: 30,
@@ -800,7 +864,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "hot-milk",
-    name: "นมสดร้อน",
+    name: "นมสดโคตรละมุน",
     nameEn: "Hot Fresh Milk",
     tagline: "นมสดอุ่น ๆ หอมมันละมุน",
     price: 30,
@@ -1034,7 +1098,7 @@ export const PRICE_TIERS: PriceTier[] = [
     note: "ตามชนิดและต้นทุนวัตถุดิบ",
   },
   { emoji: "🥑", labelTh: "อะโวคาโดปั่น", labelEn: "Avocado Smoothie", price: "50฿" },
-  { emoji: "🌿", labelTh: "น้ำสมุนไพรโฮมเมด", labelEn: "Homemade Herbal Drinks", price: "20฿" },
+  { emoji: "🌿", labelTh: "น้ำสมุนไพรโฮมเมด", labelEn: "Homemade Herbal Drinks", price: "25฿" },
   { emoji: "🧊", labelTh: "น้ำสมุนไพรปั่น", labelEn: "Blended Herbal Drinks", price: "30฿" },
   {
     emoji: "🥥",
@@ -1057,19 +1121,19 @@ export type HomemadeDrink = {
 
 /* 🧋 น้ำโฮมเมดใส่แก้ว — 20 บาท/แก้ว (ยกเว้นที่ระบุ) */
 export const HOMEMADE_BOTTLED: HomemadeDrink[] = [
-  { emoji: "🌼", nameTh: "น้ำเก๊กฮวย", nameEn: "Chrysanthemum Tea", price: 20 },
-  { emoji: "🌺", nameTh: "น้ำกระเจี๊ยบ", nameEn: "Roselle Juice", price: 20, soldOut: true },
-  { emoji: "🦋", nameTh: "น้ำอัญชันมะนาว", nameEn: "Butterfly Pea Lemonade", price: 20 },
-  { emoji: "🌿", nameTh: "น้ำใบเตย", nameEn: "Pandan Drink", price: 20 },
-  { emoji: "❤️", nameTh: "น้ำมะม่วงหาวมะนาวโห่", nameEn: "Karonda Juice", price: 20 },
-  { emoji: "🥭", nameTh: "น้ำเสาวรส", nameEn: "Passion Fruit Juice", price: 20 },
-  { emoji: "🍋", nameTh: "มะนาวน้ำผึ้ง", nameEn: "Honey Lemon Drink", price: 20 },
-  { emoji: "🖤", nameTh: "น้ำเฉาก๊วย", nameEn: "Grass Jelly Drink", price: 20 },
-  { emoji: "🌰", nameTh: "น้ำลำไย", nameEn: "Longan Drink", price: 20 },
+  { emoji: "🌼", nameTh: "น้ำเก๊กฮวย", nameEn: "Chrysanthemum Tea", price: 25 },
+  { emoji: "🌺", nameTh: "น้ำกระเจี๊ยบ", nameEn: "Roselle Juice", price: 25, soldOut: true },
+  { emoji: "🦋", nameTh: "น้ำอัญชันมะนาว", nameEn: "Butterfly Pea Lemonade", price: 25 },
+  { emoji: "🌿", nameTh: "น้ำใบเตย", nameEn: "Pandan Drink", price: 25 },
+  { emoji: "❤️", nameTh: "น้ำมะม่วงหาวมะนาวโห่", nameEn: "Karonda Juice", price: 25 },
+  { emoji: "🥭", nameTh: "น้ำเสาวรส", nameEn: "Passion Fruit Juice", price: 25 },
+  { emoji: "🍋", nameTh: "มะนาวน้ำผึ้ง", nameEn: "Honey Lemon Drink", price: 25 },
+  { emoji: "🖤", nameTh: "น้ำเฉาก๊วย", nameEn: "Grass Jelly Drink", price: 25 },
+  { emoji: "🌰", nameTh: "น้ำลำไย", nameEn: "Longan Drink", price: 25 },
   { emoji: "🥤", nameTh: "น้ำลำไยพร้อมเนื้อ", nameEn: "Longan Drink with Pulp", price: 30 },
-  { emoji: "🌳", nameTh: "น้ำมะตูม", nameEn: "Bael Fruit Drink", price: 20 },
-  { emoji: "🫚", nameTh: "น้ำขิง", nameEn: "Ginger Drink", price: 20 },
-  { emoji: "🌿", nameTh: "น้ำใบบัวบก", nameEn: "Centella Juice", price: 20 },
+  { emoji: "🌳", nameTh: "น้ำมะตูม", nameEn: "Bael Fruit Drink", price: 25 },
+  { emoji: "🫚", nameTh: "น้ำขิง", nameEn: "Ginger Drink", price: 25 },
+  { emoji: "🌿", nameTh: "น้ำใบบัวบก", nameEn: "Centella Juice", price: 25 },
 ];
 
 /* 🥤 เมนูปั่น — เริ่มต้น 30 บาท (บางรสทำแบบปั่นได้) */
@@ -1087,7 +1151,7 @@ export const HOMEMADE_SWEETNESS: { th: string; en: string }[] = [
 
 /* สรุปราคาแบบย่อของหมวดน้ำโฮมเมด */
 export const HOMEMADE_PRICE_SUMMARY: { label: string; price: string }[] = [
-  { label: "น้ำโฮมเมดทั่วไป", price: "20 บาท" },
+  { label: "น้ำโฮมเมดทั่วไป", price: "25 บาท" },
   { label: "น้ำลำไย + เนื้อลำไย", price: "30 บาท" },
   { label: "น้ำสมุนไพร/ผลไม้ปั่น", price: "เริ่ม 30 บาท" },
   { label: "เพิ่มท็อปปิ้ง", price: "+5 / +10 บาท" },
