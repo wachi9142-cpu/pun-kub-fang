@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { DRINK_CATEGORIES } from "@/data/site";
 import SmoothieCup from "@/components/SmoothieCup";
@@ -11,10 +12,10 @@ export default function Hero() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   // แก้วโชว์ความหลากหลายของร้าน
-  const fruit = byId("fruit");
+  const smoothie = byId("smoothie");
   const soda = byId("soda");
-  const bear = byId("bearmilk");
-  const tea = byId("tea");
+  const milk = byId("milk");
+  const drinks = byId("drinks");
 
   return (
     <section id="home" className="relative overflow-hidden bg-[#f8f4fa]">
@@ -60,15 +61,15 @@ export default function Hero() {
           </div>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
-            <button
-              onClick={() => scrollTo("menu")}
+            <Link
+              href="/menu"
               className="group inline-flex items-center gap-3 rounded-full bg-grape-deep px-7 py-3.5 text-base font-semibold text-white shadow-card transition-all hover:scale-[1.03] hover:bg-[#5c2f92]"
             >
               🥤 ดูเมนู
               <span className="grid h-7 w-7 place-items-center rounded-full bg-white/25 transition-transform group-hover:translate-x-1">
                 <ArrowRight size={16} />
               </span>
-            </button>
+            </Link>
             <button
               onClick={() => scrollTo("mix")}
               className="inline-flex items-center gap-2 rounded-full bg-cream-white px-7 py-3.5 text-base font-semibold text-ink shadow-soft ring-1 ring-ink/70 transition-all hover:bg-white hover:scale-[1.03]"
@@ -86,13 +87,13 @@ export default function Hero() {
             <SmoothieCup palette={soda.palette} emoji="🧊" size={132} />
           </div>
           <div className="relative z-20 -mx-5 animate-floaty">
-            <SmoothieCup palette={fruit.palette} emoji="🍓" size={182} />
+            <SmoothieCup palette={smoothie.palette} emoji="🍓" size={182} />
           </div>
           <div className="relative z-10 animate-floaty-slow translate-x-1" style={{ animationDelay: "1s" }}>
-            <SmoothieCup palette={bear.palette} emoji="🐻" size={140} />
+            <SmoothieCup palette={milk.palette} emoji="🐻" size={140} />
           </div>
           <div className="relative z-0 -ml-4 hidden animate-floaty-slow sm:block" style={{ animationDelay: "1.6s" }}>
-            <SmoothieCup palette={tea.palette} emoji="🍵" size={116} />
+            <SmoothieCup palette={drinks.palette} emoji="🍵" size={116} />
           </div>
 
           <span className="absolute left-2 top-4 animate-floaty text-3xl" style={{ animationDelay: "0.4s" }}>🍓</span>

@@ -4,21 +4,21 @@ export type NavItem = { label: string; href: string };
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "หน้าแรก", href: "#home" },
-  { label: "เมนูเครื่องดื่ม", href: "#menu" },
-  { label: "ท็อปปิ้ง", href: "#toppings" },
-  { label: "มิกซ์กับฟ่าง ✨", href: "#mix" },
+  { label: "เมนูทั้งหมด", href: "/menu" },
+  { label: "มิกซ์กับฟ่าง ✨", href: "/mix" },
   { label: "โปรโมชั่น", href: "#promo" },
   { label: "เกี่ยวกับร้าน", href: "#about" },
   { label: "ติดต่อเรา", href: "#contact" },
 ];
 
-/* ลิงก์ในฟุตเตอร์ — ใส่รีวิวไว้ตรงนี้ (ไม่รกแถบบน) */
+/* ลิงก์ในฟุตเตอร์ — ใส่รีวิว/หมวดย่อยไว้ตรงนี้ (ไม่รกแถบบน) */
 export const FOOTER_LINKS: NavItem[] = [
   { label: "หน้าแรก", href: "#home" },
-  { label: "เมนูเครื่องดื่ม", href: "#menu" },
-  { label: "ท็อปปิ้ง", href: "#toppings" },
-  { label: "ราคาเมนู", href: "#pricing" },
-  { label: "มิกซ์กับฟ่าง", href: "#mix" },
+  { label: "เมนูทั้งหมด", href: "/menu" },
+  { label: "เมนูปั่น", href: "/menu/smoothie" },
+  { label: "น้ำสมุนไพรโฮมเมด", href: "/menu/herbal" },
+  { label: "ท็อปปิ้ง", href: "/menu/toppings" },
+  { label: "มิกซ์กับฟ่าง", href: "/mix" },
   { label: "โปรโมชั่น", href: "#promo" },
   { label: "รีวิวลูกค้า", href: "#reviews" },
   { label: "เกี่ยวกับร้าน", href: "#about" },
@@ -35,15 +35,8 @@ export type SmoothiePalette = {
 };
 
 /* ---------- หมวดหมู่เครื่องดื่ม ---------- */
-export type CategoryId =
-  | "fruit"
-  | "seasonal"
-  | "soda"
-  | "bearmilk"
-  | "tea"
-  | "coffee"
-  | "soft"
-  | "herbal";
+/* หมวดเครื่องดื่มที่แสดงเป็นการ์ด (DrinkCard) — แยกเป็นหน้าละหมวด */
+export type CategoryId = "drinks" | "milk" | "smoothie" | "soda";
 
 export type DrinkCategory = {
   id: CategoryId;
@@ -56,68 +49,104 @@ export type DrinkCategory = {
 
 export const DRINK_CATEGORIES: DrinkCategory[] = [
   {
-    id: "fruit",
-    label: "ผลไม้สด",
+    id: "drinks",
+    label: "เครื่องดื่ม",
+    emoji: "🥤",
+    desc: "ชา กาแฟ และเครื่องดื่มทั่วไป",
+    palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" },
+    tint: "from-amber-100 to-orange-200/40",
+  },
+  {
+    id: "milk",
+    label: "เมนูนม",
+    emoji: "🥛",
+    desc: "นมสด นมหมี ชานม หอมมันละมุน",
+    palette: { foam: "#fffaf0", top: "#ffe3c2", bottom: "#f3c17e" },
+    tint: "from-amber-100 to-amber-200/50",
+  },
+  {
+    id: "smoothie",
+    label: "เมนูปั่น",
     emoji: "🍓",
-    desc: "ปั่นสดจากผลไม้แท้ ๆ",
+    desc: "ผลไม้ปั่นสดใหม่ทุกแก้ว",
     palette: { foam: "#fff2f6", top: "#ff9ec0", bottom: "#f0507f" },
     tint: "from-blossom-100 to-blossom-200/50",
   },
   {
     id: "soda",
-    label: "อิตาเลียนโซดา",
-    emoji: "🧊",
-    desc: "ซ่าสดชื่น สีสันสดใส",
+    label: "โซดา",
+    emoji: "🫧",
+    desc: "อิตาเลียนโซดา ซ่าสดชื่น",
     palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" },
     tint: "from-sky-100 to-sky-200/50",
   },
+];
+
+/* ---------- หมวดบนหน้า /menu (ฮับ) — รวมน้ำโฮมเมด + ท็อปปิ้ง ---------- */
+export type MenuSection = {
+  id: string;
+  label: string;
+  labelEn: string;
+  emoji: string;
+  href: string;
+  desc: string;
+  /** ถ้ามี palette จะวาดเป็นแก้ว SVG, ถ้าไม่มีจะโชว์อีโมจิ */
+  palette?: SmoothiePalette;
+};
+
+export const MENU_SECTIONS: MenuSection[] = [
   {
-    id: "bearmilk",
-    label: "นมหมี",
-    emoji: "🐻",
-    desc: "นมสดปั่นหอมมัน นุ่มละมุน",
-    palette: { foam: "#fffaf0", top: "#ffe3c2", bottom: "#f3c17e" },
-    tint: "from-amber-100 to-amber-200/50",
-  },
-  {
-    id: "tea",
-    label: "ชา",
-    emoji: "🍵",
-    desc: "ชานม ชาเขียว หอมกลมกล่อม",
-    palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" },
-    tint: "from-orange-100 to-amber-200/50",
-  },
-  {
-    id: "coffee",
-    label: "กาแฟ",
-    emoji: "☕",
-    desc: "คั่วเข้ม สดชื่น ตื่นตัว",
-    palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" },
-    tint: "from-amber-100 to-orange-200/40",
-  },
-  {
-    id: "soft",
-    label: "น้ำอัดลม",
+    id: "drinks",
+    label: "เครื่องดื่ม",
+    labelEn: "Drinks",
     emoji: "🥤",
-    desc: "ซ่า เย็น ดับกระหาย",
-    palette: { foam: "#f3ecff", top: "#b98cf0", bottom: "#7c3fc4" },
-    tint: "from-grape-100 to-grape-200/60",
+    href: "/menu/drinks",
+    desc: "ชา กาแฟ ทั่วไป",
+    palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" },
+  },
+  {
+    id: "milk",
+    label: "เมนูนม",
+    labelEn: "Milk Drinks",
+    emoji: "🥛",
+    href: "/menu/milk",
+    desc: "นมสด นมหมี ชานม",
+    palette: { foam: "#fffaf0", top: "#ffe3c2", bottom: "#f3c17e" },
+  },
+  {
+    id: "smoothie",
+    label: "เมนูปั่น",
+    labelEn: "Smoothies",
+    emoji: "🍓",
+    href: "/menu/smoothie",
+    desc: "ผลไม้ปั่นสดใหม่",
+    palette: { foam: "#fff2f6", top: "#ff9ec0", bottom: "#f0507f" },
+  },
+  {
+    id: "soda",
+    label: "โซดา",
+    labelEn: "Soda",
+    emoji: "🫧",
+    href: "/menu/soda",
+    desc: "อิตาเลียนโซดา ซ่า",
+    palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" },
   },
   {
     id: "herbal",
     label: "น้ำสมุนไพรโฮมเมด",
+    labelEn: "Homemade Herbal",
     emoji: "🌿",
-    desc: "โฮมเมด สดชื่น ราคาเบา ๆ",
+    href: "/menu/herbal",
+    desc: "โฮมเมด หมุนเวียนรายวัน",
     palette: { foam: "#eef7ea", top: "#9ec97e", bottom: "#4f8a3c" },
-    tint: "from-lime-100 to-emerald-200/50",
   },
   {
-    id: "seasonal",
-    label: "ผลไม้ปั่นตามฤดูกาล",
-    emoji: "🍉",
-    desc: "ผลไม้ตามฤดู สดใหม่หมุนเวียน",
-    palette: { foam: "#fff0f2", top: "#ff8faa", bottom: "#e8455f" },
-    tint: "from-lime-100 to-rose-200/50",
+    id: "toppings",
+    label: "ท็อปปิ้ง",
+    labelEn: "Toppings",
+    emoji: "🧋",
+    href: "/menu/toppings",
+    desc: "เพิ่มความอร่อยทุกแก้ว",
   },
 ];
 
@@ -146,7 +175,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 65,
     likes: 125,
     emoji: "🍇",
-    category: "fruit",
+    category: "smoothie",
     badge: "ขายดี",
     popular: true,
     palette: { foam: "#f3e9ff", top: "#b98cf0", bottom: "#7c3fc4" },
@@ -158,7 +187,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 60,
     likes: 98,
     emoji: "🍓",
-    category: "fruit",
+    category: "smoothie",
     popular: true,
     palette: { foam: "#fff2f6", top: "#ff9ec0", bottom: "#f0507f" },
   },
@@ -169,7 +198,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 65,
     likes: 112,
     emoji: "🥭",
-    category: "fruit",
+    category: "smoothie",
     popular: true,
     palette: { foam: "#fff7e6", top: "#ffcf6b", bottom: "#f2a52c" },
   },
@@ -180,7 +209,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 65,
     likes: 103,
     emoji: "🔵",
-    category: "fruit",
+    category: "smoothie",
     palette: { foam: "#eef0ff", top: "#8f9bf0", bottom: "#5257c9" },
   },
 
@@ -192,7 +221,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 50,
     likes: 118,
     emoji: "🍉",
-    category: "seasonal",
+    category: "smoothie",
     badge: "ตามฤดู",
     popular: true,
     palette: { foam: "#fff0f2", top: "#ff8faa", bottom: "#e8455f" },
@@ -204,7 +233,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 55,
     likes: 84,
     emoji: "🍈",
-    category: "seasonal",
+    category: "smoothie",
     palette: { foam: "#fdfbe8", top: "#ffe08a", bottom: "#f2a52c" },
   },
   {
@@ -214,7 +243,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 50,
     likes: 72,
     emoji: "🍍",
-    category: "seasonal",
+    category: "smoothie",
     palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" },
   },
   {
@@ -224,7 +253,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 55,
     likes: 90,
     emoji: "🌸",
-    category: "seasonal",
+    category: "smoothie",
     badge: "ตามฤดู",
     palette: { foam: "#fff5fb", top: "#ffc0e6", bottom: "#e86fb0" },
   },
@@ -280,7 +309,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 55,
     likes: 91,
     emoji: "🐻",
-    category: "bearmilk",
+    category: "milk",
     popular: true,
     palette: { foam: "#fffaf0", top: "#ffe9c9", bottom: "#f3c17e" },
   },
@@ -291,7 +320,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 60,
     likes: 108,
     emoji: "🐻",
-    category: "bearmilk",
+    category: "milk",
     badge: "น่ารัก",
     popular: true,
     palette: { foam: "#fff2f6", top: "#ffcde0", bottom: "#f68fb4" },
@@ -303,7 +332,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 60,
     likes: 82,
     emoji: "🐻",
-    category: "bearmilk",
+    category: "milk",
     palette: { foam: "#fff0e0", top: "#f4b06a", bottom: "#d97a2b" },
   },
   {
@@ -313,7 +342,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 60,
     likes: 77,
     emoji: "🐻",
-    category: "bearmilk",
+    category: "milk",
     palette: { foam: "#f3e9e0", top: "#b98a63", bottom: "#7a5334" },
   },
 
@@ -325,7 +354,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 55,
     likes: 96,
     emoji: "🍵",
-    category: "tea",
+    category: "milk",
     popular: true,
     palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" },
   },
@@ -336,7 +365,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 65,
     likes: 89,
     emoji: "🍵",
-    category: "tea",
+    category: "milk",
     popular: true,
     palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" },
   },
@@ -347,7 +376,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 50,
     likes: 61,
     emoji: "🍋",
-    category: "tea",
+    category: "drinks",
     palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" },
   },
   {
@@ -357,7 +386,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 55,
     likes: 70,
     emoji: "🍵",
-    category: "tea",
+    category: "milk",
     palette: { foam: "#eef7ea", top: "#9ec97e", bottom: "#568a3c" },
   },
 
@@ -369,7 +398,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 60,
     likes: 84,
     emoji: "☕",
-    category: "coffee",
+    category: "drinks",
     popular: true,
     palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" },
   },
@@ -380,7 +409,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 60,
     likes: 79,
     emoji: "☕",
-    category: "coffee",
+    category: "drinks",
     palette: { foam: "#f3e7d8", top: "#c39a70", bottom: "#8a5f3a" },
   },
   {
@@ -390,7 +419,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 65,
     likes: 73,
     emoji: "☕",
-    category: "coffee",
+    category: "drinks",
     palette: { foam: "#eaddd2", top: "#9c6f4c", bottom: "#5f3d24" },
   },
   {
@@ -400,7 +429,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 65,
     likes: 88,
     emoji: "☕",
-    category: "coffee",
+    category: "drinks",
     badge: "แนะนำ",
     palette: { foam: "#f6e9d5", top: "#cf9a5f", bottom: "#9a6a34" },
   },
@@ -413,7 +442,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 45,
     likes: 66,
     emoji: "🥤",
-    category: "soft",
+    category: "soda",
     popular: true,
     palette: { foam: "#e8ddd5", top: "#6b4a35", bottom: "#3a251a" },
   },
@@ -424,7 +453,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 45,
     likes: 58,
     emoji: "🥤",
-    category: "soft",
+    category: "soda",
     palette: { foam: "#ffeef0", top: "#ff8a99", bottom: "#e23b52" },
   },
   {
@@ -434,7 +463,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 45,
     likes: 54,
     emoji: "🍋",
-    category: "soft",
+    category: "soda",
     palette: { foam: "#eefcf1", top: "#b8ecc4", bottom: "#5bc47a" },
   },
   {
@@ -444,7 +473,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 45,
     likes: 60,
     emoji: "🍇",
-    category: "soft",
+    category: "soda",
     palette: { foam: "#f3ecff", top: "#b98cf0", bottom: "#7c3fc4" },
   },
 
@@ -618,7 +647,7 @@ export type HomemadeDrink = {
   soldOut?: boolean;
 };
 
-/* 🧴 น้ำโฮมเมดใส่ขวด — 20 บาท/ขวด (ยกเว้นที่ระบุ) */
+/* 🧋 น้ำโฮมเมดใส่แก้ว — 20 บาท/แก้ว (ยกเว้นที่ระบุ) */
 export const HOMEMADE_BOTTLED: HomemadeDrink[] = [
   { emoji: "🌼", nameTh: "น้ำเก๊กฮวย", nameEn: "Chrysanthemum Tea", price: 20 },
   { emoji: "🌺", nameTh: "น้ำกระเจี๊ยบ", nameEn: "Roselle Juice", price: 20, soldOut: true },
@@ -658,8 +687,8 @@ export const HOMEMADE_PRICE_SUMMARY: { label: string; price: string }[] = [
 ];
 
 export const HOMEMADE_NOTE = {
-  th: "น้ำโฮมเมดของทางร้านทำสดและบรรจุขวดเป็นรอบ ๆ เมนูจึงหมุนเวียนแตกต่างกันในแต่ละวัน และอาจมีบางรายการที่ไม่มีจำหน่ายในวันนั้น",
-  en: "Our homemade drinks are freshly prepared and bottled in small batches. Available flavors may vary from day to day and some items may not be available every day.",
+  th: "น้ำโฮมเมดของทางร้านทำสดใหม่เป็นรอบ ๆ เมนูจึงหมุนเวียนแตกต่างกันในแต่ละวัน และอาจมีบางรายการที่ไม่มีจำหน่ายในวันนั้น",
+  en: "Our homemade drinks are freshly prepared in small batches. Available flavors may vary from day to day and some items may not be available every day.",
 };
 
 /* ---------- โปรโมชั่น ---------- */
