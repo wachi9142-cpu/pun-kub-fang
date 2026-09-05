@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { PROMOTIONS, type Promotion } from "@/data/site";
 
 const THEME: Record<
@@ -63,6 +65,19 @@ export default function Promotions() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link
+            href="/promotions"
+            className="group inline-flex items-center gap-2 rounded-full bg-grape-deep px-7 py-3 text-base font-semibold text-white shadow-card transition-all hover:scale-[1.03] hover:bg-[#5c2f92]"
+          >
+            🎁 ดูโปรโมชั่นเทศกาลทั้งหมด
+            <ArrowRight
+              size={18}
+              className="transition-transform group-hover:translate-x-1"
+            />
+          </Link>
         </div>
       </div>
     </section>

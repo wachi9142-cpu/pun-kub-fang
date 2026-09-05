@@ -61,6 +61,11 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
       <div className="mt-3 flex flex-1 flex-col">
         <h3 className="font-display text-base font-semibold text-grape-700">
           {item.name}
+          {item.nameEn && (
+            <span className="ml-1 text-[11px] font-medium text-grape-400">
+              {item.nameEn}
+            </span>
+          )}
         </h3>
         <p className="mt-0.5 line-clamp-1 text-xs text-grape-400">{item.tagline}</p>
 
