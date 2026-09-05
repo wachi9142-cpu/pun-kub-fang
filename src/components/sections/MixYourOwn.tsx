@@ -97,7 +97,7 @@ export default function MixYourOwn({
   initialBaseId,
   initialFruitId,
 }: MixYourOwnProps) {
-  const { addItem } = useCart();
+  const { addItem, openCart } = useCart();
 
   // ฟรีเฉพาะไข่มุกดำ/คลาสสิก — ตัวอื่นทั้งหมดคิดราคาปกติในท็อปปิ้ง
   const bobaItems = TOPPING_GROUPS.flatMap((g) => g.items).filter(
@@ -194,16 +194,34 @@ export default function MixYourOwn({
     fruits.length ? " " : ""
   }${selectedBases.map((b) => b.label).join(" + ")}ปั่น`;
 
+  // ⭐ เมนูแนะนำจากฟ่าง — เลือกส่วนผสมให้อัตโนมัติ
+  const applySignature = () => {
+    setBaseIds([]);
+    setTeaType("green");
+    setTeaOpen(true);
+    setFruitIds(["apple"]);
+    setFreeBoba("");
+    setExtras(["Strawberry Popping Boba"]);
+    setSweet("regular");
+    setIce("");
+  };
+
   const handleAdd = () => {
-    const parts = [`${drinkName} (มิกซ์เอง)`];
-    if (sweetLabel) parts.push(sweetLabel);
-    if (iceLabel) parts.push(iceLabel);
-    if (freeBobaLabel) parts.push(`ไข่มุกฟรี: ${freeBobaLabel}`);
-    if (extraLabels.length) parts.push(`เพิ่ม: ${extraLabels.join(", ")}`);
-    if (other.trim()) parts.push(`อื่นๆ: ${other.trim()}`);
-    addItem({ id: `mix-${Date.now()}`, name: parts.join(" · "), price });
+    const options: string[] = [];
+    if (sweetLabel) options.push(sweetLabel);
+    if (iceLabel) options.push(iceLabel);
+    if (freeBobaLabel) options.push(`ไข่มุกฟรี: ${freeBobaLabel}`);
+    if (extraLabels.length) options.push(`เพิ่ม: ${extraLabels.join(", ")}`);
+    if (other.trim()) options.push(`อื่นๆ: ${other.trim()}`);
+    addItem({
+      id: `mix-${Date.now()}`,
+      name: `${drinkName} (มิกซ์เอง)`,
+      price,
+      options,
+    });
     setAdded(true);
     setTimeout(() => setAdded(false), 1600);
+    openCart();
   };
 
   return (
@@ -222,6 +240,40 @@ export default function MixYourOwn({
               <p className="mt-2 max-w-md text-white/80">
                 เลือกได้หลายอย่างในแก้วเดียว กดซ้ำเพื่อยกเลิก ✓
               </p>
+
+              {/* ⭐ เมนูแนะนำจากฟ่าง (Signature) */}
+              <div className="mt-6 rounded-3xl bg-white/15 p-5 ring-1 ring-white/25">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-blossom-500 px-3 py-1 text-[11px] font-bold text-white shadow-soft">
+                  ⭐ เมนูแนะนำจากฟ่าง
+                </span>
+                <h3 className="font-display mt-2 text-xl font-bold text-white">
+                  🍏🍓 เขียว ๆ แต่ป๊อปนะ
+                </h3>
+                <p className="text-xs font-medium uppercase tracking-wide text-white/60">
+                  Green Tea × Apple × Strawberry Popping Boba
+                </p>
+                <p className="mt-2 text-sm text-white/85">
+                  ชาเขียวหอม ๆ ผสมความสดชื่นของแอปเปิ้ล เติมมุกป๊อปสตรอว์เบอร์รีให้แตกป๊อปในปาก 💚🍓
+                </p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {["🍵 ชาเขียว", "🍏 แอปเปิ้ล", "🍓 มุกป๊อปสตรอว์เบอร์รี"].map(
+                    (t) => (
+                      <span
+                        key={t}
+                        className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white"
+                      >
+                        {t}
+                      </span>
+                    ),
+                  )}
+                </div>
+                <button
+                  onClick={applySignature}
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-bold text-grape-700 shadow-soft transition-all hover:scale-[1.03]"
+                >
+                  ลองแก้วนี้เลย ✨
+                </button>
+              </div>
 
               <div className="mt-6 space-y-6">
                 {/* 1. ฐาน */}

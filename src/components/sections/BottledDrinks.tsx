@@ -7,13 +7,14 @@ import { useCart } from "@/components/cart/CartContext";
 import SmoothieCup from "@/components/SmoothieCup";
 
 function SoftRow({ item }: { item: SoftDrink }) {
-  const { addItem } = useCart();
+  const { addItem, openCart } = useCart();
   const [added, setAdded] = useState(false);
 
   const add = () => {
     addItem({ id: item.id, name: item.nameTh, price: item.price });
     setAdded(true);
     setTimeout(() => setAdded(false), 1300);
+    openCart();
   };
 
   return (

@@ -52,7 +52,7 @@ function ToppingChip({
 }
 
 export default function WhippedCream() {
-  const { addItem } = useCart();
+  const { addItem, openCart } = useCart();
   const [toppings, setToppings] = useState<string[]>([]);
   const [fruits, setFruits] = useState<string[]>([]);
   const [added, setAdded] = useState(false);
@@ -73,14 +73,15 @@ export default function WhippedCream() {
   const total = WHIP_BASE_PRICE + lines.reduce((s, l) => s + l.price, 0);
 
   const handleAdd = () => {
-    const detail = lines.map((l) => l.label).join(", ");
     addItem({
       id: `whip-${Date.now()}`,
-      name: detail ? `วิปครีมแก้ว · ${detail}` : "วิปครีมแก้ว",
+      name: "วิปครีมแก้ว",
       price: total,
+      options: lines.map((l) => `${l.label} (+฿${l.price})`),
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 1600);
+    openCart();
   };
 
   return (

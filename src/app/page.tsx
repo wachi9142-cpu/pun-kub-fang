@@ -1,4 +1,5 @@
 import { CartProvider } from "@/components/cart/CartContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
 import Categories from "@/components/sections/Categories";
@@ -27,6 +28,7 @@ export default function HomePage() {
       </main>
       <SiteFooter />
       <BackToTop />
+      <CartDrawer />
     </CartProvider>
   );
 }

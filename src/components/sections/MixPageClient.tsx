@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { CartProvider, useCart } from "@/components/cart/CartContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 import BrandLogo from "@/components/BrandLogo";
 import MixYourOwn from "@/components/sections/MixYourOwn";
 
 function MixHeader() {
-  const { count } = useCart();
+  const { count, openCart } = useCart();
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
@@ -30,14 +31,18 @@ function MixHeader() {
           >
             <ArrowLeft size={16} /> กลับหน้าแรก
           </Link>
-          <span className="relative grid h-10 w-10 place-items-center rounded-full text-grape-500">
+          <button
+            onClick={openCart}
+            aria-label="ตะกร้าสินค้า"
+            className="relative grid h-10 w-10 place-items-center rounded-full text-grape-500 transition-colors hover:bg-grape-100"
+          >
             <ShoppingCart size={20} />
             {count > 0 && (
               <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-blossom-500 px-1 text-[11px] font-bold text-white shadow">
                 {count}
               </span>
             )}
-          </span>
+          </button>
         </div>
       </div>
     </header>
@@ -56,6 +61,7 @@ export default function MixPageClient({
   return (
     <CartProvider>
       <MixHeader />
+      <CartDrawer />
       <main className="pb-10">
         <div className="mx-auto max-w-7xl px-4 pt-8 text-center sm:px-6 lg:px-8">
           <h1 className="font-display text-3xl font-bold text-grape-700 sm:text-4xl">

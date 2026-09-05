@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Heart, Plus } from "lucide-react";
 import type { MenuItem } from "@/data/site";
-import { useCart } from "@/components/cart/CartContext";
 import SmoothieCup from "@/components/SmoothieCup";
+import DrinkCustomizer from "@/components/DrinkCustomizer";
 
 type DrinkCardProps = {
   item: MenuItem;
@@ -13,18 +13,11 @@ type DrinkCardProps = {
 };
 
 export default function DrinkCard({ item, buttonLabel = "เลือกเมนู" }: DrinkCardProps) {
-  const { addItem } = useCart();
   const [liked, setLiked] = useState(false);
-  const [added, setAdded] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
+  const [customizing, setCustomizing] = useState(false);
 
   const showImage = Boolean(item.image) && !imgFailed;
-
-  const handleAdd = () => {
-    addItem({ id: item.id, name: item.name, price: item.price });
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1300);
-  };
 
   return (
     <article className="hover-lift group relative flex flex-col overflow-hidden rounded-3xl bg-white/85 p-4 shadow-card ring-1 ring-white/70">
@@ -83,17 +76,17 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
         </div>
 
         <button
-          onClick={handleAdd}
-          className={`mt-3 inline-flex items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold transition-all ${
-            added
-              ? "bg-grape-500 text-white"
-              : "bg-grape-100 text-grape-700 hover:bg-grape-600 hover:text-white"
-          }`}
+          onClick={() => setCustomizing(true)}
+          className="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-grape-100 py-2.5 text-sm font-semibold text-grape-700 transition-all hover:bg-grape-600 hover:text-white"
         >
           <Plus size={16} />
-          {added ? "เพิ่มแล้ว!" : buttonLabel}
+          {buttonLabel}
         </button>
       </div>
+
+      {customizing && (
+        <DrinkCustomizer item={item} onClose={() => setCustomizing(false)} />
+      )}
     </article>
   );
 }

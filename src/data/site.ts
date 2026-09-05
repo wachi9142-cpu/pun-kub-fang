@@ -971,6 +971,7 @@ export const MIX_FRUITS: MixOption[] = [
   { id: "mango", label: "มะม่วง", emoji: "🥭" },
   { id: "grape", label: "องุ่น", emoji: "🍇" },
   { id: "blueberry", label: "บลูเบอร์รี", emoji: "🔵" },
+  { id: "apple", label: "แอปเปิ้ล", emoji: "🍏" },
 ];
 
 export const MIX_TOPPINGS: MixOption[] = [
@@ -986,6 +987,8 @@ export type ToppingItem = {
   nameEn: string;
   /** ราคาเพิ่มต่อ 1 ท็อปปิ้ง (บาท) */
   price: number;
+  /** รูปท็อปปิ้ง เช่น "/toppings/boba.png" — ถ้าไม่ใส่จะโชว์ placeholder */
+  image?: string;
 };
 
 export type ToppingGroup = {
@@ -1074,6 +1077,17 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
       { nameTh: "เนื้อสตรอว์เบอร์รี", nameEn: "Fresh Strawberry", price: 5 },
       { nameTh: "เนื้อกล้วย", nameEn: "Fresh Banana", price: 5 },
       { nameTh: "เนื้ออะโวคาโด", nameEn: "Extra Avocado", price: 10 },
+    ],
+  },
+  {
+    id: "cereal",
+    titleTh: "ซีเรียล & ถั่ว",
+    titleEn: "Cereal & Nuts",
+    emoji: "🥣",
+    items: [
+      { nameTh: "โกโก้ครั้นซ์", nameEn: "Cocoa Crunch", price: 5 },
+      { nameTh: "ซีเรียลฮันนี่สตาร์", nameEn: "Honey Stars Cereal", price: 5 },
+      { nameTh: "อัลมอนด์หั่นบาง", nameEn: "Sliced Almonds", price: 10 },
     ],
   },
 ];

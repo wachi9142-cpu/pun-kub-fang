@@ -7,7 +7,7 @@ import { useCart } from "@/components/cart/CartContext";
 import BrandLogo from "@/components/BrandLogo";
 
 export default function Navbar() {
-  const { count } = useCart();
+  const { count, openCart } = useCart();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -68,6 +68,7 @@ export default function Navbar() {
           </button>
 
           <button
+            onClick={openCart}
             aria-label="ตะกร้าสินค้า"
             className="relative grid h-10 w-10 place-items-center rounded-full text-grape-500 transition-colors hover:bg-grape-100 hover:text-grape-700"
           >
