@@ -199,6 +199,14 @@ export const MENU_SECTIONS: MenuSection[] = [
     palette: { foam: "#e6f3ff", top: "#5ab0f0", bottom: "#1f6fc4" },
   },
   {
+    id: "snacks",
+    label: "ขนมกินเพลิน",
+    labelEn: "Snacks & Bakery",
+    emoji: "🍪",
+    href: "/menu/snacks",
+    desc: "ของกินเล่น จับคู่แก้วโปรด 🍪",
+  },
+  {
     id: "toppings",
     label: "ท็อปปิ้ง",
     labelEn: "Toppings",
@@ -1327,6 +1335,75 @@ export const SOFT_DRINKS: SoftDrink[] = [
   },
   { id: "sprite", nameTh: "สไปรท์", nameEn: "Sprite", price: 20, emoji: "🥤", desc: "รสมะนาวเลมอน หอมสดชื่น เปรี้ยวหวาน ซ่าชื่นใจ", palette: { foam: "#eafdf0", top: "#7fd69a", bottom: "#2f9b57" } },
   { id: "est-cola", nameTh: "เอสโคล่า", nameEn: "est Cola", price: 20, emoji: "🥤", desc: "รสโคล่าหอมหวาน ซ่ากำลังดี ดื่มแล้วสดชื่น", palette: { foam: "#e5dbe8", top: "#6a3f7a", bottom: "#331a3d" } },
+];
+
+/* ---------- 🍪 ขนมกินเพลิน | Snacks & Bakery ---------- */
+export type SnackItem = {
+  id: string;
+  nameTh: string;
+  nameEn: string;
+  desc: string;
+  price: number;
+  /** ราคาปกติ (ถ้ามี = แสดงขีดฆ่าเป็นราคาโปรฯ) */
+  oldPrice?: number;
+  emoji: string;
+  badge?: string;
+  image?: string; // /snacks/xxx.webp — ถ้าไม่ใส่จะโชว์ placeholder
+};
+
+export type SnackGroup = {
+  id: string;
+  titleTh: string;
+  titleEn: string;
+  emoji: string;
+  note?: string;
+  items: SnackItem[];
+};
+
+export const SNACK_GROUPS: SnackGroup[] = [
+  {
+    id: "cornflakes",
+    titleTh: "คอนเฟลกกรุบกรอบ",
+    titleEn: "Crunchy Cornflakes",
+    emoji: "🥣",
+    note: "ขนาด 80 กรัม / ถุง",
+    items: [
+      { id: "cf-caramel", nameTh: "คอนเฟลกคาราเมลเนย", nameEn: "Caramel Butter Cornflakes", desc: "เคลือบคาราเมลหอมเนย + ลูกเกด + อัลมอนด์สไลด์", price: 39, emoji: "🍯", badge: "ขายดี" },
+      { id: "cf-dubai", nameTh: "คอนเฟลกช็อกโกแลตดูไบ", nameEn: "Dubai Chocolate Cornflakes", desc: "ช็อกโกแลตเข้มข้น + คูนาฟ่ากรอบ ๆ ดับเบิลครันช์", price: 59, emoji: "🍫", badge: "พิเศษ" },
+      { id: "cf-salt", nameTh: "คอนเฟลกรสเค็ม", nameEn: "Salted Cornflakes", desc: "รสเค็มหอมมัน กินเพลิน ฟีลป๊อปคอร์นรสเค็ม", price: 39, emoji: "🧂" },
+      { id: "cf-tomyum", nameTh: "คอนเฟลกรสต้มยำ", nameEn: "Tom Yum Cornflakes", desc: "หอมเครื่องต้มยำ เปรี้ยว เผ็ด เค็ม กินเล่นเพลิน", price: 39, emoji: "🌶️" },
+      { id: "cf-mala", nameTh: "คอนเฟลกรสหม่าล่า", nameEn: "Mala Cornflakes", desc: "หอมเครื่องเทศหม่าล่า เผ็ดชา เคี้ยวกรุบกรอบ", price: 39, emoji: "🌶️" },
+      { id: "cf-greentea", nameTh: "คอนเฟลกรสชาเขียว", nameEn: "Green Tea Cornflakes", desc: "หอมชาเขียว รสละมุน หวานพอดี", price: 39, emoji: "🍵" },
+      { id: "cf-thaitea", nameTh: "คอนเฟลกรสชาไทย", nameEn: "Thai Tea Cornflakes", desc: "หอมชาไทย รสหวานละมุน กรอบเคี้ยวเพลิน", price: 39, emoji: "🧋" },
+      { id: "cf-cheese", nameTh: "คอนเฟลกรสชีส", nameEn: "Cheese Cornflakes", desc: "หอมชีส รสเค็มมัน กรอบเพลิน", price: 39, emoji: "🧀" },
+      { id: "cf-milkgrain", nameTh: "คอนเฟลกรสครีมนมธัญพืช", nameEn: "Creamy Milk & Grain Cornflakes", desc: "หอมครีมนม รสหวานมัน ผสมธัญพืช เคี้ยวเพลิน", price: 39, emoji: "🥛" },
+      { id: "cf-passion", nameTh: "คอนเฟลกรสเสาวรส", nameEn: "Passion Fruit Cornflakes", desc: "เคลือบซอสเสาวรส หอมกลิ่นเสาวรส เปรี้ยวหวานสดชื่น", price: 39, emoji: "💛" },
+    ],
+  },
+  {
+    id: "fruit-cornflakes",
+    titleTh: "คอนเฟลกผลไม้",
+    titleEn: "Fruit Cornflakes",
+    emoji: "🍓",
+    note: "เพิ่มผลไม้อบแห้ง/แปรรูป · เพิ่มรสอื่นได้ในอนาคต",
+    items: [
+      { id: "cf-mango", nameTh: "คอนเฟลกมะม่วงอบแห้ง", nameEn: "Dried Mango Cornflakes", desc: "คอนเฟลกกรุบกรอบ + มะม่วงอบแห้งเคี้ยวหนึบ ๆ", price: 39, oldPrice: 49, emoji: "🥭", badge: "โปรฯ" },
+      { id: "cf-banana", nameTh: "คอนเฟลกกล้วยตาก", nameEn: "Dried Banana Cornflakes", desc: "คอนเฟลกกรุบกรอบ + กล้วยตากหอมหวาน เนื้อนุ่มหนึบ", price: 39, oldPrice: 49, emoji: "🍌", badge: "โปรฯ" },
+    ],
+  },
+  {
+    id: "bakery",
+    titleTh: "ขนม & เบเกอรี่",
+    titleEn: "Snacks & Bakery",
+    emoji: "🍪",
+    items: [
+      { id: "sandwich", nameTh: "แซนวิช", nameEn: "Sandwich", desc: "แซนวิชไส้แน่น ทานคู่เครื่องดื่มโปรด", price: 45, emoji: "🥪" },
+      { id: "butter-corn", nameTh: "ข้าวโพดอบเนย", nameEn: "Buttered Corn", desc: "ข้าวโพดหวานอบเนยหอม ๆ กินเพลิน", price: 30, emoji: "🌽" },
+      { id: "cookie", nameTh: "คุกกี้", nameEn: "Cookie", desc: "คุกกี้หอมเนย กรอบนอกนุ่มใน", price: 25, emoji: "🍪" },
+      { id: "brownie", nameTh: "บราวนี่", nameEn: "Brownie", desc: "บราวนี่ช็อกโกแลตเข้มข้น เนื้อหนึบ", price: 35, emoji: "🍫" },
+      { id: "cake", nameTh: "เค้ก/ขนมหวาน", nameEn: "Cake & Dessert", desc: "เค้กนุ่ม ๆ ขนมหวานประจำวัน", price: 45, emoji: "🍰" },
+    ],
+  },
 ];
 
 /* ---------- โปรโมชั่น ---------- */

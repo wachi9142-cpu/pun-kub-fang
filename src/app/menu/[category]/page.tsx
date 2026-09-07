@@ -8,6 +8,7 @@ import SmoothieMenuView from "@/components/sections/SmoothieMenuView";
 import HomemadeHerbal from "@/components/sections/HomemadeHerbal";
 import WhippedCream from "@/components/sections/WhippedCream";
 import BottledDrinks from "@/components/sections/BottledDrinks";
+import Snacks from "@/components/sections/Snacks";
 import Toppings from "@/components/sections/Toppings";
 
 const DRINK_IDS = DRINK_CATEGORIES.map((c) => c.id) as string[];
@@ -46,6 +47,8 @@ export default async function CategoryPage({
         <WhippedCream />
       ) : category === "soft" ? (
         <BottledDrinks />
+      ) : category === "snacks" ? (
+        <Snacks />
       ) : category === "toppings" ? (
         <Toppings />
       ) : category === "tea" ? (
