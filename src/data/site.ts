@@ -1076,6 +1076,8 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
       { nameTh: "เยลลี่ฟรุตสลัด", nameEn: "Fruit Cocktail Jelly", price: 5 },
       { nameTh: "เยลลี่องุ่น", nameEn: "Grape Jelly", price: 5 },
       { nameTh: "เยลลี่สตรอว์เบอร์รี", nameEn: "Strawberry Jelly", price: 5 },
+      { nameTh: "ฟรุตสลัดกลิ่นแอปเปิ้ล", nameEn: "Apple Fruit Cocktail Jelly", price: 5 },
+      { nameTh: "ฟรุตสลัดกลิ่นบลูฮาวาย", nameEn: "Blue Hawaii Fruit Cocktail Jelly", price: 5 },
     ],
   },
   {
@@ -1085,6 +1087,7 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
     emoji: "🍨",
     items: [
       { nameTh: "พุดดิ้ง", nameEn: "Pudding", price: 10 },
+      { nameTh: "เต้าฮวยนมสด", nameEn: "Fresh Milk Tofu Pudding", price: 10 },
       { nameTh: "ครีมชีส", nameEn: "Cream Cheese", price: 10 },
       { nameTh: "วิปครีม", nameEn: "Whipped Cream", price: 10 },
       { nameTh: "ไอศกรีม", nameEn: "Ice Cream", price: 10 },
@@ -1114,7 +1117,7 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
     items: [
       { nameTh: "โกโก้ครั้นซ์", nameEn: "Cocoa Crunch", price: 5 },
       { nameTh: "ซีเรียลฮันนี่สตาร์", nameEn: "Honey Stars Cereal", price: 5 },
-      { nameTh: "อัลมอนด์หั่นบาง", nameEn: "Sliced Almonds", price: 10 },
+      { nameTh: "อัลมอนด์สไลด์", nameEn: "Sliced Almonds", price: 10 },
     ],
   },
 ];
@@ -1158,6 +1161,8 @@ export type HomemadeDrink = {
   price: number;
   /** true = หมดวันนี้ (แสดงป้าย "หมดวันนี้ · Sold Out" แทนการลบเมนู) */
   soldOut?: boolean;
+  /** รูปสินค้า เช่น "/homemade/xxx.webp" — ถ้าไม่ใส่จะโชว์อีโมจิ placeholder */
+  image?: string;
 };
 
 /* 🧋 น้ำโฮมเมดใส่แก้ว — 20 บาท/แก้ว (ยกเว้นที่ระบุ) */
@@ -1264,6 +1269,8 @@ export const WHIP_TOPPING_GROUPS: WhipToppingGroup[] = [
       { nameTh: "เยลลี่ฟรุตสลัด", nameEn: "Fruit Cocktail Jelly", price: 5 },
       { nameTh: "เยลลี่องุ่น", nameEn: "Grape Jelly", price: 5 },
       { nameTh: "เยลลี่สตรอว์เบอร์รี", nameEn: "Strawberry Jelly", price: 5 },
+      { nameTh: "ฟรุตสลัดกลิ่นแอปเปิ้ล", nameEn: "Apple Fruit Cocktail Jelly", price: 5 },
+      { nameTh: "ฟรุตสลัดกลิ่นบลูฮาวาย", nameEn: "Blue Hawaii Fruit Cocktail Jelly", price: 5 },
     ],
   },
   {
@@ -1273,6 +1280,7 @@ export const WHIP_TOPPING_GROUPS: WhipToppingGroup[] = [
     titleEn: "Premium",
     items: [
       { nameTh: "พุดดิ้ง", nameEn: "Pudding", price: 10 },
+      { nameTh: "เต้าฮวยนมสด", nameEn: "Fresh Milk Tofu Pudding", price: 10 },
       { nameTh: "ครีมชีส", nameEn: "Cream Cheese", price: 10 },
       { nameTh: "วิปครีม", nameEn: "Whipped Cream", price: 10 },
     ],
@@ -1380,6 +1388,7 @@ export const SNACK_GROUPS: SnackGroup[] = [
     note: "ขนาด 80 กรัม / ถุง",
     items: [
       { id: "cf-caramel", nameTh: "คอนเฟลกคาราเมลเนย", nameEn: "Caramel Butter Cornflakes", desc: "เคลือบคาราเมลหอมเนย + ลูกเกด + อัลมอนด์สไลด์", price: 39, emoji: "🍯", badge: "ขายดี" },
+      { id: "cf-honey-caramel", nameTh: "คอนเฟลกคาราเมลน้ำผึ้ง", nameEn: "Honey Caramel Cornflakes", desc: "เคลือบคาราเมลหอมน้ำผึ้ง + ลูกเกด + อัลมอนด์สไลด์", price: 39, emoji: "🍯" },
       { id: "cf-dubai", nameTh: "คอนเฟลกช็อกโกแลตดูไบ", nameEn: "Dubai Chocolate Cornflakes", desc: "ช็อกโกแลตเข้มข้น + คูนาฟ่ากรอบ ๆ ดับเบิลครันช์", price: 59, emoji: "🍫", badge: "พิเศษ" },
       { id: "cf-salt", nameTh: "คอนเฟลกรสเค็ม", nameEn: "Salted Cornflakes", desc: "รสเค็มหอมมัน กินเพลิน ฟีลป๊อปคอร์นรสเค็ม", price: 39, emoji: "🧂" },
       { id: "cf-tomyum", nameTh: "คอนเฟลกรสต้มยำ", nameEn: "Tom Yum Cornflakes", desc: "หอมเครื่องต้มยำ เปรี้ยว เผ็ด เค็ม กินเล่นเพลิน", price: 39, emoji: "🌶️" },

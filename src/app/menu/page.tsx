@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import MenuPageShell from "@/components/sections/MenuPageShell";
 import MenuCategoryButtons from "@/components/MenuCategoryButtons";
+import PriceNotice from "@/components/sections/PriceNotice";
 import PricingGuide from "@/components/sections/PricingGuide";
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function MenuHubPage() {
         <MenuCategoryButtons />
       </div>
 
+      <PriceNotice />
       <PricingGuide />
     </MenuPageShell>
   );

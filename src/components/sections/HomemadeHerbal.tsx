@@ -14,9 +14,19 @@ function DrinkRow({ item }: { item: HomemadeDrink }) {
         item.soldOut ? "opacity-70" : ""
       }`}
     >
-      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-lime-50 text-lg">
-        {item.emoji}
-      </span>
+      {/* ช่องวางรูปสินค้า (ใส่ image ทีหลังได้ ไม่งั้นโชว์อีโมจิ) */}
+      <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-lime-50">
+        {item.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={item.image}
+            alt={item.nameTh}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <span className="text-xl">{item.emoji}</span>
+        )}
+      </div>
       <div className="min-w-0 flex-1 leading-tight">
         <span
           className={`block truncate text-sm font-medium text-ink ${
