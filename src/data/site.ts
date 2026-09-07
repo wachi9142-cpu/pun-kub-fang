@@ -207,6 +207,14 @@ export const MENU_SECTIONS: MenuSection[] = [
     desc: "ของกินเล่น จับคู่แก้วโปรด 🍪",
   },
   {
+    id: "sandwiches",
+    label: "แซนวิช",
+    labelEn: "Sandwiches",
+    emoji: "🥪",
+    href: "/menu/sandwiches",
+    desc: "คาว/ผลไม้ครีมสด/แยม 🥪",
+  },
+  {
     id: "toppings",
     label: "ท็อปปิ้ง",
     labelEn: "Toppings",
@@ -1357,6 +1365,9 @@ export type SnackGroup = {
   titleEn: string;
   emoji: string;
   note?: string;
+  noteEn?: string;
+  /** รายการผลไม้ที่เลือกได้ (หมุนเวียนรายวัน) — โชว์เป็นชิป */
+  fruitList?: string[];
   items: SnackItem[];
 };
 
@@ -1397,11 +1408,65 @@ export const SNACK_GROUPS: SnackGroup[] = [
     titleEn: "Snacks & Bakery",
     emoji: "🍪",
     items: [
-      { id: "sandwich", nameTh: "แซนวิช", nameEn: "Sandwich", desc: "แซนวิชไส้แน่น ทานคู่เครื่องดื่มโปรด", price: 45, emoji: "🥪" },
       { id: "butter-corn", nameTh: "ข้าวโพดอบเนย", nameEn: "Buttered Corn", desc: "ข้าวโพดหวานอบเนยหอม ๆ กินเพลิน", price: 30, emoji: "🌽" },
       { id: "cookie", nameTh: "คุกกี้", nameEn: "Cookie", desc: "คุกกี้หอมเนย กรอบนอกนุ่มใน", price: 25, emoji: "🍪" },
       { id: "brownie", nameTh: "บราวนี่", nameEn: "Brownie", desc: "บราวนี่ช็อกโกแลตเข้มข้น เนื้อหนึบ", price: 35, emoji: "🍫" },
       { id: "cake", nameTh: "เค้ก/ขนมหวาน", nameEn: "Cake & Dessert", desc: "เค้กนุ่ม ๆ ขนมหวานประจำวัน", price: 45, emoji: "🍰" },
+    ],
+  },
+];
+
+/* ---------- 🥪 แซนวิช | Sandwiches ---------- */
+export const SANDWICH_GROUPS: SnackGroup[] = [
+  {
+    id: "savory",
+    titleTh: "แซนวิชไส้คาว",
+    titleEn: "Savory Sandwiches",
+    emoji: "🥪",
+    items: [
+      { id: "sw-ham-cheese", nameTh: "แซนวิชแฮมชีส", nameEn: "Ham & Cheese Sandwich", desc: "แฮม + ชีสละมุน ในขนมปังนุ่ม", price: 49, emoji: "🥪", badge: "ขายดี" },
+      { id: "sw-crab", nameTh: "แซนวิชปูอัด", nameEn: "Crab Stick Sandwich", desc: "ปูอัดผสมสลัดครีม รสกลมกล่อม", price: 49, emoji: "🦀" },
+      { id: "sw-sausage", nameTh: "แซนวิชไส้กรอก", nameEn: "Sausage Sandwich", desc: "ไส้กรอกหมูรมควัน หอมอร่อย", price: 49, emoji: "🌭" },
+      { id: "sw-tuna", nameTh: "แซนวิชทูน่า", nameEn: "Tuna Sandwich", desc: "ทูน่าผสมมายองเนส เนื้อแน่น", price: 49, emoji: "🐟" },
+      { id: "sw-thai", nameTh: "แซนวิชโบราณ", nameEn: "Thai-Style Sandwich", desc: "แซนวิชสไตล์ไทยโบราณ รสคุ้นเคย", price: 45, emoji: "🥪" },
+    ],
+  },
+  {
+    id: "fruit-cream",
+    titleTh: "แซนวิชผลไม้ครีมสด",
+    titleEn: "Fresh Fruit & Cream",
+    emoji: "🍓",
+    note: "🍓 ผลไม้สดมีให้เลือกแตกต่างกันในแต่ละวัน ขึ้นอยู่กับความสดและวัตถุดิบที่มีในวันนั้น",
+    noteEn:
+      "Fresh fruit availability varies by day, depending on freshness and daily ingredients.",
+    fruitList: [
+      "🍓 สตรอว์เบอร์รี",
+      "🍇 องุ่นไชน์มัสแคท",
+      "🥝 กีวี",
+      "🍌 กล้วย",
+      "🍊 ส้ม",
+      "🫐 บลูเบอร์รี",
+    ],
+    items: [
+      { id: "sw-fruit-cream", nameTh: "แซนวิชผลไม้ครีมสด", nameEn: "Fresh Fruit & Cream Sandwich", desc: "ครีมสดนุ่ม + ผลไม้สดหมุนเวียนตามวัน", price: 59, emoji: "🍓", badge: "แนะนำ" },
+    ],
+  },
+  {
+    id: "jam",
+    titleTh: "แซนวิชแยม",
+    titleEn: "Jam Sandwiches",
+    emoji: "🍯",
+    items: [
+      { id: "sw-jam-strawberry", nameTh: "แซนวิชแยมสตรอว์เบอร์รี", nameEn: "Strawberry Jam", desc: "แยมสตรอว์เบอร์รีหวานอมเปรี้ยว", price: 35, emoji: "🍓" },
+      { id: "sw-jam-orange", nameTh: "แซนวิชแยมส้ม", nameEn: "Orange Marmalade", desc: "แยมส้มหอม ๆ รสสดชื่น", price: 35, emoji: "🍊" },
+      { id: "sw-jam-choco", nameTh: "แซนวิชแยมช็อกโกแลต", nameEn: "Chocolate Spread", desc: "ช็อกโกแลตสเปรดเข้มข้น", price: 35, emoji: "🍫" },
+      { id: "sw-jam-banana", nameTh: "แซนวิชแยมกล้วย", nameEn: "Banana Spread", desc: "แยมกล้วยหอมหวาน", price: 35, emoji: "🍌" },
+      { id: "sw-jam-pandan", nameTh: "แซนวิชใบเตยสังขยา", nameEn: "Pandan Custard", desc: "สังขยาใบเตยหอมละมุน", price: 35, emoji: "🌿" },
+      { id: "sw-jam-thaitea", nameTh: "แซนวิชสังขยาชาไทย", nameEn: "Thai Tea Custard", desc: "สังขยาชาไทยหวานหอม", price: 35, emoji: "🧋" },
+      { id: "sw-jam-blueberry", nameTh: "แซนวิชแยมบลูเบอร์รี", nameEn: "Blueberry Jam", desc: "แยมบลูเบอร์รีหวานอมเปรี้ยว", price: 35, emoji: "🫐" },
+      { id: "sw-jam-butter", nameTh: "แซนวิชเนยนมน้ำตาล", nameEn: "Butter, Milk & Sugar", desc: "เนย + นมข้น + น้ำตาล คลาสสิก", price: 30, emoji: "🧈" },
+      { id: "sw-jam-ovaltine", nameTh: "แซนวิชโอวัลติน", nameEn: "Ovaltine Spread", desc: "โอวัลตินสเปรดหอมมอลต์", price: 35, emoji: "🥛" },
+      { id: "sw-jam-milo", nameTh: "แซนวิชไมโล", nameEn: "Milo Spread", desc: "ไมโลสเปรดเข้มข้น", price: 35, emoji: "🍫" },
     ],
   },
 ];

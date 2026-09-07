@@ -5,7 +5,7 @@ import { Heart, Plus } from "lucide-react";
 import { SNACK_GROUPS, type SnackItem } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
 
-function SnackCard({ item }: { item: SnackItem }) {
+export function SnackCard({ item }: { item: SnackItem }) {
   const { addItem, openCart } = useCart();
   const [liked, setLiked] = useState(false);
 

@@ -9,6 +9,7 @@ import HomemadeHerbal from "@/components/sections/HomemadeHerbal";
 import WhippedCream from "@/components/sections/WhippedCream";
 import BottledDrinks from "@/components/sections/BottledDrinks";
 import Snacks from "@/components/sections/Snacks";
+import Sandwiches from "@/components/sections/Sandwiches";
 import Toppings from "@/components/sections/Toppings";
 
 const DRINK_IDS = DRINK_CATEGORIES.map((c) => c.id) as string[];
@@ -49,6 +50,8 @@ export default async function CategoryPage({
         <BottledDrinks />
       ) : category === "snacks" ? (
         <Snacks />
+      ) : category === "sandwiches" ? (
+        <Sandwiches />
       ) : category === "toppings" ? (
         <Toppings />
       ) : category === "tea" ? (
