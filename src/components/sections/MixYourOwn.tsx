@@ -44,7 +44,11 @@ function Chip({
           : "border-grape-100 bg-white/85 text-grape-600 hover:border-grape-300 hover:bg-grape-50"
       }`}
     >
-      {active && <Check size={14} />}
+      {active && (
+        <span className="animate-pop-in grid h-5 w-5 place-items-center rounded-full bg-white shadow">
+          <Check size={14} strokeWidth={3} className="text-[#22C55E]" />
+        </span>
+      )}
       {emoji && <span className="text-base">{emoji}</span>}
       {label}
       {priceLabel && (
@@ -88,7 +92,11 @@ function PrefPill({
           : "border-white/40 bg-white/10 text-white hover:scale-105 hover:bg-white/20"
       }`}
     >
-      {active && <Check size={14} />}
+      {active && (
+        <span className="animate-pop-in grid h-5 w-5 place-items-center rounded-full bg-white shadow">
+          <Check size={14} strokeWidth={3} className="text-[#22C55E]" />
+        </span>
+      )}
       {label}
     </button>
   );
@@ -301,7 +309,7 @@ export default function MixYourOwn({
                     1. เลือกฐานเครื่องดื่ม (ได้สูงสุด {MAX_BASE} ฐาน)
                   </p>
                   <p className="mb-2.5 text-xs text-white/70">
-                    รวมฐาน 1 อย่างในราคาพื้นฐาน · เพิ่มฐานที่ 2 +฿{EXTRA_BASE_PRICE}
+                    รวมฐาน 1 อย่างในราคาพื้นฐาน · เพิ่มฐานที่ 2 +{EXTRA_BASE_PRICE}
                   </p>
                   <div className="flex flex-wrap gap-2.5">
                     {MIX_BASES.slice(0, 2).map((o) => {
@@ -373,7 +381,7 @@ export default function MixYourOwn({
                     2. เลือกรสชาติ / ไซรัป (เลือกได้หลายอย่าง)
                   </p>
                   <p className="mb-2.5 text-xs text-white/70">
-                    ไซรัปกลิ่น/รสผลไม้ (ไม่ใช่ผลไม้สด) · +฿{FRUIT_PRICE} ต่ออย่าง
+                    ไซรัปกลิ่น/รสผลไม้ (ไม่ใช่ผลไม้สด) · +{FRUIT_PRICE} ต่ออย่าง
                   </p>
                   <div className="flex flex-wrap gap-2.5">
                     {MIX_SYRUPS.map((o) => (
@@ -381,7 +389,7 @@ export default function MixYourOwn({
                         key={o.id}
                         emoji={o.emoji}
                         label={o.label}
-                        priceLabel={`+฿${FRUIT_PRICE}`}
+                        priceLabel={`+${FRUIT_PRICE}`}
                         active={syrupIds.includes(o.id)}
                         onClick={() => toggleSyrup(o.id)}
                       />
@@ -395,7 +403,7 @@ export default function MixYourOwn({
                     3. เลือกผลไม้สด (เลือกได้หลายอย่าง)
                   </p>
                   <p className="mb-2.5 text-xs text-white/70">
-                    ผลไม้สดจริง ๆ · +฿{FRUIT_PRICE} ต่ออย่าง
+                    ผลไม้สดจริง ๆ · +{FRUIT_PRICE} ต่ออย่าง
                   </p>
                   <div className="flex flex-wrap gap-2.5">
                     {MIX_FRUITS.map((o) => (
@@ -403,7 +411,7 @@ export default function MixYourOwn({
                         key={o.id}
                         emoji={o.emoji}
                         label={o.label}
-                        priceLabel={`+฿${FRUIT_PRICE}`}
+                        priceLabel={`+${FRUIT_PRICE}`}
                         active={fruitIds.includes(o.id)}
                         onClick={() => toggleFruit(o.id)}
                       />
@@ -479,7 +487,11 @@ export default function MixYourOwn({
                             : "border-white/40 bg-white/10 text-white hover:bg-white/20"
                         }`}
                       >
-                        {freeBoba === b.nameEn && <Check size={14} />}
+                        {freeBoba === b.nameEn && (
+                          <span className="animate-pop-in grid h-5 w-5 place-items-center rounded-full bg-white shadow">
+                            <Check size={14} strokeWidth={3} className="text-[#22C55E]" />
+                          </span>
+                        )}
                         {b.nameTh}
                         <span
                           className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
@@ -501,7 +513,7 @@ export default function MixYourOwn({
                     4. เลือกท็อปปิ้ง (เลือกได้หลายอย่าง)
                   </p>
                   <p className="mb-2.5 text-xs text-white/70">
-                    คิดราคาตามปกติ +฿5 / +฿10 ต่ออย่าง
+                    คิดราคาตามปกติ +5 / +10 ต่ออย่าง
                   </p>
                   <div className="space-y-3">
                     {paidGroups.map((g) => (
@@ -514,7 +526,7 @@ export default function MixYourOwn({
                             <Chip
                               key={it.nameEn}
                               label={it.nameTh}
-                              priceLabel={`+฿${it.price}`}
+                              priceLabel={`+${it.price}`}
                               active={extras.includes(it.nameEn)}
                               onClick={() => toggleExtra(it.nameEn)}
                             />
@@ -587,7 +599,7 @@ export default function MixYourOwn({
               <div className="mt-3 flex items-center justify-between border-t border-grape-100 pt-3">
                 <span className="text-sm font-medium text-grape-500">รวมทั้งหมด</span>
                 <span className="font-display text-3xl font-bold text-blossom-500">
-                  ฿{price}
+                  {price}
                 </span>
               </div>
 

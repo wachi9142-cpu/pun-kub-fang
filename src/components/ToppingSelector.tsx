@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Check, X } from "lucide-react";
 import { TOPPING_GROUPS, TOPPING_IMAGES, type ToppingGroup, type ToppingItem } from "@/data/site";
 
-/** ป้ายราคา: ฟรี / +฿5 / +฿10 */
+/** ป้ายราคา: ฟรี / +5 / +10 */
 function PriceTag({ price, active }: { price: number; active?: boolean }) {
   return (
     <span
@@ -16,7 +16,7 @@ function PriceTag({ price, active }: { price: number; active?: boolean }) {
             : "bg-blossom-100 text-blossom-600"
       }`}
     >
-      {price === 0 ? "ฟรี" : `+฿${price}`}
+      {price === 0 ? "ฟรี" : `+${price}`}
     </span>
   );
 }
@@ -40,15 +40,15 @@ function ToppingCard({
   const image = imgOf(item);
   return (
     <div
-      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-cream-white text-center shadow-soft transition-all duration-200 ${
+      className={`group relative flex flex-col overflow-hidden rounded-2xl text-center shadow-soft transition-all duration-200 ${
         selected
-          ? "scale-[1.03] ring-2 ring-grape-deep"
-          : "ring-1 ring-ink/5 hover:ring-blossom-300"
+          ? "scale-[1.03] bg-grape-50 ring-2 ring-grape-deep"
+          : "bg-white ring-1 ring-ink/10 hover:ring-grape-300"
       }`}
     >
       {selected && (
-        <span className="animate-pop-in absolute right-1.5 top-1.5 z-10 grid h-5 w-5 place-items-center rounded-full bg-grape-deep text-white shadow">
-          <Check size={12} />
+        <span className="animate-pop-in absolute right-1.5 top-1.5 z-10 grid h-7 w-7 place-items-center rounded-full bg-[#22C55E] text-white shadow-md ring-2 ring-white">
+          <Check size={18} strokeWidth={3} />
         </span>
       )}
 
@@ -82,7 +82,7 @@ function ToppingCard({
         type="button"
         onClick={onToggle}
         className={`flex flex-1 flex-col items-center px-1.5 py-2 transition-colors ${
-          selected ? "bg-grape-deep/5" : "hover:bg-grape-50"
+          selected ? "" : "hover:bg-grape-50/60"
         }`}
       >
         <span className="line-clamp-2 text-[11px] font-semibold leading-tight text-ink">
@@ -147,7 +147,7 @@ function ToppingDetail({
             {item.desc ?? `ท็อปปิ้งในหมวด ${groupTh} เพิ่มความอร่อยให้แก้วโปรดของคุณ 💜`}
           </p>
           <p className="mt-3 font-display text-2xl font-bold text-blossom-500">
-            {item.price === 0 ? "ฟรี" : `+฿${item.price}`}
+            {item.price === 0 ? "ฟรี" : `+${item.price}`}
           </p>
 
           <button

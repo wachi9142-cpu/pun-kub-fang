@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#7c3fc4",
+  themeColor: "#7b4ab8",
   width: "device-width",
   initialScale: 1,
 };
@@ -43,8 +43,8 @@ export default function RootLayout({
           <ConfigProvider
             theme={{
               token: {
-                colorPrimary: "#7c3fc4",
-                colorInfo: "#7c3fc4",
+                colorPrimary: "#7b4ab8",
+                colorInfo: "#5aafe0",
                 borderRadius: 16,
                 fontFamily: "var(--font-prompt), system-ui, sans-serif",
               },

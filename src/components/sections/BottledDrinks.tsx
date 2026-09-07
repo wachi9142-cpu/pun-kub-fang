@@ -46,7 +46,7 @@ function SoftRow({ item }: { item: SoftDrink }) {
 
       <div className="flex shrink-0 flex-col items-end gap-1.5">
         <span className="font-display text-base font-bold text-blossom-500">
-          ฿{item.price}
+          {item.price}
         </span>
         {item.soldOut ? (
           <span className="rounded-full bg-ink/10 px-2.5 py-1 text-[10px] font-bold text-ink/60">

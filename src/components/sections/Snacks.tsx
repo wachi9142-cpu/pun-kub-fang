@@ -26,7 +26,7 @@ export function SnackCard({ item }: { item: SnackItem }) {
         aria-label="ถูกใจ"
         className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/85 text-blossom-400 shadow transition-transform hover:scale-110"
       >
-        <Heart size={16} fill={liked ? "#f0507f" : "transparent"} />
+        <Heart size={16} fill={liked ? "#5aafe0" : "transparent"} />
       </button>
 
       {/* พื้นที่รูปสินค้า (placeholder ถ้ายังไม่มีรูป) */}
@@ -59,11 +59,11 @@ export function SnackCard({ item }: { item: SnackItem }) {
           <span className="flex items-baseline gap-1.5">
             {item.oldPrice && (
               <span className="text-xs font-medium text-grape-400 line-through">
-                ฿{item.oldPrice}
+                {item.oldPrice}
               </span>
             )}
             <span className="font-display text-xl font-bold text-blossom-500">
-              ฿{item.price}
+              {item.price}
             </span>
           </span>
         </div>

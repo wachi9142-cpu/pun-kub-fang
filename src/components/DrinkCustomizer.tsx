@@ -45,10 +45,14 @@ function Pill({
       className={`flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-sm font-medium transition-all duration-200 active:scale-95 ${
         active
           ? "scale-105 border-grape-500 bg-grape-deep text-white shadow-soft"
-          : "border-ink/10 bg-cream-white text-ink hover:border-grape-300 hover:bg-grape-50"
+          : "border-ink/10 bg-white text-ink hover:border-grape-300 hover:bg-grape-50"
       }`}
     >
-      {active && <Check size={14} />}
+      {active && (
+        <span className="animate-pop-in grid h-5 w-5 place-items-center rounded-full bg-white shadow">
+          <Check size={14} strokeWidth={3} className="text-[#22C55E]" />
+        </span>
+      )}
       {label}
     </button>
   );
@@ -114,7 +118,7 @@ export default function DrinkCustomizer({
               <p className="text-xs text-ink/45">{item.nameEn}</p>
             )}
             <p className="mt-0.5 text-sm font-semibold text-blossom-500">
-              เริ่มต้น ฿{item.price}
+              เริ่มต้น {item.price}
             </p>
           </div>
           <button
@@ -176,12 +180,12 @@ export default function DrinkCustomizer({
             <div className="mb-2 max-h-24 space-y-0.5 overflow-y-auto text-xs">
               <div className="flex justify-between text-ink/60">
                 <span>{item.name}</span>
-                <span>฿{item.price}</span>
+                <span>{item.price}</span>
               </div>
               {picked.map((i) => (
                 <div key={i.nameEn} className="flex justify-between text-ink/60">
                   <span>+ {i.nameTh}</span>
-                  <span className="text-blossom-500">+฿{i.price}</span>
+                  <span className="text-blossom-500">+{i.price}</span>
                 </div>
               ))}
             </div>
@@ -189,7 +193,7 @@ export default function DrinkCustomizer({
           <div className="mb-3 flex items-center justify-between">
             <span className="text-sm font-medium text-ink/60">ราคารวม</span>
             <span className="font-display text-2xl font-bold text-blossom-500">
-              ฿{total}
+              {total}
             </span>
           </div>
           <button

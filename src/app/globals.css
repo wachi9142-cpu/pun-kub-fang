@@ -1,46 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  /* ---- Brand palette: purple · pink · cream ---- */
-  --color-grape-50: #f6f1fe;
-  --color-grape-100: #ede4fb;
-  --color-grape-200: #ddccf7;
-  --color-grape-300: #c6a9f0;
-  --color-grape-400: #ab7fe6;
-  --color-grape-500: #9257da;
-  --color-grape-600: #7c3fc4;
-  --color-grape-700: #6831a2;
-  --color-grape-800: #562b84;
-  --color-grape-900: #47256b;
+  /* ---- Brand palette: purple 💜 · sky-blue 🩵 · white 🤍 ---- */
+  /* ม่วง = สีหลักของแบรนด์ (ปุ่มหลัก, เมนู active/selected) */
+  --color-grape-50: #f5f1fb;
+  --color-grape-100: #ebe1f6;
+  --color-grape-200: #dccbef;
+  --color-grape-300: #c9b3e8; /* Light Lavender */
+  --color-grape-400: #ac86d7;
+  --color-grape-500: #9161c9;
+  --color-grape-600: #7b4ab8; /* Purple — สีแบรนด์หลัก */
+  --color-grape-700: #653a9c;
+  --color-grape-800: #522f7f;
+  --color-grape-900: #442867;
 
-  --color-blossom-50: #fef1f7;
-  --color-blossom-100: #fde3ef;
-  --color-blossom-200: #fbc7df;
-  --color-blossom-300: #f89bc4;
-  --color-blossom-400: #f265a2;
-  --color-blossom-500: #e8408a;
-  --color-blossom-600: #d3236e;
+  /* ฟ้า = สีรอง (highlight, badge, ปุ่มรอง, ราคา) */
+  --color-blossom-50: #ecf7fe;
+  --color-blossom-100: #d6effd;
+  --color-blossom-200: #b3e2fb;
+  --color-blossom-300: #8ed8f8; /* Sky Blue */
+  --color-blossom-400: #5aafe0; /* Blue */
+  --color-blossom-500: #2f8fd0;
+  --color-blossom-600: #1f77b8;
 
-  --color-cream-50: #fffdf8;
-  --color-cream-100: #fdf6ec;
-  --color-cream-200: #faedd8;
-  --color-cream-white: #fff8ee;
+  /* ขาว/ฟ้าอ่อน = พื้นหลังและพื้นผิว card */
+  --color-cream-50: #fbfdff;
+  --color-cream-100: #eff7fd;
+  --color-cream-200: #e1f0fa;
+  --color-cream-white: #f4fafe; /* Light Blue — พื้นผิวนุ่ม */
 
-  /* หมึกดำอมม่วง + ม่วงเข้มสำหรับปุ่ม/ตัวอักษรหลัก */
-  --color-ink: #29212e;
-  --color-ink-soft: #575062;
-  --color-grape-deep: #6d3aa8;
+  /* ข้อความหลัก + ม่วงเข้มสำหรับปุ่ม/สถานะเลือก */
+  --color-ink: #29213a;
+  --color-ink-soft: #574f66;
+  --color-grape-deep: #5f339c;
 
   --font-display: var(--font-mitr), system-ui, sans-serif;
   --font-body: var(--font-prompt), system-ui, sans-serif;
 
-  --shadow-soft: 0 12px 30px -12px rgba(124, 63, 196, 0.28);
-  --shadow-card: 0 18px 40px -20px rgba(124, 63, 196, 0.35);
+  --shadow-soft: 0 12px 30px -12px rgba(123, 74, 184, 0.26);
+  --shadow-card: 0 18px 40px -20px rgba(123, 74, 184, 0.32);
 }
 
 :root {
-  --page-top: #fbf7f1;
-  --page-bottom: #fbf6f3;
+  --page-top: #f4fafe;
+  --page-bottom: #ffffff;
 }
 
 * {
@@ -67,9 +70,9 @@ body {
   color: var(--color-ink);
   overflow-x: hidden;
   background:
-    radial-gradient(900px 480px at 12% -8%, rgba(168, 124, 224, 0.14) 0%, transparent 55%),
-    radial-gradient(760px 420px at 100% -6%, rgba(240, 130, 180, 0.12) 0%, transparent 52%),
-    linear-gradient(180deg, var(--page-top) 0%, #f8f4fa 45%, var(--page-bottom) 100%);
+    radial-gradient(900px 480px at 12% -8%, rgba(123, 74, 184, 0.13) 0%, transparent 55%),
+    radial-gradient(760px 420px at 100% -6%, rgba(90, 175, 224, 0.13) 0%, transparent 52%),
+    linear-gradient(180deg, var(--page-top) 0%, #eef6fd 45%, var(--page-bottom) 100%);
   background-repeat: no-repeat;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -87,7 +90,7 @@ body {
 }
 
 .text-gradient {
-  background: linear-gradient(120deg, #7c3fc4 0%, #e8408a 100%);
+  background: linear-gradient(120deg, #7b4ab8 0%, #5aafe0 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

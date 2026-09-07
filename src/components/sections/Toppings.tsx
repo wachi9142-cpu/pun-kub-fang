@@ -19,16 +19,16 @@ function ToppingCard({
   return (
     <button
       onClick={onClick}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-cream-white p-2.5 text-center shadow-soft transition-all duration-200 active:scale-95 ${
+      className={`group relative flex flex-col overflow-hidden rounded-2xl p-2.5 text-center shadow-soft transition-all duration-200 active:scale-95 ${
         selected
-          ? "scale-[1.03] ring-2 ring-grape-deep"
-          : "ring-1 ring-ink/5 hover:ring-blossom-300"
+          ? "scale-[1.03] bg-grape-50 ring-2 ring-grape-deep"
+          : "bg-white ring-1 ring-ink/10 hover:ring-grape-300"
       }`}
     >
-      {/* เครื่องหมายเลือกแล้ว */}
+      {/* เครื่องหมายเลือกแล้ว — ✓ เขียวในวงกลม เด้งเข้า */}
       {selected && (
-        <span className="animate-pop-in absolute right-2 top-2 z-10 grid h-6 w-6 place-items-center rounded-full bg-grape-deep text-white shadow">
-          <Check size={14} />
+        <span className="animate-pop-in absolute right-2 top-2 z-10 grid h-7 w-7 place-items-center rounded-full bg-[#22C55E] text-white shadow-md ring-2 ring-white">
+          <Check size={18} strokeWidth={3} />
         </span>
       )}
 
@@ -54,7 +54,7 @@ function ToppingCard({
       </span>
       <span className="line-clamp-1 text-[10px] text-ink/45">{item.nameEn}</span>
       <span className="mt-1 inline-block rounded-full bg-blossom-50 px-2 py-0.5 text-[11px] font-bold text-blossom-500">
-        +฿{item.price}
+        +{item.price}
       </span>
     </button>
   );

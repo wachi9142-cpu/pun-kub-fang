@@ -1576,8 +1576,8 @@ export const PROMOTIONS: Promotion[] = [
   {
     id: "month",
     title: "เมนูประจำเดือน 🍵",
-    highlight: "มัทฉะนมสด ฿55",
-    detail: "จากปกติ ฿65 พิเศษเดือนนี้เท่านั้น!",
+    highlight: "มัทฉะนมสด 55",
+    detail: "จากปกติ 65 พิเศษเดือนนี้เท่านั้น!",
     cta: "สั่งเลย",
     emoji: "🎀",
     theme: "grape",

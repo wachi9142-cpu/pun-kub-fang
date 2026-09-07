@@ -150,7 +150,7 @@ export default function CartDrawer() {
                         </button>
                       </div>
                       <span className="font-display text-base font-bold text-blossom-500">
-                        ฿{l.price * l.qty}
+                        {l.price * l.qty}
                       </span>
                     </div>
                   </div>
@@ -162,7 +162,7 @@ export default function CartDrawer() {
               <div className="mb-3 flex items-center justify-between">
                 <span className="text-sm text-ink/60">รวม {count} แก้ว</span>
                 <span className="font-display text-2xl font-bold text-blossom-500">
-                  ฿{total}
+                  {total}
                 </span>
               </div>
               <button
@@ -197,7 +197,7 @@ export default function CartDrawer() {
                       {l.name} × {l.qty}
                     </p>
                     <span className="font-semibold text-blossom-500">
-                      ฿{l.price * l.qty}
+                      {l.price * l.qty}
                     </span>
                   </div>
                   {l.options && l.options.length > 0 && (
@@ -216,7 +216,7 @@ export default function CartDrawer() {
               <div className="mb-3 flex items-center justify-between">
                 <span className="text-sm text-ink/60">ยอดรวม ({count} แก้ว)</span>
                 <span className="font-display text-2xl font-bold text-blossom-500">
-                  ฿{total}
+                  {total}
                 </span>
               </div>
               <div className="flex gap-2">

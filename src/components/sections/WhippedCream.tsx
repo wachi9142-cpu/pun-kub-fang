@@ -32,10 +32,14 @@ function ToppingChip({
       className={`flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-sm font-medium transition-all duration-200 active:scale-95 ${
         active
           ? "scale-105 border-grape-500 bg-grape-deep text-white shadow-soft"
-          : "border-ink/10 bg-cream-white text-ink hover:scale-105 hover:border-grape-300 hover:bg-grape-50"
+          : "border-ink/10 bg-white text-ink hover:scale-105 hover:border-grape-300 hover:bg-grape-50"
       }`}
     >
-      {active && <Check size={14} className="animate-pop-in" />}
+      {active && (
+        <span className="animate-pop-in grid h-5 w-5 place-items-center rounded-full bg-white shadow">
+          <Check size={14} strokeWidth={3} className="text-[#22C55E]" />
+        </span>
+      )}
       {label}
       <span
         className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
@@ -46,7 +50,7 @@ function ToppingChip({
               : "bg-blossom-100 text-blossom-600"
         }`}
       >
-        {price === 0 ? "ฟรี" : `+฿${price}`}
+        {price === 0 ? "ฟรี" : `+${price}`}
       </span>
     </button>
   );
@@ -78,7 +82,7 @@ export default function WhippedCream() {
       id: `whip-${Date.now()}`,
       name: "วิปครีมแก้ว",
       price: total,
-      options: lines.map((l) => `${l.label} (+฿${l.price})`),
+      options: lines.map((l) => `${l.label} (+${l.price})`),
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 1600);
@@ -93,7 +97,7 @@ export default function WhippedCream() {
           <span className="text-blossom-400">| Whipped Cream Cups</span>
         </h1>
         <p className="mt-2 text-ink/60">
-          วิปครีมนุ่ม ๆ เริ่มต้น ฿{WHIP_BASE_PRICE} · เลือกท็อปปิ้งเพิ่มได้ตามใจ 💜
+          วิปครีมนุ่ม ๆ เริ่มต้น {WHIP_BASE_PRICE} · เลือกท็อปปิ้งเพิ่มได้ตามใจ 💜
         </p>
       </div>
 
@@ -165,7 +169,7 @@ export default function WhippedCream() {
           <div className="mt-3 space-y-1.5 border-t border-ink/5 pt-3 text-sm">
             <div className="flex justify-between gap-3">
               <span className="text-ink/70">วิปครีมแก้ว</span>
-              <span className="font-medium text-ink">฿{WHIP_BASE_PRICE}</span>
+              <span className="font-medium text-ink">{WHIP_BASE_PRICE}</span>
             </div>
             {lines.map((l, i) => (
               <div key={i} className="flex justify-between gap-3">
@@ -175,7 +179,7 @@ export default function WhippedCream() {
                     l.price === 0 ? "text-emerald-600" : "text-blossom-500"
                   }`}
                 >
-                  {l.price === 0 ? "ฟรี" : `+฿${l.price}`}
+                  {l.price === 0 ? "ฟรี" : `+${l.price}`}
                 </span>
               </div>
             ))}
@@ -184,7 +188,7 @@ export default function WhippedCream() {
           <div className="mt-3 flex items-center justify-between border-t border-dashed border-ink/15 pt-3">
             <span className="text-sm font-semibold text-grape-500">ราคารวม</span>
             <span className="font-display text-3xl font-bold text-blossom-500">
-              ฿{total}
+              {total}
             </span>
           </div>
 

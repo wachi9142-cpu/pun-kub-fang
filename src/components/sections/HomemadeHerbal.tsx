@@ -53,7 +53,7 @@ function DrinkRow({
       ) : (
         <span className="flex shrink-0 items-center gap-2">
           <span className="font-display text-sm font-bold text-blossom-500">
-            ฿{item.price}
+            {item.price}
           </span>
           <span className="grid h-7 w-7 place-items-center rounded-full bg-grape-100 text-grape-700 transition-colors group-hover:bg-grape-600 group-hover:text-white">
             <Plus size={15} />

@@ -46,7 +46,7 @@ export default function SmoothieCup({
         </defs>
 
         {/* เงาใต้แก้ว */}
-        <ellipse cx="100" cy="238" rx="62" ry="10" fill="#7c3fc4" opacity="0.16" />
+        <ellipse cx="100" cy="238" rx="62" ry="10" fill="#7b4ab8" opacity="0.16" />
 
         {/* ตัวแก้ว (ทรงสอบ) */}
         <path
