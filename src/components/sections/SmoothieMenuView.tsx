@@ -9,9 +9,6 @@ type Group = "all" | "fruit" | "tea" | "milk" | "soda" | "yogurt";
 const FILTERS: { id: Group; label: string; labelEn: string; emoji: string }[] = [
   { id: "all", label: "ทั้งหมด", labelEn: "All", emoji: "" },
   { id: "fruit", label: "ผลไม้สดปั่น", labelEn: "Fresh Fruit", emoji: "🍓" },
-  { id: "tea", label: "ชาปั่น", labelEn: "Tea", emoji: "🍵" },
-  { id: "milk", label: "นมปั่น", labelEn: "Milk", emoji: "🥛" },
-  { id: "soda", label: "โซดาปั่น", labelEn: "Soda", emoji: "🫧" },
   { id: "yogurt", label: "โยเกิร์ตปั่น", labelEn: "Yogurt", emoji: "🍦" },
 ];
 

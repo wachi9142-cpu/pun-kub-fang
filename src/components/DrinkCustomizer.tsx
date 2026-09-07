@@ -2,8 +2,17 @@
 
 import { useState } from "react";
 import { Check, Plus, X } from "lucide-react";
-import { TOPPING_GROUPS, type MenuItem } from "@/data/site";
+import { TOPPING_GROUPS } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
+import ToppingSelector from "@/components/ToppingSelector";
+
+/** เมนูที่ปรับแต่งได้ — ใช้แค่ฟิลด์ที่จำเป็น เพื่อให้เมนูปกติ + น้ำสมุนไพรใช้ร่วมกันได้ */
+export type CustomizableItem = {
+  id: string;
+  name: string;
+  nameEn?: string;
+  price: number;
+};
 
 const SWEET = [
   { id: "less", label: "หวานน้อย" },
@@ -155,43 +164,9 @@ export default function DrinkCustomizer({
           <div>
             <p className="mb-2 text-sm font-semibold text-ink">
               🧋 เลือกท็อปปิ้ง{" "}
-              <span className="font-medium text-ink/45">(เลือกได้หลายอย่าง)</span>
+              <span className="font-medium text-ink/45">(เลือกได้หลายอย่าง · แตะรูปเพื่อดูรายละเอียด)</span>
             </p>
-            <div className="space-y-3">
-              {TOPPING_GROUPS.map((g) => (
-                <div key={g.id}>
-                  <p className="mb-1.5 text-xs font-medium text-ink/55">
-                    {g.emoji} {g.titleTh}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {g.items.map((it) => {
-                      const on = toppings.includes(it.nameEn);
-                      return (
-                        <button
-                          key={it.nameEn}
-                          onClick={() => toggleTopping(it.nameEn)}
-                          className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-all active:scale-95 ${
-                            on
-                              ? "border-grape-500 bg-grape-deep text-white shadow-soft"
-                              : "border-ink/10 bg-cream-white text-ink hover:border-grape-300 hover:bg-grape-50"
-                          }`}
-                        >
-                          {on && <Check size={13} />}
-                          {it.nameTh}
-                          <span
-                            className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
-                              on ? "bg-white/25 text-white" : "bg-blossom-100 text-blossom-600"
-                            }`}
-                          >
-                            +฿{it.price}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <ToppingSelector selected={toppings} onToggle={toggleTopping} />
           </div>
         </div>
 

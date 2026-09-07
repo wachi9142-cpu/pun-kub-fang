@@ -1016,6 +1016,8 @@ export type ToppingItem = {
   price: number;
   /** รูปท็อปปิ้ง เช่น "/toppings/boba.png" — ถ้าไม่ใส่จะโชว์ placeholder */
   image?: string;
+  /** คำอธิบายสั้น ๆ (แสดงใน popup รายละเอียด) */
+  desc?: string;
 };
 
 export type ToppingGroup = {

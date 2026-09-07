@@ -11,6 +11,7 @@ import {
 } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
 import SmoothieCup from "@/components/SmoothieCup";
+import ToppingSelector from "@/components/ToppingSelector";
 
 const CREAM = { foam: "#fffdf8", top: "#ffe0ee", bottom: "#f9b6d4" };
 
@@ -99,25 +100,17 @@ export default function WhippedCream() {
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
         {/* ตัวเลือก */}
         <div className="space-y-6">
-          {WHIP_TOPPING_GROUPS.map((g) => (
-            <div key={g.id}>
-              <p className="mb-2 text-sm font-semibold text-ink">
-                {g.emoji} {g.titleTh}{" "}
-                <span className="font-medium text-ink/40">{g.titleEn}</span>
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {g.items.map((it) => (
-                  <ToppingChip
-                    key={it.nameEn}
-                    label={it.nameTh}
-                    price={it.price}
-                    active={toppings.includes(it.nameEn)}
-                    onClick={() => toggle(setToppings, it.nameEn)}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
+          <div>
+            <p className="mb-2 text-sm font-semibold text-ink">
+              🧋 เลือกท็อปปิ้ง{" "}
+              <span className="font-medium text-ink/40">(แตะรูปเพื่อดูรายละเอียด)</span>
+            </p>
+            <ToppingSelector
+              groups={WHIP_TOPPING_GROUPS}
+              selected={toppings}
+              onToggle={(nameEn) => toggle(setToppings, nameEn)}
+            />
+          </div>
 
           {/* ผลไม้สด */}
           <div>
