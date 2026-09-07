@@ -58,7 +58,7 @@ export default function DrinkCustomizer({
   item,
   onClose,
 }: {
-  item: MenuItem;
+  item: CustomizableItem;
   onClose: () => void;
 }) {
   const { addItem, openCart } = useCart();

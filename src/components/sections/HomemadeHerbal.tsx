@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { Plus } from "lucide-react";
 import {
   HOMEMADE_BOTTLED,
   HOMEMADE_BLENDED,
@@ -6,14 +10,17 @@ import {
   HOMEMADE_NOTE,
   type HomemadeDrink,
 } from "@/data/site";
+import DrinkCustomizer, { type CustomizableItem } from "@/components/DrinkCustomizer";
 
-function DrinkRow({ item }: { item: HomemadeDrink }) {
-  return (
-    <div
-      className={`relative flex items-center gap-3 rounded-2xl bg-cream-white p-3 shadow-soft ring-1 ring-ink/5 ${
-        item.soldOut ? "opacity-70" : ""
-      }`}
-    >
+function DrinkRow({
+  item,
+  onSelect,
+}: {
+  item: HomemadeDrink;
+  onSelect: (it: CustomizableItem) => void;
+}) {
+  const inner = (
+    <>
       {/* ช่องวางรูปสินค้า (ใส่ image ทีหลังได้ ไม่งั้นโชว์อีโมจิ) */}
       <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-lime-50">
         {item.image ? (
@@ -44,15 +51,46 @@ function DrinkRow({ item }: { item: HomemadeDrink }) {
           หมดวันนี้ · Sold Out
         </span>
       ) : (
-        <span className="font-display shrink-0 text-sm font-bold text-blossom-500">
-          ฿{item.price}
+        <span className="flex shrink-0 items-center gap-2">
+          <span className="font-display text-sm font-bold text-blossom-500">
+            ฿{item.price}
+          </span>
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-grape-100 text-grape-700 transition-colors group-hover:bg-grape-600 group-hover:text-white">
+            <Plus size={15} />
+          </span>
         </span>
       )}
-    </div>
+    </>
+  );
+
+  if (item.soldOut) {
+    return (
+      <div className="relative flex items-center gap-3 rounded-2xl bg-cream-white p-3 opacity-70 shadow-soft ring-1 ring-ink/5">
+        {inner}
+      </div>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() =>
+        onSelect({
+          id: `herbal-${item.nameEn}`,
+          name: item.nameTh,
+          nameEn: item.nameEn,
+          price: item.price,
+        })
+      }
+      className="group relative flex w-full items-center gap-3 rounded-2xl bg-cream-white p-3 text-left shadow-soft ring-1 ring-ink/5 transition-all hover:-translate-y-0.5 hover:ring-grape-300 active:scale-[0.99]"
+    >
+      {inner}
+    </button>
   );
 }
 
 export default function HomemadeHerbal() {
+  const [selected, setSelected] = useState<CustomizableItem | null>(null);
   return (
     <section id="herbal" className="scroll-mt-24 py-14 lg:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -62,7 +100,7 @@ export default function HomemadeHerbal() {
             <span className="text-blossom-400">| Homemade Herbal</span>
           </h2>
           <p className="mt-2 text-ink/60">
-            เมนูน้ำโฮมเมดหมุนเวียน ไม่ได้มีทุกวัน — ทำสดใหม่ทุกขวด 💜
+            เมนูน้ำโฮมเมดหมุนเวียน ทำสดใหม่ทุกวัน — แตะเมนูเพื่อเลือกปั่น/ไม่ปั่น + ท็อปปิ้ง แล้วเพิ่มลงตะกร้าได้เลย 💜
           </p>
         </div>
 
@@ -92,7 +130,7 @@ export default function HomemadeHerbal() {
             </div>
             <div className="grid gap-2.5 sm:grid-cols-2">
               {HOMEMADE_BOTTLED.map((item) => (
-                <DrinkRow key={item.nameEn} item={item} />
+                <DrinkRow key={item.nameEn} item={item} onSelect={setSelected} />
               ))}
             </div>
 
@@ -136,7 +174,7 @@ export default function HomemadeHerbal() {
               </p>
               <div className="grid gap-2.5">
                 {HOMEMADE_BLENDED.map((item) => (
-                  <DrinkRow key={item.nameEn} item={item} />
+                  <DrinkRow key={item.nameEn} item={item} onSelect={setSelected} />
                 ))}
               </div>
             </div>
@@ -163,6 +201,10 @@ export default function HomemadeHerbal() {
           </div>
         </div>
       </div>
+
+      {selected && (
+        <DrinkCustomizer item={selected} onClose={() => setSelected(null)} />
+      )}
     </section>
   );
 }
