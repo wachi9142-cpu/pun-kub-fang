@@ -28,7 +28,7 @@ export default function BrandLogo({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="/logo.png"
+      src="/logo.png?v=2"
       alt="โลโก้ ปั่นกับฟ่าง"
       width={size}
       height={size}

@@ -1,15 +1,34 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Menu, ShoppingCart, User, X } from "lucide-react";
 import { NAV_ITEMS } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
 import BrandLogo from "@/components/BrandLogo";
 
+/* ไอคอนนำหน้าเมนู (emoji — ปลอดภัยกว่า import icon) */
+const NAV_ICONS: Record<string, string> = {
+  "#home": "🏠",
+  "/menu": "🧋",
+  "/mix": "🌀",
+  "/promotions": "🎁",
+  "#about": "💜",
+  "#contact": "📞",
+};
+
 export default function Navbar() {
   const { count, openCart } = useCart();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [query, setQuery] = useState("");
+
+  const onSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push("/menu");
+    setOpen(false);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -32,7 +51,7 @@ export default function Navbar() {
           <BrandLogo size={46} className="ring-1 ring-ink/10" />
           <span className="leading-none">
             <span className="font-display block text-lg font-semibold text-ink sm:text-xl">
-              ปั่นกับ<span className="text-blossom-500">ฟ่าง</span>
+              ปั่นกับ<span className="text-grape-600">ฟ่าง</span>
             </span>
             <span className="text-[10px] font-medium tracking-[0.28em] text-ink/45 uppercase">
               Smoothie &amp; Drinks
@@ -46,12 +65,13 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className={`rounded-full px-3.5 py-2 text-sm transition-colors hover:bg-grape-50 hover:text-grape-deep ${
+                className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-2 text-sm transition-all ${
                   i === 0
-                    ? "font-semibold text-grape-deep"
-                    : "font-medium text-ink/80"
+                    ? "bg-grape-600 font-semibold text-white shadow-soft"
+                    : "font-medium text-ink/75 hover:bg-grape-50 hover:text-grape-deep"
                 }`}
               >
+                <span className="text-[13px] leading-none">{NAV_ICONS[item.href]}</span>
                 {item.label}
               </a>
             </li>
@@ -60,6 +80,21 @@ export default function Navbar() {
 
         {/* ปุ่มขวา */}
         <div className="flex items-center gap-1.5">
+          {/* ช่องค้นหา */}
+          <form
+            onSubmit={onSearch}
+            className="hidden items-center gap-1.5 rounded-full bg-white px-3 py-2 ring-1 ring-ink/10 transition-shadow focus-within:ring-2 focus-within:ring-grape-400 md:flex"
+          >
+            <span className="text-sm leading-none text-grape-500">🔍</span>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="ค้นหาเมนู..."
+              aria-label="ค้นหาเมนู"
+              className="w-24 bg-transparent text-sm text-ink placeholder:text-ink/40 focus:outline-none lg:w-32"
+            />
+          </form>
+
           <button
             aria-label="บัญชีผู้ใช้"
             className="grid h-10 w-10 place-items-center rounded-full text-grape-500 transition-colors hover:bg-grape-100 hover:text-grape-700"
@@ -92,15 +127,33 @@ export default function Navbar() {
 
       {/* เมนูมือถือ */}
       {open && (
-        <div className="border-t border-grape-100 bg-white/95 px-4 pb-4 pt-2 lg:hidden">
+        <div className="border-t border-grape-100 bg-white/95 px-4 pb-4 pt-3 lg:hidden">
+          <form
+            onSubmit={onSearch}
+            className="mb-2 flex items-center gap-2 rounded-full bg-grape-50 px-3.5 py-2.5 ring-1 ring-ink/10 focus-within:ring-2 focus-within:ring-grape-400"
+          >
+            <span className="text-sm leading-none text-grape-500">🔍</span>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="ค้นหาเมนู..."
+              aria-label="ค้นหาเมนู"
+              className="w-full bg-transparent text-sm text-ink placeholder:text-ink/40 focus:outline-none"
+            />
+          </form>
           <ul className="flex flex-col">
-            {NAV_ITEMS.map((item) => (
+            {NAV_ITEMS.map((item, i) => (
               <li key={item.href}>
                 <a
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-xl px-4 py-3 text-sm font-medium text-grape-600 hover:bg-grape-50"
+                  className={`flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium ${
+                    i === 0
+                      ? "bg-grape-600 text-white"
+                      : "text-grape-600 hover:bg-grape-50"
+                  }`}
                 >
+                  <span className="text-[15px] leading-none">{NAV_ICONS[item.href]}</span>
                   {item.label}
                 </a>
               </li>

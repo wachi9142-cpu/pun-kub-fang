@@ -42,12 +42,12 @@ function ToppingChip({
       )}
       {label}
       <span
-        className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+        className={`rounded-full px-2 py-0.5 text-sm font-extrabold ${
           active
             ? "bg-white/25 text-white"
             : price === 0
               ? "bg-emerald-100 text-emerald-600"
-              : "bg-blossom-100 text-blossom-600"
+              : "bg-blossom-100 text-ink"
         }`}
       >
         {price === 0 ? "ฟรี" : `+${price}`}

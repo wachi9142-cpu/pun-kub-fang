@@ -53,8 +53,8 @@ function Chip({
       {label}
       {priceLabel && (
         <span
-          className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
-            active ? "bg-white/25 text-white" : "bg-blossom-100 text-blossom-600"
+          className={`rounded-full px-2 py-0.5 text-sm font-extrabold ${
+            active ? "bg-white/25 text-white" : "bg-blossom-100 text-ink"
           }`}
         >
           {priceLabel}
@@ -141,8 +141,14 @@ export default function MixYourOwn({
   const [other, setOther] = useState("");
   const [ice, setIce] = useState<string>(""); // "" = ปกติ
   const [sweet, setSweet] = useState<string>("regular");
+  const [method, setMethod] = useState<string>("blend"); // หน้ามิกซ์เน้นปั่นเป็นค่าเริ่มต้น
   const [added, setAdded] = useState(false);
 
+  const METHOD_OPTIONS = [
+    { id: "blend", label: "🌀 ปั่น" },
+    { id: "noblend", label: "🧊 ไม่ปั่น" },
+  ];
+  const methodLabel = METHOD_OPTIONS.find((o) => o.id === method)?.label;
   const ICE_OPTIONS = [
     { id: "less", label: "น้ำแข็งน้อย" },
     { id: "extra", label: "น้ำแข็งมาก" },
@@ -229,10 +235,12 @@ export default function MixYourOwn({
     setExtras(["Strawberry Popping Boba"]);
     setSweet("regular");
     setIce("");
+    setMethod("blend");
   };
 
   const handleAdd = () => {
     const options: string[] = [];
+    if (methodLabel) options.push(methodLabel);
     if (syrupLabels.length) options.push(`ไซรัป: ${syrupLabels.join(", ")}`);
     if (fruitLabels.length) options.push(`ผลไม้สด: ${fruitLabels.join(", ")}`);
     if (sweetLabel) options.push(sweetLabel);
@@ -353,7 +361,7 @@ export default function MixYourOwn({
                   {teaOpen && (
                     <div className="mt-2.5 rounded-2xl bg-white/12 p-3 ring-1 ring-white/20">
                       <p className="mb-2 text-xs text-white/70">
-                        เลือกชนิดชา (นับเป็น 1 ฐาน)
+                        เลือกชนิดชา (นับเป็น 1 ฐาน) · เลือกชาแล้วเติมไซรัปเองได้ที่ข้อ 2 ด้านล่าง 💜
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {MIX_TEA_TYPES.map((t) => {
@@ -383,7 +391,7 @@ export default function MixYourOwn({
                   <p className="mb-2.5 text-xs text-white/70">
                     ไซรัปกลิ่น/รสผลไม้ (ไม่ใช่ผลไม้สด) · +{FRUIT_PRICE} ต่ออย่าง
                   </p>
-                  <div className="flex flex-wrap gap-2.5">
+                  <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4">
                     {MIX_SYRUPS.map((o) => (
                       <Chip
                         key={o.id}
@@ -405,7 +413,7 @@ export default function MixYourOwn({
                   <p className="mb-2.5 text-xs text-white/70">
                     ผลไม้สดจริง ๆ · +{FRUIT_PRICE} ต่ออย่าง
                   </p>
-                  <div className="flex flex-wrap gap-2.5">
+                  <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4">
                     {MIX_FRUITS.map((o) => (
                       <Chip
                         key={o.id}
@@ -414,6 +422,23 @@ export default function MixYourOwn({
                         priceLabel={`+${FRUIT_PRICE}`}
                         active={fruitIds.includes(o.id)}
                         onClick={() => toggleFruit(o.id)}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* 🌀 วิธีทำ */}
+                <div>
+                  <p className="mb-2 text-sm font-semibold text-white/90">
+                    🌀 วิธีทำ
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {METHOD_OPTIONS.map((o) => (
+                      <PrefPill
+                        key={o.id}
+                        label={o.label}
+                        active={method === o.id}
+                        onClick={() => setMethod(o.id)}
                       />
                     ))}
                   </div>
@@ -583,6 +608,7 @@ export default function MixYourOwn({
                   label="ผลไม้สด"
                   value={fruitLabels.length ? fruitLabels.join(", ") : "—"}
                 />
+                <SummaryRow label="วิธีทำ" value={methodLabel ?? "🌀 ปั่น"} />
                 <SummaryRow label="ความหวาน" value={sweetLabel ?? "—"} />
                 <SummaryRow label="น้ำแข็ง" value={iceLabel ?? "ปกติ"} />
                 <SummaryRow

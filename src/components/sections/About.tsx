@@ -24,7 +24,7 @@ export default function About() {
             </span>
             <h2 className="font-display mt-4 text-3xl font-bold text-grape-700 sm:text-4xl">
               รู้จักร้าน{" "}
-              <span className="text-blossom-500">ปั่นกับฟ่าง</span>
+              <span className="text-grape-600">ปั่นกับฟ่าง</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl leading-relaxed text-grape-600 lg:mx-0">
               เราใส่ใจในทุกแก้ว คัดสรรผลไม้สด คุณภาพดี ปั่นสดใหม่ทุกออร์เดอร์

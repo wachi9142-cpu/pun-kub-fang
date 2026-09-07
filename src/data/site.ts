@@ -114,6 +114,8 @@ export type MenuSection = {
   desc: string;
   /** ถ้ามี palette จะวาดเป็นแก้ว SVG, ถ้าไม่มีจะโชว์อีโมจิ */
   palette?: SmoothiePalette;
+  /** รูปจริงของหมวด เช่น "/menu/coffee.png" (แนะนำ 400×400 พื้นโปร่ง) — ถ้าใส่จะแสดงแทนแก้ว SVG */
+  image?: string;
 };
 
 export const MENU_SECTIONS: MenuSection[] = [
@@ -969,6 +971,9 @@ export const MIX_BASES: MixOption[] = [
   { id: "milk", label: "นมสด", emoji: "🥛", palette: { foam: "#fff7ef", top: "#ffe3c2", bottom: "#f4c48a" } },
   { id: "yogurt", label: "โยเกิร์ต", emoji: "🍦", palette: { foam: "#fef1f7", top: "#ffd0e4", bottom: "#f89bc4" } },
   { id: "soda", label: "โซดา", emoji: "🧊", palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" } },
+  { id: "smoothie", label: "สมูทตี้", emoji: "🍓", palette: { foam: "#fff2f6", top: "#ff9ec0", bottom: "#f0507f" } },
+  { id: "herbal", label: "น้ำสมุนไพรโฮมเมด", emoji: "🌿", palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" } },
+  { id: "coffee", label: "กาแฟ", emoji: "☕", palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" } },
 ];
 
 /* ชนิดชา (ฐานหมวด "ชา" — เลือกได้ 1 ชนิด นับเป็น 1 ฐาน) */
@@ -980,6 +985,10 @@ export const MIX_TEA_TYPES: MixOption[] = [
   { id: "peach", label: "ชาพีช", emoji: "🍑", palette: { foam: "#fff1ea", top: "#ffb99a", bottom: "#f77e4f" } },
   { id: "apple", label: "ชาแอปเปิ้ล", emoji: "🍏", palette: { foam: "#f5ffe8", top: "#c3e87a", bottom: "#7cb32b" } },
   { id: "honey", label: "ชาน้ำผึ้ง", emoji: "🍯", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#d9a520" } },
+  { id: "rose", label: "ชากุหลาบ", emoji: "🌹", palette: { foam: "#fdeef4", top: "#f3a9c6", bottom: "#d95f8f" } },
+  { id: "jasmine", label: "ชามะลิ", emoji: "🌼", palette: { foam: "#fbf8ec", top: "#ecdfa8", bottom: "#c9b85e" } },
+  { id: "lychee", label: "ชาลิ้นจี่", emoji: "🌸", palette: { foam: "#fdf0f2", top: "#f2c0c8", bottom: "#d97b88" } },
+  { id: "strawberry", label: "ชาสตรอว์เบอร์รี", emoji: "🍓", palette: { foam: "#fff0f3", top: "#ff9fb0", bottom: "#e8536f" } },
 ];
 
 /* 🍬 รสชาติ/ไซรัป (ไม่ใช่ผลไม้สด) — ใช้ชื่อผลไม้เฉย ๆ ไม่ต้องมีคำว่า "ไซรัป" */

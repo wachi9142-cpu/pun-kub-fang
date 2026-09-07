@@ -8,12 +8,12 @@ import { TOPPING_GROUPS, TOPPING_IMAGES, type ToppingGroup, type ToppingItem } f
 function PriceTag({ price, active }: { price: number; active?: boolean }) {
   return (
     <span
-      className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+      className={`rounded-full px-2 py-0.5 text-sm font-extrabold ${
         active
           ? "bg-white/25 text-white"
           : price === 0
             ? "bg-emerald-100 text-emerald-600"
-            : "bg-blossom-100 text-blossom-600"
+            : "bg-blossom-100 text-ink"
       }`}
     >
       {price === 0 ? "ฟรี" : `+${price}`}
@@ -40,10 +40,11 @@ function ToppingCard({
   const image = imgOf(item);
   return (
     <div
+      style={{ backgroundColor: selected ? "#e4d7f6" : "#ffffff" }}
       className={`group relative flex flex-col overflow-hidden rounded-2xl text-center shadow-soft transition-all duration-200 ${
         selected
-          ? "scale-[1.03] bg-grape-50 ring-2 ring-grape-deep"
-          : "bg-white ring-1 ring-ink/10 hover:ring-grape-300"
+          ? "scale-[1.03] ring-2 ring-grape-deep"
+          : "ring-1 ring-ink/10 hover:ring-grape-300"
       }`}
     >
       {selected && (

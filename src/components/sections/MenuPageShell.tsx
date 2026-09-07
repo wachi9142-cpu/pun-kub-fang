@@ -21,7 +21,7 @@ function ShellHeader({
           <BrandLogo size={44} className="ring-1 ring-ink/10" />
           <span className="leading-none">
             <span className="font-display block text-lg font-semibold text-ink">
-              ปั่นกับ<span className="text-blossom-500">ฟ่าง</span>
+              ปั่นกับ<span className="text-grape-600">ฟ่าง</span>
             </span>
             <span className="text-[10px] font-medium tracking-[0.28em] text-ink/45 uppercase">
               Smoothie &amp; Drinks

@@ -19,10 +19,11 @@ function ToppingCard({
   return (
     <button
       onClick={onClick}
+      style={{ backgroundColor: selected ? "#e4d7f6" : "#ffffff" }}
       className={`group relative flex flex-col overflow-hidden rounded-2xl p-2.5 text-center shadow-soft transition-all duration-200 active:scale-95 ${
         selected
-          ? "scale-[1.03] bg-grape-50 ring-2 ring-grape-deep"
-          : "bg-white ring-1 ring-ink/10 hover:ring-grape-300"
+          ? "scale-[1.03] ring-2 ring-grape-deep"
+          : "ring-1 ring-ink/10 hover:ring-grape-300"
       }`}
     >
       {/* เครื่องหมายเลือกแล้ว — ✓ เขียวในวงกลม เด้งเข้า */}
@@ -53,7 +54,7 @@ function ToppingCard({
         {item.nameTh}
       </span>
       <span className="line-clamp-1 text-[10px] text-ink/45">{item.nameEn}</span>
-      <span className="mt-1 inline-block rounded-full bg-blossom-50 px-2 py-0.5 text-[11px] font-bold text-blossom-500">
+      <span className="mt-1 inline-block rounded-full bg-blossom-100 px-2.5 py-0.5 text-sm font-extrabold text-ink">
         +{item.price}
       </span>
     </button>

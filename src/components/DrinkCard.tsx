@@ -32,7 +32,7 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
         aria-label="ถูกใจ"
         className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/85 text-blossom-400 shadow transition-transform hover:scale-110"
       >
-        <Heart size={16} fill={liked ? "#5aafe0" : "transparent"} />
+        <Heart size={16} fill={liked ? "#7b4ab8" : "transparent"} />
       </button>
 
       <div className="relative grid h-44 place-items-center overflow-hidden rounded-2xl bg-gradient-to-b from-grape-50 to-blossom-50/70">
@@ -70,7 +70,7 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
             </span>
           </span>
           <span className="inline-flex items-center gap-1 text-xs font-medium text-grape-400">
-            <Heart size={13} fill="#8ed8f8" className="text-blossom-300" />
+            <Heart size={13} fill="#c9b3e8" className="text-blossom-300" />
             {item.likes}
           </span>
         </div>

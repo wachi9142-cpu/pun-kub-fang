@@ -26,7 +26,7 @@ export function SnackCard({ item }: { item: SnackItem }) {
         aria-label="ถูกใจ"
         className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/85 text-blossom-400 shadow transition-transform hover:scale-110"
       >
-        <Heart size={16} fill={liked ? "#5aafe0" : "transparent"} />
+        <Heart size={16} fill={liked ? "#7b4ab8" : "transparent"} />
       </button>
 
       {/* พื้นที่รูปสินค้า (placeholder ถ้ายังไม่มีรูป) */}

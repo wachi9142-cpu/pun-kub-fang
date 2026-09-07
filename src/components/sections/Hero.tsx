@@ -47,7 +47,7 @@ export default function Hero() {
   ];
 
   return (
-    <section id="home" className="relative overflow-hidden bg-[#f4fafe]">
+    <section id="home" className="relative overflow-hidden bg-[#fcfaff]">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -left-28 top-8 h-64 w-64 rounded-full bg-grape-300/20 blur-3xl" />
         <div className="absolute right-0 top-20 h-72 w-72 rounded-full bg-blossom-300/15 blur-3xl" />

@@ -13,7 +13,14 @@ export default function MenuCategoryButtons() {
           className="hover-lift group flex flex-col items-center gap-2 overflow-hidden rounded-3xl bg-cream-white p-5 text-center shadow-card ring-1 ring-ink/5"
         >
           <div className="grid h-28 place-items-center transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3">
-            {sec.palette ? (
+            {sec.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={sec.image}
+                alt={sec.label}
+                className="h-full w-28 object-contain"
+              />
+            ) : sec.palette ? (
               <SmoothieCup palette={sec.palette} emoji={sec.emoji} size={92} />
             ) : (
               <span className="grid h-24 w-24 place-items-center rounded-full bg-grape-50 text-5xl">

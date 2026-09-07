@@ -32,7 +32,7 @@ export default function MixTeaser() {
         <div className="relative overflow-hidden rounded-[2.25rem] bg-gradient-to-br from-grape-600 via-grape-500 to-blossom-500 p-6 text-center shadow-card sm:p-10 lg:p-12">
           {/* ประกายตกแต่ง */}
           <span className="pointer-events-none absolute left-8 top-8 text-3xl opacity-40">✨</span>
-          <span className="pointer-events-none absolute right-10 bottom-10 text-4xl opacity-40">💜</span>
+          <span className="pointer-events-none absolute right-10 bottom-10 text-4xl opacity-70">💜</span>
 
           <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold text-white">
             <Sparkles size={15} /> จุดเด่นของร้าน
