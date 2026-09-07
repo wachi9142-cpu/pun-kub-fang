@@ -11,8 +11,9 @@ const SWEET = [
   { id: "regular", label: "หวานปกติ" },
 ];
 const METHOD = [
-  { id: "blend", label: "ปั่น" },
-  { id: "noblend", label: "ไม่ปั่น" },
+  { id: "regular", label: "ปกติ" },
+  { id: "noblend", label: "🧊 ไม่ปั่น" },
+  { id: "blend", label: "🌀 ปั่น" },
 ];
 const PACKING = [
   { id: "bag", label: "🛍️ แยกน้ำใส่ถุง" },
@@ -53,7 +54,7 @@ export default function DrinkCustomizer({
 }) {
   const { addItem, openCart } = useCart();
   const [sweet, setSweet] = useState("regular");
-  const [method, setMethod] = useState("blend");
+  const [method, setMethod] = useState("regular");
   const [packing, setPacking] = useState("cup");
   const [toppings, setToppings] = useState<string[]>([]);
 
@@ -69,7 +70,7 @@ export default function DrinkCustomizer({
   const handleAdd = () => {
     const options: string[] = [
       SWEET.find((s) => s.id === sweet)!.label,
-      method === "blend" ? "ปั่น" : "ไม่ปั่น",
+      METHOD.find((m) => m.id === method)!.label,
     ];
     if (method === "noblend")
       options.push(PACKING.find((p) => p.id === packing)!.label);

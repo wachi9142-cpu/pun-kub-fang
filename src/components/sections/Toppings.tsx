@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Check } from "lucide-react";
-import { TOPPING_GROUPS, type ToppingItem } from "@/data/site";
+import { TOPPING_GROUPS, TOPPING_IMAGES, type ToppingItem } from "@/data/site";
 
 function ToppingCard({
   item,
@@ -15,6 +15,7 @@ function ToppingCard({
   selected: boolean;
   onClick: () => void;
 }) {
+  const image = item.image ?? TOPPING_IMAGES[item.nameEn];
   return (
     <button
       onClick={onClick}
@@ -33,10 +34,10 @@ function ToppingCard({
 
       {/* พื้นที่รูป (ขนาดเท่ากันทุกใบ) */}
       <div className="grid aspect-square w-full place-items-center overflow-hidden rounded-xl bg-gradient-to-b from-grape-50 to-blossom-50/60">
-        {item.image ? (
+        {image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={item.image}
+            src={image}
             alt={item.nameTh}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
