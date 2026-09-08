@@ -414,6 +414,41 @@ body {
   animation: magic-float var(--dur, 5.5s) ease-in-out var(--delay, 0s) infinite;
 }
 
+/* 🪷 ปกลอยกระทง — แต่ละเลเยอร์คนละจังหวะ (ไม่ขยับพร้อมกัน) */
+@keyframes krathong-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+@keyframes candle-flicker {
+  0%, 100% { opacity: 0.9; transform: scaleY(1) scaleX(1); }
+  40% { opacity: 1; transform: scaleY(1.18) scaleX(0.9); }
+  70% { opacity: 0.75; transform: scaleY(0.92) scaleX(1.05); }
+}
+.animate-candle-flicker { animation: candle-flicker 0.4s ease-in-out infinite; }
+@keyframes mist-drift {
+  0% { transform: translateX(-12%); opacity: 0.2; }
+  50% { opacity: 0.5; }
+  100% { transform: translateX(12%); opacity: 0.2; }
+}
+@keyframes petal-drift {
+  0% { transform: translate(-10px, 0) rotate(0deg); opacity: 0; }
+  15% { opacity: 0.9; }
+  85% { opacity: 0.9; }
+  100% { transform: translate(300px, 24px) rotate(220deg); opacity: 0; }
+}
+@keyframes water-shimmer {
+  0%, 100% { opacity: 0.35; transform: scaleX(1); }
+  50% { opacity: 0.7; transform: scaleX(1.12); }
+}
+@keyframes gentle-sway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+@keyframes cup-raise {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-4px) rotate(3deg); }
+}
+
 /* ♿ ลดการเคลื่อนไหวสำหรับผู้ที่ตั้งค่า prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-drop-in,

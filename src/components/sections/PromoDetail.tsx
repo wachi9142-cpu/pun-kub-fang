@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { PromoCampaign, PromoTheme } from "@/data/site";
+import LoyKrathongCover from "@/components/sections/LoyKrathongCover";
 
 const THAI_MONTHS = [
   "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.",
@@ -55,7 +56,18 @@ export default function PromoDetail({ campaign: p }: { campaign: PromoCampaign }
       <div
         className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${HEADER[p.theme]} p-7 text-center shadow-card ring-1 ring-ink/5`}
       >
-        <div className="text-6xl">{p.emoji}</div>
+        {p.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={p.image}
+            alt={p.titleTh}
+            className="mx-auto h-28 w-28 rounded-2xl object-contain drop-shadow-sm"
+          />
+        ) : p.id === "loykrathong" ? (
+          <LoyKrathongCover />
+        ) : (
+          <div className="text-6xl">{p.emoji}</div>
+        )}
         <h1 className="font-display mt-2 text-3xl font-bold text-ink sm:text-4xl">
           {p.titleTh}
         </h1>
@@ -87,7 +99,7 @@ export default function PromoDetail({ campaign: p }: { campaign: PromoCampaign }
       {p.activityTitle && (
         <section className="mt-6 rounded-3xl bg-cream-white p-6 shadow-soft ring-1 ring-ink/5">
           <h2 className="font-display text-xl font-bold text-ink">
-            🎃 {p.activityTitle}
+            {p.emoji} {p.activityTitle}
           </h2>
           {p.activityDesc && (
             <ul className="mt-3 space-y-2 text-sm text-ink/75">
