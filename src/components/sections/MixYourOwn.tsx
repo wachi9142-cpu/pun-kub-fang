@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Check, Plus, Sparkles } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import {
   MIX_BASES,
   MIX_TEA_TYPES,
@@ -12,6 +12,7 @@ import {
 } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
 import SmoothieCup from "@/components/SmoothieCup";
+import MixBrewAnimation from "@/components/sections/MixBrewAnimation";
 
 const BASE_PRICE = 45; // แก้วพื้นฐาน (รวมฐาน 1 อย่าง)
 const EXTRA_BASE_PRICE = 15; // ฐานเพิ่มอันที่ 2
@@ -146,6 +147,7 @@ export default function MixYourOwn({
   const [sweet, setSweet] = useState<string>("regular");
   const [method, setMethod] = useState<string>("blend"); // หน้ามิกซ์เน้นปั่นเป็นค่าเริ่มต้น
   const [added, setAdded] = useState(false);
+  const [brewing, setBrewing] = useState(false);
 
   const METHOD_OPTIONS = [
     { id: "blend", label: "🌀 ปั่น" },
@@ -254,7 +256,19 @@ export default function MixYourOwn({
     setMethod("blend");
   };
 
-  const handleAdd = () => {
+  // วัตถุดิบ/ท็อปปิ้งสำหรับแอนิเมชัน (อ่านจากที่ลูกค้าเลือกจริง)
+  const animIngredients = [
+    ...selectedBases.map((b) => ({ emoji: b.emoji, label: b.label })),
+    ...fruits.map((f) => ({ emoji: f.emoji, label: f.label })),
+    ...syrups.map((s) => ({ emoji: s.emoji, label: s.label })),
+    { emoji: "🧊", label: "น้ำแข็ง" },
+  ];
+  const animToppings = [
+    ...extraLabels.map((l) => ({ emoji: "🧋", label: l })),
+    ...(freeBobaLabel ? [{ emoji: "⚫", label: freeBobaLabel }] : []),
+  ];
+
+  const commitToCart = () => {
     const options: string[] = [];
     if (methodLabel) options.push(methodLabel);
     if (syrupLabels.length) options.push(`ไซรัป: ${syrupLabels.join(", ")}`);
@@ -270,9 +284,16 @@ export default function MixYourOwn({
       price,
       options,
     });
+    setBrewing(false);
     setAdded(true);
     setTimeout(() => setAdded(false), 1600);
     openCart();
+  };
+
+  const handleAdd = () => {
+    if (brewing) return;
+    // ▶️ เล่นแอนิเมชันตาม ปั่น/ไม่ปั่น ก่อน แล้วค่อยเพิ่มลงตะกร้า
+    setBrewing(true);
   };
 
   return (
@@ -690,19 +711,22 @@ export default function MixYourOwn({
 
               <button
                 onClick={handleAdd}
+                disabled={brewing}
                 className={`mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-white transition-all ${
-                  added
+                  added || brewing
                     ? "bg-grape-500"
                     : "bg-gradient-to-r from-grape-600 to-blossom-500 hover:scale-[1.02]"
                 }`}
               >
-                {added ? (
+                {brewing ? (
+                  <>{method === "noblend" ? "🔮 กำลังชง..." : "🌀 กำลังปั่น..."}</>
+                ) : added ? (
                   <>
                     <Check size={17} /> เพิ่มลงตะกร้าแล้ว!
                   </>
                 ) : (
                   <>
-                    <Plus size={17} /> เพิ่มลงตะกร้า
+                    {method === "noblend" ? "🔮 ชงแล้วเพิ่มลงตะกร้า" : "🥤 ปั่นแล้วเพิ่มลงตะกร้า"}
                   </>
                 )}
               </button>
@@ -710,6 +734,16 @@ export default function MixYourOwn({
           </div>
         </div>
       </div>
+
+      {brewing && (
+        <MixBrewAnimation
+          method={method}
+          ingredients={animIngredients}
+          toppings={animToppings}
+          palette={previewPalette}
+          onDone={commitToCart}
+        />
+      )}
     </section>
   );
 }

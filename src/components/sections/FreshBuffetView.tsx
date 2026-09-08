@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Plus } from "lucide-react";
+import { Check } from "lucide-react";
 import {
   FRESH_BUFFET,
   FRESH_FRUITS,
@@ -138,7 +138,7 @@ export default function FreshBuffetView() {
       });
       setPhase("idle");
       openCart();
-    }, 3400);
+    }, 3700);
   };
 
   return (
@@ -306,9 +306,7 @@ export default function FreshBuffetView() {
             ) : totalPicked === 0 ? (
               <>เลือกวัตถุดิบก่อนนะ 🥝</>
             ) : (
-              <>
-                <Plus size={17} /> เพิ่มลงตะกร้า — {FRESH_BUFFET.price} บาท
-              </>
+              <>🥤 ปั่นแล้วเพิ่มลงตะกร้า — {FRESH_BUFFET.price} บาท</>
             )}
           </button>
         </div>

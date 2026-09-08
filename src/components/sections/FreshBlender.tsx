@@ -81,10 +81,30 @@ export default function FreshBlender({
   const extra = items.length - visible.length;
 
   if (phase === "done") {
+    const sparkles = [
+      { e: "✨", pos: "left-1 top-3", d: "0s" },
+      { e: "💧", pos: "right-2 top-7", d: "0.3s" },
+      { e: "✨", pos: "right-4 top-1/3", d: "0.15s" },
+      { e: "💫", pos: "left-3 top-12", d: "0.4s" },
+      { e: "💧", pos: "left-6 bottom-20", d: "0.5s" },
+      { e: "✨", pos: "right-1 bottom-24", d: "0.25s" },
+    ];
     return (
       <div className="relative mx-auto grid h-[230px] w-[190px] place-items-center">
-        <div className="animate-mix-pop">
+        <div className="animate-serve-pop">
           <SmoothieCup palette={cupPalette} emoji="🥤" size={150} />
+        </div>
+        {/* ประกาย + หยดน้ำ (เล่นครั้งเดียวแล้วจางหาย) */}
+        <div className="pointer-events-none absolute inset-0">
+          {sparkles.map((s, i) => (
+            <span
+              key={i}
+              className={`animate-serve-sparkle absolute text-lg ${s.pos}`}
+              style={{ animationDelay: s.d }}
+            >
+              {s.e}
+            </span>
+          ))}
         </div>
       </div>
     );
