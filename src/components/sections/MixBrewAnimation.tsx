@@ -14,6 +14,53 @@ type Props = {
   onDone: () => void;
 };
 
+const MAGIC_SPARKS = ["✨", "💜", "⭐", "💫", "✨", "🌟"];
+
+/* แก้วเสร็จโทนเมจิก: เรืองแสง + วงประกายหมุน + เด้ง (ใช้ทั้งปั่น/ไม่ปั่น) */
+function MagicServeCup({
+  palette,
+  children,
+}: {
+  palette: SmoothiePalette;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="relative grid h-full w-full place-items-center">
+      {/* เรืองแสง */}
+      <div className="animate-magic-glow absolute h-36 w-36 rounded-full bg-blossom-300 blur-2xl" />
+      {/* วงประกายหมุนรอบแก้ว */}
+      <div className="animate-magic-ring pointer-events-none absolute h-[176px] w-[176px]">
+        {MAGIC_SPARKS.map((s, i) => {
+          const a = (i / MAGIC_SPARKS.length) * Math.PI * 2;
+          const r = 84;
+          return (
+            <span
+              key={i}
+              className="absolute -translate-x-1/2 -translate-y-1/2"
+              style={{
+                left: `calc(50% + ${Math.cos(a) * r}px)`,
+                top: `calc(50% + ${Math.sin(a) * r}px)`,
+              }}
+            >
+              <span
+                className="animate-twinkle inline-block text-base"
+                style={{ animationDelay: `${i * 0.2}s` }}
+              >
+                {s}
+              </span>
+            </span>
+          );
+        })}
+      </div>
+      {/* แก้ว */}
+      <div className="animate-serve-pop relative z-10">
+        <SmoothieCup palette={palette} emoji="🥤" size={150} />
+      </div>
+      {children}
+    </div>
+  );
+}
+
 /* ---------- โหมดปั่น: วัตถุดิบตกเข้าโถ → วนปั่น → แก้ว → ท็อปปิ้ง ---------- */
 type BlendPhase = "drop" | "spin" | "reveal" | "topping" | "done";
 
@@ -42,7 +89,7 @@ function BlendStage({
       ["done", hasTopping ? 3100 : 2600],
     ];
     const timers = seq.map(([p, at]) => window.setTimeout(() => setPhase(p), at));
-    const end = window.setTimeout(onDone, (hasTopping ? 3100 : 2600) + 850);
+    const end = window.setTimeout(onDone, (hasTopping ? 3100 : 2600) + 1050);
     return () => {
       timers.forEach(clearTimeout);
       clearTimeout(end);
@@ -70,13 +117,10 @@ function BlendStage({
 
   if (showCup) {
     return (
-      <div className="relative grid h-full w-full place-items-center">
-        <div className="animate-mix-pop">
-          <SmoothieCup palette={palette} emoji="🥤" size={150} />
-        </div>
+      <MagicServeCup palette={palette}>
         {/* ท็อปปิ้งหล่นลงบนแก้ว */}
         {(phase === "topping" || phase === "done") && (
-          <div className="absolute left-1/2 top-6 flex -translate-x-1/2 gap-1.5">
+          <div className="absolute left-1/2 top-6 z-20 flex -translate-x-1/2 gap-1.5">
             {toppings.slice(0, 5).map((t, i) => (
               <span
                 key={i}
@@ -88,7 +132,7 @@ function BlendStage({
             ))}
           </div>
         )}
-      </div>
+      </MagicServeCup>
     );
   }
 
@@ -157,7 +201,7 @@ function BrewStage({
       ["done", 2850],
     ];
     const timers = seq.map(([p, at]) => window.setTimeout(() => setPhase(p), at));
-    const end = window.setTimeout(onDone, 3700);
+    const end = window.setTimeout(onDone, 3900);
     return () => {
       timers.forEach(clearTimeout);
       clearTimeout(end);
@@ -185,12 +229,8 @@ function BrewStage({
 
   return (
     <div className="relative grid h-full w-full place-items-center overflow-hidden">
-      {/* แก้วสำเร็จ */}
-      {revealed && (
-        <div className="animate-mix-pop">
-          <SmoothieCup palette={palette} emoji="🥤" size={150} />
-        </div>
-      )}
+      {/* แก้วสำเร็จ (โทนเมจิก) */}
+      {revealed && <MagicServeCup palette={palette} />}
 
       {/* แก้วเปล่า + นาฬิกา ระหว่างชง */}
       {brewing && (

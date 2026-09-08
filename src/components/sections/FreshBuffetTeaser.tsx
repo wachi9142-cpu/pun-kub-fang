@@ -1,10 +1,26 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { FRESH_BUFFET } from "@/data/site";
 
-const INGREDIENTS = ["🍓", "🥝", "🍌", "🥕", "🥬", "🍍", "🫐"];
+/* 🫐 เรนเดอร์ไม่ขึ้นบางเครื่อง (Windows) เลยใช้ 🍊 แทน */
+const INGREDIENTS = ["🍓", "🥝", "🍌", "🥕", "🥬", "🍍", "🍊"];
+const GATHER = ["🍓", "🥝", "🍌", "🍊", "🥕", "🥬", "🍍", "🍎"];
 
 export default function FreshBuffetTeaser() {
+  const router = useRouter();
+  const [leaving, setLeaving] = useState(false);
+
+  const goFresh = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (leaving) return;
+    setLeaving(true);
+    window.setTimeout(() => router.push("/fresh"), 900);
+  };
+
   return (
     <section id="fresh-teaser" className="scroll-mt-24 pb-14 lg:pb-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -37,12 +53,13 @@ export default function FreshBuffetTeaser() {
             <span className="text-sm font-semibold text-grape-600">บาท/แก้ว</span>
           </div>
 
-          {/* วัตถุดิบ */}
+          {/* วัตถุดิบ — เด้ง/ลอยเบา ๆ */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
             {INGREDIENTS.map((e, i) => (
               <span
                 key={i}
-                className="grid h-12 w-12 place-items-center rounded-2xl bg-white/90 text-2xl shadow-soft sm:h-14 sm:w-14 sm:text-3xl"
+                className="animate-fresh-float grid h-12 w-12 place-items-center rounded-2xl bg-white/90 text-2xl shadow-soft sm:h-14 sm:w-14 sm:text-3xl"
+                style={{ animationDelay: `${(i % 4) * 0.4}s` }}
               >
                 {e}
               </span>
@@ -55,6 +72,7 @@ export default function FreshBuffetTeaser() {
           {/* ปุ่มใหญ่ */}
           <Link
             href="/fresh"
+            onClick={goFresh}
             className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-9 py-4 text-lg font-bold text-grape-700 shadow-card transition-all hover:scale-[1.04] hover:text-blossom-500"
           >
             🥤 เลือกวัตถุดิบของฉัน
@@ -62,6 +80,36 @@ export default function FreshBuffetTeaser() {
           </Link>
         </div>
       </div>
+
+      {/* ✨ Transition: ผัก/ผลไม้รวมตัว → ประกาย → เปลี่ยนหน้า */}
+      {leaving && (
+        <div className="animate-pop-in fixed inset-0 z-[105] grid place-items-center bg-gradient-to-br from-grape-600 via-grape-500 to-blossom-500">
+          <div className="relative grid h-48 w-48 place-items-center">
+            {GATHER.map((e, i) => {
+              const ang = (i / GATHER.length) * Math.PI * 2;
+              return (
+                <span
+                  key={i}
+                  className="animate-fresh-gather absolute text-3xl"
+                  style={
+                    {
+                      "--tx": `${Math.cos(ang) * 90}px`,
+                      "--ty": `${Math.sin(ang) * 90}px`,
+                      animationDelay: `${i * 0.05}s`,
+                    } as React.CSSProperties
+                  }
+                >
+                  {e}
+                </span>
+              );
+            })}
+            <span className="animate-mix-burst absolute text-6xl">✨</span>
+          </div>
+          <p className="absolute bottom-24 text-lg font-bold text-white">
+            กำลังเตรียมวัตถุดิบสด ๆ ... 🥬
+          </p>
+        </div>
+      )}
     </section>
   );
 }

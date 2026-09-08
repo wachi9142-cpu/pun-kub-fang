@@ -11,6 +11,7 @@ import {
 } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
 import FreshBlender, { type BlendPhase } from "@/components/sections/FreshBlender";
+import FreshFallingBg from "@/components/sections/FreshFallingBg";
 
 const SWEET = [
   { id: "less", label: "หวานน้อย" },
@@ -43,8 +44,13 @@ function PickChip({
           <Check size={14} strokeWidth={3} className="text-[#22C55E]" />
         </span>
       )}
-      {/* ช่องรูปวัตถุดิบ (คงที่ 24×24) — ใส่ item.image เมื่อไหร่ก็ขึ้นแทน emoji */}
-      <span className="grid h-6 w-6 shrink-0 place-items-center overflow-hidden">
+      {/* ช่องรูปวัตถุดิบ (คงที่ 24×24) — เด้ง/หมุนตอนเลือก */}
+      <span
+        key={active ? "on" : "off"}
+        className={`grid h-6 w-6 shrink-0 place-items-center overflow-hidden ${
+          active ? "animate-pick-pop" : ""
+        }`}
+      >
         {item.image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -142,8 +148,9 @@ export default function FreshBuffetView() {
   };
 
   return (
-    <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
-      <div className="mb-6 text-center">
+    <section className="relative mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+      <FreshFallingBg />
+      <div className="relative mb-6 text-center">
         <h1 className="font-display text-3xl font-bold text-grape-700 sm:text-4xl">
           🥝 ตักสด ปั่นฟิน 🍓
         </h1>

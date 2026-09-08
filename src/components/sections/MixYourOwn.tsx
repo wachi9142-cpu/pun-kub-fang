@@ -7,7 +7,6 @@ import {
   MIX_TEA_TYPES,
   MIX_HERBAL_TYPES,
   MIX_SYRUPS,
-  MIX_FRUITS,
   TOPPING_GROUPS,
 } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
@@ -17,7 +16,6 @@ import MixBrewAnimation from "@/components/sections/MixBrewAnimation";
 const BASE_PRICE = 45; // แก้วพื้นฐาน (รวมฐาน 1 อย่าง)
 const EXTRA_BASE_PRICE = 15; // ฐานเพิ่มอันที่ 2
 const MAX_BASE = 2;
-const FRUIT_PRICE = 10; // ต่อผลไม้ 1 อย่าง
 
 /* โปรฯ: ฟรีเฉพาะไข่มุกดำ/คลาสสิก 1 อย่าง — ไข่มุก/ท็อปปิ้งอื่นคิดราคาปกติ */
 const FREE_BOBA_EN = "Classic Black Tapioca Pearls";
@@ -109,10 +107,7 @@ type MixYourOwnProps = {
   initialFruitId?: string;
 };
 
-export default function MixYourOwn({
-  initialBaseId,
-  initialFruitId,
-}: MixYourOwnProps) {
+export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
   const { addItem, openCart } = useCart();
 
   // ฟรีเฉพาะไข่มุกดำ/คลาสสิก — ตัวอื่นทั้งหมดคิดราคาปกติในท็อปปิ้ง
@@ -129,11 +124,6 @@ export default function MixYourOwn({
     MIX_BASES.some((b) => b.id === initialBaseId)
       ? initialBaseId!
       : MIX_BASES[0].id,
-  ]);
-  const [fruitIds, setFruitIds] = useState<string[]>([
-    MIX_FRUITS.some((f) => f.id === initialFruitId)
-      ? initialFruitId!
-      : MIX_FRUITS[0].id,
   ]);
   const [syrupIds, setSyrupIds] = useState<string[]>([]);
   const [teaType, setTeaType] = useState<string>("");
@@ -188,10 +178,6 @@ export default function MixYourOwn({
       if (prev) return id; // สลับชนิด (จำนวนฐานเท่าเดิม)
       return totalBases >= MAX_BASE ? prev : id; // เพิ่มใหม่
     });
-  const toggleFruit = (id: string) =>
-    setFruitIds((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
-    );
   const toggleSyrup = (id: string) =>
     setSyrupIds((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
@@ -209,7 +195,6 @@ export default function MixYourOwn({
   const teaLabel = MIX_TEA_TYPES.find((t) => t.id === teaType)?.label;
   const herbalLabel = MIX_HERBAL_TYPES.find((h) => h.id === herbalType)?.label;
   const syrups = syrupIds.map((id) => MIX_SYRUPS.find((s) => s.id === id)!);
-  const fruits = fruitIds.map((id) => MIX_FRUITS.find((f) => f.id === id)!);
 
   const extraPrice = useMemo(
     () =>
@@ -222,8 +207,7 @@ export default function MixYourOwn({
   const price =
     BASE_PRICE +
     extraBaseCount * EXTRA_BASE_PRICE +
-    syrups.length * FRUIT_PRICE +
-    fruits.length * FRUIT_PRICE +
+    // ไซรัป/รสชาติ = ฟรี · ผลไม้สดอยู่ในท็อปปิ้งแล้ว
     extraPrice;
 
   const freeBobaLabel = bobaItems.find((b) => b.nameEn === freeBoba)?.nameTh;
@@ -231,11 +215,10 @@ export default function MixYourOwn({
     .filter((i) => extras.includes(i.nameEn))
     .map((i) => i.nameTh);
   const syrupLabels = syrups.map((s) => s.label);
-  const fruitLabels = fruits.map((f) => f.label);
 
   const previewPalette = selectedBases[0]?.palette ?? MIX_BASES[0].palette!;
-  const previewEmoji = syrups[0]?.emoji ?? fruits[0]?.emoji ?? "🥤";
-  const flavorPrefix = [...syrupLabels, ...fruitLabels].join(" + ");
+  const previewEmoji = syrups[0]?.emoji ?? "🥤";
+  const flavorPrefix = syrupLabels.join(" + ");
   const drinkName = `${flavorPrefix}${
     flavorPrefix ? " " : ""
   }${selectedBases.map((b) => b.label).join(" + ")}ปั่น`;
@@ -248,7 +231,6 @@ export default function MixYourOwn({
     setHerbalType("");
     setHerbalOpen(false);
     setSyrupIds(["apple"]);
-    setFruitIds([]);
     setFreeBoba("");
     setExtras(["Strawberry Popping Boba"]);
     setSweet("regular");
@@ -259,7 +241,6 @@ export default function MixYourOwn({
   // วัตถุดิบ/ท็อปปิ้งสำหรับแอนิเมชัน (อ่านจากที่ลูกค้าเลือกจริง)
   const animIngredients = [
     ...selectedBases.map((b) => ({ emoji: b.emoji, label: b.label })),
-    ...fruits.map((f) => ({ emoji: f.emoji, label: f.label })),
     ...syrups.map((s) => ({ emoji: s.emoji, label: s.label })),
     { emoji: "🧊", label: "น้ำแข็ง" },
   ];
@@ -272,7 +253,6 @@ export default function MixYourOwn({
     const options: string[] = [];
     if (methodLabel) options.push(methodLabel);
     if (syrupLabels.length) options.push(`ไซรัป: ${syrupLabels.join(", ")}`);
-    if (fruitLabels.length) options.push(`ผลไม้สด: ${fruitLabels.join(", ")}`);
     if (sweetLabel) options.push(sweetLabel);
     if (iceLabel) options.push(iceLabel);
     if (freeBobaLabel) options.push(`ไข่มุกฟรี: ${freeBobaLabel}`);
@@ -469,7 +449,7 @@ export default function MixYourOwn({
                     2. เลือกรสชาติ / ไซรัป (เลือกได้หลายอย่าง)
                   </p>
                   <p className="mb-2.5 text-xs text-white/70">
-                    ไซรัปกลิ่น/รสผลไม้ (ไม่ใช่ผลไม้สด) · +{FRUIT_PRICE} ต่ออย่าง
+                    ไซรัปกลิ่น/รสผลไม้ (ไม่ใช่ผลไม้สด) · ฟรี ไม่คิดเพิ่ม 🎉
                   </p>
                   <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4">
                     {MIX_SYRUPS.map((o) => (
@@ -477,31 +457,9 @@ export default function MixYourOwn({
                         key={o.id}
                         emoji={o.emoji}
                         label={o.label}
-                        priceLabel={`+${FRUIT_PRICE}`}
+                        freeLabel
                         active={syrupIds.includes(o.id)}
                         onClick={() => toggleSyrup(o.id)}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* 3. ผลไม้สด */}
-                <div>
-                  <p className="mb-1 text-sm font-semibold text-white/90">
-                    3. เลือกผลไม้สด (เลือกได้หลายอย่าง)
-                  </p>
-                  <p className="mb-2.5 text-xs text-white/70">
-                    ผลไม้สดจริง ๆ · +{FRUIT_PRICE} ต่ออย่าง
-                  </p>
-                  <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4">
-                    {MIX_FRUITS.map((o) => (
-                      <Chip
-                        key={o.id}
-                        emoji={o.emoji}
-                        label={o.label}
-                        priceLabel={`+${FRUIT_PRICE}`}
-                        active={fruitIds.includes(o.id)}
-                        onClick={() => toggleFruit(o.id)}
                       />
                     ))}
                   </div>
@@ -683,10 +641,6 @@ export default function MixYourOwn({
                 <SummaryRow
                   label="ไซรัป"
                   value={syrupLabels.length ? syrupLabels.join(", ") : "—"}
-                />
-                <SummaryRow
-                  label="ผลไม้สด"
-                  value={fruitLabels.length ? fruitLabels.join(", ") : "—"}
                 />
                 <SummaryRow label="วิธีทำ" value={methodLabel ?? "🌀 ปั่น"} />
                 <SummaryRow label="ความหวาน" value={sweetLabel ?? "—"} />
