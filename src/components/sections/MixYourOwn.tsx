@@ -5,6 +5,7 @@ import { Check, Plus, Sparkles } from "lucide-react";
 import {
   MIX_BASES,
   MIX_TEA_TYPES,
+  MIX_HERBAL_TYPES,
   MIX_SYRUPS,
   MIX_FRUITS,
   TOPPING_GROUPS,
@@ -136,6 +137,8 @@ export default function MixYourOwn({
   const [syrupIds, setSyrupIds] = useState<string[]>([]);
   const [teaType, setTeaType] = useState<string>("");
   const [teaOpen, setTeaOpen] = useState(false);
+  const [herbalType, setHerbalType] = useState<string>("");
+  const [herbalOpen, setHerbalOpen] = useState(false);
   const [freeBoba, setFreeBoba] = useState<string>("");
   const [extras, setExtras] = useState<string[]>([]);
   const [other, setOther] = useState("");
@@ -161,18 +164,27 @@ export default function MixYourOwn({
   const iceLabel = ICE_OPTIONS.find((o) => o.id === ice)?.label;
   const sweetLabel = SWEET_OPTIONS.find((o) => o.id === sweet)?.label;
 
-  const totalBases = baseIds.length + (teaType ? 1 : 0);
+  const totalBases = baseIds.length + (teaType ? 1 : 0) + (herbalType ? 1 : 0);
 
-  const toggleSimpleBase = (id: string) =>
+  const toggleSimpleBase = (id: string) => {
+    setTeaOpen(false);
+    setHerbalOpen(false);
     setBaseIds((prev) => {
       if (prev.includes(id)) return totalBases > 1 ? prev.filter((x) => x !== id) : prev;
       return totalBases >= MAX_BASE ? prev : [...prev, id];
     });
+  };
   const selectTea = (id: string) =>
     setTeaType((prev) => {
       if (prev === id) return totalBases > 1 ? "" : prev; // ยกเลิกชา (เหลือฐาน ≥1)
       if (prev) return id; // สลับชนิดชา (จำนวนฐานเท่าเดิม)
       return totalBases >= MAX_BASE ? prev : id; // เพิ่มชาใหม่
+    });
+  const selectHerbal = (id: string) =>
+    setHerbalType((prev) => {
+      if (prev === id) return totalBases > 1 ? "" : prev; // ยกเลิก (เหลือฐาน ≥1)
+      if (prev) return id; // สลับชนิด (จำนวนฐานเท่าเดิม)
+      return totalBases >= MAX_BASE ? prev : id; // เพิ่มใหม่
     });
   const toggleFruit = (id: string) =>
     setFruitIds((prev) =>
@@ -190,8 +202,10 @@ export default function MixYourOwn({
   const selectedBases = [
     ...baseIds.map((id) => MIX_BASES.find((b) => b.id === id)!),
     ...(teaType ? [MIX_TEA_TYPES.find((t) => t.id === teaType)!] : []),
+    ...(herbalType ? [MIX_HERBAL_TYPES.find((h) => h.id === herbalType)!] : []),
   ];
   const teaLabel = MIX_TEA_TYPES.find((t) => t.id === teaType)?.label;
+  const herbalLabel = MIX_HERBAL_TYPES.find((h) => h.id === herbalType)?.label;
   const syrups = syrupIds.map((id) => MIX_SYRUPS.find((s) => s.id === id)!);
   const fruits = fruitIds.map((id) => MIX_FRUITS.find((f) => f.id === id)!);
 
@@ -229,6 +243,8 @@ export default function MixYourOwn({
     setBaseIds([]);
     setTeaType("green");
     setTeaOpen(true);
+    setHerbalType("");
+    setHerbalOpen(false);
     setSyrupIds(["apple"]);
     setFruitIds([]);
     setFreeBoba("");
@@ -339,7 +355,24 @@ export default function MixYourOwn({
                       emoji="🍵"
                       label={teaLabel ? `ชา · ${teaLabel} ▾` : "ชา ▾"}
                       active={!!teaType}
-                      onClick={() => setTeaOpen((o) => !o)}
+                      onClick={() => {
+                        setHerbalOpen(false);
+                        setTeaOpen((o) => !o);
+                      }}
+                    />
+                    {/* หมวดน้ำสมุนไพร (มีชนิดย่อย) */}
+                    <Chip
+                      emoji="🌿"
+                      label={
+                        herbalLabel
+                          ? `น้ำสมุนไพร · ${herbalLabel} ▾`
+                          : "น้ำสมุนไพร ▾"
+                      }
+                      active={!!herbalType}
+                      onClick={() => {
+                        setTeaOpen(false);
+                        setHerbalOpen((o) => !o);
+                      }}
                     />
                     {MIX_BASES.slice(2).map((o) => {
                       const active = baseIds.includes(o.id);
@@ -374,6 +407,32 @@ export default function MixYourOwn({
                                 label={t.label}
                                 active={active}
                                 onClick={() => selectTea(t.id)}
+                              />
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ชนิดน้ำสมุนไพร */}
+                  {herbalOpen && (
+                    <div className="mt-2.5 rounded-2xl bg-white/12 p-3 ring-1 ring-white/20">
+                      <p className="mb-2 text-xs text-white/70">
+                        เลือกชนิดน้ำสมุนไพร (นับเป็น 1 ฐาน) · เติมไซรัป/ผลไม้เองได้ที่ข้อ 2 ด้านล่าง 🌿
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {MIX_HERBAL_TYPES.map((h) => {
+                          const active = herbalType === h.id;
+                          const atMax =
+                            !active && !herbalType && totalBases >= MAX_BASE;
+                          return (
+                            <span key={h.id} className={atMax ? "opacity-40" : ""}>
+                              <Chip
+                                emoji={h.emoji}
+                                label={h.label}
+                                active={active}
+                                onClick={() => selectHerbal(h.id)}
                               />
                             </span>
                           );

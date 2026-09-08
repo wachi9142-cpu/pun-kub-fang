@@ -5,6 +5,7 @@ import Hero from "@/components/sections/Hero";
 import Categories from "@/components/sections/Categories";
 import BestSellers from "@/components/sections/BestSellers";
 import MixTeaser from "@/components/sections/MixTeaser";
+import FreshBuffetTeaser from "@/components/sections/FreshBuffetTeaser";
 import MixPairings from "@/components/sections/MixPairings";
 import Promotions from "@/components/sections/Promotions";
 import About from "@/components/sections/About";
@@ -21,6 +22,7 @@ export default function HomePage() {
         <Categories />
         <BestSellers />
         <MixTeaser />
+        <FreshBuffetTeaser />
         <MixPairings />
         <Promotions />
         <Reviews />

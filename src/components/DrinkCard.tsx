@@ -14,10 +14,14 @@ type DrinkCardProps = {
 
 export default function DrinkCard({ item, buttonLabel = "เลือกเมนู" }: DrinkCardProps) {
   const [liked, setLiked] = useState(false);
+  const [imgAttempt, setImgAttempt] = useState(0);
   const [imgFailed, setImgFailed] = useState(false);
   const [customizing, setCustomizing] = useState(false);
 
   const showImage = Boolean(item.image) && !imgFailed;
+  // retry โหลดรูปชั่วคราวก่อน fallback เป็นแก้ว SVG — กันรูปหายจนต้องรีเฟรช
+  const imgSrc =
+    imgAttempt === 0 ? item.image : `${item.image}${item.image?.includes("?") ? "&" : "?"}retry=${imgAttempt}`;
 
   return (
     <article className="hover-lift group relative flex flex-col overflow-hidden rounded-3xl bg-white/85 p-4 shadow-card ring-1 ring-white/70">
@@ -39,9 +43,12 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
         {showImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={item.image}
+            key={imgSrc}
+            src={imgSrc}
             alt={item.name}
-            onError={() => setImgFailed(true)}
+            onError={() =>
+              imgAttempt < 3 ? setImgAttempt((a) => a + 1) : setImgFailed(true)
+            }
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (

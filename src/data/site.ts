@@ -972,8 +972,79 @@ export const MIX_BASES: MixOption[] = [
   { id: "yogurt", label: "โยเกิร์ต", emoji: "🍦", palette: { foam: "#fef1f7", top: "#ffd0e4", bottom: "#f89bc4" } },
   { id: "soda", label: "โซดา", emoji: "🧊", palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" } },
   { id: "smoothie", label: "สมูทตี้", emoji: "🍓", palette: { foam: "#fff2f6", top: "#ff9ec0", bottom: "#f0507f" } },
-  { id: "herbal", label: "น้ำสมุนไพรโฮมเมด", emoji: "🌿", palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" } },
   { id: "coffee", label: "กาแฟ", emoji: "☕", palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" } },
+];
+
+/* ชนิดน้ำสมุนไพรโฮมเมด (ฐานหมวด "น้ำสมุนไพร" — เลือกได้ 1 ชนิด นับเป็น 1 ฐาน) */
+export const MIX_HERBAL_TYPES: MixOption[] = [
+  { id: "chrysanth", label: "เก๊กฮวย", emoji: "🌼", palette: { foam: "#fff8e6", top: "#f4d97a", bottom: "#d9a520" } },
+  { id: "butterfly", label: "อัญชันมะนาว", emoji: "🦋", palette: { foam: "#eef0ff", top: "#9db4f0", bottom: "#5566c9" } },
+  { id: "pandan", label: "ใบเตย", emoji: "🌿", palette: { foam: "#eefae8", top: "#a8ce7a", bottom: "#5f9a3f" } },
+  { id: "passion", label: "เสาวรส", emoji: "🥭", palette: { foam: "#fff3e0", top: "#ffc46b", bottom: "#e88a1f" } },
+  { id: "honeylemon", label: "มะนาวน้ำผึ้ง", emoji: "🍋", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" } },
+  { id: "grassjelly", label: "เฉาก๊วย", emoji: "🖤", palette: { foam: "#e9e6ea", top: "#7a7280", bottom: "#332b3a" } },
+  { id: "longan", label: "ลำไย", emoji: "🌰", palette: { foam: "#f6ece0", top: "#d3a976", bottom: "#9a6a3f" } },
+  { id: "roselle", label: "กระเจี๊ยบ", emoji: "🌺", palette: { foam: "#fdeaf0", top: "#e77aa0", bottom: "#c02a5a" } },
+];
+
+/* ---------- 🥝 ตักสด ปั่นฟิน — บุฟเฟ่ต์ผัก/ผลไม้สดปั่น ---------- */
+/* ราคาเดียว ไม่คิดเพิ่มตามชนิด · ลูกค้าเลือกวัตถุดิบ ร้านตักใส่แก้วแล้วปั่นให้ */
+export const FRESH_BUFFET = {
+  price: 49,
+  oldPrice: 69,
+};
+
+export type FreshItem = {
+  id: string;
+  label: string;
+  /** ชื่อภาษาอังกฤษ — แสดงใต้ชื่อไทยในชิป */
+  en?: string;
+  emoji: string;
+  /** รูปวัตถุดิบ เช่น "/fresh/banana.png" (แนะนำ 96×96 พื้นโปร่ง) — ถ้าใส่จะแสดงแทน emoji */
+  image?: string;
+};
+
+export const FRESH_FRUITS: FreshItem[] = [
+  { id: "banana", label: "กล้วย", en: "Banana", emoji: "🍌" },
+  { id: "strawberry", label: "สตรอว์เบอร์รี", en: "Strawberry", emoji: "🍓" },
+  { id: "apple", label: "แอปเปิ้ล", en: "Apple", emoji: "🍎" },
+  { id: "pineapple", label: "สับปะรด", en: "Pineapple", emoji: "🍍" },
+  { id: "watermelon", label: "แตงโม", en: "Watermelon", emoji: "🍉" },
+  { id: "orange", label: "ส้ม", en: "Orange", emoji: "🍊" },
+  { id: "kiwi", label: "กีวี", en: "Kiwi", emoji: "🥝" },
+  { id: "grape", label: "องุ่น", en: "Grapes", emoji: "🍇" },
+  { id: "shine-muscat", label: "องุ่นไชน์มัสแคท", en: "Shine Muscat Grapes", emoji: "🍇" },
+  { id: "blueberry", label: "บลูเบอร์รี", en: "Blueberry", emoji: "🫐" },
+  { id: "mulberry", label: "มัลเบอร์รี", en: "Mulberry", emoji: "🫐" },
+  { id: "dragonfruit", label: "แก้วมังกร", en: "Dragon Fruit", emoji: "🩷" },
+  { id: "pomegranate", label: "ทับทิม", en: "Pomegranate", emoji: "❤️" },
+  { id: "passion", label: "เสาวรส", en: "Passion Fruit", emoji: "💛" },
+  { id: "pear", label: "สาลี่", en: "Asian Pear", emoji: "🍐" },
+  { id: "persimmon", label: "ลูกพลับ", en: "Persimmon", emoji: "🟠" },
+  { id: "cantaloupe", label: "แคนตาลูป", en: "Cantaloupe", emoji: "🍈" },
+  { id: "melon", label: "เมล่อน", en: "Melon", emoji: "🟢" },
+  { id: "roseapple", label: "ชมพู่", en: "Rose Apple", emoji: "🌸" },
+  { id: "guava", label: "ฝรั่ง", en: "Guava", emoji: "💚" },
+  { id: "jicama", label: "มันแกว", en: "Jicama", emoji: "🤎" },
+];
+
+export const FRESH_VEGGIES: FreshItem[] = [
+  { id: "carrot", label: "แครอท", en: "Carrot", emoji: "🥕" },
+  { id: "cucumber", label: "แตงกวา", en: "Cucumber", emoji: "🥒" },
+  { id: "tomato", label: "มะเขือเทศ", en: "Tomato", emoji: "🍅" },
+  { id: "spinach", label: "ผักโขม", en: "Spinach", emoji: "🌿" },
+  { id: "lettuce", label: "ผักกาดหอม", en: "Lettuce", emoji: "🥬" },
+  { id: "celery", label: "เซเลอรี", en: "Celery", emoji: "🌿" },
+  { id: "beetroot", label: "บีตรูท", en: "Beetroot", emoji: "❤️" },
+  { id: "kale", label: "เคล", en: "Kale", emoji: "🥬" },
+];
+
+/* ✨ เพิ่มรสชาติ — รวมอยู่ในราคา 49 บาท ไม่คิดเพิ่ม */
+export const FRESH_FLAVORS: FreshItem[] = [
+  { id: "honey", label: "น้ำผึ้ง", en: "Honey", emoji: "🍯" },
+  { id: "yogurt", label: "โยเกิร์ต", en: "Yogurt", emoji: "🍦" },
+  { id: "milk", label: "นมสด", en: "Fresh Milk", emoji: "🥛" },
+  { id: "syrup", label: "น้ำเชื่อม", en: "Simple Syrup", emoji: "💧" },
 ];
 
 /* ชนิดชา (ฐานหมวด "ชา" — เลือกได้ 1 ชนิด นับเป็น 1 ฐาน) */
