@@ -36,7 +36,6 @@ const TEA_GROUP: Record<string, Exclude<Group, "all">> = {
   "apple-tea": "fruit",
   "lemon-tea-plain": "fruit",
   "lemon-tea": "fruit",
-  "lemon-tea-iced": "fruit",
   // ชาอื่น ๆ
   "green-lemon-tea": "other",
   "honey-lemon-tea": "other",

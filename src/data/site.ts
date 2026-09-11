@@ -625,8 +625,8 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "lemon-tea",
-    name: "ชามะนาวปั่น",
-    nameEn: "Lemon Tea (Blended)",
+    name: "ชามะนาว",
+    nameEn: "Lemon Tea",
     tagline: "ชาหอม + มะนาวสด เปรี้ยวซ่า",
     price: 50,
     likes: 61,
@@ -741,17 +741,6 @@ export const MENU_ITEMS: MenuItem[] = [
     tagline: "ชาหอม + มะนาวสด เปรี้ยวสดชื่น",
     price: 25,
     likes: 71,
-    emoji: "🍋",
-    category: "tea",
-    palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" },
-  },
-  {
-    id: "lemon-tea-iced",
-    name: "ชามะนาว",
-    nameEn: "Iced Lemon Tea",
-    tagline: "ชาหอม + มะนาวสด เปรี้ยวเย็นชื่นใจ",
-    price: 25,
-    likes: 58,
     emoji: "🍋",
     category: "tea",
     palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" },
@@ -1227,10 +1216,39 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
       { nameTh: "อัลมอนด์สไลด์", nameEn: "Sliced Almonds", price: 10 },
     ],
   },
+  {
+    id: "sauce-shot",
+    titleTh: "ซอส ไซรัป & ช็อต",
+    titleEn: "Sauces, Syrups & Shots",
+    emoji: "🍯",
+    items: [
+      { nameTh: "น้ำผึ้ง ช็อต", nameEn: "Honey Shot", price: 5 },
+      { nameTh: "คาราเมล ไซรัป", nameEn: "Caramel Syrup", price: 5 },
+      { nameTh: "น้ำตาลโตนด ซอส", nameEn: "Palm Sugar Sauce", price: 5 },
+      { nameTh: "มัทฉะ ช็อต", nameEn: "Matcha Shot", price: 10 },
+      { nameTh: "ชาไทย ช็อต", nameEn: "Thai Tea Shot", price: 10 },
+      { nameTh: "ชาเขียว ช็อต", nameEn: "Green Tea Shot", price: 10 },
+      { nameTh: "ซอสส้ม", nameEn: "Orange Sauce", price: 5 },
+      { nameTh: "เอสเพรสโซ ช็อต", nameEn: "Espresso Shot", price: 10 },
+      { nameTh: "ช็อกโกแลต ซอส", nameEn: "Chocolate Sauce", price: 5 },
+      { nameTh: "สตรอว์เบอร์รี ซอส", nameEn: "Strawberry Sauce", price: 5 },
+    ],
+  },
 ];
 
 /** รูปท็อปปิ้ง — key = nameEn (ไฟล์อยู่ใน /public/toppings) */
 export const TOPPING_IMAGES: Record<string, string> = {
+  // ซอส ไซรัป & ช็อต — วางรูปใน /public/toppings แล้วเอา // ออก (แนะนำ 400×400)
+  // "Honey Shot": "/toppings/honey-shot.jpg",
+  // "Caramel Syrup": "/toppings/caramel-syrup.jpg",
+  // "Palm Sugar Sauce": "/toppings/palm-sugar-sauce.jpg",
+  // "Matcha Shot": "/toppings/matcha-shot.jpg",
+  // "Thai Tea Shot": "/toppings/thai-tea-shot.jpg",
+  // "Green Tea Shot": "/toppings/green-tea-shot.jpg",
+  // "Orange Sauce": "/toppings/orange-sauce.jpg",
+  // "Espresso Shot": "/toppings/espresso-shot.jpg",
+  // "Chocolate Sauce": "/toppings/chocolate-sauce.jpg",
+  // "Strawberry Sauce": "/toppings/strawberry-sauce.jpg",
   // ไข่มุก
   "Classic Black Tapioca Pearls": "/toppings/black-tapioca.jpg",
   "Golden Tapioca Pearls": "/toppings/golden-tapioca.png",

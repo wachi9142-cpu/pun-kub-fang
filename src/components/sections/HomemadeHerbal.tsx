@@ -80,6 +80,7 @@ function DrinkRow({
           name: item.nameTh,
           nameEn: item.nameEn,
           price: item.price,
+          emoji: item.emoji,
         })
       }
       className="group relative flex w-full items-center gap-3 rounded-2xl bg-cream-white p-3 text-left shadow-soft ring-1 ring-ink/5 transition-all hover:-translate-y-0.5 hover:ring-grape-300 active:scale-[0.99]"

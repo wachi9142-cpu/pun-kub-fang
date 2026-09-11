@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import { Check, Plus, X } from "lucide-react";
-import { TOPPING_GROUPS } from "@/data/site";
+import { TOPPING_GROUPS, type SmoothiePalette } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
 import ToppingSelector from "@/components/ToppingSelector";
 import Portal from "@/components/Portal";
+import MagicalDrinkAnimation, {
+  type MagicalDrinkInput,
+} from "@/components/MagicalDrinkAnimation";
 
 /** เมนูที่ปรับแต่งได้ — ใช้แค่ฟิลด์ที่จำเป็น เพื่อให้เมนูปกติ + น้ำสมุนไพรใช้ร่วมกันได้ */
 export type CustomizableItem = {
@@ -13,6 +16,16 @@ export type CustomizableItem = {
   name: string;
   nameEn?: string;
   price: number;
+  /** สีแก้วสำหรับแอนิเมชันเสก (ถ้าไม่มีใช้โทนม่วงของแบรนด์) */
+  palette?: SmoothiePalette;
+  emoji?: string;
+};
+
+/* สีเริ่มต้นเมื่อเมนูไม่ได้กำหนด palette (เช่น น้ำสมุนไพร) */
+const DEFAULT_PALETTE: SmoothiePalette = {
+  foam: "#f3e9ff",
+  top: "#c9b3e8",
+  bottom: "#7b4ab8",
 };
 
 const SWEET = [
@@ -21,29 +34,30 @@ const SWEET = [
   { id: "regular", label: "หวานปกติ" },
 ];
 const METHOD = [
-  { id: "regular", label: "ปกติ" },
   { id: "noblend", label: "🧊 ไม่ปั่น" },
   { id: "blend", label: "🌀 ปั่น" },
 ];
-const PACKING = [
-  { id: "bag", label: "🛍️ แยกน้ำใส่ถุง" },
-  { id: "iced", label: "🧊 แก้วใส่น้ำแข็ง" },
-  { id: "cup", label: "🥤 ใส่ไปในแก้วเลย" },
+const ICE = [
+  { id: "cup", label: "🥤 ใส่แก้ว" },
+  { id: "separate", label: "🧊 แยกน้ำแข็ง" },
 ];
 
 function Pill({
   label,
   active,
+  disabled,
   onClick,
 }: {
   label: string;
   active: boolean;
+  disabled?: boolean;
   onClick: () => void;
 }) {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-sm font-medium transition-all duration-200 active:scale-95 ${
+      disabled={disabled}
+      className={`flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-sm font-medium transition-all duration-200 active:scale-95 disabled:cursor-not-allowed disabled:active:scale-100 ${
         active
           ? "scale-105 border-grape-500 bg-grape-deep text-white shadow-soft"
           : "border-ink/10 bg-white text-ink hover:border-grape-300 hover:bg-grape-50"
@@ -68,14 +82,18 @@ export default function DrinkCustomizer({
 }) {
   const { addItem, openCart } = useCart();
   const [sweet, setSweet] = useState("regular");
-  const [method, setMethod] = useState("regular");
-  const [packing, setPacking] = useState("cup");
+  const [method, setMethod] = useState("noblend");
+  const [ice, setIce] = useState("cup");
   const [toppings, setToppings] = useState<string[]>([]);
+  /* 🪄 แอนิเมชันเหมียวปรุง — เล่นครั้งเดียวตอนยืนยันเมนู "ไม่ปั่น" */
+  const [brewing, setBrewing] = useState<MagicalDrinkInput | null>(null);
 
   const toggleTopping = (nameEn: string) =>
     setToppings((p) =>
       p.includes(nameEn) ? p.filter((x) => x !== nameEn) : [...p, nameEn],
     );
+
+  const isBlend = method === "blend";
 
   const allToppings = TOPPING_GROUPS.flatMap((g) => g.items);
   const picked = allToppings.filter((i) => toppings.includes(i.nameEn));
@@ -86,8 +104,7 @@ export default function DrinkCustomizer({
       SWEET.find((s) => s.id === sweet)!.label,
       METHOD.find((m) => m.id === method)!.label,
     ];
-    if (method === "noblend")
-      options.push(PACKING.find((p) => p.id === packing)!.label);
+    if (!isBlend) options.push(ICE.find((i) => i.id === ice)!.label);
     if (picked.length)
       options.push(`ท็อปปิ้ง: ${picked.map((i) => i.nameTh).join(", ")}`);
     addItem({
@@ -96,9 +113,33 @@ export default function DrinkCustomizer({
       price: total,
       options,
     });
+
+    if (!isBlend) {
+      // ไม่ปั่น → ให้สองเหมียวเสกแก้วก่อน แล้วค่อยเปิดตะกร้า
+      setBrewing({
+        name: item.name,
+        nameEn: item.nameEn,
+        emoji: item.emoji,
+        palette: item.palette ?? DEFAULT_PALETTE,
+        sweetLabel: SWEET.find((s) => s.id === sweet)!.label,
+        ice: ice === "separate" ? "separate" : "cup",
+        toppings: picked.map((i) => i.nameTh),
+      });
+      return;
+    }
     onClose();
     openCart();
   };
+
+  const finishBrewing = () => {
+    setBrewing(null);
+    onClose();
+    openCart();
+  };
+
+  if (brewing) {
+    return <MagicalDrinkAnimation input={brewing} onDone={finishBrewing} />;
+  }
 
   return (
     <Portal onEscape={onClose}>
@@ -168,24 +209,28 @@ export default function DrinkCustomizer({
               </div>
             </div>
 
-            {/* การบรรจุ (เฉพาะไม่ปั่น) */}
-            {method === "noblend" && (
-              <div className="animate-pop-in rounded-2xl bg-grape-50/60 p-3">
-                <p className="mb-2 text-sm font-semibold text-ink">
-                  🥤 การบรรจุ
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {PACKING.map((p) => (
-                    <Pill
-                      key={p.id}
-                      label={p.label}
-                      active={packing === p.id}
-                      onClick={() => setPacking(p.id)}
-                    />
-                  ))}
-                </div>
+            {/* ตัวเลือกน้ำแข็ง — เลือกได้เฉพาะ "ไม่ปั่น" (ปั่นแล้วน้ำแข็งรวมอยู่ในแก้ว แยกไม่ได้) */}
+            <div className={isBlend ? "opacity-50" : ""}>
+              <p className="mb-2 text-sm font-semibold text-ink">
+                🧊 ตัวเลือกน้ำแข็ง
+                {isBlend && (
+                  <span className="ml-1 font-medium text-ink/45">
+                    (เมนูปั่นไม่แยกน้ำแข็ง)
+                  </span>
+                )}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {ICE.map((i) => (
+                  <Pill
+                    key={i.id}
+                    label={i.label}
+                    active={!isBlend && ice === i.id}
+                    disabled={isBlend}
+                    onClick={() => setIce(i.id)}
+                  />
+                ))}
               </div>
-            )}
+            </div>
 
             {/* ท็อปปิ้ง */}
             <div>

@@ -449,6 +449,111 @@ body {
   50% { transform: translateY(-4px) rotate(3deg); }
 }
 
+
+/* 🐱🪄 MagicalDrinkAnimation — สองเหมียวปรุงเครื่องดื่มวิเศษ (เมนูไม่ปั่น) */
+@keyframes cat-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.animate-cat-bob { animation: cat-bob 2.2s ease-in-out infinite; }
+.animate-cat-bob-fast { animation: cat-bob 1.6s ease-in-out infinite; }
+@keyframes cat-tail {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(10deg); }
+}
+.animate-cat-tail { animation: cat-tail 1.8s ease-in-out infinite; }
+@keyframes cat-arm-stir {
+  0% { transform: rotate(-14deg); }
+  50% { transform: rotate(16deg); }
+  100% { transform: rotate(-14deg); }
+}
+.animate-cat-arm-stir { animation: cat-arm-stir 0.45s ease-in-out infinite; }
+@keyframes cat-arm-pour {
+  0%, 100% { transform: rotate(0deg); }
+  40%, 70% { transform: rotate(-38deg); }
+}
+.animate-cat-arm-pour { animation: cat-arm-pour 1.4s ease-in-out infinite; }
+@keyframes cat-arm-wave {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(14deg); }
+}
+.animate-cat-arm-wave { animation: cat-arm-wave 0.9s ease-in-out infinite; }
+@keyframes cat-head-look {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-7deg) translateY(1px); }
+}
+.animate-cat-head-look { animation: cat-head-look 1.4s ease-in-out infinite; }
+@keyframes cat-eye-sparkle {
+  0%, 100% { transform: scale(0.85) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(20deg); }
+}
+.animate-cat-eye-sparkle { animation: cat-eye-sparkle 0.7s ease-in-out infinite; }
+
+@keyframes magic-liquid-fill {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(0.75); }
+}
+.animate-magic-liquid-fill { animation: magic-liquid-fill 1.2s ease-out both; }
+@keyframes magic-bubble {
+  0% { transform: translateY(0); opacity: 0; }
+  30% { opacity: 0.7; }
+  100% { transform: translateY(-40px); opacity: 0; }
+}
+.animate-magic-bubble { animation: magic-bubble 1.1s ease-out infinite; }
+@keyframes magic-spoon {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(12deg); }
+}
+.animate-magic-spoon { animation: magic-spoon 0.45s ease-in-out infinite; }
+
+@keyframes magic-particle-rise {
+  0% { opacity: 0; transform: translateY(16px) scale(0.6); }
+  25% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-48px) scale(1.05) rotate(20deg); }
+}
+.animate-magic-particle-rise { animation: magic-particle-rise var(--dur, 1.8s) ease-out infinite; }
+
+/* ☁️ หมอก: ลอยขึ้น → ฟุ้งข้าง → ปกคลุม */
+@keyframes magic-fog-rise {
+  0% { opacity: 0; transform: translateY(40px) scale(0.5); }
+  60% { opacity: 0.95; }
+  100% { opacity: 0.95; transform: translateY(0) scale(1.15); }
+}
+.animate-magic-fog-rise { animation: magic-fog-rise 0.9s ease-out both; }
+@keyframes magic-fog-swirl {
+  0% { opacity: 0.95; transform: scale(1.15) rotate(0deg) translateX(0); }
+  50% { transform: scale(1.25) rotate(8deg) translateX(6px); }
+  100% { opacity: 0.95; transform: scale(1.15) rotate(0deg) translateX(0); }
+}
+.animate-magic-fog-swirl { animation: magic-fog-swirl 0.8s ease-in-out infinite; }
+/* หมอกจาง: บางลง → เห็นเงาแก้ว → สลาย */
+@keyframes magic-fog-out {
+  0% { opacity: 1; filter: blur(0); }
+  40% { opacity: 0.6; }
+  100% { opacity: 0; transform: scale(1.3); }
+}
+.animate-magic-fog-out { animation: magic-fog-out 0.9s ease-in-out both; }
+@keyframes magic-flash {
+  0% { opacity: 0; }
+  30% { opacity: 0.55; }
+  100% { opacity: 0; }
+}
+.animate-magic-flash { animation: magic-flash 0.7s ease-out both; }
+
+/* 👀 แก้วจริงโผล่จากหมอก */
+@keyframes magic-reveal {
+  from { opacity: 0; transform: scale(0.9); filter: blur(4px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+.animate-magic-reveal { animation: magic-reveal 0.8s ease-out both; }
+/* 💜 หัวใจ/ประกายเด้งออกตอน WOW (เล่นครั้งเดียว) */
+@keyframes magic-heart-burst {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.1); }
+}
+.animate-magic-heart-burst { animation: magic-heart-burst 1.1s ease-out both; }
+
 /* ♿ ลดการเคลื่อนไหวสำหรับผู้ที่ตั้งค่า prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-drop-in,

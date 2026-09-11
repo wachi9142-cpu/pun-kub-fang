@@ -59,15 +59,16 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
       </div>
 
       <div className="mt-3 flex flex-1 flex-col">
-        <h3 className="font-display line-clamp-2 min-h-[2.75rem] text-base font-semibold leading-snug text-grape-700">
+        {/* เว้นบรรทัดคงที่: ชื่อไทย 1 บรรทัด · ชื่ออังกฤษ 1 บรรทัด · คำโปรย 1 บรรทัด → ปุ่มทุกการ์ดอยู่ระดับเดียวกัน */}
+        <h3 className="font-display truncate text-base font-semibold leading-snug text-grape-700">
           {item.name}
-          {item.nameEn && (
-            <span className="ml-1 text-[11px] font-medium text-grape-400">
-              {item.nameEn}
-            </span>
-          )}
         </h3>
-        <p className="mt-0.5 line-clamp-1 text-xs text-grape-400">{item.tagline}</p>
+        <p className="h-4 truncate text-[11px] font-medium leading-4 text-grape-400">
+          {item.nameEn ?? " "}
+        </p>
+        <p className="mt-0.5 h-4 truncate text-xs leading-4 text-grape-400">
+          {item.tagline || " "}
+        </p>
 
         <div className="mt-auto flex items-center justify-between pt-3">
           <span className="leading-none">
