@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import { Check, X } from "lucide-react";
-import { TOPPING_GROUPS, TOPPING_IMAGES, type ToppingGroup, type ToppingItem } from "@/data/site";
+import {
+  TOPPING_GROUPS,
+  TOPPING_IMAGES,
+  type ToppingGroup,
+  type ToppingItem,
+} from "@/data/site";
+import Portal from "@/components/Portal";
 
 /** ป้ายราคา: ฟรี / +5 / +10 */
 function PriceTag({ price, active }: { price: number; active?: boolean }) {
@@ -70,7 +76,9 @@ function ToppingCard({
         ) : (
           <span className="flex flex-col items-center gap-0.5 text-3xl opacity-70">
             {emoji}
-            <span className="text-[9px] font-medium text-ink/35">รูปเร็ว ๆ นี้</span>
+            <span className="text-[9px] font-medium text-ink/35">
+              รูปเร็ว ๆ นี้
+            </span>
           </span>
         )}
         <span className="absolute bottom-1 right-1 grid h-5 w-5 place-items-center rounded-full bg-white/85 text-[10px] opacity-0 shadow transition-opacity group-hover:opacity-100">
@@ -116,58 +124,69 @@ function ToppingDetail({
 }) {
   const image = imgOf(item);
   return (
-    <div
-      className="fixed inset-0 z-[110] flex items-center justify-center bg-ink/60 p-4 backdrop-blur-sm"
-      onClick={onClose}
-    >
+    <Portal lockScroll={false} onEscape={onClose}>
       <div
-        className="animate-pop-in w-full max-w-xs overflow-hidden rounded-3xl bg-white shadow-card"
-        onClick={(e) => e.stopPropagation()}
+        className="fixed inset-0 z-[110] flex items-center justify-center bg-ink/60 p-4 backdrop-blur-sm"
+        onClick={onClose}
       >
-        <div className="relative grid aspect-square w-full place-items-center overflow-hidden bg-gradient-to-b from-grape-50 to-blossom-50/60">
-          {image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={image} alt={item.nameTh} className="h-full w-full object-cover" />
-          ) : (
-            <span className="text-6xl opacity-70">🍧</span>
-          )}
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="ปิด"
-            className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-ink/60 shadow hover:bg-white"
-          >
-            <X size={18} />
-          </button>
-        </div>
+        <div
+          className="animate-pop-in w-full max-w-xs overflow-hidden rounded-3xl bg-white shadow-card"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="relative grid aspect-square w-full place-items-center overflow-hidden bg-gradient-to-b from-grape-50 to-blossom-50/60">
+            {image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={image}
+                alt={item.nameTh}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <span className="text-6xl opacity-70">🍧</span>
+            )}
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="ปิด"
+              className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-ink/60 shadow hover:bg-white"
+            >
+              <X size={18} />
+            </button>
+          </div>
 
-        <div className="p-5 text-center">
-          <h3 className="font-display text-lg font-bold text-ink">{item.nameTh}</h3>
-          <p className="text-xs text-ink/45">{item.nameEn}</p>
-          <p className="mt-2 text-sm leading-relaxed text-ink/70">
-            {item.desc ?? `ท็อปปิ้งในหมวด ${groupTh} เพิ่มความอร่อยให้แก้วโปรดของคุณ 💜`}
-          </p>
-          <p className="mt-3 font-display text-2xl font-bold text-blossom-500">
-            {item.price === 0 ? "ฟรี" : `+${item.price}`}
-          </p>
+          <div className="p-5 text-center">
+            <h3 className="font-display text-lg font-bold text-ink">
+              {item.nameTh}
+            </h3>
+            <p className="text-xs text-ink/45">{item.nameEn}</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink/70">
+              {item.desc ??
+                `ท็อปปิ้งในหมวด ${groupTh} เพิ่มความอร่อยให้แก้วโปรดของคุณ 💜`}
+            </p>
+            <p className="mt-3 font-display text-2xl font-bold text-blossom-500">
+              {item.price === 0 ? "ฟรี" : `+${item.price}`}
+            </p>
 
-          <button
-            type="button"
-            onClick={() => {
-              onToggle();
-              onClose();
-            }}
-            className={`mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold transition-all ${
-              selected
-                ? "bg-ink/10 text-ink hover:bg-ink/15"
-                : "bg-gradient-to-r from-grape-600 to-blossom-500 text-white hover:scale-[1.02]"
-            }`}
-          >
-            {selected ? "✓ เลือกแล้ว · แตะเพื่อเอาออก" : "เลือกท็อปปิ้งนี้ 🧋"}
-          </button>
+            <button
+              type="button"
+              onClick={() => {
+                onToggle();
+                onClose();
+              }}
+              className={`mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold transition-all ${
+                selected
+                  ? "bg-ink/10 text-ink hover:bg-ink/15"
+                  : "bg-gradient-to-r from-grape-600 to-blossom-500 text-white hover:scale-[1.02]"
+              }`}
+            >
+              {selected
+                ? "✓ เลือกแล้ว · แตะเพื่อเอาออก"
+                : "เลือกท็อปปิ้งนี้ 🧋"}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </Portal>
   );
 }
 
@@ -182,9 +201,10 @@ export default function ToppingSelector({
   selected: string[];
   onToggle: (nameEn: string) => void;
 }) {
-  const [detail, setDetail] = useState<{ item: ToppingItem; groupTh: string } | null>(
-    null,
-  );
+  const [detail, setDetail] = useState<{
+    item: ToppingItem;
+    groupTh: string;
+  } | null>(null);
 
   return (
     <div className="space-y-5">
@@ -194,7 +214,7 @@ export default function ToppingSelector({
             {g.emoji} {g.titleTh}{" "}
             <span className="font-medium text-ink/35">{g.titleEn}</span>
           </p>
-          <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4">
+          <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 md:grid-cols-5">
             {g.items.map((it) => (
               <ToppingCard
                 key={it.nameEn}
@@ -209,10 +229,14 @@ export default function ToppingSelector({
 
           {g.note && (
             <div className="mt-2.5 rounded-xl bg-amber-50 p-2.5 text-[11px] leading-relaxed text-amber-900/80 ring-1 ring-amber-200/70">
-              <span className="font-semibold text-amber-900">📌 หมายเหตุ: </span>
+              <span className="font-semibold text-amber-900">
+                📌 หมายเหตุ:{" "}
+              </span>
               {g.note}
               {g.noteEn && (
-                <span className="mt-0.5 block italic text-amber-900/60">{g.noteEn}</span>
+                <span className="mt-0.5 block italic text-amber-900/60">
+                  {g.noteEn}
+                </span>
               )}
             </div>
           )}

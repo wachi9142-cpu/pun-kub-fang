@@ -5,6 +5,7 @@ import { Check, Plus, X } from "lucide-react";
 import { TOPPING_GROUPS } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
 import ToppingSelector from "@/components/ToppingSelector";
+import Portal from "@/components/Portal";
 
 /** เมนูที่ปรับแต่งได้ — ใช้แค่ฟิลด์ที่จำเป็น เพื่อให้เมนูปกติ + น้ำสมุนไพรใช้ร่วมกันได้ */
 export type CustomizableItem = {
@@ -100,110 +101,138 @@ export default function DrinkCustomizer({
   };
 
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-end justify-center bg-ink/50 p-0 backdrop-blur-sm sm:items-center sm:p-4"
-      onClick={onClose}
-    >
+    <Portal onEscape={onClose}>
       <div
-        className="animate-pop-in flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl bg-white shadow-card sm:rounded-3xl"
-        onClick={(e) => e.stopPropagation()}
+        className="fixed inset-0 z-[100] flex items-end justify-center bg-ink/50 p-0 backdrop-blur-sm sm:items-center sm:p-4"
+        onClick={onClose}
       >
-        {/* หัว */}
-        <div className="flex items-start justify-between gap-3 border-b border-ink/5 p-5">
-          <div className="leading-tight">
-            <h3 className="font-display text-lg font-bold text-ink">
-              {item.name}
-            </h3>
-            {item.nameEn && (
-              <p className="text-xs text-ink/45">{item.nameEn}</p>
-            )}
-            <p className="mt-0.5 text-sm font-semibold text-blossom-500">
-              เริ่มต้น {item.price}
-            </p>
-          </div>
-          <button
-            onClick={onClose}
-            aria-label="ปิด"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-grape-50 text-ink/60 hover:bg-grape-100"
-          >
-            <X size={18} />
-          </button>
-        </div>
-
-        {/* เนื้อหา (เลื่อนได้) */}
-        <div className="flex-1 space-y-5 overflow-y-auto p-5">
-          {/* ความหวาน */}
-          <div>
-            <p className="mb-2 text-sm font-semibold text-ink">🍯 ระดับความหวาน</p>
-            <div className="flex flex-wrap gap-2">
-              {SWEET.map((s) => (
-                <Pill key={s.id} label={s.label} active={sweet === s.id} onClick={() => setSweet(s.id)} />
-              ))}
+        <div
+          className="animate-pop-in flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-3xl bg-white shadow-card sm:rounded-3xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* หัว */}
+          <div className="flex items-start justify-between gap-3 border-b border-ink/5 p-5">
+            <div className="leading-tight">
+              <h3 className="font-display text-lg font-bold text-ink">
+                {item.name}
+              </h3>
+              {item.nameEn && (
+                <p className="text-xs text-ink/45">{item.nameEn}</p>
+              )}
+              <p className="mt-0.5 text-sm font-semibold text-blossom-500">
+                เริ่มต้น {item.price}
+              </p>
             </div>
+            <button
+              onClick={onClose}
+              aria-label="ปิด"
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-grape-50 text-ink/60 hover:bg-grape-100"
+            >
+              <X size={18} />
+            </button>
           </div>
 
-          {/* วิธีทำ */}
-          <div>
-            <p className="mb-2 text-sm font-semibold text-ink">🌀 เลือกวิธีทำ</p>
-            <div className="flex flex-wrap gap-2">
-              {METHOD.map((m) => (
-                <Pill key={m.id} label={m.label} active={method === m.id} onClick={() => setMethod(m.id)} />
-              ))}
-            </div>
-          </div>
-
-          {/* การบรรจุ (เฉพาะไม่ปั่น) */}
-          {method === "noblend" && (
-            <div className="animate-pop-in rounded-2xl bg-grape-50/60 p-3">
-              <p className="mb-2 text-sm font-semibold text-ink">🥤 การบรรจุ</p>
+          {/* เนื้อหา (เลื่อนได้) */}
+          <div className="flex-1 space-y-5 overflow-y-auto p-5">
+            {/* ความหวาน */}
+            <div>
+              <p className="mb-2 text-sm font-semibold text-ink">
+                🍯 ระดับความหวาน
+              </p>
               <div className="flex flex-wrap gap-2">
-                {PACKING.map((p) => (
-                  <Pill key={p.id} label={p.label} active={packing === p.id} onClick={() => setPacking(p.id)} />
+                {SWEET.map((s) => (
+                  <Pill
+                    key={s.id}
+                    label={s.label}
+                    active={sweet === s.id}
+                    onClick={() => setSweet(s.id)}
+                  />
                 ))}
               </div>
             </div>
-          )}
 
-          {/* ท็อปปิ้ง */}
-          <div>
-            <p className="mb-2 text-sm font-semibold text-ink">
-              🧋 เลือกท็อปปิ้ง{" "}
-              <span className="font-medium text-ink/45">(เลือกได้หลายอย่าง · แตะรูปเพื่อดูรายละเอียด)</span>
-            </p>
-            <ToppingSelector selected={toppings} onToggle={toggleTopping} />
-          </div>
-        </div>
-
-        {/* ท้าย: ราคารวม + เพิ่มลงตะกร้า */}
-        <div className="border-t border-ink/5 p-5">
-          {picked.length > 0 && (
-            <div className="mb-2 max-h-24 space-y-0.5 overflow-y-auto text-xs">
-              <div className="flex justify-between text-ink/60">
-                <span>{item.name}</span>
-                <span>{item.price}</span>
+            {/* วิธีทำ */}
+            <div>
+              <p className="mb-2 text-sm font-semibold text-ink">
+                🌀 เลือกวิธีทำ
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {METHOD.map((m) => (
+                  <Pill
+                    key={m.id}
+                    label={m.label}
+                    active={method === m.id}
+                    onClick={() => setMethod(m.id)}
+                  />
+                ))}
               </div>
-              {picked.map((i) => (
-                <div key={i.nameEn} className="flex justify-between text-ink/60">
-                  <span>+ {i.nameTh}</span>
-                  <span className="text-blossom-500">+{i.price}</span>
-                </div>
-              ))}
             </div>
-          )}
-          <div className="mb-3 flex items-center justify-between">
-            <span className="text-sm font-medium text-ink/60">ราคารวม</span>
-            <span className="font-display text-2xl font-bold text-blossom-500">
-              {total}
-            </span>
+
+            {/* การบรรจุ (เฉพาะไม่ปั่น) */}
+            {method === "noblend" && (
+              <div className="animate-pop-in rounded-2xl bg-grape-50/60 p-3">
+                <p className="mb-2 text-sm font-semibold text-ink">
+                  🥤 การบรรจุ
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {PACKING.map((p) => (
+                    <Pill
+                      key={p.id}
+                      label={p.label}
+                      active={packing === p.id}
+                      onClick={() => setPacking(p.id)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* ท็อปปิ้ง */}
+            <div>
+              <p className="mb-2 text-sm font-semibold text-ink">
+                🧋 เลือกท็อปปิ้ง{" "}
+                <span className="font-medium text-ink/45">
+                  (เลือกได้หลายอย่าง · แตะรูปเพื่อดูรายละเอียด)
+                </span>
+              </p>
+              <ToppingSelector selected={toppings} onToggle={toggleTopping} />
+            </div>
           </div>
-          <button
-            onClick={handleAdd}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-grape-600 to-blossom-500 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02]"
-          >
-            <Plus size={17} /> เพิ่มลงตะกร้า 🛒
-          </button>
+
+          {/* ท้าย: ราคารวม + เพิ่มลงตะกร้า */}
+          <div className="border-t border-ink/5 p-5">
+            {picked.length > 0 && (
+              <div className="mb-2 max-h-24 space-y-0.5 overflow-y-auto text-xs">
+                <div className="flex justify-between text-ink/60">
+                  <span>{item.name}</span>
+                  <span>{item.price}</span>
+                </div>
+                {picked.map((i) => (
+                  <div
+                    key={i.nameEn}
+                    className="flex justify-between text-ink/60"
+                  >
+                    <span>+ {i.nameTh}</span>
+                    <span className="text-blossom-500">+{i.price}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="mb-3 flex items-center justify-between">
+              <span className="text-sm font-medium text-ink/60">ราคารวม</span>
+              <span className="font-display text-2xl font-bold text-blossom-500">
+                {total}
+              </span>
+            </div>
+            <button
+              onClick={handleAdd}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-grape-600 to-blossom-500 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02]"
+            >
+              <Plus size={17} /> เพิ่มลงตะกร้า 🛒
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </Portal>
   );
 }

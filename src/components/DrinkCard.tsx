@@ -24,7 +24,7 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
     imgAttempt === 0 ? item.image : `${item.image}${item.image?.includes("?") ? "&" : "?"}retry=${imgAttempt}`;
 
   return (
-    <article className="hover-lift group relative flex flex-col overflow-hidden rounded-3xl bg-white/85 p-4 shadow-card ring-1 ring-white/70">
+    <article className="hover-lift group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white/85 p-4 shadow-card ring-1 ring-white/70">
       {item.badge && (
         <span className="absolute left-4 top-4 z-10 rounded-full bg-blossom-500 px-2.5 py-1 text-[11px] font-bold text-white shadow">
           {item.badge}
@@ -59,7 +59,7 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
       </div>
 
       <div className="mt-3 flex flex-1 flex-col">
-        <h3 className="font-display text-base font-semibold text-grape-700">
+        <h3 className="font-display line-clamp-2 min-h-[2.75rem] text-base font-semibold leading-snug text-grape-700">
           {item.name}
           {item.nameEn && (
             <span className="ml-1 text-[11px] font-medium text-grape-400">
@@ -69,7 +69,7 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
         </h3>
         <p className="mt-0.5 line-clamp-1 text-xs text-grape-400">{item.tagline}</p>
 
-        <div className="mt-3 flex items-center justify-between">
+        <div className="mt-auto flex items-center justify-between pt-3">
           <span className="leading-none">
             <span className="mr-1 text-[11px] font-medium text-grape-400">เริ่มต้น</span>
             <span className="font-display text-xl font-bold text-blossom-500">
