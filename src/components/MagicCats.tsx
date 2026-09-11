@@ -2,10 +2,10 @@
 
 /**
  * 🐱🐱 สองเหมียวผู้ช่วยนักปรุงเครื่องดื่มแห่งบ้านฟ่าง
- * - ChefCat  = "ฟักทอง" เหมียวลายเทา ตัวใหญ่ ตาปรือ ๆ ปลอกคอเขียวมีกระดิ่ง → หัวหน้าเชฟ (คน / โบกไม้กายสิทธิ์)
- * - HelperCat = "เมล่อน" เหมียวขาวแต้มส้ม/น้ำตาล (ลายวัว) ตาเขียว ตัวเล็ก → ผู้ช่วย (หยิบ / เท / เฝ้าแก้ว)
+ * - ChefCat   = "ฟักทอง" แมวลายสลิด (mackerel tabby) ตัวใหญ่ ตาปรือ ๆ ปลอกคอเขียวมีกระดิ่ง → หัวหน้าเชฟ (คน / โบกไม้กายสิทธิ์)
+ * - HelperCat = "เมล่อน" แมวขาวปื้นส้ม (ลายวัว) ตาเขียวกลมโต ตัวเล็ก → ผู้ช่วย (หยิบ / เท / เฝ้าแก้ว)
  *
- * วาดด้วย SVG ล้วน ปรับท่าทางผ่าน prop `pose` (ขยับด้วย CSS keyframes)
+ * วาดเป็น "แมวนั่ง" ทรงแมวจริง ด้วย SVG ล้วน · ปรับท่าทางผ่าน prop `pose` (ขยับด้วย CSS keyframes)
  * เอาไปใช้เป็น Mascot ที่อื่นของเว็บได้เลย
  */
 
@@ -22,35 +22,32 @@ type CatProps = {
   flip?: boolean;
 };
 
-/* ---------- ตา: ปกติ / ปรือ / เป็นประกาย ---------- */
+const INK = "#3a2f45";
+
+/* ---------- ตา ---------- */
 function Eyes({
   cx1,
   cx2,
   cy,
-  sleepy,
-  wow,
-  color = "#3b2f4a",
+  style,
+  iris = INK,
 }: {
   cx1: number;
   cx2: number;
   cy: number;
-  sleepy?: boolean;
-  wow?: boolean;
-  color?: string;
+  /** sleepy = ปรือมีความสุข · open = ลืมตากลมโต · wow = ประกาย */
+  style: "sleepy" | "open" | "wow";
+  iris?: string;
 }) {
-  if (wow) {
-    // ตาเป็นประกาย ✨
+  if (style === "wow") {
     const star = (cx: number) => (
-      <g
-        key={cx}
-        className="animate-cat-eye-sparkle"
-        style={{ transformOrigin: `${cx}px ${cy}px` }}
-      >
+      <g key={cx} className="animate-cat-eye-sparkle" style={{ transformOrigin: `${cx}px ${cy}px` }}>
+        <ellipse cx={cx} cy={cy} rx={5.5} ry={6.5} fill={iris} />
         <path
-          d={`M${cx} ${cy - 7} L${cx + 2} ${cy - 2} L${cx + 7} ${cy} L${cx + 2} ${cy + 2} L${cx} ${cy + 7} L${cx - 2} ${cy + 2} L${cx - 7} ${cy} L${cx - 2} ${cy - 2} Z`}
-          fill="#a344bf"
+          d={`M${cx} ${cy - 6} L${cx + 1.6} ${cy - 1.6} L${cx + 6} ${cy} L${cx + 1.6} ${cy + 1.6} L${cx} ${cy + 6} L${cx - 1.6} ${cy + 1.6} L${cx - 6} ${cy} L${cx - 1.6} ${cy - 1.6} Z`}
+          fill="#ffffff"
         />
-        <circle cx={cx} cy={cy} r={2} fill="#ffffff" />
+        <circle cx={cx + 1.8} cy={cy - 2.2} r={1.4} fill="#ffffff" />
       </g>
     );
     return (
@@ -60,288 +57,219 @@ function Eyes({
       </>
     );
   }
-  if (sleepy) {
-    // ตาปรือ ๆ ชิล ๆ
+  if (style === "sleepy") {
+    // ตาปรือ ๆ มีความสุข ︶ ︶
     return (
-      <>
-        <path
-          d={`M${cx1 - 5} ${cy} q5 4 10 0`}
-          stroke={color}
-          strokeWidth="2.4"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d={`M${cx2 - 5} ${cy} q5 4 10 0`}
-          stroke={color}
-          strokeWidth="2.4"
-          strokeLinecap="round"
-          fill="none"
-        />
-      </>
+      <g>
+        <path d={`M${cx1 - 6} ${cy - 1} q6 6 12 0`} stroke={INK} strokeWidth="2.6" strokeLinecap="round" fill="none" />
+        <path d={`M${cx2 - 6} ${cy - 1} q6 6 12 0`} stroke={INK} strokeWidth="2.6" strokeLinecap="round" fill="none" />
+      </g>
     );
   }
+  // ตากลมโต (มีกะพริบ)
   return (
-    <>
-      <circle cx={cx1} cy={cy} r={3.2} fill={color} />
-      <circle cx={cx2} cy={cy} r={3.2} fill={color} />
-      <circle cx={cx1 + 1.2} cy={cy - 1.2} r={1} fill="#ffffff" />
-      <circle cx={cx2 + 1.2} cy={cy - 1.2} r={1} fill="#ffffff" />
-    </>
+    <g className="animate-cat-blink" style={{ transformOrigin: `${(cx1 + cx2) / 2}px ${cy}px` }}>
+      <ellipse cx={cx1} cy={cy} rx={5} ry={6} fill={iris} />
+      <ellipse cx={cx2} cy={cy} rx={5} ry={6} fill={iris} />
+      <ellipse cx={cx1} cy={cy + 0.5} rx={2.4} ry={4} fill={INK} />
+      <ellipse cx={cx2} cy={cy + 0.5} rx={2.4} ry={4} fill={INK} />
+      <circle cx={cx1 + 1.8} cy={cy - 2.4} r={1.6} fill="#ffffff" />
+      <circle cx={cx2 + 1.8} cy={cy - 2.4} r={1.6} fill="#ffffff" />
+    </g>
   );
 }
 
-/* ---------- 🐈 หัวหน้าเชฟ "ฟักทอง": เหมียวลายเทา ---------- */
-export function ChefCat({
-  pose = "idle",
-  size = 120,
-  className = "",
-  flip,
-}: CatProps) {
-  const fur = "#c9c2b8";
-  const stripe = "#8f867c";
+/* ---------- จมูก + ปาก ω + หนวด (ใช้ร่วมกัน) ---------- */
+function Muzzle({ cx, cy, noseColor = "#e58fa8" }: { cx: number; cy: number; noseColor?: string }) {
+  return (
+    <g>
+      {/* ปากกระเปาะฟู */}
+      <ellipse cx={cx - 5} cy={cy + 3} rx={6.5} ry={4.5} fill="#ffffff" opacity="0.55" />
+      <ellipse cx={cx + 5} cy={cy + 3} rx={6.5} ry={4.5} fill="#ffffff" opacity="0.55" />
+      {/* จมูก */}
+      <path d={`M${cx - 3} ${cy - 1} h6 l-3 3.2 Z`} fill={noseColor} />
+      {/* ปาก ω */}
+      <path
+        d={`M${cx} ${cy + 2} q-2.5 4 -6 1.5 M${cx} ${cy + 2} q2.5 4 6 1.5`}
+        stroke={INK}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* หนวด */}
+      <g stroke={INK} strokeWidth="1.1" strokeLinecap="round" opacity="0.55">
+        <path d={`M${cx - 12} ${cy - 2} l-13 -3 M${cx - 12} ${cy + 2} l-14 0 M${cx - 12} ${cy + 6} l-13 3`} />
+        <path d={`M${cx + 12} ${cy - 2} l13 -3 M${cx + 12} ${cy + 2} l14 0 M${cx + 12} ${cy + 6} l13 3`} />
+      </g>
+    </g>
+  );
+}
+
+/* ---------- 🐈 หัวหน้าเชฟ "ฟักทอง": แมวลายสลิด นั่งชิล ๆ ---------- */
+export function ChefCat({ pose = "idle", size = 120, className = "", flip }: CatProps) {
+  const fur = "#d3c8b6";
+  const furLight = "#efe8dc";
+  const stripe = "#8e7d66";
   const stirring = pose === "stir";
   const waving = pose === "wow" || pose === "watch";
+  const eye = pose === "wow" ? "wow" : "sleepy";
 
   return (
     <div
-      className={`animate-cat-bob ${className}`}
-      style={{
-        width: size,
-        height: size,
-        transform: flip ? "scaleX(-1)" : undefined,
-      }}
+      className={className}
+      style={{ width: size, height: size * 1.15, transform: flip ? "scaleX(-1)" : undefined }}
       aria-hidden
     >
-      <svg viewBox="0 0 120 120" width="100%" height="100%" fill="none">
-        {/* หาง */}
+      {/* ชั้นในรับ animation หายใจ แยกจากชั้นนอกที่ใช้ flip (ไม่ให้ transform ทับกัน) */}
+      <svg viewBox="0 0 120 138" width="100%" height="100%" fill="none" className="animate-cat-bob">
+        {/* หาง: ม้วนมาข้างหน้าด้านซ้าย */}
         <path
           className="animate-cat-tail"
-          style={{ transformOrigin: "22px 92px" }}
-          d="M22 92 q-18 -6 -12 -24"
+          style={{ transformOrigin: "34px 118px" }}
+          d="M34 118 q-26 4 -22 -18 q2 -9 10 -8"
           stroke={fur}
           strokeWidth="9"
           strokeLinecap="round"
         />
-        {/* ตัว */}
-        <ellipse cx="60" cy="88" rx="34" ry="24" fill={fur} />
-        <path
-          d="M40 78 q6 8 0 16 M52 74 q6 10 0 20 M68 74 q6 10 0 20 M80 78 q6 8 0 16"
-          stroke={stripe}
-          strokeWidth="3"
-          strokeLinecap="round"
-          opacity="0.7"
-        />
-        {/* ท้อง */}
-        <ellipse cx="60" cy="94" rx="18" ry="13" fill="#efe9e0" />
-        {/* ปลอกคอเขียว + กระดิ่ง */}
-        <path
-          d="M38 72 q22 12 44 0"
-          stroke="#7cc47a"
-          strokeWidth="5"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <circle
-          cx="60"
-          cy="79"
-          r="4"
-          fill="#f4d35e"
-          stroke="#c9a52a"
-          strokeWidth="1"
-        />
+        <path d="M18 108 q-2 -4 0 -8 M22 100 q-1 -3 1 -6" stroke={stripe} strokeWidth="2.2" strokeLinecap="round" opacity="0.6" />
 
-        {/* หัว */}
-        <g
-          className={
-            pose === "watch" || pose === "wow" ? "animate-cat-head-look" : ""
-          }
-          style={{ transformOrigin: "60px 56px" }}
-        >
-          <path d="M30 40 l6 -20 l16 12 Z" fill={fur} />
-          <path d="M90 40 l-6 -20 l-16 12 Z" fill={fur} />
-          <path d="M34 38 l4 -13 l10 8 Z" fill="#f2c7d4" />
-          <path d="M86 38 l-4 -13 l-10 8 Z" fill="#f2c7d4" />
-          <circle cx="60" cy="50" r="27" fill={fur} />
-          {/* ลายหน้าผาก */}
-          <path
-            d="M52 27 v9 M60 25 v10 M68 27 v9"
-            stroke={stripe}
-            strokeWidth="3"
-            strokeLinecap="round"
-            opacity="0.7"
-          />
-          {/* แก้ม */}
-          <circle cx="42" cy="58" r="5" fill="#f5b7c8" opacity="0.7" />
-          <circle cx="78" cy="58" r="5" fill="#f5b7c8" opacity="0.7" />
-          <Eyes
-            cx1={49}
-            cx2={71}
-            cy={50}
-            sleepy={pose !== "wow"}
-            wow={pose === "wow"}
-          />
-          {/* จมูก + ปาก */}
-          <path d="M57 59 h6 l-3 3 Z" fill="#e58fa8" />
-          <path
-            d="M60 62 q-4 5 -8 1 M60 62 q4 5 8 1"
-            stroke="#3b2f4a"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-          />
-          {/* หนวด */}
-          <path
-            d="M30 56 h12 M30 61 h12 M78 56 h12 M78 61 h12"
-            stroke="#3b2f4a"
-            strokeWidth="1.4"
-            strokeLinecap="round"
-            opacity="0.6"
-          />
+        {/* ลำตัวทรงลูกแพร์ (นั่ง) */}
+        <path d="M60 62 C34 62 26 88 28 112 C29 126 40 132 60 132 C80 132 91 126 92 112 C94 88 86 62 60 62 Z" fill={fur} />
+        {/* ท้องสีอ่อน */}
+        <path d="M60 84 C48 84 42 98 43 114 C44 124 50 128 60 128 C70 128 76 124 77 114 C78 98 72 84 60 84 Z" fill={furLight} />
+        {/* ลายสลิดข้างตัว */}
+        <g stroke={stripe} strokeWidth="2.6" strokeLinecap="round" opacity="0.65">
+          <path d="M34 86 q6 3 8 10 M31 98 q6 2 9 9 M32 110 q5 1 8 7" />
+          <path d="M86 86 q-6 3 -8 10 M89 98 q-6 2 -9 9 M88 110 q-5 1 -8 7" />
         </g>
+        {/* อุ้งเท้าหน้า */}
+        <ellipse cx="48" cy="130" rx="9" ry="5.5" fill={fur} />
+        <ellipse cx="72" cy="130" rx="9" ry="5.5" fill={fur} />
+        <path d="M44 131 v2 M48 130 v3 M52 131 v2 M68 131 v2 M72 130 v3 M76 131 v2" stroke={stripe} strokeWidth="1.4" strokeLinecap="round" opacity="0.5" />
 
-        {/* หมวกเชฟเล็ก ๆ */}
-        <path d="M44 26 q16 -18 32 0 v6 h-32 Z" fill="#ffffff" />
-        <rect x="42" y="30" width="36" height="6" rx="3" fill="#ede3f7" />
+        {/* ปลอกคอเขียว + กระดิ่ง */}
+        <path d="M36 70 q24 12 48 0" stroke="#79c06f" strokeWidth="5" strokeLinecap="round" fill="none" />
+        <circle cx="60" cy="77" r="4.2" fill="#f4d35e" stroke="#c9a52a" strokeWidth="1" />
+        <path d="M58 78 h4" stroke="#c9a52a" strokeWidth="1" />
 
-        {/* แขนซ้าย (วางบนโต๊ะ) + ลายขา */}
-        <ellipse cx="34" cy="98" rx="9" ry="6" fill={fur} />
-        <path d="M30 95 v5 M35 94 v6" stroke={stripe} strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+        {/* หัว (กว้างกว่าสูง) */}
+        <g className={waving ? "animate-cat-head-look" : ""} style={{ transformOrigin: "60px 54px" }}>
+          {/* หู */}
+          <g className="animate-cat-ear" style={{ transformOrigin: "40px 34px" }}>
+            <path d="M28 40 C26 26 30 14 36 10 C44 18 50 24 54 30 Z" fill={fur} />
+            <path d="M33 36 C32 28 34 20 37 16 C42 21 46 25 48 30 Z" fill="#f3c4cf" />
+          </g>
+          <g className="animate-cat-ear-r" style={{ transformOrigin: "80px 34px" }}>
+            <path d="M92 40 C94 26 90 14 84 10 C76 18 70 24 66 30 Z" fill={fur} />
+            <path d="M87 36 C88 28 86 20 83 16 C78 21 74 25 72 30 Z" fill="#f3c4cf" />
+          </g>
+          {/* หน้า + แก้มฟู */}
+          <path d="M60 24 C40 24 26 36 26 52 C26 66 38 76 60 76 C82 76 94 66 94 52 C94 36 80 24 60 24 Z" fill={fur} />
+          <path d="M28 58 q-4 4 -2 8 M92 58 q4 4 2 8" stroke={fur} strokeWidth="6" strokeLinecap="round" />
+          {/* ลาย M หน้าผาก + แก้ม (สลิด) */}
+          <g stroke={stripe} strokeWidth="2.4" strokeLinecap="round" opacity="0.7">
+            <path d="M48 27 l3 11 M54 25 l2 12 M60 24 v13 M66 25 l-2 12 M72 27 l-3 11" />
+            <path d="M30 50 l9 2 M30 56 l9 0 M90 50 l-9 2 M90 56 l-9 0" strokeWidth="2" opacity="0.5" />
+          </g>
+          {/* แก้มชมพู */}
+          <ellipse cx="38" cy="60" rx="6" ry="3.6" fill="#f5b7c8" opacity="0.6" />
+          <ellipse cx="82" cy="60" rx="6" ry="3.6" fill="#f5b7c8" opacity="0.6" />
+          <Eyes cx1={47} cx2={73} cy={52} style={eye} iris="#8a6a3d" />
+          <Muzzle cx={60} cy={62} />
+          {/* หมวกเชฟใบจิ๋ว เอียง ๆ บนหัว */}
+          <g transform="rotate(-14 84 24)">
+            <path d="M74 26 q10 -16 22 -2 v6 h-22 Z" fill="#ffffff" />
+            <rect x="73" y="28" width="24" height="5" rx="2.5" fill="#ede3f7" />
+          </g>
+        </g>
 
         {/* แขนขวา: ถือช้อน / ไม้กายสิทธิ์ */}
         <g
-          className={
-            stirring
-              ? "animate-cat-arm-stir"
-              : waving
-                ? "animate-cat-arm-wave"
-                : ""
-          }
-          style={{ transformOrigin: "84px 80px" }}
+          className={stirring ? "animate-cat-arm-stir" : waving ? "animate-cat-arm-wave" : ""}
+          style={{ transformOrigin: "86px 92px" }}
         >
-          <path
-            d="M84 80 l16 -18"
-            stroke={fur}
-            strokeWidth="10"
-            strokeLinecap="round"
-          />
-          <circle cx="100" cy="62" r="6" fill={fur} />
+          <path d="M86 92 q14 -8 20 -22" stroke={fur} strokeWidth="10" strokeLinecap="round" />
+          <path d="M92 86 q2 -3 4 -6" stroke={stripe} strokeWidth="2" strokeLinecap="round" opacity="0.5" />
+          <ellipse cx="107" cy="68" rx="6.5" ry="5.5" fill={fur} />
           {/* ไม้กายสิทธิ์ */}
-          <path
-            d="M100 62 l12 -22"
-            stroke="#7b4ab8"
-            strokeWidth="3.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M112 40 l1.5 -4 l1.5 4 l4 1.5 l-4 1.5 l-1.5 4 l-1.5 -4 l-4 -1.5 Z"
-            fill="#f4d35e"
-          />
+          <path d="M107 68 l9 -26" stroke="#7b4ab8" strokeWidth="3.2" strokeLinecap="round" />
+          <path d="M116 40 l1.6 -4.2 l1.6 4.2 l4.2 1.6 l-4.2 1.6 l-1.6 4.2 l-1.6 -4.2 l-4.2 -1.6 Z" fill="#f4d35e" />
         </g>
       </svg>
     </div>
   );
 }
 
-/* ---------- 🐈 ผู้ช่วย "เมล่อน": เหมียวขาวแต้มเทา ตาเขียว ---------- */
-export function HelperCat({
-  pose = "idle",
-  size = 96,
-  className = "",
-  flip,
-}: CatProps) {
-  const fur = "#fbf8f3";
-  const patch = "#d9a066"; // ปื้นส้ม-น้ำตาล ลายวัว
+/* ---------- 🐈 ผู้ช่วย "เมล่อน": แมวขาวปื้นส้ม ตาเขียวกลมโต ---------- */
+export function HelperCat({ pose = "idle", size = 96, className = "", flip }: CatProps) {
+  const fur = "#fdfaf5";
+  const patch = "#e0a56b";
   const pouring = pose === "pour";
+  const looking = pose === "watch" || pose === "wow";
+  const eye = pose === "wow" ? "wow" : "open";
 
   return (
     <div
-      className={`animate-cat-bob-fast ${className}`}
-      style={{
-        width: size,
-        height: size,
-        transform: flip ? "scaleX(-1)" : undefined,
-      }}
+      className={className}
+      style={{ width: size, height: size * 1.15, transform: flip ? "scaleX(-1)" : undefined }}
       aria-hidden
     >
-      <svg viewBox="0 0 120 120" width="100%" height="100%" fill="none">
-        {/* หาง */}
+      {/* ชั้นในรับ animation หายใจ แยกจากชั้นนอกที่ใช้ flip (ไม่ให้ transform ทับกัน) */}
+      <svg viewBox="0 0 120 138" width="100%" height="100%" fill="none" className="animate-cat-bob-fast">
+        {/* หาง: ยกขึ้นด้านขวา ปลายส้ม */}
         <path
           className="animate-cat-tail"
-          style={{ transformOrigin: "96px 96px" }}
-          d="M96 96 q18 -4 14 -22"
-          stroke={patch}
+          style={{ transformOrigin: "88px 116px" }}
+          d="M88 116 q24 -2 20 -26 q-2 -8 -9 -9"
+          stroke={fur}
           strokeWidth="8"
           strokeLinecap="round"
         />
-        {/* ตัว */}
-        <ellipse cx="60" cy="92" rx="28" ry="20" fill={fur} />
-        <path
-          d="M74 76 q14 6 10 22 q-10 -4 -14 -14 Z"
-          fill={patch}
-          opacity="0.9"
-        />
+        <path d="M108 92 q-2 -8 -9 -11" stroke={patch} strokeWidth="8" strokeLinecap="round" />
+
+        {/* ลำตัว */}
+        <path d="M60 66 C38 66 30 90 32 112 C33 126 44 132 60 132 C76 132 87 126 88 112 C90 90 82 66 60 66 Z" fill={fur} />
+        {/* ปื้นส้มบนหลัง/ไหล่ */}
+        <path d="M70 70 C84 74 88 92 86 106 C80 100 72 92 66 84 C64 78 66 72 70 70 Z" fill={patch} opacity="0.95" />
+        {/* อุ้งเท้า */}
+        <ellipse cx="50" cy="130" rx="8" ry="5" fill={fur} />
+        <ellipse cx="70" cy="130" rx="8" ry="5" fill={fur} />
+        <path d="M47 131 v2 M50 130 v3 M53 131 v2 M67 131 v2 M70 130 v3 M73 131 v2" stroke="#d9b48c" strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
+
+        {/* โบว์ม่วง */}
+        <path d="M44 74 l-9 -6 v12 Z M44 74 l9 -6 v12 Z" fill="#a344bf" />
+        <circle cx="44" cy="74" r="2.6" fill="#d492e0" />
 
         {/* หัว */}
-        <g
-          className={
-            pose === "watch" || pose === "wow" ? "animate-cat-head-look" : ""
-          }
-          style={{ transformOrigin: "60px 60px" }}
-        >
-          <path d="M36 48 l4 -20 l16 12 Z" fill={fur} />
-          <path d="M84 48 l-4 -20 l-16 12 Z" fill={patch} />
-          <path d="M40 46 l3 -13 l10 8 Z" fill="#f7c9d3" />
-          <circle cx="60" cy="58" r="24" fill={fur} />
-          {/* ปื้นส้มบนหัว */}
-          <path d="M64 36 q18 4 18 22 q-8 -6 -18 -4 Z" fill={patch} />
-          <circle cx="44" cy="66" r="4.5" fill="#f5b7c8" opacity="0.7" />
-          <circle cx="76" cy="66" r="4.5" fill="#f5b7c8" opacity="0.7" />
-          <Eyes
-            cx1={50}
-            cx2={70}
-            cy={58}
-            wow={pose === "wow"}
-            color="#5f9a3f"
-          />
-          <path d="M57 66 h6 l-3 3 Z" fill="#e58fa8" />
-          <path
-            d="M60 69 q-3 4 -7 1 M60 69 q3 4 7 1"
-            stroke="#3b2f4a"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-          />
-          <path
-            d="M32 64 h10 M32 68 h10 M78 64 h10 M78 68 h10"
-            stroke="#3b2f4a"
-            strokeWidth="1.3"
-            strokeLinecap="round"
-            opacity="0.55"
-          />
+        <g className={looking ? "animate-cat-head-look" : ""} style={{ transformOrigin: "60px 56px" }}>
+          <g className="animate-cat-ear-r" style={{ transformOrigin: "42px 38px" }}>
+            <path d="M30 44 C28 30 32 18 38 14 C46 22 51 28 55 34 Z" fill={fur} />
+            <path d="M35 40 C34 32 36 24 39 20 C44 25 47 29 49 34 Z" fill="#f7c9d3" />
+          </g>
+          <g className="animate-cat-ear" style={{ transformOrigin: "78px 38px" }}>
+            <path d="M90 44 C92 30 88 18 82 14 C74 22 69 28 65 34 Z" fill={patch} />
+            <path d="M85 40 C86 32 84 24 81 20 C76 25 73 29 71 34 Z" fill="#f7c9d3" />
+          </g>
+          {/* หน้า */}
+          <path d="M60 28 C42 28 29 40 29 56 C29 69 41 79 60 79 C79 79 91 69 91 56 C91 40 78 28 60 28 Z" fill={fur} />
+          {/* ปื้นส้มคาดตาขวา */}
+          <path d="M66 30 C80 32 90 42 90 56 C86 50 80 46 72 46 C68 42 66 36 66 30 Z" fill={patch} opacity="0.95" />
+          <path d="M31 62 q-4 4 -2 8 M89 62 q4 4 2 8" stroke={fur} strokeWidth="6" strokeLinecap="round" />
+          <ellipse cx="40" cy="64" rx="5.5" ry="3.4" fill="#f5b7c8" opacity="0.65" />
+          <ellipse cx="80" cy="64" rx="5.5" ry="3.4" fill="#f5b7c8" opacity="0.65" />
+          <Eyes cx1={48} cx2={72} cy={56} style={eye} iris="#6fae4c" />
+          <Muzzle cx={60} cy={66} noseColor="#ef9ab0" />
         </g>
-
-        {/* โบว์ม่วงเล็ก ๆ */}
-        <path d="M40 78 l-8 -5 v10 Z M40 78 l8 -5 v10 Z" fill="#a344bf" />
-        <circle cx="40" cy="78" r="2.5" fill="#d492e0" />
 
         {/* แขนซ้าย: ถือขวดส่วนผสม (เท) */}
-        <g
-          className={pouring ? "animate-cat-arm-pour" : ""}
-          style={{ transformOrigin: "36px 86px" }}
-        >
-          <path
-            d="M36 86 l-14 -16"
-            stroke={fur}
-            strokeWidth="9"
-            strokeLinecap="round"
-          />
-          <circle cx="22" cy="70" r="5.5" fill={fur} />
+        <g className={pouring ? "animate-cat-arm-pour" : ""} style={{ transformOrigin: "36px 94px" }}>
+          <path d="M36 94 q-12 -10 -16 -24" stroke={fur} strokeWidth="9" strokeLinecap="round" />
+          <ellipse cx="19" cy="68" rx="6" ry="5" fill={fur} />
           {/* ขวดเล็ก */}
-          <rect x="10" y="52" width="14" height="22" rx="5" fill="#d8c7f0" />
-          <rect x="13" y="47" width="8" height="7" rx="2" fill="#7b4ab8" />
-          <circle cx="17" cy="66" r="3" fill="#ffffff" opacity="0.7" />
+          <rect x="7" y="48" width="15" height="24" rx="5.5" fill="#d8c7f0" />
+          <rect x="10.5" y="43" width="8" height="7" rx="2" fill="#7b4ab8" />
+          <circle cx="14.5" cy="63" r="3" fill="#ffffff" opacity="0.75" />
         </g>
-        {/* แขนขวาวางโต๊ะ */}
-        <ellipse cx="82" cy="102" rx="8" ry="5.5" fill={fur} />
       </svg>
     </div>
   );
