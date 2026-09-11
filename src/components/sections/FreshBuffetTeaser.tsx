@@ -1,5 +1,6 @@
 "use client";
 
+import Portal from "@/components/Portal";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -26,8 +27,12 @@ export default function FreshBuffetTeaser() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-[2.25rem] bg-gradient-to-br from-grape-600 via-grape-500 to-blossom-500 p-6 text-center shadow-card sm:p-10 lg:p-12">
           {/* ประกายตกแต่ง */}
-          <span className="pointer-events-none absolute left-8 top-8 text-3xl opacity-40">🥬</span>
-          <span className="pointer-events-none absolute right-10 bottom-10 text-4xl opacity-40">🍓</span>
+          <span className="pointer-events-none absolute left-8 top-8 text-3xl opacity-40">
+            🥬
+          </span>
+          <span className="pointer-events-none absolute right-10 bottom-10 text-4xl opacity-40">
+            🍓
+          </span>
 
           <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold text-white">
             🥝 จุดเด่นของร้าน
@@ -50,7 +55,9 @@ export default function FreshBuffetTeaser() {
             <span className="font-display text-3xl font-bold text-blossom-500">
               {FRESH_BUFFET.price}
             </span>
-            <span className="text-sm font-semibold text-grape-600">บาท/แก้ว</span>
+            <span className="text-sm font-semibold text-grape-600">
+              บาท/แก้ว
+            </span>
           </div>
 
           {/* วัตถุดิบ — เด้ง/ลอยเบา ๆ */}
@@ -83,32 +90,34 @@ export default function FreshBuffetTeaser() {
 
       {/* ✨ Transition: ผัก/ผลไม้รวมตัว → ประกาย → เปลี่ยนหน้า */}
       {leaving && (
-        <div className="animate-pop-in fixed inset-0 z-[105] grid place-items-center bg-gradient-to-br from-grape-600 via-grape-500 to-blossom-500">
-          <div className="relative grid h-48 w-48 place-items-center">
-            {GATHER.map((e, i) => {
-              const ang = (i / GATHER.length) * Math.PI * 2;
-              return (
-                <span
-                  key={i}
-                  className="animate-fresh-gather absolute text-3xl"
-                  style={
-                    {
-                      "--tx": `${Math.cos(ang) * 90}px`,
-                      "--ty": `${Math.sin(ang) * 90}px`,
-                      animationDelay: `${i * 0.05}s`,
-                    } as React.CSSProperties
-                  }
-                >
-                  {e}
-                </span>
-              );
-            })}
-            <span className="animate-mix-burst absolute text-6xl">✨</span>
+        <Portal>
+          <div className="animate-pop-in fixed inset-0 z-[105] grid place-items-center bg-gradient-to-br from-grape-600 via-grape-500 to-blossom-500">
+            <div className="relative grid h-48 w-48 place-items-center">
+              {GATHER.map((e, i) => {
+                const ang = (i / GATHER.length) * Math.PI * 2;
+                return (
+                  <span
+                    key={i}
+                    className="animate-fresh-gather absolute text-3xl"
+                    style={
+                      {
+                        "--tx": `${Math.cos(ang) * 90}px`,
+                        "--ty": `${Math.sin(ang) * 90}px`,
+                        animationDelay: `${i * 0.05}s`,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {e}
+                  </span>
+                );
+              })}
+              <span className="animate-mix-burst absolute text-6xl">✨</span>
+            </div>
+            <p className="absolute bottom-24 text-lg font-bold text-white">
+              กำลังเตรียมวัตถุดิบสด ๆ ... 🥬
+            </p>
           </div>
-          <p className="absolute bottom-24 text-lg font-bold text-white">
-            กำลังเตรียมวัตถุดิบสด ๆ ... 🥬
-          </p>
-        </div>
+        </Portal>
       )}
     </section>
   );

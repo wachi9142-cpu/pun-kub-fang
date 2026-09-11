@@ -305,10 +305,10 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                   Green Tea × Apple × Strawberry Popping Boba
                 </p>
                 <p className="mt-2 text-sm text-white/85">
-                  ชาเขียวหอม ๆ ผสมความสดชื่นของแอปเปิ้ล เติมมุกป๊อปสตรอว์เบอร์รีให้แตกป๊อปในปาก 💚🍓
+                  ชาเขียวหอม ๆ ผสมความสดชื่นของแอปเปิล เติมมุกป๊อปสตรอว์เบอร์รีให้แตกป๊อปในปาก 💚🍓
                 </p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
-                  {["🍵 ชาเขียว", "🍏 แอปเปิ้ล", "🍓 มุกป๊อปสตรอว์เบอร์รี"].map(
+                  {["🍵 ชาเขียว", "🍏 แอปเปิล", "🍓 มุกป๊อปสตรอว์เบอร์รี"].map(
                     (t) => (
                       <span
                         key={t}

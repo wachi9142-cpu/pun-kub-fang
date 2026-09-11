@@ -210,7 +210,7 @@ export const MENU_SECTIONS: MenuSection[] = [
   },
   {
     id: "sandwiches",
-    label: "แซนวิช",
+    label: "แซนด์วิช",
     labelEn: "Sandwiches",
     emoji: "🥪",
     href: "/menu/sandwiches",
@@ -312,6 +312,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "cantaloupe-milk",
     name: "แคนตาลูปนมสดปั่น",
+    nameEn: "Cantaloupe Milk Smoothie",
     tagline: "แคนตาลูปหอมหวาน + นมสด",
     price: 55,
     likes: 84,
@@ -322,6 +323,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "pineapple-smoothie",
     name: "สับปะรดปั่น",
+    nameEn: "Pineapple Smoothie",
     tagline: "สับปะรดหวานอมเปรี้ยว สดชื่น",
     price: 50,
     likes: 72,
@@ -332,6 +334,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "lychee-smoothie",
     name: "ลิ้นจี่ปั่น",
+    nameEn: "Lychee Smoothie",
     tagline: "ลิ้นจี่หอมหวาน เนื้อนุ่มละมุน",
     price: 55,
     likes: 90,
@@ -400,6 +403,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "red-soda",
     name: "แดงโซดา",
+    nameEn: "Red Soda",
     tagline: "น้ำแดงหวานเย็น ซ่าสดชื่น",
     price: 30,
     likes: 71,
@@ -410,6 +414,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "green-soda",
     name: "เขียวโซดา",
+    nameEn: "Green Soda",
     tagline: "เขียวสดใส ซ่าชื่นใจ",
     price: 30,
     likes: 55,
@@ -420,6 +425,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "lime-soda",
     name: "มะนาวโซดา",
+    nameEn: "Lime Soda",
     tagline: "มะนาวสด เปรี้ยวซ่ากำลังดี",
     price: 30,
     likes: 68,
@@ -430,6 +436,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "strawberry-soda",
     name: "สตรอว์เบอร์รีโซดา",
+    nameEn: "Strawberry Soda",
     tagline: "หวานอมเปรี้ยว ซ่ากำลังดี",
     price: 30,
     likes: 90,
@@ -441,6 +448,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "grape-soda",
     name: "องุ่นโซดา",
+    nameEn: "Grape Soda",
     tagline: "องุ่นม่วงหวาน + โซดาซ่า",
     price: 30,
     likes: 64,
@@ -451,6 +459,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "mango-soda",
     name: "มะม่วงโซดา",
+    nameEn: "Mango Soda",
     tagline: "มะม่วงหอมหวาน ซ่าสดชื่น",
     price: 30,
     likes: 62,
@@ -461,6 +470,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "peach-soda",
     name: "พีชโซดา",
+    nameEn: "Peach Soda",
     tagline: "พีชหอมหวาน ละมุนซ่า",
     price: 30,
     likes: 58,
@@ -471,6 +481,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "kiwi-soda",
     name: "กีวีโซดา",
+    nameEn: "Kiwi Soda",
     tagline: "กีวีเปรี้ยวอมหวาน สดชื่น",
     price: 30,
     likes: 49,
@@ -481,6 +492,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "blueberry-soda",
     name: "บลูเบอร์รีโซดา",
+    nameEn: "Blueberry Soda",
     tagline: "บลูเบอร์รีหวานอมเปรี้ยว",
     price: 30,
     likes: 53,
@@ -491,6 +503,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "pineapple-soda",
     name: "สับปะรดโซดา",
+    nameEn: "Pineapple Soda",
     tagline: "สับปะรดเปรี้ยวหวาน ซ่าสดชื่น",
     price: 30,
     likes: 47,
@@ -501,6 +514,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "passionfruit-soda",
     name: "เสาวรสโซดา",
+    nameEn: "Passion Fruit Soda",
     tagline: "เสาวรสเปรี้ยวหอม ซ่าจี๊ดใจ",
     price: 30,
     likes: 60,
@@ -511,6 +525,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "honey-lemon-soda",
     name: "น้ำผึ้งมะนาวโซดา",
+    nameEn: "Honey Lemon Soda",
     tagline: "น้ำผึ้งมะนาว ซ่าละมุน ชื่นคอ",
     price: 35,
     likes: 66,
@@ -535,6 +550,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "bear-original",
     name: "นมหมีออริจินัลปั่น",
+    nameEn: "Bear Brand Milk Smoothie",
     tagline: "นมสดหอมมัน นุ่มละมุน",
     price: 55,
     likes: 91,
@@ -546,6 +562,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "bear-pink",
     name: "นมหมีชมพูปั่น",
+    nameEn: "Pink Bear Milk Smoothie",
     tagline: "นมชมพูหวานหอม น่ารักสุด ๆ",
     price: 60,
     likes: 108,
@@ -558,6 +575,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "bear-thaitea",
     name: "นมหมีชาไทยปั่น",
+    nameEn: "Thai Tea Bear Milk Smoothie",
     tagline: "ชาไทยเข้ม + นมสดหมี",
     price: 60,
     likes: 82,
@@ -568,6 +586,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "bear-choco",
     name: "นมหมีช็อกโกปั่น",
+    nameEn: "Chocolate Bear Milk Smoothie",
     tagline: "ช็อกโกเข้ม + นมสดหมี",
     price: 60,
     likes: 77,
@@ -650,6 +669,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "espresso-blend",
     name: "เอสเพรสโซเย็นปั่น",
+    nameEn: "Iced Espresso Frappe",
     tagline: "กาแฟคั่วเข้ม สดชื่นตื่นตัว",
     price: 60,
     likes: 84,
@@ -661,6 +681,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "latte-blend",
     name: "ลาเต้เย็นปั่น",
+    nameEn: "Iced Latte Frappe",
     tagline: "กาแฟนุ่ม + นมสดละมุน",
     price: 60,
     likes: 79,
@@ -671,6 +692,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "mocha-blend",
     name: "มอคค่าปั่น",
+    nameEn: "Mocha Frappe",
     tagline: "กาแฟ + ช็อกโกเข้มข้น",
     price: 65,
     likes: 73,
@@ -681,6 +703,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "caramel-blend",
     name: "คาราเมลมัคคิอาโตปั่น",
+    nameEn: "Caramel Macchiato Frappe",
     tagline: "คาราเมลหอมหวาน + กาแฟ",
     price: 65,
     likes: 88,
@@ -706,6 +729,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "green-tea",
     name: "ชาเขียว",
+    nameEn: "Green Tea",
     tagline: "ชาเขียวหอมละมุน รสกลมกล่อม สดชื่น",
     price: 25,
     likes: 78,
@@ -716,6 +740,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "green-lemon-tea",
     name: "ชาเขียวมะนาว",
+    nameEn: "Green Tea with Lemon",
     tagline: "ชาเขียวหอม + มะนาวสด เปรี้ยวสดชื่น",
     price: 25,
     likes: 66,
@@ -726,6 +751,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: "iced-black-tea",
     name: "ชาดำเย็น",
+    nameEn: "Iced Black Tea",
     tagline: "ชาดำหอม เย็นชื่นใจ ราคาเบา ๆ",
     price: 20,
     likes: 58,
@@ -769,7 +795,8 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "apple-tea",
-    name: "ชาแอปเปิ้ล",
+    name: "ชาแอปเปิล",
+    nameEn: "Apple Tea",
     tagline: "ชากลิ่นแอปเปิลเปรี้ยวอมหวาน",
     price: 30,
     likes: 52,
@@ -1007,7 +1034,7 @@ export type FreshItem = {
 export const FRESH_FRUITS: FreshItem[] = [
   { id: "banana", label: "กล้วย", en: "Banana", emoji: "🍌" },
   { id: "strawberry", label: "สตรอว์เบอร์รี", en: "Strawberry", emoji: "🍓" },
-  { id: "apple", label: "แอปเปิ้ล", en: "Apple", emoji: "🍎" },
+  { id: "apple", label: "แอปเปิล", en: "Apple", emoji: "🍎" },
   { id: "pineapple", label: "สับปะรด", en: "Pineapple", emoji: "🍍" },
   { id: "watermelon", label: "แตงโม", en: "Watermelon", emoji: "🍉" },
   { id: "orange", label: "ส้ม", en: "Orange", emoji: "🍊" },
@@ -1054,7 +1081,7 @@ export const MIX_TEA_TYPES: MixOption[] = [
   { id: "black", label: "ชาดำ", emoji: "🍵", palette: { foam: "#efe0cf", top: "#9a6a3f", bottom: "#4f3016" } },
   { id: "lemon", label: "ชามะนาว", emoji: "🍋", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" } },
   { id: "peach", label: "ชาพีช", emoji: "🍑", palette: { foam: "#fff1ea", top: "#ffb99a", bottom: "#f77e4f" } },
-  { id: "apple", label: "ชาแอปเปิ้ล", emoji: "🍏", palette: { foam: "#f5ffe8", top: "#c3e87a", bottom: "#7cb32b" } },
+  { id: "apple", label: "ชาแอปเปิล", emoji: "🍏", palette: { foam: "#f5ffe8", top: "#c3e87a", bottom: "#7cb32b" } },
   { id: "honey", label: "ชาน้ำผึ้ง", emoji: "🍯", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#d9a520" } },
   { id: "rose", label: "ชากุหลาบ", emoji: "🌹", palette: { foam: "#fdeef4", top: "#f3a9c6", bottom: "#d95f8f" } },
   { id: "jasmine", label: "ชามะลิ", emoji: "🌼", palette: { foam: "#fbf8ec", top: "#ecdfa8", bottom: "#c9b85e" } },
@@ -1064,7 +1091,7 @@ export const MIX_TEA_TYPES: MixOption[] = [
 
 /* 🍬 รสชาติ/ไซรัป (ไม่ใช่ผลไม้สด) — ใช้ชื่อผลไม้เฉย ๆ ไม่ต้องมีคำว่า "ไซรัป" */
 export const MIX_SYRUPS: MixOption[] = [
-  { id: "apple", label: "แอปเปิ้ล", emoji: "🍏" },
+  { id: "apple", label: "แอปเปิล", emoji: "🍏" },
   { id: "peach", label: "พีช", emoji: "🍑" },
   { id: "strawberry-syrup", label: "สตรอว์เบอร์รี", emoji: "🍓" },
   { id: "lychee", label: "ลิ้นจี่", emoji: "🌸" },
@@ -1157,7 +1184,7 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
       { nameTh: "เฉาก๊วย", nameEn: "Grass Jelly", price: 5 },
       { nameTh: "เยลลี่องุ่น", nameEn: "Grape Jelly", price: 5 },
       { nameTh: "เยลลี่สตรอว์เบอร์รี", nameEn: "Strawberry Jelly", price: 5 },
-      { nameTh: "ฟรุตสลัด กลิ่นแอปเปิ้ล", nameEn: "Apple Fruit Cocktail Jelly", price: 5 },
+      { nameTh: "ฟรุตสลัด กลิ่นแอปเปิล", nameEn: "Apple Fruit Cocktail Jelly", price: 5 },
       { nameTh: "ฟรุตสลัด กลิ่นบลูฮาวาย", nameEn: "Blue Hawaii Fruit Cocktail Jelly", price: 5 },
       { nameTh: "ฟรุตสลัด กลิ่นสตรอว์เบอร์รี", nameEn: "Strawberry Fruit Cocktail Jelly", price: 5 },
       { nameTh: "เยลลี่น้องทะเล", nameEn: "Ocean Animal Jelly", price: 5 },
@@ -1196,7 +1223,7 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
       { nameTh: "ส้มหั่นบาง", nameEn: "Sliced Orange", price: 10 },
       { nameTh: "เลมอนหั่นบาง", nameEn: "Sliced Lemon", price: 10 },
       { nameTh: "กีวีหั่นบาง", nameEn: "Sliced Kiwi", price: 10 },
-      { nameTh: "แอปเปิ้ลหั่นบาง", nameEn: "Sliced Apple", price: 10 },
+      { nameTh: "แอปเปิลหั่นบาง", nameEn: "Sliced Apple", price: 10 },
       { nameTh: "แตงโมหั่นบาง", nameEn: "Sliced Watermelon", price: 10 },
       { nameTh: "บลูเบอร์รี", nameEn: "Blueberries", price: 10 },
       { nameTh: "มัลเบอร์รี", nameEn: "Mulberries", price: 10 },
@@ -1448,7 +1475,7 @@ export const WHIP_TOPPING_GROUPS: WhipToppingGroup[] = [
       { nameTh: "เฉาก๊วย", nameEn: "Grass Jelly", price: 5 },
       { nameTh: "เยลลี่องุ่น", nameEn: "Grape Jelly", price: 5 },
       { nameTh: "เยลลี่สตรอว์เบอร์รี", nameEn: "Strawberry Jelly", price: 5 },
-      { nameTh: "ฟรุตสลัด กลิ่นแอปเปิ้ล", nameEn: "Apple Fruit Cocktail Jelly", price: 5 },
+      { nameTh: "ฟรุตสลัด กลิ่นแอปเปิล", nameEn: "Apple Fruit Cocktail Jelly", price: 5 },
       { nameTh: "ฟรุตสลัด กลิ่นบลูฮาวาย", nameEn: "Blue Hawaii Fruit Cocktail Jelly", price: 5 },
       { nameTh: "ฟรุตสลัด กลิ่นสตรอว์เบอร์รี", nameEn: "Strawberry Fruit Cocktail Jelly", price: 5 },
       { nameTh: "เยลลี่น้องทะเล", nameEn: "Ocean Animal Jelly", price: 5 },
@@ -1606,24 +1633,24 @@ export const SNACK_GROUPS: SnackGroup[] = [
   },
 ];
 
-/* ---------- 🥪 แซนวิช | Sandwiches ---------- */
+/* ---------- 🥪 แซนด์วิช | Sandwiches ---------- */
 export const SANDWICH_GROUPS: SnackGroup[] = [
   {
     id: "savory",
-    titleTh: "แซนวิชไส้คาว",
+    titleTh: "แซนด์วิชไส้คาว",
     titleEn: "Savory Sandwiches",
     emoji: "🥪",
     items: [
-      { id: "sw-ham-cheese", nameTh: "แซนวิชแฮมชีส", nameEn: "Ham & Cheese Sandwich", desc: "แฮม + ชีสละมุน ในขนมปังนุ่ม", price: 49, emoji: "🥪", badge: "ขายดี" },
-      { id: "sw-crab", nameTh: "แซนวิชปูอัด", nameEn: "Crab Stick Sandwich", desc: "ปูอัดผสมสลัดครีม รสกลมกล่อม", price: 49, emoji: "🦀" },
-      { id: "sw-sausage", nameTh: "แซนวิชไส้กรอก", nameEn: "Sausage Sandwich", desc: "ไส้กรอกหมูรมควัน หอมอร่อย", price: 49, emoji: "🌭" },
-      { id: "sw-tuna", nameTh: "แซนวิชทูน่า", nameEn: "Tuna Sandwich", desc: "ทูน่าผสมมายองเนส เนื้อแน่น", price: 49, emoji: "🐟" },
-      { id: "sw-thai", nameTh: "แซนวิชโบราณ", nameEn: "Thai-Style Sandwich", desc: "แซนวิชสไตล์ไทยโบราณ รสคุ้นเคย", price: 45, emoji: "🥪" },
+      { id: "sw-ham-cheese", nameTh: "แซนด์วิชแฮมชีส", nameEn: "Ham & Cheese Sandwich", desc: "แฮม + ชีสละมุน ในขนมปังนุ่ม", price: 49, emoji: "🥪", badge: "ขายดี" },
+      { id: "sw-crab", nameTh: "แซนด์วิชปูอัด", nameEn: "Crab Stick Sandwich", desc: "ปูอัดผสมสลัดครีม รสกลมกล่อม", price: 49, emoji: "🦀" },
+      { id: "sw-sausage", nameTh: "แซนด์วิชไส้กรอก", nameEn: "Sausage Sandwich", desc: "ไส้กรอกหมูรมควัน หอมอร่อย", price: 49, emoji: "🌭" },
+      { id: "sw-tuna", nameTh: "แซนด์วิชทูน่า", nameEn: "Tuna Sandwich", desc: "ทูน่าผสมมายองเนส เนื้อแน่น", price: 49, emoji: "🐟" },
+      { id: "sw-thai", nameTh: "แซนด์วิชโบราณ", nameEn: "Thai-Style Sandwich", desc: "แซนด์วิชสไตล์ไทยโบราณ รสคุ้นเคย", price: 45, emoji: "🥪" },
     ],
   },
   {
     id: "fruit-cream",
-    titleTh: "แซนวิชผลไม้ครีมสด",
+    titleTh: "แซนด์วิชผลไม้ครีมสด",
     titleEn: "Fresh Fruit & Cream",
     emoji: "🍓",
     note: "🍓 ผลไม้สดมีให้เลือกแตกต่างกันในแต่ละวัน ขึ้นอยู่กับความสดและวัตถุดิบที่มีในวันนั้น",
@@ -1638,25 +1665,25 @@ export const SANDWICH_GROUPS: SnackGroup[] = [
       "🫐 บลูเบอร์รี",
     ],
     items: [
-      { id: "sw-fruit-cream", nameTh: "แซนวิชผลไม้ครีมสด", nameEn: "Fresh Fruit & Cream Sandwich", desc: "ครีมสดนุ่ม + ผลไม้สดหมุนเวียนตามวัน", price: 59, emoji: "🍓", badge: "แนะนำ" },
+      { id: "sw-fruit-cream", nameTh: "แซนด์วิชผลไม้ครีมสด", nameEn: "Fresh Fruit & Cream Sandwich", desc: "ครีมสดนุ่ม + ผลไม้สดหมุนเวียนตามวัน", price: 59, emoji: "🍓", badge: "แนะนำ" },
     ],
   },
   {
     id: "jam",
-    titleTh: "แซนวิชแยม",
+    titleTh: "แซนด์วิชแยม",
     titleEn: "Jam Sandwiches",
     emoji: "🍯",
     items: [
-      { id: "sw-jam-strawberry", nameTh: "แซนวิชแยมสตรอว์เบอร์รี", nameEn: "Strawberry Jam", desc: "แยมสตรอว์เบอร์รีหวานอมเปรี้ยว", price: 35, emoji: "🍓" },
-      { id: "sw-jam-orange", nameTh: "แซนวิชแยมส้ม", nameEn: "Orange Marmalade", desc: "แยมส้มหอม ๆ รสสดชื่น", price: 35, emoji: "🍊" },
-      { id: "sw-jam-choco", nameTh: "แซนวิชแยมช็อกโกแลต", nameEn: "Chocolate Spread", desc: "ช็อกโกแลตสเปรดเข้มข้น", price: 35, emoji: "🍫" },
-      { id: "sw-jam-banana", nameTh: "แซนวิชแยมกล้วย", nameEn: "Banana Spread", desc: "แยมกล้วยหอมหวาน", price: 35, emoji: "🍌" },
-      { id: "sw-jam-pandan", nameTh: "แซนวิชใบเตยสังขยา", nameEn: "Pandan Custard", desc: "สังขยาใบเตยหอมละมุน", price: 35, emoji: "🌿" },
-      { id: "sw-jam-thaitea", nameTh: "แซนวิชสังขยาชาไทย", nameEn: "Thai Tea Custard", desc: "สังขยาชาไทยหวานหอม", price: 35, emoji: "🧋" },
-      { id: "sw-jam-blueberry", nameTh: "แซนวิชแยมบลูเบอร์รี", nameEn: "Blueberry Jam", desc: "แยมบลูเบอร์รีหวานอมเปรี้ยว", price: 35, emoji: "🫐" },
-      { id: "sw-jam-butter", nameTh: "แซนวิชเนยนมน้ำตาล", nameEn: "Butter, Milk & Sugar", desc: "เนย + นมข้น + น้ำตาล คลาสสิก", price: 30, emoji: "🧈" },
-      { id: "sw-jam-ovaltine", nameTh: "แซนวิชโอวัลติน", nameEn: "Ovaltine Spread", desc: "โอวัลตินสเปรดหอมมอลต์", price: 35, emoji: "🥛" },
-      { id: "sw-jam-milo", nameTh: "แซนวิชไมโล", nameEn: "Milo Spread", desc: "ไมโลสเปรดเข้มข้น", price: 35, emoji: "🍫" },
+      { id: "sw-jam-strawberry", nameTh: "แซนด์วิชแยมสตรอว์เบอร์รี", nameEn: "Strawberry Jam", desc: "แยมสตรอว์เบอร์รีหวานอมเปรี้ยว", price: 35, emoji: "🍓" },
+      { id: "sw-jam-orange", nameTh: "แซนด์วิชแยมส้ม", nameEn: "Orange Marmalade", desc: "แยมส้มหอม ๆ รสสดชื่น", price: 35, emoji: "🍊" },
+      { id: "sw-jam-choco", nameTh: "แซนด์วิชแยมช็อกโกแลต", nameEn: "Chocolate Spread", desc: "ช็อกโกแลตสเปรดเข้มข้น", price: 35, emoji: "🍫" },
+      { id: "sw-jam-banana", nameTh: "แซนด์วิชแยมกล้วย", nameEn: "Banana Spread", desc: "แยมกล้วยหอมหวาน", price: 35, emoji: "🍌" },
+      { id: "sw-jam-pandan", nameTh: "แซนด์วิชใบเตยสังขยา", nameEn: "Pandan Custard", desc: "สังขยาใบเตยหอมละมุน", price: 35, emoji: "🌿" },
+      { id: "sw-jam-thaitea", nameTh: "แซนด์วิชสังขยาชาไทย", nameEn: "Thai Tea Custard", desc: "สังขยาชาไทยหวานหอม", price: 35, emoji: "🧋" },
+      { id: "sw-jam-blueberry", nameTh: "แซนด์วิชแยมบลูเบอร์รี", nameEn: "Blueberry Jam", desc: "แยมบลูเบอร์รีหวานอมเปรี้ยว", price: 35, emoji: "🫐" },
+      { id: "sw-jam-butter", nameTh: "แซนด์วิชเนยนมน้ำตาล", nameEn: "Butter, Milk & Sugar", desc: "เนย + นมข้น + น้ำตาล คลาสสิก", price: 30, emoji: "🧈" },
+      { id: "sw-jam-ovaltine", nameTh: "แซนด์วิชโอวัลติน", nameEn: "Ovaltine Spread", desc: "โอวัลตินสเปรดหอมมอลต์", price: 35, emoji: "🥛" },
+      { id: "sw-jam-milo", nameTh: "แซนด์วิชไมโล", nameEn: "Milo Spread", desc: "ไมโลสเปรดเข้มข้น", price: 35, emoji: "🍫" },
     ],
   },
 ];
@@ -2059,5 +2086,5 @@ export const CONTACT = {
 export const FEATURES = [
   { emoji: "🍒", title: "ผลไม้สด", detail: "คัดเกรดพรีเมียม" },
   { emoji: "🥤", title: "ปั่นสดใหม่", detail: "ทุกออร์เดอร์" },
-  { emoji: "🌿", title: "ไม่ใส่วัตถุกันเสีย", detail: "ปลอดภัย อร่อยแน่น" },
+  { emoji: "🌿", title: "ไม่ใส่วัตถุกันเสีย", detail: "ปลอดภัย อร่อยแน่นอน" },
 ];

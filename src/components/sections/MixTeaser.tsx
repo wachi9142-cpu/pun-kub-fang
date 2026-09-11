@@ -1,5 +1,6 @@
 "use client";
 
+import Portal from "@/components/Portal";
 import { useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -55,13 +56,20 @@ export default function MixTeaser() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-[2.25rem] bg-gradient-to-br from-grape-600 via-grape-500 to-blossom-500 p-6 text-center shadow-card sm:p-10 lg:p-12">
           {/* ✨ ประกายเวทมนตร์ลอยขึ้น */}
-          <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+          <div
+            className="pointer-events-none absolute inset-0 overflow-hidden"
+            aria-hidden
+          >
             {MAGIC.map((m, i) => (
               <span
                 key={i}
                 className={`animate-magic-float absolute bottom-4 ${m.size}`}
                 style={
-                  { left: m.left, "--dur": m.dur, "--delay": m.delay } as CSSProperties
+                  {
+                    left: m.left,
+                    "--dur": m.dur,
+                    "--delay": m.delay,
+                  } as CSSProperties
                 }
               >
                 {m.e}
@@ -70,14 +78,24 @@ export default function MixTeaser() {
           </div>
 
           {/* ประกายมุมการ์ด (กะพริบ) */}
-          <span className="animate-twinkle pointer-events-none absolute left-8 top-8 text-3xl">✨</span>
-          <span className="animate-twinkle pointer-events-none absolute right-10 bottom-10 text-4xl" style={{ animationDelay: "1s" }}>💜</span>
+          <span className="animate-twinkle pointer-events-none absolute left-8 top-8 text-3xl">
+            ✨
+          </span>
+          <span
+            className="animate-twinkle pointer-events-none absolute right-10 bottom-10 text-4xl"
+            style={{ animationDelay: "1s" }}
+          >
+            💜
+          </span>
 
           <span className="relative inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold text-white">
             <Sparkles size={15} /> จุดเด่นของร้าน
           </span>
           <h2 className="font-display relative mt-4 text-3xl font-bold text-white sm:text-5xl">
-            มิกซ์กับฟ่าง <span className="animate-twinkle inline-block text-cream-100">✨</span>
+            มิกซ์กับฟ่าง{" "}
+            <span className="animate-twinkle inline-block text-cream-100">
+              ✨
+            </span>
           </h2>
           <p className="relative mx-auto mt-3 max-w-xl text-white/85">
             เบื่อรสเดิม ๆ? จับคู่ความอร่อยในแบบของคุณเอง
@@ -137,32 +155,34 @@ export default function MixTeaser() {
 
       {/* ✨ Transition เวทมนตร์ → เปลี่ยนหน้า /mix */}
       {leaving && (
-        <div className="animate-pop-in fixed inset-0 z-[105] grid place-items-center bg-gradient-to-br from-grape-700 via-grape-600 to-blossom-500">
-          <div className="relative grid h-48 w-48 place-items-center">
-            {["✨", "💜", "⭐", "💫", "🌟", "✨", "💜", "⭐"].map((s, i) => {
-              const ang = (i / 8) * Math.PI * 2;
-              return (
-                <span
-                  key={i}
-                  className="animate-fresh-gather absolute text-3xl"
-                  style={
-                    {
-                      "--tx": `${Math.cos(ang) * 90}px`,
-                      "--ty": `${Math.sin(ang) * 90}px`,
-                      animationDelay: `${i * 0.05}s`,
-                    } as CSSProperties
-                  }
-                >
-                  {s}
-                </span>
-              );
-            })}
-            <span className="animate-mix-burst absolute text-6xl">🥤</span>
+        <Portal>
+          <div className="animate-pop-in fixed inset-0 z-[105] grid place-items-center bg-gradient-to-br from-grape-700 via-grape-600 to-blossom-500">
+            <div className="relative grid h-48 w-48 place-items-center">
+              {["✨", "💜", "⭐", "💫", "🌟", "✨", "💜", "⭐"].map((s, i) => {
+                const ang = (i / 8) * Math.PI * 2;
+                return (
+                  <span
+                    key={i}
+                    className="animate-fresh-gather absolute text-3xl"
+                    style={
+                      {
+                        "--tx": `${Math.cos(ang) * 90}px`,
+                        "--ty": `${Math.sin(ang) * 90}px`,
+                        animationDelay: `${i * 0.05}s`,
+                      } as CSSProperties
+                    }
+                  >
+                    {s}
+                  </span>
+                );
+              })}
+              <span className="animate-mix-burst absolute text-6xl">🥤</span>
+            </div>
+            <p className="absolute bottom-24 text-lg font-bold text-white">
+              กำลังเสกแก้วของคุณ... ✨
+            </p>
           </div>
-          <p className="absolute bottom-24 text-lg font-bold text-white">
-            กำลังเสกแก้วของคุณ... ✨
-          </p>
-        </div>
+        </Portal>
       )}
     </section>
   );

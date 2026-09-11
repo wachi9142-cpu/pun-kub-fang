@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import SmoothieCup from "@/components/SmoothieCup";
+import Portal from "@/components/Portal";
 import type { SmoothiePalette } from "@/data/site";
 
 type Emo = { emoji: string; label: string };
@@ -88,7 +89,9 @@ function BlendStage({
       ...(hasTopping ? ([["topping", 2600]] as [BlendPhase, number][]) : []),
       ["done", hasTopping ? 3100 : 2600],
     ];
-    const timers = seq.map(([p, at]) => window.setTimeout(() => setPhase(p), at));
+    const timers = seq.map(([p, at]) =>
+      window.setTimeout(() => setPhase(p), at),
+    );
     const end = window.setTimeout(onDone, (hasTopping ? 3100 : 2600) + 1050);
     return () => {
       timers.forEach(clearTimeout);
@@ -200,7 +203,9 @@ function BrewStage({
       ["reveal", 2300],
       ["done", 2850],
     ];
-    const timers = seq.map(([p, at]) => window.setTimeout(() => setPhase(p), at));
+    const timers = seq.map(([p, at]) =>
+      window.setTimeout(() => setPhase(p), at),
+    );
     const end = window.setTimeout(onDone, 3900);
     return () => {
       timers.forEach(clearTimeout);
@@ -238,16 +243,42 @@ function BrewStage({
           <div className="h-[130px] w-[96px] rounded-b-[34px] rounded-t-xl border-4 border-grape-200 bg-white/40" />
           {/* นาฬิกาชง */}
           <svg viewBox="0 0 60 60" className="absolute h-14 w-14">
-            <circle cx="30" cy="30" r="24" fill="#ffffff" stroke="#7b4ab8" strokeWidth="3" />
+            <circle
+              cx="30"
+              cy="30"
+              r="24"
+              fill="#ffffff"
+              stroke="#7b4ab8"
+              strokeWidth="3"
+            />
             <g
               style={{ transformOrigin: "30px 30px" }}
               className="animate-spin-soft"
               // เดินเร็วขึ้นตอน brew
             >
-              <line x1="30" y1="30" x2="30" y2="13" stroke="#7b4ab8" strokeWidth="3" strokeLinecap="round" />
+              <line
+                x1="30"
+                y1="30"
+                x2="30"
+                y2="13"
+                stroke="#7b4ab8"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
             </g>
-            <g style={{ transformOrigin: "30px 30px" }} className="animate-spin-soft" >
-              <line x1="30" y1="30" x2="43" y2="30" stroke="#c9b3e8" strokeWidth="2.5" strokeLinecap="round" />
+            <g
+              style={{ transformOrigin: "30px 30px" }}
+              className="animate-spin-soft"
+            >
+              <line
+                x1="30"
+                y1="30"
+                x2="43"
+                y2="30"
+                stroke="#c9b3e8"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
             </g>
             <circle cx="30" cy="30" r="3" fill="#5f339c" />
           </svg>
@@ -258,13 +289,19 @@ function BrewStage({
       {fogVisible && (
         <div className="pointer-events-none absolute inset-0">
           {[
-            "left-2 top-6", "right-3 top-10", "left-8 bottom-8",
-            "right-8 bottom-6", "left-1/2 top-2", "left-1/3 bottom-1/3",
+            "left-2 top-6",
+            "right-3 top-10",
+            "left-8 bottom-8",
+            "right-8 bottom-6",
+            "left-1/2 top-2",
+            "left-1/3 bottom-1/3",
           ].map((pos, i) => (
             <span
               key={i}
               className={`animate-fog-pulse absolute rounded-full bg-sky-100 blur-md ${pos} ${
-                phase === "brew" || phase === "pop" ? "h-14 w-14 opacity-90" : "h-10 w-10"
+                phase === "brew" || phase === "pop"
+                  ? "h-14 w-14 opacity-90"
+                  : "h-10 w-10"
               }`}
               style={{ animationDelay: `${(i % 3) * 0.3}s` }}
             />
@@ -293,23 +330,31 @@ export default function MixBrewAnimation({
   const isBrew = method === "noblend";
 
   return (
-    <div className="fixed inset-0 z-[105] grid place-items-center bg-ink/55 p-4 backdrop-blur-sm">
-      <div className="animate-pop-in w-full max-w-[300px] rounded-3xl bg-white p-6 text-center shadow-card">
-        <div className="relative mx-auto h-[230px] w-[200px] select-none">
-          {isBrew ? (
-            <BrewStage palette={palette} setStatus={setStatus} onDone={onDone} />
-          ) : (
-            <BlendStage
-              ingredients={ingredients}
-              toppings={toppings}
-              palette={palette}
-              setStatus={setStatus}
-              onDone={onDone}
-            />
-          )}
+    <Portal>
+      <div className="fixed inset-0 z-[105] grid place-items-center bg-ink/55 p-4 backdrop-blur-sm">
+        <div className="animate-pop-in w-full max-w-[300px] rounded-3xl bg-white p-6 text-center shadow-card">
+          <div className="relative mx-auto h-[230px] w-[200px] select-none">
+            {isBrew ? (
+              <BrewStage
+                palette={palette}
+                setStatus={setStatus}
+                onDone={onDone}
+              />
+            ) : (
+              <BlendStage
+                ingredients={ingredients}
+                toppings={toppings}
+                palette={palette}
+                setStatus={setStatus}
+                onDone={onDone}
+              />
+            )}
+          </div>
+          <p className="animate-pop-in mt-1 text-sm font-bold text-grape-700">
+            {status}
+          </p>
         </div>
-        <p className="animate-pop-in mt-1 text-sm font-bold text-grape-700">{status}</p>
       </div>
-    </div>
+    </Portal>
   );
 }

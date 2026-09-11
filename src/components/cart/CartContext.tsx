@@ -4,9 +4,13 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
+
+/* เก็บตะกร้าไว้ใน localStorage — ให้ตะกร้าอยู่ครบตอนเปลี่ยนหน้า/รีเฟรช (แต่ละหน้ามี CartProvider ของตัวเอง) */
+const STORAGE_KEY = "pkf-cart-v1";
 
 export type CartLine = {
   /** ไอดีบรรทัด (unique ต่อการปรับแต่ง 1 แบบ) */
@@ -45,6 +49,31 @@ const CartContext = createContext<CartContextValue | null>(null);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+
+  // โหลดตะกร้าจากเครื่องตอน mount
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) setLines(parsed);
+      }
+    } catch {
+      /* ข้อมูลเสีย/ไม่มี localStorage → เริ่มตะกร้าว่าง */
+    }
+    setHydrated(true);
+  }, []);
+
+  // บันทึกทุกครั้งที่ตะกร้าเปลี่ยน (หลังโหลดเสร็จแล้วเท่านั้น กันเขียนทับด้วยค่าว่าง)
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
+    } catch {
+      /* เต็ม/ปิดใช้งาน → ข้าม */
+    }
+  }, [lines, hydrated]);
 
   const addItem = useCallback((item: AddItemInput) => {
     setLines((prev) => {
@@ -87,7 +116,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       openCart,
       closeCart,
     };
-  }, [lines, addItem, setQty, removeItem, clear, drawerOpen, openCart, closeCart]);
+  }, [
+    lines,
+    addItem,
+    setQty,
+    removeItem,
+    clear,
+    drawerOpen,
+    openCart,
+    closeCart,
+  ]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

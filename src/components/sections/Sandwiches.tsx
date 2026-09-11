@@ -6,7 +6,7 @@ export default function Sandwiches() {
     <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
       <div className="mb-8 text-center">
         <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-          🥪 แซนวิช <span className="text-blossom-400">| Sandwiches</span>
+          🥪 แซนด์วิช <span className="text-blossom-400">| Sandwiches</span>
         </h1>
         <p className="mt-2 text-ink/60">
           ไส้คาว · ผลไม้ครีมสด · แยม เลือกอร่อยได้ตามใจ 💜
