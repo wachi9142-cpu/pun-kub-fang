@@ -82,7 +82,9 @@ export default function DrinkCustomizer({
 }) {
   const { addItem, openCart } = useCart();
   const [sweet, setSweet] = useState("regular");
-  const [method, setMethod] = useState("noblend");
+  /* เมนูที่ชื่อมีคำว่า "ปั่น" = ปั่นเสมอ → ไม่ต้องให้เลือกวิธีทำ/น้ำแข็ง */
+  const alwaysBlend = item.name.includes("ปั่น");
+  const [method, setMethod] = useState(alwaysBlend ? "blend" : "noblend");
   const [ice, setIce] = useState("cup");
   const [toppings, setToppings] = useState<string[]>([]);
   /* 🪄 แอนิเมชันเหมียวปรุง — เล่นครั้งเดียวตอนยืนยันเมนู "ไม่ปั่น" */
@@ -102,7 +104,7 @@ export default function DrinkCustomizer({
   const handleAdd = () => {
     const options: string[] = [
       SWEET.find((s) => s.id === sweet)!.label,
-      METHOD.find((m) => m.id === method)!.label,
+      ...(alwaysBlend ? [] : [METHOD.find((m) => m.id === method)!.label]),
     ];
     if (!isBlend) options.push(ICE.find((i) => i.id === ice)!.label);
     if (picked.length)
@@ -192,45 +194,49 @@ export default function DrinkCustomizer({
               </div>
             </div>
 
-            {/* วิธีทำ */}
-            <div>
-              <p className="mb-2 text-sm font-semibold text-ink">
-                🌀 เลือกวิธีทำ
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {METHOD.map((m) => (
-                  <Pill
-                    key={m.id}
-                    label={m.label}
-                    active={method === m.id}
-                    onClick={() => setMethod(m.id)}
-                  />
-                ))}
-              </div>
-            </div>
+            {!alwaysBlend && (
+              <>
+                {/* วิธีทำ */}
+                <div>
+                  <p className="mb-2 text-sm font-semibold text-ink">
+                    🌀 เลือกวิธีทำ
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {METHOD.map((m) => (
+                      <Pill
+                        key={m.id}
+                        label={m.label}
+                        active={method === m.id}
+                        onClick={() => setMethod(m.id)}
+                      />
+                    ))}
+                  </div>
+                </div>
 
-            {/* ตัวเลือกน้ำแข็ง — เลือกได้เฉพาะ "ไม่ปั่น" (ปั่นแล้วน้ำแข็งรวมอยู่ในแก้ว แยกไม่ได้) */}
-            <div className={isBlend ? "opacity-50" : ""}>
-              <p className="mb-2 text-sm font-semibold text-ink">
-                🧊 ตัวเลือกน้ำแข็ง
-                {isBlend && (
-                  <span className="ml-1 font-medium text-ink/45">
-                    (เมนูปั่นไม่แยกน้ำแข็ง)
-                  </span>
-                )}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {ICE.map((i) => (
-                  <Pill
-                    key={i.id}
-                    label={i.label}
-                    active={!isBlend && ice === i.id}
-                    disabled={isBlend}
-                    onClick={() => setIce(i.id)}
-                  />
-                ))}
-              </div>
-            </div>
+                {/* ตัวเลือกน้ำแข็ง — เลือกได้เฉพาะ "ไม่ปั่น" (ปั่นแล้วน้ำแข็งรวมอยู่ในแก้ว แยกไม่ได้) */}
+                <div className={isBlend ? "opacity-50" : ""}>
+                  <p className="mb-2 text-sm font-semibold text-ink">
+                    🧊 ตัวเลือกน้ำแข็ง
+                    {isBlend && (
+                      <span className="ml-1 font-medium text-ink/45">
+                        (เมนูปั่นไม่แยกน้ำแข็ง)
+                      </span>
+                    )}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {ICE.map((i) => (
+                      <Pill
+                        key={i.id}
+                        label={i.label}
+                        active={!isBlend && ice === i.id}
+                        disabled={isBlend}
+                        onClick={() => setIce(i.id)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
 
             {/* ท็อปปิ้ง */}
             <div>

@@ -616,6 +616,19 @@ export const MENU_ITEMS: MenuItem[] = [
     category: "milk",
     palette: { foam: "#fffdf8", top: "#f0ead8", bottom: "#cbbf9e" },
   },
+  {
+    id: "two-tone-milk",
+    name: "นมทูโทน",
+    nameEn: "Two-Tone Milk",
+    tagline: "ชาไทยเข้มด้านบน + นมสดด้านล่าง สองชั้นสวย ๆ",
+    price: 40,
+    likes: 64,
+    emoji: "🥛",
+    category: "milk",
+    badge: "ใหม่",
+    // ภาพตัวอย่างชั่วคราว: บน = ชาไทย ล่าง = นมสด (รอรูปจริง → ใส่ image: "/menu/two-tone-milk.jpg")
+    palette: { foam: "#fff3e4", top: "#e8853a", bottom: "#fff8ee" },
+  },
 
   /* ชา */
   {
@@ -1201,6 +1214,7 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
       { nameTh: "ครีมชีส", nameEn: "Cream Cheese", price: 10 },
       { nameTh: "วิปครีม", nameEn: "Whipped Cream", price: 10 },
       { nameTh: "ไอศกรีม", nameEn: "Ice Cream", price: 10 },
+      { nameTh: "นมเหนียว", nameEn: "Sticky Milk", price: 10 },
     ],
   },
   {
@@ -1276,6 +1290,7 @@ export const TOPPING_IMAGES: Record<string, string> = {
   // "Espresso Shot": "/toppings/espresso-shot.jpg",
   // "Chocolate Sauce": "/toppings/chocolate-sauce.jpg",
   // "Strawberry Sauce": "/toppings/strawberry-sauce.jpg",
+  // "Sticky Milk": "/toppings/sticky-milk.jpg",
   // ไข่มุก
   "Classic Black Tapioca Pearls": "/toppings/black-tapioca.jpg",
   "Golden Tapioca Pearls": "/toppings/golden-tapioca.png",
