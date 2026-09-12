@@ -1494,6 +1494,7 @@ export const STICKY_FLAVORS: StickyFlavor[] = [
   { id: "pinkmilk", nameTh: "นมเหนียวนมชมพู", nameEn: "Pink Milk Sticky Cream", price: 10, emoji: "🌸", color: "#f7b8cf" },
   { id: "greentea", nameTh: "นมเหนียวชาเขียว", nameEn: "Green Tea Sticky Cream", price: 10, emoji: "🍵", color: "#9cc47a" },
   { id: "cocoa", nameTh: "นมเหนียวโกโก้", nameEn: "Cocoa Sticky Cream", price: 10, emoji: "🍫", color: "#8a5a3c" },
+  { id: "taro", nameTh: "นมเหนียวเผือกหอม", nameEn: "Taro Sticky Cream", price: 10, emoji: "🍠", color: "#b795d8" },
 ];
 
 /** ขั้นที่ 3 — รูปแบบการกิน */

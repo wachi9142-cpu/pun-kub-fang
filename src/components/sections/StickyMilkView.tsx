@@ -745,7 +745,7 @@ export default function StickyMilkView() {
               2️⃣ เลือกรสนมเหนียว{" "}
               <span className="font-medium text-ink/40">(จับคู่ได้ทุกแบบ)</span>
             </p>
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
               {STICKY_FLAVORS.map((f) => {
                 const active = flavorId === f.id;
                 return (
