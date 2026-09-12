@@ -19,11 +19,152 @@ import { useCart } from "@/components/cart/CartContext";
 
 type StyleId = (typeof STICKY_STYLES)[number]["id"];
 
-const SWEET = [
-  { id: "less", label: "หวานน้อย" },
-  { id: "50", label: "หวานกลาง 50%" },
-  { id: "regular", label: "หวานปกติ" },
-];
+/* ---------- 🥄 นมเหนียวบนช้อน — โคลสอัปเนื้อข้นหนืด ไหลยืดเล็กน้อย (รูปตัวเลือกรส) ---------- */
+function shade(hex: string, amt: number) {
+  // ปรับความสว่างสี hex (amt -1..1)
+  const n = parseInt(hex.slice(1), 16);
+  const ch = (v: number) =>
+    Math.max(
+      0,
+      Math.min(255, Math.round(v + (amt > 0 ? (255 - v) * amt : v * amt))),
+    );
+  const r = ch((n >> 16) & 255),
+    g = ch((n >> 8) & 255),
+    b = ch(n & 255);
+  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, "0")}`;
+}
+
+export function StickySpoon({
+  color,
+  image,
+  size = 96,
+}: {
+  color: string;
+  image?: string;
+  size?: number;
+}) {
+  if (image) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return (
+      <img
+        src={image}
+        alt=""
+        width={size}
+        height={size}
+        className="object-contain"
+        style={{ width: size, height: size }}
+      />
+    );
+  }
+  const light = shade(color, 0.45);
+  const dark = shade(color, -0.22);
+  const uid = color.replace("#", "");
+  return (
+    <svg
+      viewBox="0 0 120 120"
+      width={size}
+      height={size}
+      fill="none"
+      aria-hidden
+    >
+      <defs>
+        <linearGradient id={`sp-${uid}`} x1="0" y1="0" x2="0.3" y2="1">
+          <stop offset="0%" stopColor={light} />
+          <stop offset="55%" stopColor={color} />
+          <stop offset="100%" stopColor={dark} />
+        </linearGradient>
+        <linearGradient id={`spoon-${uid}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f7f7fb" />
+          <stop offset="60%" stopColor="#cfd2dc" />
+          <stop offset="100%" stopColor="#9a9eab" />
+        </linearGradient>
+      </defs>
+      {/* เงา */}
+      <ellipse cx="58" cy="108" rx="34" ry="6" fill="#7b4ab8" opacity="0.12" />
+      {/* ด้ามช้อน: ต่อจากขอบขวาของหัวช้อน โค้งขึ้นไปมุมขวาบน */}
+      <path
+        d="M84 70 C98 62 104 44 110 20"
+        stroke={`url(#spoon-${uid})`}
+        strokeWidth="9"
+        strokeLinecap="round"
+      />
+      <path
+        d="M86 68 C98 60 103 44 108 24"
+        stroke="#ffffff"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity="0.5"
+      />
+      {/* หัวช้อน (มองเฉียงจากด้านบน) */}
+      <g transform="rotate(-8 52 78)">
+        <ellipse cx="52" cy="78" rx="36" ry="21" fill={`url(#spoon-${uid})`} />
+        <ellipse cx="52" cy="76" rx="31" ry="16" fill="#aeb2bf" />
+        <ellipse cx="52" cy="75" rx="27" ry="12" fill="#c9ccd6" />
+      </g>
+      {/* หยดที่ไหลยืดลงจากขอบช้อนด้านหน้า */}
+      <path
+        d="M30 88 C27 96 27 104 29 112"
+        stroke={dark}
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M30 88 C27 96 27 104 29 112"
+        stroke={color}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <ellipse cx="29.5" cy="113" rx="4.5" ry="5" fill={color} />
+      <circle cx="28" cy="111" r="1.4" fill="#ffffff" opacity="0.7" />
+      <path
+        d="M62 94 C62 100 63 104 62 108"
+        stroke={color}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+      <circle cx="62" cy="109" r="3" fill={color} />
+      {/* กองนมเหนียว: ข้น นูน เนียน วางบนช้อน ขอบล่างย้อยเป็นคลื่น */}
+      <path
+        d="M22 74 C20 52 34 38 54 38 C74 38 88 50 86 68 C85 78 78 82 70 84 C66 90 60 90 56 85 C50 92 42 92 38 86 C30 88 24 84 22 74 Z"
+        fill={`url(#sp-${uid})`}
+      />
+      {/* รอยพับ/ริ้วแสดงความหนืด */}
+      <path
+        d="M36 56 C42 44 60 42 72 50"
+        stroke={light}
+        strokeWidth="4"
+        strokeLinecap="round"
+        opacity="0.9"
+      />
+      <path
+        d="M30 74 C40 80 58 82 74 76"
+        stroke={dark}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity="0.45"
+      />
+      <path
+        d="M44 66 C50 70 60 70 66 66"
+        stroke={dark}
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity="0.3"
+      />
+      {/* แสง glossy */}
+      <ellipse
+        cx="46"
+        cy="50"
+        rx="10"
+        ry="4.5"
+        fill="#ffffff"
+        opacity="0.6"
+        transform="rotate(-20 46 50)"
+      />
+      <circle cx="66" cy="54" r="2.6" fill="#ffffff" opacity="0.75" />
+      <circle cx="58" cy="46" r="1.5" fill="#ffffff" opacity="0.6" />
+    </svg>
+  );
+}
 
 /* ---------- แครกเกอร์ (SVG ชิ้นเล็ก) ---------- */
 function Cracker({ x, y, rotate }: { x: number; y: number; rotate: number }) {
@@ -372,7 +513,6 @@ export default function StickyMilkView() {
   const [baseId, setBaseId] = useState<string | null>(null);
   const [flavorId, setFlavorId] = useState<string | null>(null);
   const [extraCracker, setExtraCracker] = useState(false);
-  const [sweet, setSweet] = useState("regular");
   const [added, setAdded] = useState(false);
 
   const noDrink = style === "crackerOnly";
@@ -425,7 +565,6 @@ export default function StickyMilkView() {
         : `${base!.nameTh} + ${flavor.nameTh}`;
     const options = [
       STICKY_STYLES.find((s) => s.id === style)!.label,
-      ...(base ? [SWEET.find((s) => s.id === sweet)!.label] : []),
       ...(style === "pour" && extraCracker ? ["🍪 เพิ่มแครกเกอร์"] : []),
     ];
     addItem({ id: `sticky-${Date.now()}`, name, price: total, options });
@@ -606,17 +745,39 @@ export default function StickyMilkView() {
               2️⃣ เลือกรสนมเหนียว{" "}
               <span className="font-medium text-ink/40">(จับคู่ได้ทุกแบบ)</span>
             </p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-              {STICKY_FLAVORS.map((f) => (
-                <Chip
-                  key={f.id}
-                  label={`${f.emoji} ${f.nameTh}`}
-                  sub={f.nameEn}
-                  price={f.price}
-                  active={flavorId === f.id}
-                  onClick={() => setFlavorId(f.id)}
-                />
-              ))}
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
+              {STICKY_FLAVORS.map((f) => {
+                const active = flavorId === f.id;
+                return (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => setFlavorId(f.id)}
+                    className={`group relative flex flex-col items-center rounded-2xl border p-2.5 text-center transition-all duration-200 active:scale-95 ${
+                      active
+                        ? "scale-[1.03] border-grape-500 bg-grape-50 shadow-soft ring-2 ring-grape-deep"
+                        : "border-ink/10 bg-white hover:border-grape-300 hover:bg-grape-50/60"
+                    }`}
+                  >
+                    {active && (
+                      <span className="animate-pop-in absolute right-1.5 top-1.5 z-10 grid h-6 w-6 place-items-center rounded-full bg-[#22C55E] text-white shadow ring-2 ring-white">
+                        <Check size={14} strokeWidth={3} />
+                      </span>
+                    )}
+                    {/* 🥄 รูปนมเหนียวบนช้อน — สีตามรส */}
+                    <div className="grid aspect-square w-full place-items-center rounded-xl bg-gradient-to-b from-cream-50 to-grape-50/60 transition-transform group-hover:scale-105">
+                      <StickySpoon color={f.color} image={f.image} size={88} />
+                    </div>
+                    <span className="mt-1.5 text-[12px] font-semibold leading-tight text-ink">
+                      {f.nameTh}
+                    </span>
+                    <span className="text-[10px] text-ink/45">{f.nameEn}</span>
+                    <span className="mt-1 rounded-full bg-blossom-100 px-2 py-0.5 text-xs font-extrabold text-ink">
+                      +{f.price}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -664,25 +825,6 @@ export default function StickyMilkView() {
               </a>
             </p>
           </div>
-
-          {/* ความหวาน (เฉพาะมีน้ำ) */}
-          {!noDrink && !(separate && !base) && (
-            <div>
-              <p className="mb-2 text-sm font-semibold text-ink">
-                🍯 ระดับความหวานของน้ำ
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {SWEET.map((s) => (
-                  <Chip
-                    key={s.id}
-                    label={s.label}
-                    active={sweet === s.id}
-                    onClick={() => setSweet(s.id)}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         {/* สรุป + พรีวิว */}
