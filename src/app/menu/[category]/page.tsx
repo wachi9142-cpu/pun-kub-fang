@@ -11,6 +11,7 @@ import BottledDrinks from "@/components/sections/BottledDrinks";
 import Snacks from "@/components/sections/Snacks";
 import Sandwiches from "@/components/sections/Sandwiches";
 import Toppings from "@/components/sections/Toppings";
+import StickyMilkView from "@/components/sections/StickyMilkView";
 import IngredientNote from "@/components/sections/IngredientNote";
 
 const DRINK_IDS = DRINK_CATEGORIES.map((c) => c.id) as string[];
@@ -58,6 +59,8 @@ export default async function CategoryPage({
         <Sandwiches />
       ) : category === "toppings" ? (
         <Toppings />
+      ) : category === "sticky" ? (
+        <StickyMilkView />
       ) : category === "tea" ? (
         <TeaMenuView />
       ) : category === "smoothie" ? (
