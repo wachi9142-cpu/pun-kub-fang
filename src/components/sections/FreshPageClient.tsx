@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { CartProvider, useCart } from "@/components/cart/CartContext";
 import CartDrawer from "@/components/cart/CartDrawer";
+import IngredientNote from "@/components/sections/IngredientNote";
 import BrandLogo from "@/components/BrandLogo";
 import FreshBuffetView from "@/components/sections/FreshBuffetView";
 
@@ -56,6 +57,7 @@ export default function FreshPageClient() {
       <CartDrawer />
       <main className="pb-10">
         <FreshBuffetView />
+        <IngredientNote fresh />
       </main>
       <footer className="bg-gradient-to-br from-grape-600 to-grape-700 py-6 text-center text-sm text-white/70">
         © 2024 ปั่นกับฟ่าง · Smoothie &amp; Drinks

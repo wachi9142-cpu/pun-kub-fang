@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { MENU_ITEMS } from "@/data/site";
 import DrinkCard from "@/components/DrinkCard";
+import { IMAGE_NOTE } from "@/components/sections/IngredientNote";
 
 // คัดเมนูขายดีข้ามหมวด (เรียงตามลำดับที่อยากโชว์)
 const BEST_SELLER_IDS = [
@@ -45,6 +46,7 @@ export default function BestSellers() {
           <DrinkCard key={item.id} item={item} buttonLabel="เลือกเมนู" />
         ))}
       </div>
+      <p className="mt-4 text-center text-[11px] text-ink/45">💜 {IMAGE_NOTE}</p>
     </section>
   );
 }

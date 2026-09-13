@@ -1454,6 +1454,81 @@ export const HOMEMADE_NOTE = {
 
 /* ---------- 🥛 วิปครีมแก้ว | Whipped Cream Cups ---------- */
 /* ฐานวิปครีม ฿20 + ท็อปปิ้งตามที่เลือก (คิดราคาต่อชิ้น) */
+/* ---------- 🫧 อิตาเลียนโซดา 3 รูปแบบ | Italian Soda Modes ---------- */
+export type SodaModeId = "regular" | "diy" | "mystery";
+export type SodaMode = {
+  id: SodaModeId;
+  nameTh: string;
+  nameEn: string;
+  emoji: string;
+  desc: string;
+  /** ราคาเพิ่มจากเมนูโซดาปกติ (แบบปกติ = 0 · ไม่แตะราคาเมนูเดิม) */
+  extra: number;
+  badge?: string;
+};
+
+export const SODA_MODES: SodaMode[] = [
+  {
+    id: "regular",
+    nameTh: "อิตาเลียนโซดาปกติ",
+    nameEn: "Classic Italian Soda",
+    emoji: "🥤",
+    desc: "ร้านผสมไซรัปให้เรียบร้อย พร้อมดื่มทันที",
+    extra: 0,
+  },
+  {
+    id: "diy",
+    nameTh: "ซ่าผสมเอง",
+    nameEn: "DIY Italian Soda",
+    emoji: "🧪",
+    desc: "โซดา + น้ำแข็งในแก้ว · ไซรัปที่เลือกแยกใส่หลอดสลิง กด/หยดเองตามใจ",
+    extra: 10,
+    badge: "ผสมเอง",
+  },
+  {
+    id: "mystery",
+    nameTh: "ซ่ามิกซ์กับฟ่าง",
+    nameEn: "Fang's Mystery Italian Soda",
+    emoji: "🫧",
+    desc: "ฟ่างสุ่มหลอดสลิงให้ 1 ใน 5 สูตร (ผสม 2–5 รส) · ไม่บอกรสจนกว่าจะได้ของ",
+    extra: 15,
+    badge: "สุ่ม 🎲",
+  },
+];
+
+/** ไซรัปที่ร้านมี — ใช้กับ "ซ่าผสมเอง" (เลือกได้สูงสุด SODA_DIY_MAX) */
+export type SodaSyrup = { id: string; label: string; emoji: string; color: string };
+export const SODA_SYRUPS: SodaSyrup[] = [
+  { id: "strawberry", label: "สตรอว์เบอร์รี", emoji: "🍓", color: "#f0507f" },
+  { id: "grape", label: "องุ่น", emoji: "🍇", color: "#7c3fc4" },
+  { id: "mango", label: "มะม่วง", emoji: "🥭", color: "#f5b32d" },
+  { id: "peach", label: "พีช", emoji: "🍑", color: "#ff9c7a" },
+  { id: "kiwi", label: "กีวี", emoji: "🥝", color: "#7cc244" },
+  { id: "blueberry", label: "บลูเบอร์รี", emoji: "🫐", color: "#4a5fd0" },
+  { id: "pineapple", label: "สับปะรด", emoji: "🍍", color: "#f2d130" },
+  { id: "passionfruit", label: "เสาวรส", emoji: "🍈", color: "#e89b2c" },
+  { id: "lychee", label: "ลิ้นจี่", emoji: "🌸", color: "#f3a6c8" },
+  { id: "apple", label: "แอปเปิล", emoji: "🍏", color: "#8fd35a" },
+  { id: "lime", label: "มะนาว", emoji: "🍋", color: "#c9e34a" },
+  { id: "honey-lemon", label: "น้ำผึ้งมะนาว", emoji: "🍯", color: "#f4c542" },
+  { id: "red", label: "แดง (สละ)", emoji: "❤️", color: "#e8333f" },
+  { id: "green", label: "เขียว (ครีมโซดา)", emoji: "💚", color: "#3ecf8e" },
+];
+export const SODA_DIY_MAX = 3;
+
+/** ซ่ามิกซ์กับฟ่าง — ข้อความ (ไม่เปิดเผยสูตร) */
+export const SODA_MYSTERY = {
+  tubes: 5,
+  secret: 1,
+  taglines: [
+    "5 สูตร 5 ความลับ สุ่มให้ 1 หลอด 💜",
+    "ไม่บอกรสชาติ ให้ฟ่างเป็นคนสุ่มให้!",
+    "และใน 5 หลอด...มี 1 หลอดเป็น SECRET 👀✨",
+  ],
+  chips: ["🎲 สุ่ม 1 ใน 5 สูตร", "🤫 มี 1 สูตร SECRET!", "🧪 ไซรัปผสม 2–5 รส"],
+  question: "วันนี้ฟ่างจะสุ่มรสอะไรให้คุณนะ?",
+};
+
 /* ---------- 🥛 นมเหนียว | Sticky Milk — เลือกน้ำ → เลือกรสนมเหนียว → เลือกเพิ่มแครกเกอร์ ---------- */
 export type StickyBase = {
   id: string;

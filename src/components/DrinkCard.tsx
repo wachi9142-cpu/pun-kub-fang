@@ -5,6 +5,7 @@ import { Heart, Plus } from "lucide-react";
 import type { MenuItem } from "@/data/site";
 import SmoothieCup from "@/components/SmoothieCup";
 import DrinkCustomizer from "@/components/DrinkCustomizer";
+import { ImageCaption } from "@/components/sections/IngredientNote";
 
 type DrinkCardProps = {
   item: MenuItem;
@@ -58,7 +59,9 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
         )}
       </div>
 
-      <div className="mt-3 flex flex-1 flex-col">
+      <ImageCaption fresh={item.category === "smoothie"} />
+
+      <div className="mt-2 flex flex-1 flex-col">
         {/* เว้นบรรทัดคงที่: ชื่อไทย 1 บรรทัด · ชื่ออังกฤษ 1 บรรทัด · คำโปรย 1 บรรทัด → ปุ่มทุกการ์ดอยู่ระดับเดียวกัน */}
         <h3 className="font-display truncate text-base font-semibold leading-snug text-grape-700">
           {item.name}

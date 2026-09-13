@@ -31,6 +31,9 @@ export type AddItemInput = {
   options?: string[];
 };
 
+/** mini confirmation "ปิ๊ง!" หลังเพิ่มลงตะกร้า (แทน toast ธรรมดา) */
+export type CartToast = { emoji: string; name: string; title?: string };
+
 type CartContextValue = {
   lines: CartLine[];
   count: number;
@@ -42,6 +45,9 @@ type CartContextValue = {
   drawerOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
+  toast: CartToast | null;
+  showToast: (t: CartToast) => void;
+  hideToast: () => void;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -50,6 +56,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [toast, setToast] = useState<CartToast | null>(null);
 
   // โหลดตะกร้าจากเครื่องตอน mount
   useEffect(() => {
@@ -100,6 +107,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const clear = useCallback(() => setLines([]), []);
   const openCart = useCallback(() => setDrawerOpen(true), []);
   const closeCart = useCallback(() => setDrawerOpen(false), []);
+  const showToast = useCallback((t: CartToast) => setToast(t), []);
+  const hideToast = useCallback(() => setToast(null), []);
 
   const value = useMemo<CartContextValue>(() => {
     const count = lines.reduce((s, l) => s + l.qty, 0);
@@ -115,6 +124,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       drawerOpen,
       openCart,
       closeCart,
+      toast,
+      showToast,
+      hideToast,
     };
   }, [
     lines,
@@ -125,6 +137,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     drawerOpen,
     openCart,
     closeCart,
+    toast,
+    showToast,
+    hideToast,
   ]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

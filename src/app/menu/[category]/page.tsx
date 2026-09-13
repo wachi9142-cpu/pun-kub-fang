@@ -16,8 +16,8 @@ import IngredientNote from "@/components/sections/IngredientNote";
 
 const DRINK_IDS = DRINK_CATEGORIES.map((c) => c.id) as string[];
 
-/* หมวดที่เกี่ยวกับวัตถุดิบ/ผลไม้สด — แสดงหมายเหตุเรื่องรูปภาพและวัตถุดิบ */
-const INGREDIENT_CATEGORIES = ["toppings", "sandwiches", "whipped", "smoothie"];
+/* หมวดที่มีวัตถุดิบสด (ผลไม้/วิปครีม/ท็อปปิ้ง) — แสดงหมายเหตุเพิ่มเรื่องวัตถุดิบสดต่างกันตามวัน */
+const FRESH_CATEGORIES = ["toppings", "sandwiches", "whipped", "smoothie", "snacks"];
 
 export function generateStaticParams() {
   return MENU_SECTIONS.map((s) => ({ category: s.id }));
@@ -70,7 +70,7 @@ export default async function CategoryPage({
       ) : (
         notFound()
       )}
-      {INGREDIENT_CATEGORIES.includes(category) && <IngredientNote />}
+      <IngredientNote fresh={FRESH_CATEGORIES.includes(category)} />
     </MenuPageShell>
   );
 }
