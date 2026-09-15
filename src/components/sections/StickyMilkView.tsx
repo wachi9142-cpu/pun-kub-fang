@@ -582,7 +582,7 @@ export default function StickyMilkView() {
   };
 
   return (
-    <section className="relative mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
+    <section className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       {/* 🥂 ภาพประกอบตกแต่ง: แก้วนมเหนียว × แก้วแครกเกอร์ ชนกัน (ไม่บังเนื้อหา) */}
       <StickyCheersDecor className="absolute -right-2 top-0 hidden w-44 opacity-90 md:block lg:-right-6 lg:w-56 xl:-right-16 xl:w-64" />
       <StickyCheersDecor className="absolute -left-4 top-2 hidden w-36 -scale-x-100 opacity-70 lg:block xl:-left-14 xl:w-44" />

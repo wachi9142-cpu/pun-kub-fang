@@ -12,12 +12,19 @@ import Snacks from "@/components/sections/Snacks";
 import Sandwiches from "@/components/sections/Sandwiches";
 import Toppings from "@/components/sections/Toppings";
 import StickyMilkView from "@/components/sections/StickyMilkView";
+import StickyDripFrame from "@/components/sections/StickyDripFrame";
 import IngredientNote from "@/components/sections/IngredientNote";
 
 const DRINK_IDS = DRINK_CATEGORIES.map((c) => c.id) as string[];
 
 /* หมวดที่มีวัตถุดิบสด (ผลไม้/วิปครีม/ท็อปปิ้ง) — แสดงหมายเหตุเพิ่มเรื่องวัตถุดิบสดต่างกันตามวัน */
-const FRESH_CATEGORIES = ["toppings", "sandwiches", "whipped", "smoothie", "snacks"];
+const FRESH_CATEGORIES = [
+  "toppings",
+  "sandwiches",
+  "whipped",
+  "smoothie",
+  "snacks",
+];
 
 export function generateStaticParams() {
   return MENU_SECTIONS.map((s) => ({ category: s.id }));
@@ -60,7 +67,9 @@ export default async function CategoryPage({
       ) : category === "toppings" ? (
         <Toppings />
       ) : category === "sticky" ? (
-        <StickyMilkView />
+        <StickyDripFrame>
+          <StickyMilkView />
+        </StickyDripFrame>
       ) : category === "tea" ? (
         <TeaMenuView />
       ) : category === "smoothie" ? (
