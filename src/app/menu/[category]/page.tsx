@@ -14,6 +14,7 @@ import Toppings from "@/components/sections/Toppings";
 import StickyMilkView from "@/components/sections/StickyMilkView";
 import StickyDripFrame from "@/components/sections/StickyDripFrame";
 import SnackShopFrame from "@/components/sections/SnackShopFrame";
+import SodaBubbleFrame from "@/components/sections/SodaBubbleFrame";
 import IngredientNote from "@/components/sections/IngredientNote";
 
 const DRINK_IDS = DRINK_CATEGORIES.map((c) => c.id) as string[];
@@ -77,6 +78,10 @@ export default async function CategoryPage({
         <TeaMenuView />
       ) : category === "smoothie" ? (
         <SmoothieMenuView />
+      ) : category === "soda" ? (
+        <SodaBubbleFrame>
+          <CategoryMenuView categoryId="soda" />
+        </SodaBubbleFrame>
       ) : DRINK_IDS.includes(category) ? (
         <CategoryMenuView categoryId={category as CategoryId} />
       ) : (

@@ -10,7 +10,10 @@ import {
   HOMEMADE_NOTE,
   type HomemadeDrink,
 } from "@/data/site";
-import DrinkCustomizer, { type CustomizableItem } from "@/components/DrinkCustomizer";
+import DrinkCustomizer, {
+  type CustomizableItem,
+} from "@/components/DrinkCustomizer";
+import HerbalHeroArt from "@/components/sections/HerbalHeroArt";
 
 function DrinkRow({
   item,
@@ -95,14 +98,52 @@ export default function HomemadeHerbal() {
   return (
     <section id="herbal" className="scroll-mt-24 py-14 lg:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-6 text-center">
-          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-            🌿 น้ำสมุนไพรโฮมเมด{" "}
-            <span className="text-blossom-400">| Homemade Herbal</span>
-          </h2>
-          <p className="mt-2 text-ink/60">
-            เมนูน้ำโฮมเมดหมุนเวียน ทำสดใหม่ทุกวัน — แตะเมนูเพื่อเลือกปั่น/ไม่ปั่น + ท็อปปิ้ง แล้วเพิ่มลงตะกร้าได้เลย 💜
-          </p>
+        {/* 🌿 Hero: ชื่อหมวดเด่น + ภาพขวดน้ำสมุนไพร 5 สี (ขวาบน Desktop / บนสุดบน Mobile) */}
+        <div className="relative mb-6 overflow-hidden rounded-[2rem] bg-gradient-to-br from-cream-white via-grape-50 to-[#eef8e6] px-6 py-8 ring-1 ring-white/80 sm:px-10 lg:py-10">
+          <div className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full bg-[#9bd66a]/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -right-10 h-64 w-64 rounded-full bg-grape-300/25 blur-3xl" />
+          <div className="relative grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
+            <div className="text-center lg:text-left">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200">
+                🌿 Homemade · ทำสดใหม่ทุกวัน
+              </span>
+              <h2 className="font-display mt-3 text-3xl font-bold text-ink sm:text-4xl lg:text-5xl">
+                น้ำสมุนไพรโฮมเมด
+              </h2>
+              <p className="font-display mt-1 text-lg font-semibold text-blossom-400">
+                Homemade Herbal Drinks
+              </p>
+              <p className="mx-auto mt-3 max-w-xl text-ink/60 lg:mx-0">
+                กระเจี๊ยบ เก๊กฮวย อัญชัน ใบเตย มะตูม — ต้มเองในครัว
+                บรรจุขวดสดใหม่ทุกวัน หมุนเวียนตามวัตถุดิบที่มี 💜
+              </p>
+              <p className="mt-2 text-xs text-ink/45">
+                แตะเมนูเพื่อเลือกปั่น/ไม่ปั่น + ท็อปปิ้ง แล้วเพิ่มลงตะกร้าได้เลย
+              </p>
+              {/* ป้ายสีน้ำสมุนไพร */}
+              <div className="mt-4 flex flex-wrap justify-center gap-1.5 lg:justify-start">
+                {[
+                  ["🌺 กระเจี๊ยบ", "#e0435c"],
+                  ["🌼 เก๊กฮวย", "#e0a11c"],
+                  ["🦋 อัญชัน", "#3f63d6"],
+                  ["🌿 ใบเตย", "#3f8f35"],
+                  ["🌳 มะตูม", "#b07a3a"],
+                ].map(([t, c]) => (
+                  <span
+                    key={t}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-2.5 py-1 text-[11px] font-semibold text-ink ring-1 ring-ink/5"
+                  >
+                    <span
+                      className="h-2.5 w-2.5 rounded-full"
+                      style={{ background: c }}
+                    />
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <HerbalHeroArt className="order-first mx-auto w-full max-w-[300px] sm:max-w-[360px] lg:order-none lg:max-w-none" />
+          </div>
         </div>
 
         {/* 📢 หมายเหตุสำคัญ */}
@@ -131,7 +172,11 @@ export default function HomemadeHerbal() {
             </div>
             <div className="grid gap-2.5 sm:grid-cols-2">
               {HOMEMADE_BOTTLED.map((item) => (
-                <DrinkRow key={item.nameEn} item={item} onSelect={setSelected} />
+                <DrinkRow
+                  key={item.nameEn}
+                  item={item}
+                  onSelect={setSelected}
+                />
               ))}
             </div>
 
@@ -139,7 +184,9 @@ export default function HomemadeHerbal() {
             <div className="mt-4 rounded-2xl bg-cream-white p-4 shadow-soft ring-1 ring-ink/5">
               <p className="text-sm font-semibold text-ink">
                 🍯 เลือกระดับความหวาน{" "}
-                <span className="font-medium text-ink/45">Choose Your Sweetness</span>
+                <span className="font-medium text-ink/45">
+                  Choose Your Sweetness
+                </span>
               </p>
               <div className="mt-2.5 flex flex-wrap gap-2">
                 {HOMEMADE_SWEETNESS.map((s) => (
@@ -164,7 +211,9 @@ export default function HomemadeHerbal() {
               <div className="mb-3 flex items-baseline justify-between gap-2">
                 <h3 className="font-display text-lg font-bold text-ink">
                   🥤 เมนูปั่น{" "}
-                  <span className="text-sm font-medium text-ink/45">Blended</span>
+                  <span className="text-sm font-medium text-ink/45">
+                    Blended
+                  </span>
                 </h3>
                 <span className="shrink-0 rounded-full bg-grape-50 px-3 py-1 text-xs font-semibold text-grape-deep">
                   เริ่ม 30 ฿
@@ -175,7 +224,11 @@ export default function HomemadeHerbal() {
               </p>
               <div className="grid gap-2.5">
                 {HOMEMADE_BLENDED.map((item) => (
-                  <DrinkRow key={item.nameEn} item={item} onSelect={setSelected} />
+                  <DrinkRow
+                    key={item.nameEn}
+                    item={item}
+                    onSelect={setSelected}
+                  />
                 ))}
               </div>
             </div>

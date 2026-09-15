@@ -733,6 +733,27 @@ body {
 }
 .animate-garland-swing { animation: garland-swing 3.2s ease-in-out infinite; }
 
+
+/* 🫧 อิตาเลียนโซดา — ฟองลอยขึ้นช้า ๆ แกว่งเบา ๆ จางหายด้านบน แล้ววนใหม่ */
+@keyframes soda-rise {
+  0% { transform: translate3d(0, 0, 0) scale(0.7); opacity: 0; }
+  8% { opacity: 1; }
+  50% { transform: translate3d(var(--drift, 10px), -45vh, 0) scale(1); }
+  85% { opacity: 0.9; }
+  100% { transform: translate3d(calc(var(--drift, 10px) * -0.6), -90vh, 0) scale(1.08); opacity: 0; }
+}
+.animate-soda-rise { animation: soda-rise 20s linear infinite; will-change: transform, opacity; }
+@keyframes soda-bob {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.03); }
+}
+.animate-soda-bob { animation: soda-bob 6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  /* ลดการเคลื่อนไหว: ฟองหยุดนิ่ง กระจายตามตำแหน่งที่กำหนด (--rm-top) */
+  .animate-soda-rise { animation: none; opacity: 0.7; }
+  .animate-soda-bob { animation: none; }
+}
+
 /* ♿ ลดการเคลื่อนไหวสำหรับผู้ที่ตั้งค่า prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-drop-in,
