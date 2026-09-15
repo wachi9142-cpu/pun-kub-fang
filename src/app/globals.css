@@ -754,6 +754,31 @@ body {
   .animate-soda-bob { animation: none; }
 }
 
+
+/* ☕ ไอร้อนกาแฟ ลอยขึ้นช้า ๆ โปร่ง นุ่ม */
+@keyframes coffee-steam {
+  0% { transform: translateY(8px) scaleX(0.9); opacity: 0; }
+  25% { opacity: 0.9; }
+  70% { opacity: 0.6; }
+  100% { transform: translateY(-34px) scaleX(1.15); opacity: 0; }
+}
+.animate-coffee-steam { animation: coffee-steam 4.5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-coffee-steam { animation: none; opacity: 0.6; }
+}
+
+
+/* 🥛 หยดนมเด้งเบา ๆ ค่อย ๆ ลง */
+@keyframes milk-drop {
+  0%, 100% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(8px) scale(1.06, 0.94); }
+  60% { transform: translateY(6px) scale(0.98, 1.04); }
+}
+.animate-milk-drop { animation: milk-drop 4.5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-milk-drop { animation: none; }
+}
+
 /* ♿ ลดการเคลื่อนไหวสำหรับผู้ที่ตั้งค่า prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-drop-in,
