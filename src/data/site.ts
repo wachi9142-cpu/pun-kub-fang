@@ -89,9 +89,9 @@ export const DRINK_CATEGORIES: DrinkCategory[] = [
   },
   {
     id: "soda",
-    label: "โซดา",
+    label: "อิตาเลียนโซดา",
     emoji: "🫧",
-    desc: "อิตาเลียนโซดา ซ่าสดชื่น",
+    desc: "Italian Soda · ซ่าสดชื่น",
     palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" },
     tint: "from-sky-100 to-sky-200/50",
   },
@@ -166,8 +166,8 @@ export const MENU_SECTIONS: MenuSection[] = [
   },
   {
     id: "soda",
-    label: "โซดา",
-    labelEn: "Soda",
+    label: "อิตาเลียนโซดา",
+    labelEn: "Italian Soda",
     emoji: "🫧",
     href: "/menu/soda",
     desc: "ซ่าจนใจสั่น 🫧",
@@ -1021,28 +1021,30 @@ export const MENU_ITEMS: MenuItem[] = [
 export type MixOption = {
   id: string;
   label: string;
+  /** ชื่อภาษาอังกฤษ */
+  labelEn?: string;
   emoji: string;
   palette?: SmoothiePalette;
 };
 
 export const MIX_BASES: MixOption[] = [
-  { id: "milk", label: "นมสด", emoji: "🥛", palette: { foam: "#fff7ef", top: "#ffe3c2", bottom: "#f4c48a" } },
-  { id: "yogurt", label: "โยเกิร์ต", emoji: "🍦", palette: { foam: "#fef1f7", top: "#ffd0e4", bottom: "#f89bc4" } },
-  { id: "soda", label: "โซดา", emoji: "🧊", palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" } },
-  { id: "smoothie", label: "สมูทตี้", emoji: "🍓", palette: { foam: "#fff2f6", top: "#ff9ec0", bottom: "#f0507f" } },
-  { id: "coffee", label: "กาแฟ", emoji: "☕", palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" } },
+  { id: "milk", label: "นมสด", labelEn: "Fresh Milk", emoji: "🥛", palette: { foam: "#fff7ef", top: "#ffe3c2", bottom: "#f4c48a" } },
+  { id: "yogurt", label: "โยเกิร์ต", labelEn: "Yogurt", emoji: "🍦", palette: { foam: "#fef1f7", top: "#ffd0e4", bottom: "#f89bc4" } },
+  { id: "soda", label: "โซดา", labelEn: "Soda", emoji: "🧊", palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" } },
+  { id: "smoothie", label: "สมูทตี้", labelEn: "Smoothie", emoji: "🍓", palette: { foam: "#fff2f6", top: "#ff9ec0", bottom: "#f0507f" } },
+  { id: "coffee", label: "กาแฟ", labelEn: "Coffee", emoji: "☕", palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" } },
 ];
 
 /* ชนิดน้ำสมุนไพรโฮมเมด (ฐานหมวด "น้ำสมุนไพร" — เลือกได้ 1 ชนิด นับเป็น 1 ฐาน) */
 export const MIX_HERBAL_TYPES: MixOption[] = [
-  { id: "chrysanth", label: "เก๊กฮวย", emoji: "🌼", palette: { foam: "#fff8e6", top: "#f4d97a", bottom: "#d9a520" } },
-  { id: "butterfly", label: "อัญชันมะนาว", emoji: "🦋", palette: { foam: "#eef0ff", top: "#9db4f0", bottom: "#5566c9" } },
-  { id: "pandan", label: "ใบเตย", emoji: "🌿", palette: { foam: "#eefae8", top: "#a8ce7a", bottom: "#5f9a3f" } },
-  { id: "passion", label: "เสาวรส", emoji: "🥭", palette: { foam: "#fff3e0", top: "#ffc46b", bottom: "#e88a1f" } },
-  { id: "honeylemon", label: "มะนาวน้ำผึ้ง", emoji: "🍋", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" } },
-  { id: "grassjelly", label: "เฉาก๊วย", emoji: "🖤", palette: { foam: "#e9e6ea", top: "#7a7280", bottom: "#332b3a" } },
-  { id: "longan", label: "ลำไย", emoji: "🌰", palette: { foam: "#f6ece0", top: "#d3a976", bottom: "#9a6a3f" } },
-  { id: "roselle", label: "กระเจี๊ยบ", emoji: "🌺", palette: { foam: "#fdeaf0", top: "#e77aa0", bottom: "#c02a5a" } },
+  { id: "chrysanth", label: "เก๊กฮวย", labelEn: "Chrysanthemum", emoji: "🌼", palette: { foam: "#fff8e6", top: "#f4d97a", bottom: "#d9a520" } },
+  { id: "butterfly", label: "อัญชันมะนาว", labelEn: "Butterfly Pea Lemon", emoji: "🦋", palette: { foam: "#eef0ff", top: "#9db4f0", bottom: "#5566c9" } },
+  { id: "pandan", label: "ใบเตย", labelEn: "Pandan", emoji: "🌿", palette: { foam: "#eefae8", top: "#a8ce7a", bottom: "#5f9a3f" } },
+  { id: "passion", label: "เสาวรส", labelEn: "Passion Fruit", emoji: "🥭", palette: { foam: "#fff3e0", top: "#ffc46b", bottom: "#e88a1f" } },
+  { id: "honeylemon", label: "มะนาวน้ำผึ้ง", labelEn: "Honey Lemon", emoji: "🍋", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" } },
+  { id: "grassjelly", label: "เฉาก๊วย", labelEn: "Grass Jelly", emoji: "🖤", palette: { foam: "#e9e6ea", top: "#7a7280", bottom: "#332b3a" } },
+  { id: "longan", label: "ลำไย", labelEn: "Longan", emoji: "🌰", palette: { foam: "#f6ece0", top: "#d3a976", bottom: "#9a6a3f" } },
+  { id: "roselle", label: "กระเจี๊ยบ", labelEn: "Roselle", emoji: "🌺", palette: { foam: "#fdeaf0", top: "#e77aa0", bottom: "#c02a5a" } },
 ];
 
 /* ---------- 🥝 ตักสด ปั่นฟิน — บุฟเฟ่ต์ผัก/ผลไม้สดปั่น ---------- */
@@ -1107,43 +1109,43 @@ export const FRESH_FLAVORS: FreshItem[] = [
 
 /* ชนิดชา (ฐานหมวด "ชา" — เลือกได้ 1 ชนิด นับเป็น 1 ฐาน) */
 export const MIX_TEA_TYPES: MixOption[] = [
-  { id: "thai", label: "ชาไทย", emoji: "🍵", palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" } },
-  { id: "green", label: "ชาเขียว", emoji: "🍵", palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" } },
-  { id: "black", label: "ชาดำ", emoji: "🍵", palette: { foam: "#efe0cf", top: "#9a6a3f", bottom: "#4f3016" } },
-  { id: "lemon", label: "ชามะนาว", emoji: "🍋", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" } },
-  { id: "peach", label: "ชาพีช", emoji: "🍑", palette: { foam: "#fff1ea", top: "#ffb99a", bottom: "#f77e4f" } },
-  { id: "apple", label: "ชาแอปเปิล", emoji: "🍏", palette: { foam: "#f5ffe8", top: "#c3e87a", bottom: "#7cb32b" } },
-  { id: "honey", label: "ชาน้ำผึ้ง", emoji: "🍯", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#d9a520" } },
-  { id: "rose", label: "ชากุหลาบ", emoji: "🌹", palette: { foam: "#fdeef4", top: "#f3a9c6", bottom: "#d95f8f" } },
-  { id: "jasmine", label: "ชามะลิ", emoji: "🌼", palette: { foam: "#fbf8ec", top: "#ecdfa8", bottom: "#c9b85e" } },
-  { id: "lychee", label: "ชาลิ้นจี่", emoji: "🌸", palette: { foam: "#fdf0f2", top: "#f2c0c8", bottom: "#d97b88" } },
-  { id: "strawberry", label: "ชาสตรอว์เบอร์รี", emoji: "🍓", palette: { foam: "#fff0f3", top: "#ff9fb0", bottom: "#e8536f" } },
+  { id: "thai", label: "ชาไทย", labelEn: "Thai Tea", emoji: "🍵", palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" } },
+  { id: "green", label: "ชาเขียว", labelEn: "Green Tea", emoji: "🍵", palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" } },
+  { id: "black", label: "ชาดำ", labelEn: "Black Tea", emoji: "🍵", palette: { foam: "#efe0cf", top: "#9a6a3f", bottom: "#4f3016" } },
+  { id: "lemon", label: "ชามะนาว", labelEn: "Lemon Tea", emoji: "🍋", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" } },
+  { id: "peach", label: "ชาพีช", labelEn: "Peach Tea", emoji: "🍑", palette: { foam: "#fff1ea", top: "#ffb99a", bottom: "#f77e4f" } },
+  { id: "apple", label: "ชาแอปเปิล", labelEn: "Apple Tea", emoji: "🍏", palette: { foam: "#f5ffe8", top: "#c3e87a", bottom: "#7cb32b" } },
+  { id: "honey", label: "ชาน้ำผึ้ง", labelEn: "Honey Tea", emoji: "🍯", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#d9a520" } },
+  { id: "rose", label: "ชากุหลาบ", labelEn: "Rose Tea", emoji: "🌹", palette: { foam: "#fdeef4", top: "#f3a9c6", bottom: "#d95f8f" } },
+  { id: "jasmine", label: "ชามะลิ", labelEn: "Jasmine Tea", emoji: "🌼", palette: { foam: "#fbf8ec", top: "#ecdfa8", bottom: "#c9b85e" } },
+  { id: "lychee", label: "ชาลิ้นจี่", labelEn: "Lychee Tea", emoji: "🌸", palette: { foam: "#fdf0f2", top: "#f2c0c8", bottom: "#d97b88" } },
+  { id: "strawberry", label: "ชาสตรอว์เบอร์รี", labelEn: "Strawberry Tea", emoji: "🍓", palette: { foam: "#fff0f3", top: "#ff9fb0", bottom: "#e8536f" } },
 ];
 
 /* 🍬 รสชาติ/ไซรัป (ไม่ใช่ผลไม้สด) — ใช้ชื่อผลไม้เฉย ๆ ไม่ต้องมีคำว่า "ไซรัป" */
 export const MIX_SYRUPS: MixOption[] = [
-  { id: "apple", label: "แอปเปิล", emoji: "🍏" },
-  { id: "peach", label: "พีช", emoji: "🍑" },
-  { id: "strawberry-syrup", label: "สตรอว์เบอร์รี", emoji: "🍓" },
-  { id: "lychee", label: "ลิ้นจี่", emoji: "🌸" },
-  { id: "mango-syrup", label: "มะม่วง", emoji: "🥭" },
-  { id: "blueberry-syrup", label: "บลูเบอร์รี", emoji: "🫐" },
+  { id: "apple", label: "แอปเปิล", labelEn: "Apple", emoji: "🍏" },
+  { id: "peach", label: "พีช", labelEn: "Peach", emoji: "🍑" },
+  { id: "strawberry-syrup", label: "สตรอว์เบอร์รี", labelEn: "Strawberry", emoji: "🍓" },
+  { id: "lychee", label: "ลิ้นจี่", labelEn: "Lychee", emoji: "🌸" },
+  { id: "mango-syrup", label: "มะม่วง", labelEn: "Mango", emoji: "🥭" },
+  { id: "blueberry-syrup", label: "บลูเบอร์รี", labelEn: "Blueberry", emoji: "🫐" },
 ];
 
 /* 🍓 ผลไม้สด */
 export const MIX_FRUITS: MixOption[] = [
-  { id: "strawberry", label: "สตรอว์เบอร์รี", emoji: "🍓" },
-  { id: "grape", label: "องุ่น", emoji: "🍇" },
-  { id: "mango", label: "มะม่วง", emoji: "🥭" },
-  { id: "blueberry", label: "บลูเบอร์รี", emoji: "🫐" },
-  { id: "kiwi", label: "กีวี", emoji: "🥝" },
+  { id: "strawberry", label: "สตรอว์เบอร์รี", labelEn: "Strawberry", emoji: "🍓" },
+  { id: "grape", label: "องุ่น", labelEn: "Grape", emoji: "🍇" },
+  { id: "mango", label: "มะม่วง", labelEn: "Mango", emoji: "🥭" },
+  { id: "blueberry", label: "บลูเบอร์รี", labelEn: "Blueberry", emoji: "🫐" },
+  { id: "kiwi", label: "กีวี", labelEn: "Kiwi", emoji: "🥝" },
 ];
 
 export const MIX_TOPPINGS: MixOption[] = [
-  { id: "boba", label: "ไข่มุก", emoji: "🟤" },
-  { id: "jelly", label: "เจลลี่", emoji: "🟣" },
-  { id: "cookie", label: "คุกกี้", emoji: "🍪" },
-  { id: "whip", label: "วิปครีม", emoji: "🍨" },
+  { id: "boba", label: "ไข่มุก", labelEn: "Boba", emoji: "🟤" },
+  { id: "jelly", label: "เจลลี่", labelEn: "Jelly", emoji: "🟣" },
+  { id: "cookie", label: "คุกกี้", labelEn: "Cookie", emoji: "🍪" },
+  { id: "whip", label: "วิปครีม", labelEn: "Whipped Cream", emoji: "🍨" },
 ];
 
 /* ---------- 🧋 ท็อปปิ้ง | Toppings ---------- */
@@ -1497,22 +1499,22 @@ export const SODA_MODES: SodaMode[] = [
 ];
 
 /** ไซรัปที่ร้านมี — ใช้กับ "ซ่าผสมเอง" (เลือกได้สูงสุด SODA_DIY_MAX) */
-export type SodaSyrup = { id: string; label: string; emoji: string; color: string };
+export type SodaSyrup = { id: string; label: string; labelEn: string; emoji: string; color: string };
 export const SODA_SYRUPS: SodaSyrup[] = [
-  { id: "strawberry", label: "สตรอว์เบอร์รี", emoji: "🍓", color: "#f0507f" },
-  { id: "grape", label: "องุ่น", emoji: "🍇", color: "#7c3fc4" },
-  { id: "mango", label: "มะม่วง", emoji: "🥭", color: "#f5b32d" },
-  { id: "peach", label: "พีช", emoji: "🍑", color: "#ff9c7a" },
-  { id: "kiwi", label: "กีวี", emoji: "🥝", color: "#7cc244" },
-  { id: "blueberry", label: "บลูเบอร์รี", emoji: "🫐", color: "#4a5fd0" },
-  { id: "pineapple", label: "สับปะรด", emoji: "🍍", color: "#f2d130" },
-  { id: "passionfruit", label: "เสาวรส", emoji: "🍈", color: "#e89b2c" },
-  { id: "lychee", label: "ลิ้นจี่", emoji: "🌸", color: "#f3a6c8" },
-  { id: "apple", label: "แอปเปิล", emoji: "🍏", color: "#8fd35a" },
-  { id: "lime", label: "มะนาว", emoji: "🍋", color: "#c9e34a" },
-  { id: "honey-lemon", label: "น้ำผึ้งมะนาว", emoji: "🍯", color: "#f4c542" },
-  { id: "red", label: "แดง (สละ)", emoji: "❤️", color: "#e8333f" },
-  { id: "green", label: "เขียว (ครีมโซดา)", emoji: "💚", color: "#3ecf8e" },
+  { id: "strawberry", label: "สตรอว์เบอร์รี", labelEn: "Strawberry", emoji: "🍓", color: "#f0507f" },
+  { id: "grape", label: "องุ่น", labelEn: "Grape", emoji: "🍇", color: "#7c3fc4" },
+  { id: "mango", label: "มะม่วง", labelEn: "Mango", emoji: "🥭", color: "#f5b32d" },
+  { id: "peach", label: "พีช", labelEn: "Peach", emoji: "🍑", color: "#ff9c7a" },
+  { id: "kiwi", label: "กีวี", labelEn: "Kiwi", emoji: "🥝", color: "#7cc244" },
+  { id: "blueberry", label: "บลูเบอร์รี", labelEn: "Blueberry", emoji: "🫐", color: "#4a5fd0" },
+  { id: "pineapple", label: "สับปะรด", labelEn: "Pineapple", emoji: "🍍", color: "#f2d130" },
+  { id: "passionfruit", label: "เสาวรส", labelEn: "Passion Fruit", emoji: "🍈", color: "#e89b2c" },
+  { id: "lychee", label: "ลิ้นจี่", labelEn: "Lychee", emoji: "🌸", color: "#f3a6c8" },
+  { id: "apple", label: "แอปเปิล", labelEn: "Apple", emoji: "🍏", color: "#8fd35a" },
+  { id: "lime", label: "มะนาว", labelEn: "Lime", emoji: "🍋", color: "#c9e34a" },
+  { id: "honey-lemon", label: "น้ำผึ้งมะนาว", labelEn: "Honey Lemon", emoji: "🍯", color: "#f4c542" },
+  { id: "red", label: "แดง (สละ)", labelEn: "Red (Sala)", emoji: "❤️", color: "#e8333f" },
+  { id: "green", label: "เขียว (ครีมโซดา)", labelEn: "Green (Cream Soda)", emoji: "💚", color: "#3ecf8e" },
 ];
 export const SODA_DIY_MAX = 3;
 

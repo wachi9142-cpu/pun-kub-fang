@@ -377,6 +377,11 @@ export default function DrinkCustomizer({
                           style={{ background: sy.color }}
                         />
                         {sy.emoji} {sy.label}
+                        <span
+                          className={`text-[10px] ${active ? "text-white/70" : "text-ink/40"}`}
+                        >
+                          {sy.labelEn}
+                        </span>
                       </button>
                     );
                   })}

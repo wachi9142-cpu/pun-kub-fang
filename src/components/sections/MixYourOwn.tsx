@@ -23,6 +23,7 @@ const FREE_BOBA_EN = "Classic Black Tapioca Pearls";
 function Chip({
   emoji,
   label,
+  labelEn,
   active,
   priceLabel,
   freeLabel,
@@ -30,6 +31,7 @@ function Chip({
 }: {
   emoji?: string;
   label: string;
+  labelEn?: string;
   active: boolean;
   priceLabel?: string;
   freeLabel?: boolean;
@@ -50,7 +52,16 @@ function Chip({
         </span>
       )}
       {emoji && <span className="text-base">{emoji}</span>}
-      {label}
+      <span className="flex flex-col leading-tight">
+        <span>{label}</span>
+        {labelEn && (
+          <span
+            className={`text-[10px] font-normal ${active ? "text-white/70" : "text-grape-400"}`}
+          >
+            {labelEn}
+          </span>
+        )}
+      </span>
       {priceLabel && (
         <span
           className={`rounded-full px-2 py-0.5 text-sm font-extrabold ${
@@ -63,7 +74,9 @@ function Chip({
       {freeLabel && (
         <span
           className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
-            active ? "bg-white/25 text-white" : "bg-emerald-100 text-emerald-600"
+            active
+              ? "bg-white/25 text-white"
+              : "bg-emerald-100 text-emerald-600"
           }`}
         >
           ฟรี
@@ -162,7 +175,8 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
     setTeaOpen(false);
     setHerbalOpen(false);
     setBaseIds((prev) => {
-      if (prev.includes(id)) return totalBases > 1 ? prev.filter((x) => x !== id) : prev;
+      if (prev.includes(id))
+        return totalBases > 1 ? prev.filter((x) => x !== id) : prev;
       return totalBases >= MAX_BASE ? prev : [...prev, id];
     });
   };
@@ -184,7 +198,9 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
     );
   const toggleExtra = (nameEn: string) =>
     setExtras((prev) =>
-      prev.includes(nameEn) ? prev.filter((t) => t !== nameEn) : [...prev, nameEn],
+      prev.includes(nameEn)
+        ? prev.filter((t) => t !== nameEn)
+        : [...prev, nameEn],
     );
 
   const selectedBases = [
@@ -305,7 +321,8 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                   Green Tea × Apple × Strawberry Popping Boba
                 </p>
                 <p className="mt-2 text-sm text-white/85">
-                  ชาเขียวหอม ๆ ผสมความสดชื่นของแอปเปิล เติมมุกป๊อปสตรอว์เบอร์รีให้แตกป๊อปในปาก 💚🍓
+                  ชาเขียวหอม ๆ ผสมความสดชื่นของแอปเปิล
+                  เติมมุกป๊อปสตรอว์เบอร์รีให้แตกป๊อปในปาก 💚🍓
                 </p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {["🍵 ชาเขียว", "🍏 แอปเปิล", "🍓 มุกป๊อปสตรอว์เบอร์รี"].map(
@@ -334,7 +351,8 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                     1. เลือกฐานเครื่องดื่ม (ได้สูงสุด {MAX_BASE} ฐาน)
                   </p>
                   <p className="mb-2.5 text-xs text-white/70">
-                    รวมฐาน 1 อย่างในราคาพื้นฐาน · เพิ่มฐานที่ 2 +{EXTRA_BASE_PRICE}
+                    รวมฐาน 1 อย่างในราคาพื้นฐาน · เพิ่มฐานที่ 2 +
+                    {EXTRA_BASE_PRICE}
                   </p>
                   <div className="flex flex-wrap gap-2.5">
                     {MIX_BASES.slice(0, 2).map((o) => {
@@ -345,6 +363,7 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                           <Chip
                             emoji={o.emoji}
                             label={o.label}
+                            labelEn={o.labelEn}
                             active={active}
                             onClick={() => toggleSimpleBase(o.id)}
                           />
@@ -383,6 +402,7 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                           <Chip
                             emoji={o.emoji}
                             label={o.label}
+                            labelEn={o.labelEn}
                             active={active}
                             onClick={() => toggleSimpleBase(o.id)}
                           />
@@ -395,17 +415,23 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                   {teaOpen && (
                     <div className="mt-2.5 rounded-2xl bg-white/12 p-3 ring-1 ring-white/20">
                       <p className="mb-2 text-xs text-white/70">
-                        เลือกชนิดชา (นับเป็น 1 ฐาน) · เลือกชาแล้วเติมไซรัปเองได้ที่ข้อ 2 ด้านล่าง 💜
+                        เลือกชนิดชา (นับเป็น 1 ฐาน) ·
+                        เลือกชาแล้วเติมไซรัปเองได้ที่ข้อ 2 ด้านล่าง 💜
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {MIX_TEA_TYPES.map((t) => {
                           const active = teaType === t.id;
-                          const atMax = !active && !teaType && totalBases >= MAX_BASE;
+                          const atMax =
+                            !active && !teaType && totalBases >= MAX_BASE;
                           return (
-                            <span key={t.id} className={atMax ? "opacity-40" : ""}>
+                            <span
+                              key={t.id}
+                              className={atMax ? "opacity-40" : ""}
+                            >
                               <Chip
                                 emoji={t.emoji}
                                 label={t.label}
+                                labelEn={t.labelEn}
                                 active={active}
                                 onClick={() => selectTea(t.id)}
                               />
@@ -420,7 +446,8 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                   {herbalOpen && (
                     <div className="mt-2.5 rounded-2xl bg-white/12 p-3 ring-1 ring-white/20">
                       <p className="mb-2 text-xs text-white/70">
-                        เลือกชนิดน้ำสมุนไพร (นับเป็น 1 ฐาน) · เติมไซรัป/ผลไม้เองได้ที่ข้อ 2 ด้านล่าง 🌿
+                        เลือกชนิดน้ำสมุนไพร (นับเป็น 1 ฐาน) ·
+                        เติมไซรัป/ผลไม้เองได้ที่ข้อ 2 ด้านล่าง 🌿
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {MIX_HERBAL_TYPES.map((h) => {
@@ -428,10 +455,14 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                           const atMax =
                             !active && !herbalType && totalBases >= MAX_BASE;
                           return (
-                            <span key={h.id} className={atMax ? "opacity-40" : ""}>
+                            <span
+                              key={h.id}
+                              className={atMax ? "opacity-40" : ""}
+                            >
                               <Chip
                                 emoji={h.emoji}
                                 label={h.label}
+                                labelEn={h.labelEn}
                                 active={active}
                                 onClick={() => selectHerbal(h.id)}
                               />
@@ -457,6 +488,7 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                         key={o.id}
                         emoji={o.emoji}
                         label={o.label}
+                        labelEn={o.labelEn}
                         freeLabel
                         active={syrupIds.includes(o.id)}
                         onClick={() => toggleSyrup(o.id)}
@@ -527,7 +559,8 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                     </span>
                   </p>
                   <p className="mb-2.5 text-xs text-white/70">
-                    ฟรีไข่มุกดำ/คลาสสิก 1 อย่าง / แก้ว · ไข่มุกอื่นคิดราคาปกติในท็อปปิ้ง
+                    ฟรีไข่มุกดำ/คลาสสิก 1 อย่าง / แก้ว ·
+                    ไข่มุกอื่นคิดราคาปกติในท็อปปิ้ง
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <button
@@ -552,7 +585,11 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                       >
                         {freeBoba === b.nameEn && (
                           <span className="animate-pop-in grid h-5 w-5 place-items-center rounded-full bg-white shadow">
-                            <Check size={14} strokeWidth={3} className="text-[#22C55E]" />
+                            <Check
+                              size={14}
+                              strokeWidth={3}
+                              className="text-[#22C55E]"
+                            />
                           </span>
                         )}
                         {b.nameTh}
@@ -627,7 +664,11 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
             {/* สรุป + พรีวิว */}
             <div className="rounded-3xl bg-white/95 p-6 shadow-soft lg:sticky lg:top-24">
               <div className="grid place-items-center">
-                <SmoothieCup palette={previewPalette} emoji={previewEmoji} size={140} />
+                <SmoothieCup
+                  palette={previewPalette}
+                  emoji={previewEmoji}
+                  size={140}
+                />
               </div>
               <h3 className="font-display mt-2 text-center text-lg font-semibold text-grape-700">
                 {drinkName}
@@ -653,11 +694,15 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                 {extraLabels.length > 0 && (
                   <SummaryRow label="ท็อปปิ้ง" value={extraLabels.join(", ")} />
                 )}
-                {other.trim() && <SummaryRow label="อื่นๆ" value={other.trim()} />}
+                {other.trim() && (
+                  <SummaryRow label="อื่นๆ" value={other.trim()} />
+                )}
               </div>
 
               <div className="mt-3 flex items-center justify-between border-t border-grape-100 pt-3">
-                <span className="text-sm font-medium text-grape-500">รวมทั้งหมด</span>
+                <span className="text-sm font-medium text-grape-500">
+                  รวมทั้งหมด
+                </span>
                 <span className="font-display text-3xl font-bold text-blossom-500">
                   {price}
                 </span>
@@ -673,14 +718,18 @@ export default function MixYourOwn({ initialBaseId }: MixYourOwnProps) {
                 }`}
               >
                 {brewing ? (
-                  <>{method === "noblend" ? "🔮 กำลังชง..." : "🌀 กำลังปั่น..."}</>
+                  <>
+                    {method === "noblend" ? "🔮 กำลังชง..." : "🌀 กำลังปั่น..."}
+                  </>
                 ) : added ? (
                   <>
                     <Check size={17} /> เพิ่มลงตะกร้าแล้ว!
                   </>
                 ) : (
                   <>
-                    {method === "noblend" ? "🔮 ชงแล้วเพิ่มลงตะกร้า" : "🥤 ปั่นแล้วเพิ่มลงตะกร้า"}
+                    {method === "noblend"
+                      ? "🔮 ชงแล้วเพิ่มลงตะกร้า"
+                      : "🥤 ปั่นแล้วเพิ่มลงตะกร้า"}
                   </>
                 )}
               </button>
