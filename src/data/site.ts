@@ -1539,15 +1539,15 @@ export type StickyBase = {
   palette: SmoothiePalette;
 };
 
-/** ขั้นที่ 1 — น้ำพื้นฐาน (แก้ราคาได้ตามจริง) */
+/** น้ำพื้นฐานสำหรับแพ็กเกจ "น้ำ + นมเหนียว" (ราคารวมในแพ็กเกจแล้ว) */
 export const STICKY_BASES: StickyBase[] = [
-  { id: "thaitea", nameTh: "ชาไทย", nameEn: "Thai Tea", price: 35, emoji: "🧋", palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" } },
-  { id: "cocoa", nameTh: "โกโก้", nameEn: "Cocoa", price: 35, emoji: "🍫", palette: { foam: "#f4e9e2", top: "#a8735a", bottom: "#5c3a2a" } },
-  { id: "greentea", nameTh: "ชาเขียว", nameEn: "Green Tea", price: 35, emoji: "🍵", palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" } },
-  { id: "pinkmilk", nameTh: "นมชมพู", nameEn: "Pink Milk", price: 35, emoji: "🌸", palette: { foam: "#fff5f9", top: "#ffc2d8", bottom: "#f38bb1" } },
-  { id: "milo", nameTh: "ไมโล", nameEn: "Milo", price: 35, emoji: "🥛", palette: { foam: "#f5ece4", top: "#b8865e", bottom: "#6b4a30" } },
-  { id: "ovaltine", nameTh: "โอวัลติน", nameEn: "Ovaltine", price: 35, emoji: "🥛", palette: { foam: "#f5ede3", top: "#c4a37a", bottom: "#7d5a3a" } },
-  { id: "milk", nameTh: "นมสด", nameEn: "Fresh Milk", price: 30, emoji: "🥛", palette: { foam: "#fffaf0", top: "#fff4e4", bottom: "#f3d9b4" } },
+  { id: "thaitea", nameTh: "ชาไทย", nameEn: "Thai Tea", price: 0, emoji: "🧋", palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" } },
+  { id: "cocoa", nameTh: "โกโก้", nameEn: "Cocoa", price: 0, emoji: "🍫", palette: { foam: "#f4e9e2", top: "#a8735a", bottom: "#5c3a2a" } },
+  { id: "greentea", nameTh: "ชาเขียว", nameEn: "Green Tea", price: 0, emoji: "🍵", palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" } },
+  { id: "pinkmilk", nameTh: "นมชมพู", nameEn: "Pink Milk", price: 0, emoji: "🌸", palette: { foam: "#fff5f9", top: "#ffc2d8", bottom: "#f38bb1" } },
+  { id: "milo", nameTh: "ไมโล", nameEn: "Milo", price: 0, emoji: "🥛", palette: { foam: "#f5ece4", top: "#b8865e", bottom: "#6b4a30" } },
+  { id: "ovaltine", nameTh: "โอวัลติน", nameEn: "Ovaltine", price: 0, emoji: "🥛", palette: { foam: "#f5ede3", top: "#c4a37a", bottom: "#7d5a3a" } },
+  { id: "milk", nameTh: "นมสด", nameEn: "Fresh Milk", price: 0, emoji: "🥛", palette: { foam: "#fffaf0", top: "#fff4e4", bottom: "#f3d9b4" } },
 ];
 
 export type StickyFlavor = {
@@ -1562,25 +1562,81 @@ export type StickyFlavor = {
   image?: string;
 };
 
-/** ขั้นที่ 2 — รสนมเหนียว (แก้ราคาได้ตามจริง) */
+/** รสนมเหนียว (ราคารวมในแพ็กเกจแล้ว) */
 export const STICKY_FLAVORS: StickyFlavor[] = [
-  { id: "milk", nameTh: "นมเหนียวนมสด", nameEn: "Fresh Milk Sticky Cream", price: 10, emoji: "🥛", color: "#f7e7c8" },
-  { id: "thaitea", nameTh: "นมเหนียวชาไทย", nameEn: "Thai Tea Sticky Cream", price: 10, emoji: "🧋", color: "#e8a35c" },
-  { id: "pinkmilk", nameTh: "นมเหนียวนมชมพู", nameEn: "Pink Milk Sticky Cream", price: 10, emoji: "🌸", color: "#f7b8cf" },
-  { id: "greentea", nameTh: "นมเหนียวชาเขียว", nameEn: "Green Tea Sticky Cream", price: 10, emoji: "🍵", color: "#9cc47a" },
-  { id: "cocoa", nameTh: "นมเหนียวโกโก้", nameEn: "Cocoa Sticky Cream", price: 10, emoji: "🍫", color: "#8a5a3c" },
-  { id: "taro", nameTh: "นมเหนียวเผือกหอม", nameEn: "Taro Sticky Cream", price: 10, emoji: "🍠", color: "#b795d8" },
+  { id: "milk", nameTh: "นมเหนียวนมสด", nameEn: "Fresh Milk Sticky Cream", price: 0, emoji: "🥛", color: "#f7e7c8" },
+  { id: "thaitea", nameTh: "นมเหนียวชาไทย", nameEn: "Thai Tea Sticky Cream", price: 0, emoji: "🧋", color: "#e8a35c" },
+  { id: "pinkmilk", nameTh: "นมเหนียวนมชมพู", nameEn: "Pink Milk Sticky Cream", price: 0, emoji: "🌸", color: "#f7b8cf" },
+  { id: "greentea", nameTh: "นมเหนียวชาเขียว", nameEn: "Green Tea Sticky Cream", price: 0, emoji: "🍵", color: "#9cc47a" },
+  { id: "cocoa", nameTh: "นมเหนียวโกโก้", nameEn: "Cocoa Sticky Cream", price: 0, emoji: "🍫", color: "#8a5a3c" },
+  { id: "taro", nameTh: "นมเหนียวเผือกหอม", nameEn: "Taro Sticky Cream", price: 0, emoji: "🍠", color: "#b795d8" },
 ];
 
-/** ขั้นที่ 3 — รูปแบบการกิน */
-export const STICKY_STYLES = [
-  { id: "pour", label: "🥤 แบบราดบนเครื่องดื่ม", desc: "เลือกน้ำที่ชอบ แล้วราดนมเหนียวด้านบน" },
-  { id: "crackerOnly", label: "🍪 แบบนมเหนียว + แครกเกอร์", desc: "ไม่ต้องเลือกน้ำ กินคู่แครกเกอร์กรอบ ๆ" },
-  { id: "separate", label: "📦 แบบแยก — มิกซ์เองที่บ้าน", desc: "นมเหนียวใส่กระปุก + แครกเกอร์ใส่แก้วมีฝา ไม่ผสมกัน" },
-] as const;
+/** 📦 แพ็กเกจนมเหนียว 4 แบบ — เลือกได้ตามใจ ไม่บังคับสั่งน้ำ (ราคาเหมา) */
+export type StickyPackageId = "milkOnly" | "crackerOnly" | "drinkMilk" | "milkCracker";
+export type StickyPackage = {
+  id: StickyPackageId;
+  nameTh: string;
+  nameEn: string;
+  emoji: string;
+  price: number;
+  unit: string;
+  desc: string;
+  needFlavor: boolean;
+  needDrink: boolean;
+};
+export const STICKY_PACKAGES: StickyPackage[] = [
+  {
+    id: "milkOnly",
+    nameTh: "นมเหนียวอย่างเดียว",
+    nameEn: "Sticky Milk",
+    emoji: "🥛",
+    price: 20,
+    unit: "แก้ว",
+    desc: "นมเหนียวเนื้อข้น หนึบหนับ หอมหวาน กินเพลิน",
+    needFlavor: true,
+    needDrink: false,
+  },
+  {
+    id: "crackerOnly",
+    nameTh: "แครกเกอร์",
+    nameEn: "Crackers",
+    emoji: "🍪",
+    price: 20,
+    unit: "แก้ว",
+    desc: "แครกเกอร์กรอบ ๆ กินเล่นเพลิน หรือเอาไว้กินคู่กับนมเหนียว",
+    needFlavor: false,
+    needDrink: false,
+  },
+  {
+    id: "drinkMilk",
+    nameTh: "น้ำ + นมเหนียว",
+    nameEn: "Drink + Sticky Milk",
+    emoji: "🥤🥛",
+    price: 30,
+    unit: "แก้ว",
+    desc: "เลือกเครื่องดื่มที่ชอบ แล้วเพิ่มนมเหนียวราดด้านบน",
+    needFlavor: true,
+    needDrink: true,
+  },
+  {
+    id: "milkCracker",
+    nameTh: "นมเหนียว + แครกเกอร์",
+    nameEn: "Sticky Milk + Crackers",
+    emoji: "🍪🥛",
+    price: 30,
+    unit: "ชุด",
+    desc: "นมเหนียวเนื้อข้นคู่กับแครกเกอร์กรอบ ๆ จะกินคู่กัน หรือแยกไว้ผสมเองก็ได้ 💜",
+    needFlavor: true,
+    needDrink: false,
+  },
+];
 
-/** ราคาชุด "แบบแยก" (กระปุกนมเหนียว + แก้วแครกเกอร์มีฝา — ยังไม่รวมรสนมเหนียว/น้ำ) — แก้ตามจริง */
-export const STICKY_SEPARATE_SET_PRICE = 30;
+/** วิธีรับสำหรับชุด "นมเหนียว + แครกเกอร์" */
+export const STICKY_SERVE = [
+  { id: "together", label: "🍪 กินคู่กัน", desc: "จัดมาพร้อมกิน" },
+  { id: "separate", label: "📦 แยกไว้ผสมเอง", desc: "นมเหนียวใส่กระปุก + แครกเกอร์ใส่แก้วมีฝา ไม่ผสม" },
+] as const;
 
 export const STICKY_SEPARATE_NOTE = {
   title: "🍪 นมเหนียวแบบแยก — เอาไปมิกซ์เองที่บ้านได้เลย!",
@@ -1588,16 +1644,11 @@ export const STICKY_SEPARATE_NOTE = {
   points: [
     "🫙 นมเหนียว → กระปุกเล็กปิดฝาสนิท (เลือกได้หลายรส)",
     "🍪 แครกเกอร์ → แก้วใสมีฝาปิด ยังกรอบ สะอาด น่ากิน",
-    "🚫 แยกบรรจุ ไม่ผสมกัน · จะสั่งพร้อมน้ำหรือไม่ก็ได้",
+    "🚫 แยกบรรจุ ไม่ผสมกัน",
   ],
 };
 
-/** ราคาเพิ่มแครกเกอร์ (ตัวเลือกเสริมของแบบราดน้ำ) */
-export const STICKY_CRACKER_PRICE = 10;
-/** ราคาชุด "นมเหนียว + แครกเกอร์" แบบไม่ใส่น้ำ (ยังไม่รวมรสนมเหนียว) — แก้ตามจริง */
-export const STICKY_CRACKER_SET_PRICE = 25;
-
-/** ตัวอย่างการจับคู่ (Inspiration — มีทั้งแบบมีน้ำและไม่มีน้ำ) · base = null คือไม่ใส่น้ำ */
+/** ตัวอย่างการจับคู่ (Inspiration) · base = null คือไม่ใส่น้ำ */
 export const STICKY_EXAMPLES: {
   base: string | null;
   flavor: string;
@@ -1613,8 +1664,8 @@ export const STICKY_EXAMPLES: {
 
 export const STICKY_NOTE = {
   title: "💜 อยากกินแบบไหน เลือกได้เลย!",
-  th: "จะเลือกคู่กับเครื่องดื่ม หรือเลือกแค่ นมเหนียว + แครกเกอร์กรอบ ๆ แบบไม่ใส่น้ำก็ได้ 🍪✨",
-  en: "Pair it with any drink, or go drink-free: sticky cream + crispy crackers only.",
+  th: "นมเหนียวอย่างเดียว / แครกเกอร์อย่างเดียว / น้ำ + นมเหนียว / นมเหนียว + แครกเกอร์ — ไม่จำเป็นต้องสั่งเครื่องดื่มทุกแบบ ✨",
+  en: "Sticky milk alone, crackers alone, drink + sticky milk, or sticky milk + crackers — no drink required.",
 };
 
 export const WHIP_BASE_PRICE = 20;
