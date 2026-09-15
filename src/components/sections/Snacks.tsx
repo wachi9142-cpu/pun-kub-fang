@@ -10,12 +10,16 @@ export function SnackCard({ item }: { item: SnackItem }) {
   const [liked, setLiked] = useState(false);
 
   const add = () => {
-    addItem({ id: `${item.id}-${Date.now()}`, name: item.nameTh, price: item.price });
+    addItem({
+      id: `${item.id}-${Date.now()}`,
+      name: item.nameTh,
+      price: item.price,
+    });
     openCart();
   };
 
   return (
-    <article className="hover-lift group relative flex flex-col overflow-hidden rounded-3xl bg-white/85 p-4 shadow-card ring-1 ring-white/70">
+    <article className="hover-lift group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white/85 p-4 shadow-card ring-1 ring-white/70">
       {item.badge && (
         <span className="absolute left-4 top-4 z-10 rounded-full bg-blossom-500 px-2.5 py-1 text-[11px] font-bold text-white shadow">
           {item.badge}
@@ -41,21 +45,26 @@ export function SnackCard({ item }: { item: SnackItem }) {
         ) : (
           <span className="flex flex-col items-center gap-1 text-6xl transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3">
             {item.emoji}
-            <span className="text-[10px] font-medium text-ink/35">รูปเร็ว ๆ นี้</span>
+            <span className="text-[10px] font-medium text-ink/35">
+              รูปเร็ว ๆ นี้
+            </span>
           </span>
         )}
       </div>
 
       <div className="mt-3 flex flex-1 flex-col">
-        <h3 className="font-display text-base font-semibold text-grape-700">
+        {/* เว้นบรรทัดคงที่: ชื่อไทย 1 · ชื่ออังกฤษ 1 · คำอธิบาย 2 → ปุ่มทุกการ์ดอยู่ระดับเดียวกัน */}
+        <h3 className="font-display truncate text-base font-semibold leading-snug text-grape-700">
           {item.nameTh}
-          <span className="ml-1 text-[11px] font-medium text-grape-400">
-            {item.nameEn}
-          </span>
         </h3>
-        <p className="mt-0.5 line-clamp-2 text-xs text-grape-400">{item.desc}</p>
+        <p className="h-4 truncate text-[11px] font-medium leading-4 text-grape-400">
+          {item.nameEn || " "}
+        </p>
+        <p className="mt-0.5 line-clamp-2 h-8 text-xs leading-4 text-grape-400">
+          {item.desc}
+        </p>
 
-        <div className="mt-3 flex items-end justify-between">
+        <div className="mt-auto flex items-end justify-between pt-3">
           <span className="flex items-baseline gap-1.5">
             {item.oldPrice && (
               <span className="text-xs font-medium text-grape-400 line-through">
@@ -81,7 +90,7 @@ export function SnackCard({ item }: { item: SnackItem }) {
 
 export default function Snacks() {
   return (
-    <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="mb-8 text-center">
         <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
           🍪 ขนมกินเพลิน{" "}

@@ -725,6 +725,14 @@ body {
 }
 .animate-cheers-spark { animation: cheers-spark 1.6s ease-out both; }
 
+
+/* 🍪 ขนมแขวนบนเชือก แกว่งเบา ๆ */
+@keyframes garland-swing {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+.animate-garland-swing { animation: garland-swing 3.2s ease-in-out infinite; }
+
 /* ♿ ลดการเคลื่อนไหวสำหรับผู้ที่ตั้งค่า prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-drop-in,
