@@ -105,7 +105,7 @@ export default function HomemadeHerbal() {
           <div className="relative grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
             <div className="text-center lg:text-left">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200">
-                🌿 Homemade · ทำสดใหม่ทุกวัน
+                🌿 ชั้นวางน้ำสมุนไพรจากบ้านฟ่าง · ทำสดใหม่ทุกวัน
               </span>
               <h2 className="font-display mt-3 text-3xl font-bold text-ink sm:text-4xl lg:text-5xl">
                 น้ำสมุนไพรโฮมเมด
@@ -114,8 +114,8 @@ export default function HomemadeHerbal() {
                 Homemade Herbal Drinks
               </p>
               <p className="mx-auto mt-3 max-w-xl text-ink/60 lg:mx-0">
-                กระเจี๊ยบ เก๊กฮวย อัญชัน ใบเตย มะตูม — ต้มเองในครัว
-                บรรจุขวดสดใหม่ทุกวัน หมุนเวียนตามวัตถุดิบที่มี 💜
+                เปิดมาเจอขวดน้ำสมุนไพรหลายสีเรียงกันบนชั้น — กระเจี๊ยบ เก๊กฮวย
+                อัญชัน ใบเตย มะตูม ต้มเองในครัว บรรจุขวดสดใหม่ทุกวัน 💜
               </p>
               <p className="mt-2 text-xs text-ink/45">
                 แตะเมนูเพื่อเลือกปั่น/ไม่ปั่น + ท็อปปิ้ง แล้วเพิ่มลงตะกร้าได้เลย

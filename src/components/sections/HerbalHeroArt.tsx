@@ -191,9 +191,141 @@ export default function HerbalHeroArt({
   return (
     <div className={`pointer-events-none select-none ${className}`} aria-hidden>
       <svg viewBox="0 0 380 250" className="h-full w-full" fill="none">
-        {/* พื้นโต๊ะไม้อ่อน / ผ้าครีม */}
-        <ellipse cx="190" cy="226" rx="176" ry="16" fill="#ede3f7" />
-        <ellipse cx="190" cy="222" rx="160" ry="10" fill="#fffdf7" />
+        {/* 🪵 ชั้นวางไม้ "ชั้นวางน้ำสมุนไพรจากบ้านฟ่าง" */}
+        {/* ผนังหลังชั้น (ลาเวนเดอร์อ่อน) */}
+        <rect
+          x="0"
+          y="30"
+          width="380"
+          height="200"
+          rx="18"
+          fill="#f3ecfb"
+          opacity="0.7"
+        />
+        {/* แผ่นชั้น */}
+        <rect x="6" y="218" width="368" height="14" rx="5" fill="#d9b98a" />
+        <rect x="6" y="218" width="368" height="5" rx="2.5" fill="#e9cfa5" />
+        <path
+          d="M30 226 h60 M120 227 h90 M240 226 h50 M310 227 h40"
+          stroke="#c99a63"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          opacity="0.7"
+        />
+        {/* ขายึดชั้น */}
+        <path d="M40 232 l-14 16 h14 Z" fill="#c99a63" />
+        <path d="M340 232 l14 16 h-14 Z" fill="#c99a63" />
+        {/* ป้ายไม้แขวนใต้ชั้น */}
+        <g
+          className="animate-floaty-slow"
+          style={{ transformOrigin: "190px 232px" }}
+        >
+          <path
+            d="M176 232 v6 M204 232 v6"
+            stroke="#c99a63"
+            strokeWidth="1.5"
+          />
+          <rect
+            x="150"
+            y="237"
+            width="80"
+            height="12"
+            rx="4"
+            fill="#fffdf7"
+            stroke="#e6d9f5"
+            strokeWidth="1.2"
+          />
+          <text
+            x="190"
+            y="246"
+            textAnchor="middle"
+            fontSize="7"
+            fontWeight="700"
+            fill="#5f339c"
+          >
+            🌿 ชั้นวางน้ำสมุนไพรบ้านฟ่าง
+          </text>
+        </g>
+        {/* 🌿 มัดสมุนไพรแห้งแขวนจากด้านบน */}
+        <g
+          className="animate-floaty"
+          style={{ transformOrigin: "352px 30px", animationDelay: "0.7s" }}
+        >
+          <path d="M352 30 v22" stroke="#c99a63" strokeWidth="1.5" />
+          <path
+            d="M352 52 l-10 26 M352 52 l-3 30 M352 52 l4 30 M352 52 l10 26"
+            stroke="#7cc27a"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+          <path
+            d="M352 52 l-10 26 M352 52 l10 26"
+            stroke="#4f8a3a"
+            strokeWidth="1"
+            strokeLinecap="round"
+          />
+          <rect x="347" y="50" width="10" height="5" rx="2" fill="#d492e0" />
+        </g>
+        <g
+          className="animate-floaty-slow"
+          style={{ transformOrigin: "24px 30px", animationDelay: "1.5s" }}
+        >
+          <path d="M24 30 v18" stroke="#c99a63" strokeWidth="1.5" />
+          <path
+            d="M24 48 l-8 22 M24 48 l-2 26 M24 48 l4 26 M24 48 l9 22"
+            stroke="#9bd66a"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+          <rect x="19" y="46" width="10" height="5" rx="2" fill="#f4d35e" />
+        </g>
+        {/* 🫙 โหลสมุนไพรเล็ก ๆ บนชั้น (ริมซ้าย/ขวา) */}
+        <g>
+          <rect
+            x="6"
+            y="186"
+            width="18"
+            height="32"
+            rx="4"
+            fill="#ffffff"
+            fillOpacity="0.6"
+            stroke="#d8c7f0"
+            strokeWidth="1.5"
+          />
+          <rect
+            x="8"
+            y="200"
+            width="14"
+            height="16"
+            rx="3"
+            fill="#e0a11c"
+            opacity="0.8"
+          />
+          <rect x="7" y="183" width="16" height="5" rx="2" fill="#c99a63" />
+        </g>
+        <g>
+          <rect
+            x="356"
+            y="190"
+            width="18"
+            height="28"
+            rx="4"
+            fill="#ffffff"
+            fillOpacity="0.6"
+            stroke="#d8c7f0"
+            strokeWidth="1.5"
+          />
+          <rect
+            x="358"
+            y="202"
+            width="14"
+            height="14"
+            rx="3"
+            fill="#c8163a"
+            opacity="0.8"
+          />
+          <rect x="357" y="187" width="16" height="5" rx="2" fill="#c99a63" />
+        </g>
 
         {/* 🌿 ใบเตย/ใบไม้ด้านหลัง */}
         <g
