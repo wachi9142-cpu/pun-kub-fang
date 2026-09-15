@@ -5,20 +5,19 @@ import { Check, Plus } from "lucide-react";
 import {
   STICKY_BASES,
   STICKY_FLAVORS,
-  STICKY_STYLES,
-  STICKY_CRACKER_PRICE,
-  STICKY_CRACKER_SET_PRICE,
-  STICKY_SEPARATE_SET_PRICE,
+  STICKY_PACKAGES,
+  STICKY_SERVE,
   STICKY_SEPARATE_NOTE,
   STICKY_EXAMPLES,
   STICKY_NOTE,
   type StickyBase,
   type StickyFlavor,
+  type StickyPackageId,
 } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
 import StickyCheersDecor from "@/components/sections/StickyCheersDecor";
 
-type StyleId = (typeof STICKY_STYLES)[number]["id"];
+type ServeId = (typeof STICKY_SERVE)[number]["id"];
 
 /* ---------- 🥄 นมเหนียวบนช้อน — โคลสอัปเนื้อข้นหนืด ไหลยืดเล็กน้อย (รูปตัวเลือกรส) ---------- */
 function shade(hex: string, amt: number) {
@@ -508,67 +507,90 @@ function Chip({
   );
 }
 
+/* ตัวเลือกของแต่ละแบบที่เลือกไว้ (เลือกได้หลายแบบพร้อมกัน) */
+type Pick = { base: string | null; flavor: string | null; serve: ServeId };
+const EMPTY: Pick = { base: null, flavor: null, serve: "together" };
+
 export default function StickyMilkView() {
   const { addItem, openCart } = useCart();
-  const [style, setStyle] = useState<StyleId>("pour");
-  const [baseId, setBaseId] = useState<string | null>(null);
-  const [flavorId, setFlavorId] = useState<string | null>(null);
-  const [extraCracker, setExtraCracker] = useState(false);
+  const [sel, setSel] = useState<Partial<Record<StickyPackageId, Pick>>>({});
   const [added, setAdded] = useState(false);
 
-  const noDrink = style === "crackerOnly";
-  const separate = style === "separate";
-  const base = noDrink
-    ? null
-    : (STICKY_BASES.find((b) => b.id === baseId) ?? null);
-  const flavor = STICKY_FLAVORS.find((f) => f.id === flavorId);
-  const cracker = noDrink || separate || extraCracker;
+  const selected = STICKY_PACKAGES.filter((p) => sel[p.id]);
+  const pickOf = (id: StickyPackageId): Pick => sel[id] ?? EMPTY;
+  const update = (id: StickyPackageId, patch: Partial<Pick>) =>
+    setSel((s) => ({ ...s, [id]: { ...(s[id] ?? EMPTY), ...patch } }));
+  const togglePkg = (id: StickyPackageId) =>
+    setSel((s) => {
+      if (s[id]) {
+        const n = { ...s };
+        delete n[id];
+        return n;
+      }
+      return { ...s, [id]: { ...EMPTY } };
+    });
 
-  const total = noDrink
-    ? STICKY_CRACKER_SET_PRICE + (flavor?.price ?? 0)
-    : separate
-      ? (base?.price ?? 0) + STICKY_SEPARATE_SET_PRICE + (flavor?.price ?? 0)
-      : (base?.price ?? 0) +
-        (flavor?.price ?? 0) +
-        (extraCracker ? STICKY_CRACKER_PRICE : 0);
-  // แบบแยก: มีน้ำหรือไม่ก็ได้ · แบบราด: ต้องมีน้ำ · แบบแครกเกอร์: ไม่มีน้ำ
-  const ready = Boolean(flavor) && (noDrink || separate || Boolean(base));
+  const baseOf = (pk: Pick) =>
+    STICKY_BASES.find((b) => b.id === pk.base) ?? null;
+  const flavorOf = (pk: Pick) =>
+    STICKY_FLAVORS.find((f) => f.id === pk.flavor) ?? null;
 
-  const chooseBase = (id: string | null) => {
-    if (id === null) {
-      if (!separate) setStyle("crackerOnly");
-      setBaseId(null);
-    } else {
-      if (noDrink) setStyle("pour");
-      setBaseId(id);
-    }
+  const isReady = (p: (typeof STICKY_PACKAGES)[number]) => {
+    const pk = pickOf(p.id);
+    return (
+      (!p.needFlavor || Boolean(pk.flavor)) &&
+      (!p.needDrink || Boolean(pk.base))
+    );
   };
-  const chooseStyle = (id: StyleId) => {
-    setStyle(id);
-    if (id === "crackerOnly") setBaseId(null);
-  };
+  const total = selected.reduce((s, p) => s + p.price, 0);
+  const ready = selected.length > 0 && selected.every(isReady);
 
-  const pick = (b: string | null, f: string, c?: boolean) => {
-    chooseBase(b);
-    setFlavorId(f);
-    setExtraCracker(Boolean(b && c));
+  const scrollToBuilder = () =>
     document
       .getElementById("sticky-builder")
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  /* จากตัวอย่าง: มีน้ำ → น้ำ+นมเหนียว · ไม่มีน้ำ+แครกเกอร์ → นมเหนียว+แครกเกอร์ */
+  const pickExample = (b: string | null, f: string, c?: boolean) => {
+    const id: StickyPackageId = b
+      ? "drinkMilk"
+      : c
+        ? "milkCracker"
+        : "milkOnly";
+    setSel((s) => ({ ...s, [id]: { base: b, flavor: f, serve: "together" } }));
+    scrollToBuilder();
+  };
+
+  const lineName = (p: (typeof STICKY_PACKAGES)[number]) => {
+    const pk = pickOf(p.id);
+    const b = baseOf(pk);
+    const f = flavorOf(pk);
+    const parts: string[] = [];
+    if (p.needDrink && b) parts.push(b.nameTh);
+    if (p.needFlavor && f) parts.push(f.nameTh);
+    if (p.id === "crackerOnly" || p.id === "milkCracker")
+      parts.push("แครกเกอร์");
+    return `${p.nameTh}: ${parts.join(" + ")}`;
   };
 
   const handleAdd = () => {
-    if (!ready || !flavor) return;
-    const name = separate
-      ? `แบบแยก: ${flavor.nameTh} + แครกเกอร์${base ? ` + ${base.nameTh}` : ""}`
-      : noDrink
-        ? `แครกเกอร์ + ${flavor.nameTh}`
-        : `${base!.nameTh} + ${flavor.nameTh}`;
-    const options = [
-      STICKY_STYLES.find((s) => s.id === style)!.label,
-      ...(style === "pour" && extraCracker ? ["🍪 เพิ่มแครกเกอร์"] : []),
-    ];
-    addItem({ id: `sticky-${Date.now()}`, name, price: total, options });
+    if (!ready) return;
+    selected.forEach((p, i) => {
+      const pk = pickOf(p.id);
+      const options = [
+        `${p.emoji} ${p.nameTh} (${p.price}/${p.unit})`,
+        ...(p.id === "milkCracker"
+          ? [STICKY_SERVE.find((x) => x.id === pk.serve)!.label]
+          : []),
+      ];
+      addItem({
+        id: `sticky-${p.id}-${Date.now()}-${i}`,
+        name: lineName(p),
+        price: p.price,
+        options,
+      });
+    });
+    setSel({});
     setAdded(true);
     setTimeout(() => setAdded(false), 1600);
     openCart();
@@ -581,6 +603,23 @@ export default function StickyMilkView() {
     return `${bs.emoji} ${bs.nameTh} + ${fl.emoji} ${fl.nameTh}`;
   };
 
+  /* พรีวิวของแต่ละแบบ */
+  const preview = (p: (typeof STICKY_PACKAGES)[number], size = 96) => {
+    const pk = pickOf(p.id);
+    const f = flavorOf(pk) ?? undefined;
+    if (p.id === "crackerOnly")
+      return <StickyCup base={null} cracker size={size} />;
+    if (p.id === "milkOnly")
+      return <StickyCup base={null} flavor={f} size={size} />;
+    if (p.id === "milkCracker")
+      return pk.serve === "separate" ? (
+        <SeparateSet base={null} flavor={f} size={size} />
+      ) : (
+        <StickyCup base={null} flavor={f} cracker size={size} />
+      );
+    return <StickyCup base={baseOf(pk)} flavor={f} size={size} />;
+  };
+
   return (
     <section className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       {/* 🥂 ภาพประกอบตกแต่ง: แก้วนมเหนียว × แก้วแครกเกอร์ ชนกัน (ไม่บังเนื้อหา) */}
@@ -589,19 +628,19 @@ export default function StickyMilkView() {
 
       {/* หัว */}
       <div className="relative mb-6 text-center">
-        {/* มือถือ/แท็บเล็ตเล็ก: วางไว้เหนือหัวเรื่องขนาดเล็ก */}
         <div className="mx-auto mb-1 w-40 md:hidden">
           <StickyCheersDecor className="w-full" />
         </div>
         <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-          🥛 นมเหนียว <span className="text-blossom-400">| Sticky Milk</span>
+          🥛 เมนูนมเหนียว{" "}
+          <span className="text-blossom-400">| Sticky Milk</span>
         </h1>
         <p className="mx-auto mt-2 max-w-2xl text-ink/60">
-          เลือกได้ตามสไตล์ที่ชอบ — จะกินคู่กับเครื่องดื่ม หรือเลือกเป็น{" "}
+          นมเหนียวเลือกกินได้หลายแบบ จะกิน{" "}
           <span className="font-semibold text-grape-600">
-            นมเหนียวกับแครกเกอร์อย่างเดียว
-          </span>{" "}
-          ก็ได้ ✨
+            นมเหนียวอย่างเดียว
+          </span>
+          , คู่กับแครกเกอร์ หรือเลือกเป็นเครื่องดื่มราดนมเหนียวก็ได้ ✨
         </p>
       </div>
 
@@ -616,13 +655,64 @@ export default function StickyMilkView() {
         </p>
       </div>
 
+      {/* 📦 4 แบบ — เลือกได้หลายแบบ */}
+      <div id="sticky-builder" className="mt-6 scroll-mt-24">
+        <p className="mb-2 text-sm font-semibold text-ink">
+          1️⃣ เลือกแบบที่อยากกิน{" "}
+          <span className="font-medium text-ink/40">
+            (เลือกได้มากกว่า 1 แบบ · ไม่บังคับสั่งน้ำ)
+          </span>
+        </p>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {STICKY_PACKAGES.map((p) => {
+            const active = Boolean(sel[p.id]);
+            return (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => togglePkg(p.id)}
+                className={`relative flex flex-col rounded-2xl border p-4 text-left transition-all duration-200 active:scale-[0.98] ${
+                  active
+                    ? "border-grape-500 bg-grape-50 shadow-soft ring-2 ring-grape-deep"
+                    : "border-ink/10 bg-white hover:border-grape-300 hover:bg-grape-50/60"
+                }`}
+              >
+                <span
+                  className={`absolute right-2.5 top-2.5 grid h-6 w-6 place-items-center rounded-full ring-2 ring-white shadow ${
+                    active
+                      ? "animate-pop-in bg-[#22C55E] text-white"
+                      : "bg-white text-ink/20 ring-ink/10"
+                  }`}
+                >
+                  <Check size={14} strokeWidth={3} />
+                </span>
+                <span className="text-2xl">{p.emoji}</span>
+                <span className="mt-1 font-display text-base font-bold text-ink">
+                  {p.nameTh}
+                </span>
+                <span className="text-[11px] text-ink/45">{p.nameEn}</span>
+                <span className="mt-1.5 flex-1 text-xs leading-relaxed text-ink/65">
+                  {p.desc}
+                </span>
+                <span className="mt-3 inline-flex items-baseline gap-1">
+                  <span className="font-display text-2xl font-bold text-blossom-500">
+                    {p.price}
+                  </span>
+                  <span className="text-xs font-medium text-ink/50">
+                    บาท/{p.unit}
+                  </span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* 🖼️ ตัวอย่าง Combination */}
-      <div className="mt-4 rounded-3xl bg-white/70 p-4 ring-1 ring-white/70 sm:p-6">
+      <div className="mt-6 rounded-3xl bg-white/70 p-4 ring-1 ring-white/70 sm:p-6">
         <p className="mb-3 text-center text-sm font-semibold text-grape-700">
           🧁 ตัวอย่าง Combination{" "}
-          <span className="font-medium text-ink/45">
-            (แตะเพื่อลองคู่นี้ — หรือจัดเองด้านล่าง)
-          </span>
+          <span className="font-medium text-ink/45">(แตะเพื่อลองคู่นี้)</span>
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {STICKY_EXAMPLES.map((ex, i) => {
@@ -634,7 +724,7 @@ export default function StickyMilkView() {
               <button
                 key={i}
                 type="button"
-                onClick={() => pick(ex.base, ex.flavor, ex.cracker)}
+                onClick={() => pickExample(ex.base, ex.flavor, ex.cracker)}
                 className="hover-lift group flex flex-col items-center rounded-2xl bg-white p-3 text-center shadow-soft ring-1 ring-ink/5 transition-all hover:ring-grape-300"
               >
                 <span
@@ -644,7 +734,9 @@ export default function StickyMilkView() {
                       : "bg-amber-50 text-amber-700"
                   }`}
                 >
-                  {ex.base ? "🥤 มีน้ำ" : "🍪 ไม่ใส่น้ำ"}
+                  {ex.base
+                    ? "🥤 น้ำ + นมเหนียว · 30"
+                    : "🍪 นมเหนียว + แครกเกอร์ · 30"}
                 </span>
                 <div className="my-1 transition-transform group-hover:-rotate-3 group-hover:scale-105">
                   <StickyCup
@@ -698,10 +790,8 @@ export default function StickyMilkView() {
           <button
             type="button"
             onClick={() => {
-              chooseStyle("separate");
-              document
-                .getElementById("sticky-builder")
-                ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              update("milkCracker", { serve: "separate" });
+              scrollToBuilder();
             }}
             className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-grape-600 to-blossom-500 px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-[1.03]"
           >
@@ -710,212 +800,196 @@ export default function StickyMilkView() {
         </div>
       </div>
 
-      {/* 🛠️ จัดเอง */}
-      <div
-        id="sticky-builder"
-        className="mt-8 grid scroll-mt-24 gap-6 lg:grid-cols-[minmax(0,1fr)_320px]"
-      >
-        <div className="space-y-6">
-          {/* 1️⃣ */}
-          <div>
-            <p className="mb-2 text-sm font-semibold text-ink">
-              1️⃣ เลือกเครื่องดื่ม{" "}
-              <span className="font-medium text-ink/40">
-                — เลือกได้ หรือไม่เลือกก็ได้
-              </span>
-            </p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-              {STICKY_BASES.map((b) => (
-                <Chip
-                  key={b.id}
-                  label={`${b.emoji} ${b.nameTh}`}
-                  sub={b.nameEn}
-                  price={b.price}
-                  active={!noDrink && baseId === b.id}
-                  onClick={() => chooseBase(b.id)}
-                />
-              ))}
-              <Chip
-                label="🚫 ไม่เอาน้ำ"
-                sub={
-                  separate
-                    ? "เอาแค่กระปุก + แครกเกอร์"
-                    : "กินนมเหนียวกับแครกเกอร์"
-                }
-                active={noDrink || (separate && !base)}
-                onClick={() => chooseBase(null)}
-              />
+      {/* 🛠️ รายละเอียดของแต่ละแบบที่เลือก */}
+      <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="space-y-5">
+          {selected.length === 0 && (
+            <div className="rounded-2xl bg-grape-50/70 p-5 text-center text-sm text-ink/60">
+              👆 เลือกแบบที่อยากกินด้านบนก่อน (เลือกได้หลายแบบ)
+              แล้วค่อยเลือกรส/น้ำตรงนี้
             </div>
-          </div>
+          )}
 
-          {/* 2️⃣ */}
-          <div>
-            <p className="mb-2 text-sm font-semibold text-ink">
-              2️⃣ เลือกรสนมเหนียว{" "}
-              <span className="font-medium text-ink/40">(จับคู่ได้ทุกแบบ)</span>
-            </p>
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
-              {STICKY_FLAVORS.map((f) => {
-                const active = flavorId === f.id;
-                return (
-                  <button
-                    key={f.id}
-                    type="button"
-                    onClick={() => setFlavorId(f.id)}
-                    className={`group relative flex flex-col items-center rounded-2xl border p-2.5 text-center transition-all duration-200 active:scale-95 ${
-                      active
-                        ? "scale-[1.03] border-grape-500 bg-grape-50 shadow-soft ring-2 ring-grape-deep"
-                        : "border-ink/10 bg-white hover:border-grape-300 hover:bg-grape-50/60"
-                    }`}
-                  >
-                    {active && (
-                      <span className="animate-pop-in absolute right-1.5 top-1.5 z-10 grid h-6 w-6 place-items-center rounded-full bg-[#22C55E] text-white shadow ring-2 ring-white">
-                        <Check size={14} strokeWidth={3} />
-                      </span>
-                    )}
-                    {/* 🥄 รูปนมเหนียวบนช้อน — สีตามรส */}
-                    <div className="grid aspect-square w-full place-items-center rounded-xl bg-gradient-to-b from-cream-50 to-grape-50/60 transition-transform group-hover:scale-105">
-                      <StickySpoon color={f.color} image={f.image} size={88} />
-                    </div>
-                    <span className="mt-1.5 text-[12px] font-semibold leading-tight text-ink">
-                      {f.nameTh}
-                    </span>
-                    <span className="text-[10px] text-ink/45">{f.nameEn}</span>
-                    <span className="mt-1 rounded-full bg-blossom-100 px-2 py-0.5 text-xs font-extrabold text-ink">
-                      +{f.price}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* 3️⃣ */}
-          <div>
-            <p className="mb-2 text-sm font-semibold text-ink">
-              3️⃣ เลือกรูปแบบการกิน 🍪
-            </p>
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-              {STICKY_STYLES.map((s) => (
-                <Chip
-                  key={s.id}
-                  label={s.label}
-                  sub={s.desc}
-                  price={
-                    s.id === "crackerOnly"
-                      ? STICKY_CRACKER_SET_PRICE
-                      : s.id === "separate"
-                        ? STICKY_SEPARATE_SET_PRICE
-                        : undefined
-                  }
-                  active={style === s.id}
-                  onClick={() => chooseStyle(s.id)}
-                />
-              ))}
-            </div>
-            {style === "pour" && (
-              <div className="mt-2">
-                <Chip
-                  label="🍪 เพิ่มแครกเกอร์"
-                  sub="ตัวเลือกเสริมของแบบราดน้ำ"
-                  price={STICKY_CRACKER_PRICE}
-                  active={extraCracker}
-                  onClick={() => setExtraCracker((v) => !v)}
-                />
-              </div>
-            )}
-            <p className="mt-2 text-[11px] text-ink/45">
-              * อยากซื้อแครกเกอร์อย่างเดียว เลือกได้จากเมนู{" "}
-              <a
-                href="/menu/snacks"
-                className="font-semibold text-grape-600 underline-offset-2 hover:underline"
+          {selected.map((p) => {
+            const pk = pickOf(p.id);
+            const okay = isReady(p);
+            return (
+              <div
+                key={p.id}
+                className={`animate-pop-in rounded-3xl bg-white/90 p-4 ring-1 sm:p-5 ${
+                  okay ? "ring-emerald-200" : "ring-grape-200"
+                }`}
               >
-                ขนม
-              </a>
-            </p>
-          </div>
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <p className="font-display text-base font-bold text-ink">
+                    {p.emoji} {p.nameTh}{" "}
+                    <span className="text-sm font-semibold text-blossom-500">
+                      {p.price}
+                    </span>
+                    <span className="text-xs font-medium text-ink/45">
+                      {" "}
+                      บาท/{p.unit}
+                    </span>
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => togglePkg(p.id)}
+                    className="rounded-full bg-ink/5 px-2.5 py-1 text-[11px] font-medium text-ink/60 hover:bg-ink/10"
+                  >
+                    ✕ เอาออก
+                  </button>
+                </div>
+
+                {p.id === "crackerOnly" && (
+                  <p className="text-sm text-emerald-600">
+                    ✓ พร้อมเพิ่มลงตะกร้าได้เลย ไม่ต้องเลือกอะไรเพิ่ม
+                  </p>
+                )}
+
+                {p.needDrink && (
+                  <div className="mb-4">
+                    <p className="mb-2 text-xs font-semibold text-ink/70">
+                      🥤 เลือกเครื่องดื่ม{" "}
+                      <span className="font-medium text-ink/40">
+                        (รวมในราคาแล้ว)
+                      </span>
+                    </p>
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+                      {STICKY_BASES.map((b) => (
+                        <Chip
+                          key={b.id}
+                          label={`${b.emoji} ${b.nameTh}`}
+                          sub={b.nameEn}
+                          active={pk.base === b.id}
+                          onClick={() => update(p.id, { base: b.id })}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {p.needFlavor && (
+                  <div>
+                    <p className="mb-2 text-xs font-semibold text-ink/70">
+                      🥄 เลือกรสนมเหนียว{" "}
+                      <span className="font-medium text-ink/40">
+                        (รวมในราคาแล้ว)
+                      </span>
+                    </p>
+                    <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+                      {STICKY_FLAVORS.map((f) => {
+                        const active = pk.flavor === f.id;
+                        return (
+                          <button
+                            key={f.id}
+                            type="button"
+                            onClick={() => update(p.id, { flavor: f.id })}
+                            className={`group relative flex flex-col items-center rounded-2xl border p-2 text-center transition-all duration-200 active:scale-95 ${
+                              active
+                                ? "scale-[1.03] border-grape-500 bg-grape-50 shadow-soft ring-2 ring-grape-deep"
+                                : "border-ink/10 bg-white hover:border-grape-300 hover:bg-grape-50/60"
+                            }`}
+                          >
+                            {active && (
+                              <span className="animate-pop-in absolute right-1 top-1 z-10 grid h-5 w-5 place-items-center rounded-full bg-[#22C55E] text-white shadow ring-2 ring-white">
+                                <Check size={12} strokeWidth={3} />
+                              </span>
+                            )}
+                            <div className="grid aspect-square w-full place-items-center rounded-xl bg-gradient-to-b from-cream-50 to-grape-50/60 transition-transform group-hover:scale-105">
+                              <StickySpoon
+                                color={f.color}
+                                image={f.image}
+                                size={64}
+                              />
+                            </div>
+                            <span className="mt-1 text-[11px] font-semibold leading-tight text-ink">
+                              {f.nameTh.replace("นมเหนียว", "")}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {p.id === "milkCracker" && (
+                  <div className="mt-4">
+                    <p className="mb-2 text-xs font-semibold text-ink/70">
+                      🍪 รับแบบไหนดี
+                    </p>
+                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                      {STICKY_SERVE.map((sv) => (
+                        <Chip
+                          key={sv.id}
+                          label={sv.label}
+                          sub={sv.desc}
+                          active={pk.serve === sv.id}
+                          onClick={() => update(p.id, { serve: sv.id })}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
-        {/* สรุป + พรีวิว */}
+        {/* สรุป */}
         <div className="rounded-3xl bg-white/95 p-6 shadow-soft ring-1 ring-ink/5 lg:sticky lg:top-24 lg:self-start">
-          <div className="grid place-items-center">
-            {separate ? (
-              <SeparateSet base={base} flavor={flavor} size={130} />
-            ) : ready || base || noDrink ? (
-              <StickyCup
-                base={base}
-                flavor={flavor}
-                cracker={cracker}
-                size={130}
-              />
-            ) : (
-              <div className="grid h-[162px] w-[130px] place-items-center rounded-3xl bg-grape-50 text-4xl">
+          <div className="flex flex-wrap justify-center gap-1">
+            {selected.length === 0 ? (
+              <div className="grid h-[120px] w-[96px] place-items-center rounded-3xl bg-grape-50 text-4xl">
                 🥛
               </div>
+            ) : (
+              selected.map((p) => (
+                <div key={p.id}>
+                  {preview(p, selected.length > 2 ? 64 : 88)}
+                </div>
+              ))
             )}
           </div>
           <h3 className="font-display mt-1 text-center text-lg font-semibold text-grape-700">
-            {ready
-              ? (separate ? "📦 แบบแยก: " : "") +
-                nameOf(base?.id ?? null, flavor!.id)
-                  .replace(/[^\p{L}\p{M}\p{N}\s+:]/gu, "")
-                  .trim()
-              : "แก้วของคุณ"}
+            {selected.length === 0
+              ? "ยังไม่ได้เลือก"
+              : `เลือกแล้ว ${selected.length} รายการ`}
           </h3>
-          {!ready && (
-            <p className="mt-1 text-center text-xs text-ink/50">
-              {noDrink || separate
-                ? "เลือกรสนมเหนียวได้เลย"
-                : "เลือกน้ำ (หรือไม่เอาน้ำ) และรสนมเหนียว"}
-            </p>
-          )}
 
-          <div className="mt-3 space-y-1.5 border-t border-ink/5 pt-3 text-sm">
-            {separate && (
-              <div className="flex justify-between gap-3">
-                <span className="text-ink/70">
-                  📦 ชุดแยก: กระปุก + แครกเกอร์มีฝา
-                </span>
-                <span className="font-medium text-ink">
-                  {STICKY_SEPARATE_SET_PRICE}
-                </span>
-              </div>
-            )}
-            {noDrink ? (
-              <div className="flex justify-between gap-3">
-                <span className="text-ink/70">🍪 ชุดนมเหนียว + แครกเกอร์</span>
-                <span className="font-medium text-ink">
-                  {STICKY_CRACKER_SET_PRICE}
-                </span>
-              </div>
-            ) : (
-              base && (
-                <div className="flex justify-between gap-3">
-                  <span className="text-ink/70">
-                    {base.emoji} {base.nameTh}
-                  </span>
-                  <span className="font-medium text-ink">{base.price}</span>
+          <div className="mt-3 space-y-2 border-t border-ink/5 pt-3 text-sm">
+            {selected.map((p) => {
+              const pk = pickOf(p.id);
+              const b = baseOf(pk);
+              const f = flavorOf(pk);
+              const okay = isReady(p);
+              return (
+                <div key={p.id}>
+                  <div className="flex justify-between gap-3">
+                    <span className="text-ink/80">
+                      {p.emoji} {p.nameTh}
+                    </span>
+                    <span className="font-medium text-ink">{p.price}</span>
+                  </div>
+                  <p
+                    className={`text-[11px] ${okay ? "text-ink/50" : "text-blossom-500"}`}
+                  >
+                    {okay
+                      ? [
+                          b?.nameTh,
+                          f?.nameTh,
+                          p.id === "milkCracker"
+                            ? STICKY_SERVE.find((x) => x.id === pk.serve)!.label
+                            : null,
+                        ]
+                          .filter(Boolean)
+                          .join(" · ") || "พร้อมเพิ่ม"
+                      : p.needDrink && !b
+                        ? "ยังไม่ได้เลือกเครื่องดื่ม"
+                        : "ยังไม่ได้เลือกรสนมเหนียว"}
+                  </p>
                 </div>
-              )
-            )}
-            {flavor && (
-              <div className="flex justify-between gap-3">
-                <span className="text-ink/70">
-                  {flavor.emoji} {flavor.nameTh}
-                </span>
-                <span className="font-medium text-blossom-500">
-                  +{flavor.price}
-                </span>
-              </div>
-            )}
-            {style === "pour" && extraCracker && (
-              <div className="flex justify-between gap-3">
-                <span className="text-ink/70">🍪 เพิ่มแครกเกอร์</span>
-                <span className="font-medium text-blossom-500">
-                  +{STICKY_CRACKER_PRICE}
-                </span>
-              </div>
-            )}
+              );
+            })}
           </div>
 
           <div className="mt-3 flex items-center justify-between border-t border-dashed border-ink/15 pt-3">
@@ -944,6 +1018,7 @@ export default function StickyMilkView() {
             ) : (
               <>
                 <Plus size={17} /> เพิ่มลงตะกร้า
+                {selected.length > 1 ? ` (${selected.length} รายการ)` : ""}
               </>
             )}
           </button>
