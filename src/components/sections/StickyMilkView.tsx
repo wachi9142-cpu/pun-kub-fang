@@ -16,6 +16,7 @@ import {
   type StickyFlavor,
 } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
+import StickyCheersDecor from "@/components/sections/StickyCheersDecor";
 
 type StyleId = (typeof STICKY_STYLES)[number]["id"];
 
@@ -581,9 +582,17 @@ export default function StickyMilkView() {
   };
 
   return (
-    <section className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
+    <section className="relative mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
+      {/* 🥂 ภาพประกอบตกแต่ง: แก้วนมเหนียว × แก้วแครกเกอร์ ชนกัน (ไม่บังเนื้อหา) */}
+      <StickyCheersDecor className="absolute -right-2 top-0 hidden w-44 opacity-90 md:block lg:-right-6 lg:w-56 xl:-right-16 xl:w-64" />
+      <StickyCheersDecor className="absolute -left-4 top-2 hidden w-36 -scale-x-100 opacity-70 lg:block xl:-left-14 xl:w-44" />
+
       {/* หัว */}
-      <div className="mb-6 text-center">
+      <div className="relative mb-6 text-center">
+        {/* มือถือ/แท็บเล็ตเล็ก: วางไว้เหนือหัวเรื่องขนาดเล็ก */}
+        <div className="mx-auto mb-1 w-40 md:hidden">
+          <StickyCheersDecor className="w-full" />
+        </div>
         <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
           🥛 นมเหนียว <span className="text-blossom-400">| Sticky Milk</span>
         </h1>
