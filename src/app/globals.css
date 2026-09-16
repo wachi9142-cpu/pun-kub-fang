@@ -779,6 +779,16 @@ body {
   .animate-milk-drop { animation: none; }
 }
 
+
+/* 🥛 เส้นของเหลวสีนมหมุนวนรอบแก้ว ช้า ๆ */
+@keyframes milk-swirl { to { transform: rotate(360deg); } }
+@keyframes milk-swirl-rev { to { transform: rotate(-360deg); } }
+.animate-milk-swirl { animation: milk-swirl 30s linear infinite; }
+.animate-milk-swirl-rev { animation: milk-swirl-rev 30s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-milk-swirl, .animate-milk-swirl-rev { animation: none; }
+}
+
 /* ♿ ลดการเคลื่อนไหวสำหรับผู้ที่ตั้งค่า prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-drop-in,
