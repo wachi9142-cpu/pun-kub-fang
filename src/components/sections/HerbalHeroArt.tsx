@@ -18,8 +18,8 @@ const BOTTLES: Bottle[] = [
   {
     x: 26,
     h: 130,
-    top: "#e0435c",
-    bottom: "#a3122f",
+    top: "#d6224a",
+    bottom: "#6e0a20",
     label: "กระเจี๊ยบ",
     emoji: "🌺",
     delay: "0s",
@@ -27,8 +27,8 @@ const BOTTLES: Bottle[] = [
   {
     x: 92,
     h: 150,
-    top: "#ffd45c",
-    bottom: "#e0a11c",
+    top: "#ffcd3c",
+    bottom: "#c98a0a",
     label: "เก๊กฮวย",
     emoji: "🌼",
     delay: "0.8s",
@@ -36,8 +36,8 @@ const BOTTLES: Bottle[] = [
   {
     x: 160,
     h: 166,
-    top: "#6fa8ff",
-    bottom: "#2d4ec9",
+    top: "#4c78f0",
+    bottom: "#1a2a8f",
     label: "อัญชัน",
     emoji: "🦋",
     delay: "1.6s",
@@ -45,8 +45,8 @@ const BOTTLES: Bottle[] = [
   {
     x: 228,
     h: 150,
-    top: "#9bd66a",
-    bottom: "#3f8f35",
+    top: "#7cc244",
+    bottom: "#1f5f1a",
     label: "ใบเตย",
     emoji: "🌿",
     delay: "0.4s",
@@ -54,8 +54,8 @@ const BOTTLES: Bottle[] = [
   {
     x: 294,
     h: 130,
-    top: "#e9c48c",
-    bottom: "#b07a3a",
+    top: "#e0a85a",
+    bottom: "#7a4a14",
     label: "มะตูม",
     emoji: "🌳",
     delay: "1.2s",
@@ -164,6 +164,33 @@ function BottleSvg({ b }: { b: Bottle }) {
       >
         {b.label}
       </text>
+      {/* 💧 หยดน้ำเกาะขวด (เย็นสดชื่น) */}
+      {[
+        [b.x + 6, baseY - 30],
+        [b.x + 10, baseY - 70],
+        [b.x + w - 8, baseY - 50],
+        [b.x + w - 12, baseY - 95],
+      ].map(([dx, dy], i) => (
+        <circle
+          key={i}
+          cx={dx}
+          cy={dy}
+          r={1.6 + (i % 2) * 0.6}
+          fill="#ffffff"
+          opacity="0.85"
+        />
+      ))}
+      {/* ✨ แสงสะท้อนวิ่งผ่านขวด */}
+      <rect
+        x={b.x + 8}
+        y={y + 50}
+        width="10"
+        height={b.h - 60}
+        fill="#ffffff"
+        opacity="0.25"
+        className="animate-glass-shine"
+        style={{ animationDelay: b.delay }}
+      />
       {/* ฟองเล็ก ๆ ในน้ำ */}
       <circle
         cx={b.x + w - 14}
@@ -199,8 +226,8 @@ export default function HerbalHeroArt({
           width="380"
           height="200"
           rx="18"
-          fill="#f3ecfb"
-          opacity="0.7"
+          fill="#ffffff"
+          opacity="0.12"
         />
         {/* แผ่นชั้น */}
         <rect x="6" y="218" width="368" height="14" rx="5" fill="#d9b98a" />

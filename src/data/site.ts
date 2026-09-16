@@ -260,6 +260,8 @@ export type MenuItem = {
   popular?: boolean;
   /** รูปจริงของเมนู เช่น "/menu/grape-yogurt.webp" — ถ้าไม่ใส่จะใช้แก้ว SVG อัตโนมัติ */
   image?: string;
+  /** หมดชั่วคราว — ฟีเจอร์ "สุ่มแก้วกับฟ่าง" จะข้ามเมนูนี้ */
+  soldOut?: boolean;
 };
 
 export const MENU_ITEMS: MenuItem[] = [
@@ -2340,4 +2342,175 @@ export const FEATURES = [
   { emoji: "🍒", title: "ผลไม้สด", detail: "คัดเกรดพรีเมียม" },
   { emoji: "🥤", title: "ปั่นสดใหม่", detail: "ทุกออร์เดอร์" },
   { emoji: "🌿", title: "ไม่ใส่วัตถุกันเสีย", detail: "ปลอดภัย อร่อยแน่นอน" },
+];
+
+/* ═══════════════════════════════════════════════════════════
+   🎰 สุ่มแก้วกับฟ่าง — ข้อมูล "ตู้กาชาปอง" (แยกจากเมนูหลัก ไม่กระทบ MENU_ITEMS)
+   - GACHA_FROM_MENU: id ของเมนูหลักที่ยอมให้อยู่ในตู้ (ดึงชื่อ/ราคา/รูปจาก MENU_ITEMS จริง)
+   - GACHA_MENUS: เมนูลับ/เมนูมั่ว/เมนูทดลองของฟ่าง ที่ "ไม่มี" ในเมนูหลัก
+   - rarity ใช้แค่ป้ายบอกความพิเศษ · ยัง "ไม่กำหนดอัตราสุ่ม" → สุ่มทุกใบเท่ากัน
+   - available: false = วันนี้ไม่มี → ตู้จะข้าม
+   - ⚠️ ราคาเมนูลับตั้งไว้เป็นตัวอย่าง แก้ได้ที่นี่ที่เดียว
+   ═══════════════════════════════════════════════════════════ */
+export type GachaRarity = "common" | "special" | "lucky" | "secret";
+
+export const GACHA_RARITY: Record<
+  GachaRarity,
+  { label: string; labelEn: string; emoji: string; color: string }
+> = {
+  common: { label: "ธรรมดา", labelEn: "Common", emoji: "🍀", color: "#8ee39a" },
+  special: { label: "พิเศษ", labelEn: "Special", emoji: "✨", color: "#ffd76a" },
+  lucky: { label: "Lucky Drink", labelEn: "Lucky", emoji: "💜", color: "#b48cff" },
+  secret: { label: "SECRET MENU", labelEn: "Secret", emoji: "👀", color: "#ff8fb1" },
+};
+
+export type GachaMenu = {
+  id: string;
+  name: string;
+  englishName: string;
+  description: string;
+  price: number;
+  emoji: string;
+  image?: string;
+  category: CategoryId;
+  palette: SmoothiePalette;
+  rarity: GachaRarity;
+  available?: boolean;
+  /** เมนูลับ — ไม่มีในเมนูหลัก */
+  isSecret?: boolean;
+  /** เป็นเมนูปั่น/สมูทตี้ */
+  isSmoothie?: boolean;
+  /** เมนูทดลอง/มิกซ์พิเศษของฟ่าง */
+  isSpecial?: boolean;
+  /** ลูกค้าถามหาบ่อย (ใส่ตามจริงเท่านั้น) */
+  askedOften?: boolean;
+};
+
+/* เมนูหลักที่อยู่ในตู้ (อ้างอิง MENU_ITEMS จริง) */
+export const GACHA_FROM_MENU: string[] = [
+  "latte-blend",
+  "caramel-blend",
+  "bear-pink",
+  "bear-choco",
+  "two-tone-milk",
+  "thai-milk-tea",
+  "matcha-milk",
+  "peach-tea",
+  "lime-soda",
+  "passionfruit-soda",
+  "grape-yogurt",
+  "strawberry-milk",
+  "watermelon-smoothie",
+  "lychee-smoothie",
+  "avocado-smoothie",
+];
+
+/* เมนูลับ / เมนูมั่ว / เมนูทดลองของฟ่าง (ไม่มีในเมนูหลัก) */
+export const GACHA_MENUS: GachaMenu[] = [
+  {
+    id: "gacha-tamarind-soda",
+    name: "มะขามเปรี้ยวซ่า",
+    englishName: "Tamarind Fizz",
+    description: "มะขามเปรี้ยวหวาน + โซดาซ่า ๆ แบบที่ไม่มีในเมนูหลัก 🌶️🫧",
+    price: 45,
+    emoji: "🌶️",
+    category: "soda",
+    palette: { foam: "#fde7c8", top: "#d98a3c", bottom: "#8a4b12" },
+    rarity: "secret",
+    isSecret: true,
+    isSpecial: true,
+  },
+  {
+    id: "gacha-lychee-rose-tea",
+    name: "ชาลิ้นจี่กุหลาบ",
+    englishName: "Lychee Rose Tea",
+    description: "ชาดำหอม ๆ + ลิ้นจี่ + กลิ่นกุหลาบบาง ๆ เมนูทดลองของฟ่าง 🌹",
+    price: 50,
+    emoji: "🌹",
+    category: "tea",
+    palette: { foam: "#ffe3ec", top: "#f2a0bd", bottom: "#b23a62" },
+    rarity: "special",
+    isSecret: true,
+    isSpecial: true,
+  },
+  {
+    id: "gacha-pineapple-mint-soda",
+    name: "สับปะรดมินต์โซดา",
+    englishName: "Pineapple Mint Soda",
+    description: "สับปะรดหวานฉ่ำ + ใบมินต์ + โซดา เย็นซ่าถึงใจ 🍍🌿",
+    price: 45,
+    emoji: "🍍",
+    category: "soda",
+    palette: { foam: "#fff7c2", top: "#ffe066", bottom: "#4fbf8a" },
+    rarity: "special",
+    isSecret: true,
+    isSpecial: true,
+  },
+  {
+    id: "gacha-choco-banana-blend",
+    name: "กล้วยช็อกโกปั่นลับ",
+    englishName: "Secret Choco Banana Blend",
+    description: "กล้วยหอม + ช็อกโกแลตเข้ม + นมสด ปั่นเนียน ๆ ไม่ได้อยู่ในหมวดสมูทตี้ 🍌🍫",
+    price: 55,
+    emoji: "🍌",
+    category: "smoothie",
+    palette: { foam: "#f3e2c8", top: "#a9714b", bottom: "#5c3a2a" },
+    rarity: "lucky",
+    isSecret: true,
+    isSmoothie: true,
+  },
+  {
+    id: "gacha-mango-thaitea-blend",
+    name: "มะม่วงชาไทยปั่น",
+    englishName: "Mango Thai Tea Blend",
+    description: "มะม่วงสุก + ชาไทยเข้ม ปั่นเป็นสองรสในแก้วเดียว มั่วแต่เข้ากัน 😂",
+    price: 60,
+    emoji: "🥭",
+    category: "smoothie",
+    palette: { foam: "#ffe9b8", top: "#ffb84d", bottom: "#c9662b" },
+    rarity: "lucky",
+    isSecret: true,
+    isSmoothie: true,
+    isSpecial: true,
+  },
+  {
+    id: "gacha-butterfly-lemon-milk",
+    name: "นมอัญชันเลมอน",
+    englishName: "Butterfly Pea Lemon Milk",
+    description: "นมสด + อัญชัน + เลมอน เปลี่ยนสีม่วง-ชมพูตอนคน 💜🍋",
+    price: 45,
+    emoji: "🦋",
+    category: "milk",
+    palette: { foam: "#ffffff", top: "#b9a6ff", bottom: "#6d4bd6" },
+    rarity: "special",
+    isSecret: true,
+    isSpecial: true,
+  },
+  {
+    id: "gacha-coconut-coffee",
+    name: "กาแฟมะพร้าว",
+    englishName: "Coconut Coffee",
+    description: "เอสเพรสโซ + น้ำมะพร้าว + นมมะพร้าว หอมมันแบบไม่คาดคิด 🥥☕",
+    price: 55,
+    emoji: "🥥",
+    category: "drinks",
+    palette: { foam: "#f7efe6", top: "#b58a63", bottom: "#5b3a24" },
+    rarity: "special",
+    isSecret: true,
+    isSpecial: true,
+  },
+  {
+    id: "gacha-strawberry-matcha-blend",
+    name: "สตรอว์เบอร์รีมัทฉะปั่น",
+    englishName: "Strawberry Matcha Blend",
+    description: "ชั้นสตรอว์เบอร์รีสด + มัทฉะปั่น สีสวยแปลกตา 🍓🍵",
+    price: 65,
+    emoji: "🍓",
+    category: "smoothie",
+    palette: { foam: "#ffe3ec", top: "#ff8fb1", bottom: "#4f9a5a" },
+    rarity: "secret",
+    isSecret: true,
+    isSmoothie: true,
+    isSpecial: true,
+  },
 ];

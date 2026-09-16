@@ -3,6 +3,8 @@ import { Prompt, Mitr } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
 import "./globals.css";
+import BobaCursor from "@/components/BobaCursor";
+import FangChat from "@/components/chat/FangChat";
 
 const prompt = Prompt({
   subsets: ["latin", "thai"],
@@ -22,7 +24,14 @@ export const metadata: Metadata = {
   title: "ปั่นกับฟ่าง · Smoothie & Drinks | ปั่นสด อร่อยทุกแก้ว",
   description:
     "ปั่นกับฟ่าง ร้านน้ำปั่นผลไม้สด สมูทตี้ นมสด โกโก้ มัทฉะ ปั่นสดใหม่ทุกแก้ว คัดสรรวัตถุดิบคุณภาพ ไม่ใส่วัตถุกันเสีย สั่งเลยวันนี้!",
-  keywords: ["น้ำปั่น", "สมูทตี้", "ปั่นกับฟ่าง", "smoothie", "ผลไม้ปั่น", "นมสด"],
+  keywords: [
+    "น้ำปั่น",
+    "สมูทตี้",
+    "ปั่นกับฟ่าง",
+    "smoothie",
+    "ผลไม้ปั่น",
+    "นมสด",
+  ],
 };
 
 export const viewport: Viewport = {
@@ -51,6 +60,8 @@ export default function RootLayout({
             }}
           >
             {children}
+            <FangChat />
+            <BobaCursor />
           </ConfigProvider>
         </AntdRegistry>
       </body>

@@ -10,8 +10,9 @@ import {
   WHIP_FRUIT_PRICE,
 } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
-import SmoothieCup from "@/components/SmoothieCup";
 import ToppingSelector from "@/components/ToppingSelector";
+import WhipCupCharacter, { type WhipMood } from "@/components/WhipCupCharacter";
+import AddToCartFx from "@/components/AddToCartFx";
 
 const CREAM = { foam: "#fffdf8", top: "#ffe0ee", bottom: "#f9b6d4" };
 
@@ -57,15 +58,25 @@ function ToppingChip({
 }
 
 export default function WhippedCream() {
-  const { addItem, openCart } = useCart();
+  const { addItem, showToast } = useCart();
   const [toppings, setToppings] = useState<string[]>([]);
   const [fruits, setFruits] = useState<string[]>([]);
   const [added, setAdded] = useState(false);
+  /* 🍦 น้องแก้ววิปครีม: ดีใจตอนถูกเลือก (happy ชั่วครู่) · แก้วบินเข้าตะกร้าตอนกดเพิ่ม */
+  const [mood, setMood] = useState<WhipMood>("idle");
+  const [flying, setFlying] = useState(false);
+  const cheer = () => {
+    setMood("happy");
+    window.setTimeout(() => setMood("idle"), 1200);
+  };
 
   const toggle = (
     set: React.Dispatch<React.SetStateAction<string[]>>,
     v: string,
-  ) => set((p) => (p.includes(v) ? p.filter((x) => x !== v) : [...p, v]));
+  ) => {
+    set((p) => (p.includes(v) ? p.filter((x) => x !== v) : [...p, v]));
+    cheer();
+  };
 
   const allToppings = WHIP_TOPPING_GROUPS.flatMap((g) => g.items);
   const toppingLines = allToppings
@@ -86,19 +97,83 @@ export default function WhippedCream() {
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 1600);
-    openCart();
+    setMood("happy");
+    setFlying(true);
+  };
+
+  const finishFly = () => {
+    setFlying(false);
+    setMood("idle");
+    showToast({
+      emoji: "🍦",
+      name: "วิปครีมแก้ว",
+      title: "🍦 วิปฟู ๆ เข้าแก้วแล้ว!",
+    });
   };
 
   return (
     <section className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
-      <div className="mb-6 text-center">
-        <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-          🍦 วิปครีมแก้ว{" "}
-          <span className="text-blossom-400">| Whipped Cream Cups</span>
-        </h1>
-        <p className="mt-2 text-ink/60">
-          วิปครีมนุ่ม ๆ เริ่มต้น {WHIP_BASE_PRICE} · เลือกท็อปปิ้งเพิ่มได้ตามใจ 💜
-        </p>
+      {flying && (
+        <AddToCartFx
+          variant="whip"
+          palette={CREAM}
+          emoji="🍦"
+          onDone={finishFly}
+        />
+      )}
+
+      {/* 🍦 Hero: น้องแก้ววิปครีม ตัวการ์ตูนประจำหมวด */}
+      <div className="relative mb-6 overflow-hidden rounded-[2rem] bg-gradient-to-br from-grape-200 via-[#fbe9f7] to-cream-100 px-6 py-8 ring-1 ring-white/80 sm:px-10 lg:py-10">
+        <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-grape-300/40 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 right-1/3 h-64 w-64 rounded-full bg-[#f5b7c8]/45 blur-3xl" />
+        <div className="pointer-events-none absolute -right-16 top-4 h-72 w-72 rounded-full bg-white/60 blur-2xl" />
+        <div className="relative grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="text-center lg:text-left">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-grape-700 ring-1 ring-grape-200">
+              🍦 น้องแก้ววิปครีม · ฟูนุ่ม มีชีวิต 💜
+            </span>
+            <h1 className="font-display mt-3 text-3xl font-bold text-ink sm:text-4xl lg:text-5xl">
+              วิปครีมแก้ว
+            </h1>
+            <p className="font-display mt-1 text-lg font-semibold text-blossom-400">
+              Whipped Cream Cups
+            </p>
+            <p className="mx-auto mt-3 max-w-xl text-ink/65 lg:mx-0">
+              วิปครีมฟู ๆ นุ่ม ๆ เริ่มต้น {WHIP_BASE_PRICE} บาท ·
+              เลือกท็อปปิ้งและผลไม้เพิ่มได้ตามใจ — เลือกอะไรน้องแก้วก็ดีใจ
+              ลองเอาเมาส์ไปชี้ดูสิ ✨
+            </p>
+            <div className="mt-4 flex flex-wrap justify-center gap-1.5 lg:justify-start">
+              {[
+                ["🍓 สตรอว์เบอร์รี", "#e5194f"],
+                ["🫐 บลูเบอร์รี", "#2f3fc4"],
+                ["🍊 ส้ม", "#ff7f11"],
+                ["🥝 กีวี", "#5cb52e"],
+                ["🍇 องุ่น", "#7c3fc4"],
+              ].map(([t, c]) => (
+                <span
+                  key={t}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-2.5 py-1 text-[11px] font-semibold text-ink ring-1 ring-ink/5"
+                >
+                  <span
+                    className="h-2.5 w-2.5 rounded-full ring-1 ring-white"
+                    style={{ background: c }}
+                  />
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="order-first flex justify-center lg:order-none">
+            <WhipCupCharacter
+              fruits={fruits}
+              toppings={toppings.length}
+              mood={mood}
+              size={200}
+              className="sm:!h-[288px] sm:!w-[240px] lg:!h-[336px] lg:!w-[280px]"
+            />
+          </div>
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
@@ -107,7 +182,9 @@ export default function WhippedCream() {
           <div>
             <p className="mb-2 text-sm font-semibold text-ink">
               🧋 เลือกท็อปปิ้ง{" "}
-              <span className="font-medium text-ink/40">(แตะรูปเพื่อดูรายละเอียด)</span>
+              <span className="font-medium text-ink/40">
+                (แตะรูปเพื่อดูรายละเอียด)
+              </span>
             </p>
             <ToppingSelector
               groups={WHIP_TOPPING_GROUPS}
@@ -119,7 +196,8 @@ export default function WhippedCream() {
           {/* ผลไม้สด */}
           <div>
             <p className="mb-1 text-sm font-semibold text-ink">
-              🍓 ผลไม้สด <span className="font-medium text-ink/40">Fresh Fruits</span>
+              🍓 ผลไม้สด{" "}
+              <span className="font-medium text-ink/40">Fresh Fruits</span>
             </p>
             <p className="mb-2 text-[11px] text-ink/50">
               🍓 ผลไม้สดมีให้เลือกแตกต่างกันในแต่ละวัน
@@ -160,7 +238,13 @@ export default function WhippedCream() {
         {/* สรุปราคา real-time */}
         <div className="rounded-3xl bg-white/95 p-6 shadow-soft ring-1 ring-ink/5 lg:sticky lg:top-24 lg:self-start">
           <div className="grid place-items-center">
-            <SmoothieCup palette={CREAM} emoji="🍦" size={120} />
+            <WhipCupCharacter
+              fruits={fruits}
+              toppings={toppings.length}
+              mood={mood}
+              size={120}
+              interactive={false}
+            />
           </div>
           <h3 className="font-display mt-1 text-center text-lg font-semibold text-grape-700">
             สรุปรายการที่เลือก
@@ -186,7 +270,9 @@ export default function WhippedCream() {
           </div>
 
           <div className="mt-3 flex items-center justify-between border-t border-dashed border-ink/15 pt-3">
-            <span className="text-sm font-semibold text-grape-500">ราคารวม</span>
+            <span className="text-sm font-semibold text-grape-500">
+              ราคารวม
+            </span>
             <span className="font-display text-3xl font-bold text-blossom-500">
               {total}
             </span>
@@ -215,7 +301,9 @@ export default function WhippedCream() {
 
       {/* หมายเหตุผลไม้ตามฤดู */}
       <div className="mx-auto mt-8 max-w-3xl rounded-2xl bg-amber-50 p-4 text-center ring-1 ring-amber-200/70">
-        <p className="text-sm leading-relaxed text-amber-900/85">{WHIP_NOTE.th}</p>
+        <p className="text-sm leading-relaxed text-amber-900/85">
+          {WHIP_NOTE.th}
+        </p>
         <p className="mt-1 text-xs italic text-amber-900/55">{WHIP_NOTE.en}</p>
       </div>
     </section>

@@ -75,9 +75,22 @@ body {
   color: var(--color-ink);
   overflow-x: hidden;
   background:
-    radial-gradient(900px 480px at 12% -8%, rgba(123, 74, 184, 0.16) 0%, transparent 55%),
-    radial-gradient(760px 420px at 100% -6%, rgba(90, 175, 224, 0.08) 0%, transparent 52%),
-    linear-gradient(180deg, var(--page-top) 0%, #f7f2fd 45%, var(--page-bottom) 100%);
+    radial-gradient(
+      900px 480px at 12% -8%,
+      rgba(123, 74, 184, 0.16) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      760px 420px at 100% -6%,
+      rgba(90, 175, 224, 0.08) 0%,
+      transparent 52%
+    ),
+    linear-gradient(
+      180deg,
+      var(--page-top) 0%,
+      #f7f2fd 45%,
+      var(--page-bottom) 100%
+    );
   background-repeat: no-repeat;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -266,149 +279,364 @@ body {
 
 /* ---- การ์ดจับคู่ (MixPairings): hover / click / ผสมเครื่องดื่ม ---- */
 @keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-9deg); }
-  75% { transform: rotate(9deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-9deg);
+  }
+  75% {
+    transform: rotate(9deg);
+  }
 }
 @keyframes spin-soft {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 @keyframes converge-r {
-  from { transform: translateX(0) scale(1); }
-  to { transform: translateX(20px) scale(1.15); }
+  from {
+    transform: translateX(0) scale(1);
+  }
+  to {
+    transform: translateX(20px) scale(1.15);
+  }
 }
 @keyframes converge-l {
-  from { transform: translateX(0) scale(1); }
-  to { transform: translateX(-20px) scale(1.15); }
+  from {
+    transform: translateX(0) scale(1);
+  }
+  to {
+    transform: translateX(-20px) scale(1.15);
+  }
 }
-.animate-converge-r { animation: converge-r 0.5s ease-in forwards; }
-.animate-converge-l { animation: converge-l 0.5s ease-in forwards; }
+.animate-converge-r {
+  animation: converge-r 0.5s ease-in forwards;
+}
+.animate-converge-l {
+  animation: converge-l 0.5s ease-in forwards;
+}
 @keyframes mix-burst {
-  0% { transform: scale(0) rotate(0deg); opacity: 0; }
-  45% { transform: scale(1.3) rotate(90deg); opacity: 1; }
-  100% { transform: scale(1) rotate(180deg); opacity: 0; }
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  45% {
+    transform: scale(1.3) rotate(90deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(180deg);
+    opacity: 0;
+  }
 }
-.animate-mix-burst { animation: mix-burst 0.8s ease-out forwards; }
+.animate-mix-burst {
+  animation: mix-burst 0.8s ease-out forwards;
+}
 @keyframes mix-rise {
-  0% { transform: translateY(8px); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: translateY(-44px); opacity: 0; }
+  0% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-44px);
+    opacity: 0;
+  }
 }
-.animate-mix-rise { animation: mix-rise 1s ease-out forwards; }
+.animate-mix-rise {
+  animation: mix-rise 1s ease-out forwards;
+}
 @keyframes mix-pop {
-  0% { transform: translateY(22px) scale(0.5); opacity: 0; }
-  55% { transform: translateY(-8px) scale(1.12); opacity: 1; }
-  100% { transform: translateY(0) scale(1); opacity: 1; }
+  0% {
+    transform: translateY(22px) scale(0.5);
+    opacity: 0;
+  }
+  55% {
+    transform: translateY(-8px) scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
-.animate-mix-pop { animation: mix-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-mix-pop {
+  animation: mix-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
 @keyframes reveal-in {
-  from { opacity: 0; transform: translateY(8px) scale(0.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
-.animate-reveal-in { animation: reveal-in 0.4s ease-out both; }
+.animate-reveal-in {
+  animation: reveal-in 0.4s ease-out both;
+}
 
 /* 🥤 ตักสด ปั่นฟิน — เครื่องปั่น */
 @keyframes blend-shake {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translate(-2px, 1px) rotate(-1.2deg); }
-  75% { transform: translate(2px, -1px) rotate(1.2deg); }
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translate(-2px, 1px) rotate(-1.2deg);
+  }
+  75% {
+    transform: translate(2px, -1px) rotate(1.2deg);
+  }
 }
-.animate-blend-shake { animation: blend-shake 0.16s ease-in-out infinite; }
+.animate-blend-shake {
+  animation: blend-shake 0.16s ease-in-out infinite;
+}
 
-@keyframes blade-spin { to { transform: rotate(360deg); } }
-.animate-blade-spin { animation: blade-spin 0.28s linear infinite; }
+@keyframes blade-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-blade-spin {
+  animation: blade-spin 0.28s linear infinite;
+}
 
 @keyframes blend-swirl {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(0.82); }
-  100% { transform: rotate(360deg) scale(1); }
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.82);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
 }
-.animate-blend-swirl { animation: blend-swirl 0.55s linear infinite; }
+.animate-blend-swirl {
+  animation: blend-swirl 0.55s linear infinite;
+}
 
 @keyframes ingredient-drop {
-  0% { opacity: 0; transform: translateY(-26px) scale(0.4); }
-  60% { opacity: 1; transform: translateY(4px) scale(1.08); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+  0% {
+    opacity: 0;
+    transform: translateY(-26px) scale(0.4);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(4px) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
-.animate-ingredient-drop { animation: ingredient-drop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-ingredient-drop {
+  animation: ingredient-drop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
 
 /* 🥤 มิกซ์กับฟ่าง — ปั่น (ตกจากด้านบน) + ไม่ปั่น (หมอกชง) */
 @keyframes mix-fall {
-  0% { opacity: 0; transform: translateY(-70px) scale(0.4) rotate(-20deg); }
-  70% { opacity: 1; transform: translateY(5px) scale(1.12); }
-  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+  0% {
+    opacity: 0;
+    transform: translateY(-70px) scale(0.4) rotate(-20deg);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(5px) scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
 }
-.animate-mix-fall { animation: mix-fall 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-mix-fall {
+  animation: mix-fall 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
 
 @keyframes fog-pulse {
-  0%, 100% { opacity: 0.35; transform: scale(0.9); }
-  50% { opacity: 0.8; transform: scale(1.2); }
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
 }
-.animate-fog-pulse { animation: fog-pulse 1.5s ease-in-out infinite; }
+.animate-fog-pulse {
+  animation: fog-pulse 1.5s ease-in-out infinite;
+}
 
 /* ✨ แก้วพร้อมเสิร์ฟ — เด้งขึ้น + โยกน่ารัก + หยุดนุ่มนวล (เล่นครั้งเดียว) */
 @keyframes serve-pop {
-  0% { opacity: 0; transform: translateY(42px) scale(0.4); }
-  32% { opacity: 1; transform: translateY(-16px) scale(1.14) rotate(-5deg); }
-  50% { transform: translateY(2px) scale(0.97) rotate(4.5deg); }
-  66% { transform: translateY(-6px) scale(1.04) rotate(-3deg); }
-  80% { transform: translateY(0) scale(0.99) rotate(1.6deg); }
-  90% { transform: translateY(0) scale(1) rotate(-0.6deg); }
-  100% { transform: translateY(0) scale(1) rotate(0deg); }
+  0% {
+    opacity: 0;
+    transform: translateY(42px) scale(0.4);
+  }
+  32% {
+    opacity: 1;
+    transform: translateY(-16px) scale(1.14) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(2px) scale(0.97) rotate(4.5deg);
+  }
+  66% {
+    transform: translateY(-6px) scale(1.04) rotate(-3deg);
+  }
+  80% {
+    transform: translateY(0) scale(0.99) rotate(1.6deg);
+  }
+  90% {
+    transform: translateY(0) scale(1) rotate(-0.6deg);
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
 }
-.animate-serve-pop { animation: serve-pop 1.15s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-serve-pop {
+  animation: serve-pop 1.15s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
 
 @keyframes serve-sparkle {
-  0% { opacity: 0; transform: scale(0) rotate(0deg); }
-  45% { opacity: 1; transform: scale(1.15) rotate(18deg); }
-  100% { opacity: 0; transform: scale(0.55) rotate(38deg) translateY(-10px); }
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.15) rotate(18deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.55) rotate(38deg) translateY(-10px);
+  }
 }
-.animate-serve-sparkle { animation: serve-sparkle 1.2s ease-out both; }
+.animate-serve-sparkle {
+  animation: serve-sparkle 1.2s ease-out both;
+}
 
 /* 🍓 ตักสด ปั่นฟิน — ผัก/ผลไม้ร่วง + เด้งตอนเลือก */
 @keyframes fresh-fall {
-  0% { opacity: 0; transform: translateY(-30px) rotate(0deg); }
-  8% { opacity: 0.85; }
-  85% { opacity: 0.85; }
-  100% { opacity: 0; transform: translateY(100vh) rotate(var(--spin, 300deg)); }
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) rotate(0deg);
+  }
+  8% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) rotate(var(--spin, 300deg));
+  }
 }
 .animate-fresh-fall {
   animation: fresh-fall var(--dur, 4.5s) linear var(--delay, 0s) both;
 }
 @keyframes fresh-float {
-  0%, 100% { transform: translateY(0) rotate(-6deg); }
-  50% { transform: translateY(-12px) rotate(6deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(6deg);
+  }
 }
-.animate-fresh-float { animation: fresh-float 5s ease-in-out infinite; }
+.animate-fresh-float {
+  animation: fresh-float 5s ease-in-out infinite;
+}
 @keyframes pick-pop {
-  0% { transform: scale(1) rotate(0deg); }
-  35% { transform: scale(1.35) rotate(-12deg); }
-  70% { transform: scale(0.92) rotate(9deg); }
-  100% { transform: scale(1) rotate(0deg); }
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  35% {
+    transform: scale(1.35) rotate(-12deg);
+  }
+  70% {
+    transform: scale(0.92) rotate(9deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
 }
-.animate-pick-pop { animation: pick-pop 0.45s ease-out; }
+.animate-pick-pop {
+  animation: pick-pop 0.45s ease-out;
+}
 @keyframes fresh-gather {
-  0% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.4) rotate(0deg); }
-  45% { opacity: 1; transform: translate(calc(var(--tx) * 0.55), calc(var(--ty) * 0.55)) scale(1) rotate(22deg); }
-  100% { opacity: 0; transform: translate(0, 0) scale(0.3) rotate(60deg); }
+  0% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0.4) rotate(0deg);
+  }
+  45% {
+    opacity: 1;
+    transform: translate(calc(var(--tx) * 0.55), calc(var(--ty) * 0.55))
+      scale(1) rotate(22deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.3) rotate(60deg);
+  }
 }
-.animate-fresh-gather { animation: fresh-gather 0.9s ease-in both; }
+.animate-fresh-gather {
+  animation: fresh-gather 0.9s ease-in both;
+}
 
 /* 💜 มิกซ์กับฟ่าง — แก้วเสร็จโทนเมจิก: วงประกายหมุน + เรืองแสง */
-.animate-spin-soft { animation: spin-soft 1.1s linear infinite; }
-@keyframes magic-ring { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.animate-magic-ring { animation: magic-ring 4s linear infinite; }
-@keyframes magic-glow {
-  0%, 100% { opacity: 0.35; transform: scale(0.92); }
-  50% { opacity: 0.7; transform: scale(1.08); }
+.animate-spin-soft {
+  animation: spin-soft 1.1s linear infinite;
 }
-.animate-magic-glow { animation: magic-glow 2s ease-in-out infinite; }
+@keyframes magic-ring {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-magic-ring {
+  animation: magic-ring 4s linear infinite;
+}
+@keyframes magic-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.08);
+  }
+}
+.animate-magic-glow {
+  animation: magic-glow 2s ease-in-out infinite;
+}
 @keyframes magic-float {
-  0% { opacity: 0; transform: translateY(24px) scale(0.5) rotate(0deg); }
-  20% { opacity: 0.7; }
-  80% { opacity: 0.7; }
-  100% { opacity: 0; transform: translateY(-64px) scale(1) rotate(28deg); }
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.5) rotate(0deg);
+  }
+  20% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-64px) scale(1) rotate(28deg);
+  }
 }
 .animate-magic-float {
   animation: magic-float var(--dur, 5.5s) ease-in-out var(--delay, 0s) infinite;
@@ -416,531 +644,1603 @@ body {
 
 /* 🪷 ปกลอยกระทง — แต่ละเลเยอร์คนละจังหวะ (ไม่ขยับพร้อมกัน) */
 @keyframes krathong-bob {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-6px) rotate(2deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(2deg);
+  }
 }
 @keyframes candle-flicker {
-  0%, 100% { opacity: 0.9; transform: scaleY(1) scaleX(1); }
-  40% { opacity: 1; transform: scaleY(1.18) scaleX(0.9); }
-  70% { opacity: 0.75; transform: scaleY(0.92) scaleX(1.05); }
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scaleY(1) scaleX(1);
+  }
+  40% {
+    opacity: 1;
+    transform: scaleY(1.18) scaleX(0.9);
+  }
+  70% {
+    opacity: 0.75;
+    transform: scaleY(0.92) scaleX(1.05);
+  }
 }
-.animate-candle-flicker { animation: candle-flicker 0.4s ease-in-out infinite; }
+.animate-candle-flicker {
+  animation: candle-flicker 0.4s ease-in-out infinite;
+}
 @keyframes mist-drift {
-  0% { transform: translateX(-12%); opacity: 0.2; }
-  50% { opacity: 0.5; }
-  100% { transform: translateX(12%); opacity: 0.2; }
+  0% {
+    transform: translateX(-12%);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(12%);
+    opacity: 0.2;
+  }
 }
 @keyframes petal-drift {
-  0% { transform: translate(-10px, 0) rotate(0deg); opacity: 0; }
-  15% { opacity: 0.9; }
-  85% { opacity: 0.9; }
-  100% { transform: translate(300px, 24px) rotate(220deg); opacity: 0; }
+  0% {
+    transform: translate(-10px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(300px, 24px) rotate(220deg);
+    opacity: 0;
+  }
 }
 @keyframes water-shimmer {
-  0%, 100% { opacity: 0.35; transform: scaleX(1); }
-  50% { opacity: 0.7; transform: scaleX(1.12); }
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scaleX(1.12);
+  }
 }
 @keyframes gentle-sway {
-  0%, 100% { transform: rotate(-1.5deg); }
-  50% { transform: rotate(1.5deg); }
+  0%,
+  100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
 }
 @keyframes cup-raise {
-  0%, 100% { transform: translateY(0) rotate(-3deg); }
-  50% { transform: translateY(-4px) rotate(3deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(3deg);
+  }
 }
-
 
 /* 🐱🪄 MagicalDrinkAnimation — สองเหมียวปรุงเครื่องดื่มวิเศษ (เมนูไม่ปั่น)
    หลักการให้ดู "มีชีวิต": จังหวะไม่เท่ากัน · มีช่วงหยุด · easing มี overshoot · มี secondary motion (หู/หาง/กะพริบตา) */
 @keyframes cat-breathe {
-  0%, 100% { transform: scale(1, 1); }
-  45% { transform: scale(1.015, 1.035); }
-  60% { transform: scale(1.012, 1.03); }
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  45% {
+    transform: scale(1.015, 1.035);
+  }
+  60% {
+    transform: scale(1.012, 1.03);
+  }
 }
-.animate-cat-bob { animation: cat-breathe 3.4s cubic-bezier(0.45, 0, 0.55, 1) infinite; transform-origin: 50% 100%; }
-.animate-cat-bob-fast { animation: cat-breathe 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite 0.7s; transform-origin: 50% 100%; }
+.animate-cat-bob {
+  animation: cat-breathe 3.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transform-origin: 50% 100%;
+}
+.animate-cat-bob-fast {
+  animation: cat-breathe 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite 0.7s;
+  transform-origin: 50% 100%;
+}
 
 /* หาง: แกว่งช้า ๆ มีหยุดพัก แล้วสะบัด */
 @keyframes cat-tail {
-  0% { transform: rotate(-6deg); }
-  30% { transform: rotate(9deg); }
-  45% { transform: rotate(6deg); }
-  55% { transform: rotate(14deg); }
-  75% { transform: rotate(-4deg); }
-  100% { transform: rotate(-6deg); }
+  0% {
+    transform: rotate(-6deg);
+  }
+  30% {
+    transform: rotate(9deg);
+  }
+  45% {
+    transform: rotate(6deg);
+  }
+  55% {
+    transform: rotate(14deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(-6deg);
+  }
 }
-.animate-cat-tail { animation: cat-tail 3.2s cubic-bezier(0.4, 0, 0.3, 1) infinite; }
+.animate-cat-tail {
+  animation: cat-tail 3.2s cubic-bezier(0.4, 0, 0.3, 1) infinite;
+}
 
 /* หูกระดิกเป็นครั้งคราว */
 @keyframes cat-ear-twitch {
-  0%, 82%, 100% { transform: rotate(0deg); }
-  86% { transform: rotate(-12deg); }
-  90% { transform: rotate(4deg); }
-  94% { transform: rotate(-6deg); }
+  0%,
+  82%,
+  100% {
+    transform: rotate(0deg);
+  }
+  86% {
+    transform: rotate(-12deg);
+  }
+  90% {
+    transform: rotate(4deg);
+  }
+  94% {
+    transform: rotate(-6deg);
+  }
 }
-.animate-cat-ear { animation: cat-ear-twitch 4.6s ease-in-out infinite; }
-.animate-cat-ear-r { animation: cat-ear-twitch 5.3s ease-in-out infinite 1.9s; }
+.animate-cat-ear {
+  animation: cat-ear-twitch 4.6s ease-in-out infinite;
+}
+.animate-cat-ear-r {
+  animation: cat-ear-twitch 5.3s ease-in-out infinite 1.9s;
+}
 
 /* กะพริบตา */
 @keyframes cat-blink {
-  0%, 91%, 100% { transform: scaleY(1); }
-  94%, 97% { transform: scaleY(0.08); }
+  0%,
+  91%,
+  100% {
+    transform: scaleY(1);
+  }
+  94%,
+  97% {
+    transform: scaleY(0.08);
+  }
 }
-.animate-cat-blink { animation: cat-blink 3.8s ease-in-out infinite; }
+.animate-cat-blink {
+  animation: cat-blink 3.8s ease-in-out infinite;
+}
 
 /* คน: เร่ง → ช้า → หยุดนิดนึง → คนต่อ (ไม่ใช่วนเท่ากัน) */
 @keyframes cat-arm-stir {
-  0% { transform: rotate(-12deg); }
-  18% { transform: rotate(18deg); }
-  34% { transform: rotate(-10deg); }
-  48% { transform: rotate(16deg); }
-  60% { transform: rotate(-6deg); }
-  70%, 80% { transform: rotate(-2deg); }
-  100% { transform: rotate(-12deg); }
+  0% {
+    transform: rotate(-12deg);
+  }
+  18% {
+    transform: rotate(18deg);
+  }
+  34% {
+    transform: rotate(-10deg);
+  }
+  48% {
+    transform: rotate(16deg);
+  }
+  60% {
+    transform: rotate(-6deg);
+  }
+  70%,
+  80% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(-12deg);
+  }
 }
-.animate-cat-arm-stir { animation: cat-arm-stir 1.6s cubic-bezier(0.45, 0.05, 0.35, 1) infinite; }
+.animate-cat-arm-stir {
+  animation: cat-arm-stir 1.6s cubic-bezier(0.45, 0.05, 0.35, 1) infinite;
+}
 
 /* เท: ยกขวด → เอียงเท (ค้าง) → สั่นเบา ๆ → วางลง → พัก */
 @keyframes cat-arm-pour {
-  0% { transform: rotate(0deg); }
-  22% { transform: rotate(-44deg); }
-  30% { transform: rotate(-38deg); }
-  40% { transform: rotate(-42deg); }
-  52% { transform: rotate(-39deg); }
-  70% { transform: rotate(4deg); }
-  78%, 100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  22% {
+    transform: rotate(-44deg);
+  }
+  30% {
+    transform: rotate(-38deg);
+  }
+  40% {
+    transform: rotate(-42deg);
+  }
+  52% {
+    transform: rotate(-39deg);
+  }
+  70% {
+    transform: rotate(4deg);
+  }
+  78%,
+  100% {
+    transform: rotate(0deg);
+  }
 }
-.animate-cat-arm-pour { animation: cat-arm-pour 2.4s cubic-bezier(0.34, 1.3, 0.64, 1) infinite; }
+.animate-cat-arm-pour {
+  animation: cat-arm-pour 2.4s cubic-bezier(0.34, 1.3, 0.64, 1) infinite;
+}
 
 /* โบกไม้กายสิทธิ์: สะบัด 2 ที แล้วชี้ค้าง */
 @keyframes cat-arm-wave {
-  0% { transform: rotate(-4deg); }
-  15% { transform: rotate(18deg); }
-  30% { transform: rotate(-8deg); }
-  45% { transform: rotate(14deg); }
-  60%, 100% { transform: rotate(2deg); }
+  0% {
+    transform: rotate(-4deg);
+  }
+  15% {
+    transform: rotate(18deg);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  45% {
+    transform: rotate(14deg);
+  }
+  60%,
+  100% {
+    transform: rotate(2deg);
+  }
 }
-.animate-cat-arm-wave { animation: cat-arm-wave 2.2s cubic-bezier(0.34, 1.4, 0.64, 1) infinite; }
+.animate-cat-arm-wave {
+  animation: cat-arm-wave 2.2s cubic-bezier(0.34, 1.4, 0.64, 1) infinite;
+}
 
 /* มองแก้ว: หันช้า ๆ ค้าง แล้วเอียงหัวนิด */
 @keyframes cat-head-look {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-8deg) translateY(1px); }
-  55% { transform: rotate(-7deg) translateY(1px); }
-  70% { transform: rotate(-11deg) translateY(2px); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-8deg) translateY(1px);
+  }
+  55% {
+    transform: rotate(-7deg) translateY(1px);
+  }
+  70% {
+    transform: rotate(-11deg) translateY(2px);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
-.animate-cat-head-look { animation: cat-head-look 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.animate-cat-head-look {
+  animation: cat-head-look 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
 @keyframes cat-eye-sparkle {
-  0%, 100% { transform: scale(0.9) rotate(0deg); }
-  40% { transform: scale(1.25) rotate(18deg); }
-  60% { transform: scale(1.1) rotate(12deg); }
+  0%,
+  100% {
+    transform: scale(0.9) rotate(0deg);
+  }
+  40% {
+    transform: scale(1.25) rotate(18deg);
+  }
+  60% {
+    transform: scale(1.1) rotate(12deg);
+  }
 }
-.animate-cat-eye-sparkle { animation: cat-eye-sparkle 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+.animate-cat-eye-sparkle {
+  animation: cat-eye-sparkle 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
 
 @keyframes magic-liquid-fill {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(0.75); }
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(0.75);
+  }
 }
-.animate-magic-liquid-fill { animation: magic-liquid-fill 1.2s ease-out both; }
+.animate-magic-liquid-fill {
+  animation: magic-liquid-fill 1.2s ease-out both;
+}
 @keyframes magic-bubble {
-  0% { transform: translateY(0); opacity: 0; }
-  30% { opacity: 0.7; }
-  100% { transform: translateY(-40px); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
 }
-.animate-magic-bubble { animation: magic-bubble 1.1s ease-out infinite; }
+.animate-magic-bubble {
+  animation: magic-bubble 1.1s ease-out infinite;
+}
 @keyframes magic-spoon {
-  0%, 100% { transform: rotate(-10deg); }
-  50% { transform: rotate(12deg); }
+  0%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(12deg);
+  }
 }
-.animate-magic-spoon { animation: magic-spoon 0.45s ease-in-out infinite; }
+.animate-magic-spoon {
+  animation: magic-spoon 0.45s ease-in-out infinite;
+}
 
 @keyframes magic-particle-rise {
-  0% { opacity: 0; transform: translateY(16px) scale(0.6); }
-  25% { opacity: 0.9; }
-  100% { opacity: 0; transform: translateY(-48px) scale(1.05) rotate(20deg); }
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.6);
+  }
+  25% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-48px) scale(1.05) rotate(20deg);
+  }
 }
-.animate-magic-particle-rise { animation: magic-particle-rise var(--dur, 1.8s) ease-out infinite; }
+.animate-magic-particle-rise {
+  animation: magic-particle-rise var(--dur, 1.8s) ease-out infinite;
+}
 
 /* ☁️ หมอก: ลอยขึ้น → ฟุ้งข้าง → ปกคลุม */
 @keyframes magic-fog-rise {
-  0% { opacity: 0; transform: translateY(40px) scale(0.5); }
-  60% { opacity: 0.95; }
-  100% { opacity: 0.95; transform: translateY(0) scale(1.15); }
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.5);
+  }
+  60% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0.95;
+    transform: translateY(0) scale(1.15);
+  }
 }
-.animate-magic-fog-rise { animation: magic-fog-rise 0.9s ease-out both; }
+.animate-magic-fog-rise {
+  animation: magic-fog-rise 0.9s ease-out both;
+}
 @keyframes magic-fog-swirl {
-  0% { opacity: 0.95; transform: scale(1.15) rotate(0deg) translateX(0); }
-  50% { transform: scale(1.25) rotate(8deg) translateX(6px); }
-  100% { opacity: 0.95; transform: scale(1.15) rotate(0deg) translateX(0); }
+  0% {
+    opacity: 0.95;
+    transform: scale(1.15) rotate(0deg) translateX(0);
+  }
+  50% {
+    transform: scale(1.25) rotate(8deg) translateX(6px);
+  }
+  100% {
+    opacity: 0.95;
+    transform: scale(1.15) rotate(0deg) translateX(0);
+  }
 }
-.animate-magic-fog-swirl { animation: magic-fog-swirl 0.8s ease-in-out infinite; }
+.animate-magic-fog-swirl {
+  animation: magic-fog-swirl 0.8s ease-in-out infinite;
+}
 /* หมอกจาง: บางลง → เห็นเงาแก้ว → สลาย */
 @keyframes magic-fog-out {
-  0% { opacity: 1; filter: blur(0); }
-  40% { opacity: 0.6; }
-  100% { opacity: 0; transform: scale(1.3); }
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
 }
-.animate-magic-fog-out { animation: magic-fog-out 0.9s ease-in-out both; }
+.animate-magic-fog-out {
+  animation: magic-fog-out 0.9s ease-in-out both;
+}
 @keyframes magic-flash {
-  0% { opacity: 0; }
-  30% { opacity: 0.55; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+  }
 }
-.animate-magic-flash { animation: magic-flash 0.7s ease-out both; }
+.animate-magic-flash {
+  animation: magic-flash 0.7s ease-out both;
+}
 
 /* 👀 แก้วจริงโผล่จากหมอก */
 @keyframes magic-reveal {
-  from { opacity: 0; transform: scale(0.9); filter: blur(4px); }
-  to { opacity: 1; transform: scale(1); filter: blur(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
 }
-.animate-magic-reveal { animation: magic-reveal 0.8s ease-out both; }
+.animate-magic-reveal {
+  animation: magic-reveal 0.8s ease-out both;
+}
 /* 💜 หัวใจ/ประกายเด้งออกตอน WOW (เล่นครั้งเดียว) */
 @keyframes magic-heart-burst {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
-  25% { opacity: 1; }
-  100% { opacity: 0; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.1); }
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)))
+      scale(1.1);
+  }
 }
-.animate-magic-heart-burst { animation: magic-heart-burst 1.1s ease-out both; }
-
+.animate-magic-heart-burst {
+  animation: magic-heart-burst 1.1s ease-out both;
+}
 
 /* ✨ AddToCartFx — แก้ว → ตะกร้า (เล่นครั้งเดียว) */
 @keyframes fx-cup-pop {
-  0% { transform: translateY(30px) scale(0.6); opacity: 0; }
-  40% { transform: translateY(-12px) scale(1.08); opacity: 1; }
-  60% { transform: translateY(0) scale(0.98); }
-  100% { transform: translateY(0) scale(1); opacity: 1; }
+  0% {
+    transform: translateY(30px) scale(0.6);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(-12px) scale(1.08);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(0) scale(0.98);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
-.animate-fx-cup-pop { animation: fx-cup-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-fx-cup-pop {
+  animation: fx-cup-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
 @keyframes fx-cup-fizz {
-  0% { transform: translateY(30px) scale(0.6); opacity: 0; }
-  30% { transform: translateY(-10px) scale(1.06); opacity: 1; }
-  45% { transform: translateY(0) rotate(-2deg); }
-  55% { transform: translateY(-3px) rotate(2deg); }
-  65% { transform: translateY(0) rotate(-1.5deg); }
-  75% { transform: translateY(-2px) rotate(1.5deg); }
-  100% { transform: translateY(0) rotate(0); opacity: 1; }
+  0% {
+    transform: translateY(30px) scale(0.6);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(-10px) scale(1.06);
+    opacity: 1;
+  }
+  45% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  55% {
+    transform: translateY(-3px) rotate(2deg);
+  }
+  65% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  75% {
+    transform: translateY(-2px) rotate(1.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
 }
-.animate-fx-cup-fizz { animation: fx-cup-fizz 1.2s ease-out both; }
+.animate-fx-cup-fizz {
+  animation: fx-cup-fizz 1.2s ease-out both;
+}
 @keyframes fx-bubble {
-  0% { transform: translateY(0) scale(0.6); opacity: 0; }
-  20% { opacity: 0.9; }
-  100% { transform: translateY(-110px) scale(1.1); opacity: 0; }
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-110px) scale(1.1);
+    opacity: 0;
+  }
 }
-.animate-fx-bubble { animation: fx-bubble var(--dur, 1s) ease-out infinite; }
+.animate-fx-bubble {
+  animation: fx-bubble var(--dur, 1s) ease-out infinite;
+}
 @keyframes fx-rise {
-  0% { transform: translateY(10px) scale(0.7); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: translateY(-70px) scale(1.1) rotate(10deg); opacity: 0; }
+  0% {
+    transform: translateY(10px) scale(0.7);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-70px) scale(1.1) rotate(10deg);
+    opacity: 0;
+  }
 }
-.animate-fx-rise { animation: fx-rise 1.1s ease-out infinite; }
+.animate-fx-rise {
+  animation: fx-rise 1.1s ease-out infinite;
+}
 @keyframes fx-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px) rotate(-8deg); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-8deg);
+  }
 }
-.animate-fx-bounce { animation: fx-bounce 0.55s ease-in-out infinite; }
+.animate-fx-bounce {
+  animation: fx-bounce 0.55s ease-in-out infinite;
+}
 /* 🧪 หลอดสลิงเอียงหยด */
 @keyframes fx-tube-tilt {
-  0% { transform: translateY(-16px) rotate(0); opacity: 0; }
-  20% { transform: translateY(0) rotate(0); opacity: 1; }
-  40%, 70% { transform: translateY(0) rotate(-28deg); }
-  100% { transform: translateY(0) rotate(0); opacity: 1; }
+  0% {
+    transform: translateY(-16px) rotate(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  40%,
+  70% {
+    transform: translateY(0) rotate(-28deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
 }
-.animate-fx-tube-tilt { animation: fx-tube-tilt 1.4s ease-in-out both; transform-origin: 50% 90%; }
+.animate-fx-tube-tilt {
+  animation: fx-tube-tilt 1.4s ease-in-out both;
+  transform-origin: 50% 90%;
+}
 @keyframes fx-drip {
-  0% { transform: translate(-50%, 0) scale(0.6); opacity: 0; }
-  20% { opacity: 1; }
-  100% { transform: translate(-50%, 90px) scale(1); opacity: 0; }
+  0% {
+    transform: translate(-50%, 0) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 90px) scale(1);
+    opacity: 0;
+  }
 }
-.animate-fx-drip { animation: fx-drip 0.7s ease-in both; }
+.animate-fx-drip {
+  animation: fx-drip 0.7s ease-in both;
+}
 @keyframes fx-swirl {
-  0% { transform: translate(-50%, -50%) scale(0.2) rotate(0); opacity: 0; }
-  30% { opacity: 0.8; }
-  100% { transform: translate(-50%, -50%) scale(1.6) rotate(180deg); opacity: 0.35; }
+  0% {
+    transform: translate(-50%, -50%) scale(0.2) rotate(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.6) rotate(180deg);
+    opacity: 0.35;
+  }
 }
-.animate-fx-swirl { animation: fx-swirl 1s ease-out both; }
+.animate-fx-swirl {
+  animation: fx-swirl 1s ease-out both;
+}
 /* 🎲 หลอด 5 หลอดสลับ/หมุน → สุ่มหยุด */
 @keyframes fx-shuffle {
-  0% { transform: translateY(0) rotate(-6deg); }
-  25% { transform: translateY(-14px) rotate(6deg); }
-  50% { transform: translateY(0) rotate(-6deg); }
-  75% { transform: translateY(-14px) rotate(6deg); }
-  100% { transform: translateY(0) rotate(-6deg); }
+  0% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  25% {
+    transform: translateY(-14px) rotate(6deg);
+  }
+  50% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  75% {
+    transform: translateY(-14px) rotate(6deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
 }
-.animate-fx-shuffle { animation: fx-shuffle 0.36s linear infinite; }
+.animate-fx-shuffle {
+  animation: fx-shuffle 0.36s linear infinite;
+}
 @keyframes fx-pick {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-22px) scale(1.25) rotate(-6deg); }
-  100% { transform: translateY(-16px) scale(1.18) rotate(0); }
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-22px) scale(1.25) rotate(-6deg);
+  }
+  100% {
+    transform: translateY(-16px) scale(1.18) rotate(0);
+  }
 }
-.animate-fx-pick { animation: fx-pick 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-fx-pick {
+  animation: fx-pick 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
 @keyframes fx-sparkle {
-  0% { transform: scale(0) rotate(0); opacity: 0; }
-  50% { transform: scale(1.3) rotate(20deg); opacity: 1; }
-  100% { transform: scale(1) rotate(40deg); opacity: 0.8; }
+  0% {
+    transform: scale(0) rotate(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.3) rotate(20deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(40deg);
+    opacity: 0.8;
+  }
 }
-.animate-fx-sparkle { animation: fx-sparkle 0.6s ease-out both; }
+.animate-fx-sparkle {
+  animation: fx-sparkle 0.6s ease-out both;
+}
 @keyframes fx-qmark {
-  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.7; }
-  50% { transform: translateX(-50%) scale(1.25); opacity: 1; }
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.25);
+    opacity: 1;
+  }
 }
-.animate-fx-qmark { animation: fx-qmark 0.5s ease-in-out infinite; }
+.animate-fx-qmark {
+  animation: fx-qmark 0.5s ease-in-out infinite;
+}
 /* 🛒 ตะกร้า "ดึ๋ง!" */
 @keyframes cart-bump {
-  0% { transform: scale(1); }
-  30% { transform: scale(1.35) rotate(-8deg); }
-  55% { transform: scale(0.92) rotate(6deg); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.35) rotate(-8deg);
+  }
+  55% {
+    transform: scale(0.92) rotate(6deg);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
-.cart-bump { animation: cart-bump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.cart-bump {
+  animation: cart-bump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 /* ปิ๊ง! toast */
 @keyframes toast-pop {
-  0% { transform: translateY(20px) scale(0.9); opacity: 0; }
-  60% { transform: translateY(-4px) scale(1.03); opacity: 1; }
-  100% { transform: translateY(0) scale(1); }
+  0% {
+    transform: translateY(20px) scale(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(-4px) scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
 }
-.animate-toast-pop { animation: toast-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-
+.animate-toast-pop {
+  animation: toast-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
 
 /* 🥂 นมเหนียว × แครกเกอร์ ชนแก้ว (เล่นเป็นช่วง ๆ ตอน section โผล่) */
 @keyframes cheers-left {
-  0% { transform: translateX(0) rotate(0); }
-  35% { transform: translateX(14px) rotate(6deg); }
-  48% { transform: translateX(10px) rotate(3deg); }
-  100% { transform: translateX(0) rotate(0); }
+  0% {
+    transform: translateX(0) rotate(0);
+  }
+  35% {
+    transform: translateX(14px) rotate(6deg);
+  }
+  48% {
+    transform: translateX(10px) rotate(3deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0);
+  }
 }
 @keyframes cheers-right {
-  0% { transform: translateX(0) rotate(0); }
-  35% { transform: translateX(-14px) rotate(-6deg); }
-  48% { transform: translateX(-10px) rotate(-3deg); }
-  100% { transform: translateX(0) rotate(0); }
+  0% {
+    transform: translateX(0) rotate(0);
+  }
+  35% {
+    transform: translateX(-14px) rotate(-6deg);
+  }
+  48% {
+    transform: translateX(-10px) rotate(-3deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0);
+  }
 }
-.animate-cheers-left { animation: cheers-left 1.6s cubic-bezier(0.34, 1.3, 0.64, 1) both; }
-.animate-cheers-right { animation: cheers-right 1.6s cubic-bezier(0.34, 1.3, 0.64, 1) both; }
+.animate-cheers-left {
+  animation: cheers-left 1.6s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+}
+.animate-cheers-right {
+  animation: cheers-right 1.6s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+}
 @keyframes cheers-spark {
-  0%, 25% { opacity: 0; transform: scale(0.3) rotate(0); }
-  40% { opacity: 1; transform: scale(1.25) rotate(15deg); }
-  60% { opacity: 1; transform: scale(1) rotate(25deg); }
-  100% { opacity: 0; transform: scale(0.8) rotate(40deg); }
+  0%,
+  25% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.25) rotate(15deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1) rotate(25deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(40deg);
+  }
 }
-.animate-cheers-spark { animation: cheers-spark 1.6s ease-out both; }
-
+.animate-cheers-spark {
+  animation: cheers-spark 1.6s ease-out both;
+}
 
 /* 🍪 ขนมแขวนบนเชือก แกว่งเบา ๆ */
 @keyframes garland-swing {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
 }
-.animate-garland-swing { animation: garland-swing 3.2s ease-in-out infinite; }
-
+.animate-garland-swing {
+  animation: garland-swing 3.2s ease-in-out infinite;
+}
 
 /* 🫧 อิตาเลียนโซดา — ฟองลอยขึ้นช้า ๆ แกว่งเบา ๆ จางหายด้านบน แล้ววนใหม่ */
 @keyframes soda-rise {
-  0% { transform: translate3d(0, 0, 0) scale(0.7); opacity: 0; }
-  8% { opacity: 1; }
-  50% { transform: translate3d(var(--drift, 10px), -45vh, 0) scale(1); }
-  85% { opacity: 0.9; }
-  100% { transform: translate3d(calc(var(--drift, 10px) * -0.6), -90vh, 0) scale(1.08); opacity: 0; }
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.7);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(var(--drift, 10px), -45vh, 0) scale(1);
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(calc(var(--drift, 10px) * -0.6), -90vh, 0)
+      scale(1.08);
+    opacity: 0;
+  }
 }
-.animate-soda-rise { animation: soda-rise 20s linear infinite; will-change: transform, opacity; }
+.animate-soda-rise {
+  animation: soda-rise 20s linear infinite;
+  will-change: transform, opacity;
+}
 @keyframes soda-bob {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-8px) scale(1.03); }
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.03);
+  }
 }
-.animate-soda-bob { animation: soda-bob 6s ease-in-out infinite; }
+.animate-soda-bob {
+  animation: soda-bob 6s ease-in-out infinite;
+}
 @media (prefers-reduced-motion: reduce) {
   /* ลดการเคลื่อนไหว: ฟองหยุดนิ่ง กระจายตามตำแหน่งที่กำหนด (--rm-top) */
-  .animate-soda-rise { animation: none; opacity: 0.7; }
-  .animate-soda-bob { animation: none; }
+  .animate-soda-rise {
+    animation: none;
+    opacity: 0.7;
+  }
+  .animate-soda-bob {
+    animation: none;
+  }
 }
-
 
 /* ☕ ไอร้อนกาแฟ ลอยขึ้นช้า ๆ โปร่ง นุ่ม */
 @keyframes coffee-steam {
-  0% { transform: translateY(8px) scaleX(0.9); opacity: 0; }
-  25% { opacity: 0.9; }
-  70% { opacity: 0.6; }
-  100% { transform: translateY(-34px) scaleX(1.15); opacity: 0; }
+  0% {
+    transform: translateY(8px) scaleX(0.9);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-34px) scaleX(1.15);
+    opacity: 0;
+  }
 }
-.animate-coffee-steam { animation: coffee-steam 4.5s ease-in-out infinite; }
+.animate-coffee-steam {
+  animation: coffee-steam 4.5s ease-in-out infinite;
+}
 @media (prefers-reduced-motion: reduce) {
-  .animate-coffee-steam { animation: none; opacity: 0.6; }
+  .animate-coffee-steam {
+    animation: none;
+    opacity: 0.6;
+  }
 }
-
 
 /* 🥛 หยดนมเด้งเบา ๆ ค่อย ๆ ลง */
 @keyframes milk-drop {
-  0%, 100% { transform: translateY(0) scale(1); }
-  40% { transform: translateY(8px) scale(1.06, 0.94); }
-  60% { transform: translateY(6px) scale(0.98, 1.04); }
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(8px) scale(1.06, 0.94);
+  }
+  60% {
+    transform: translateY(6px) scale(0.98, 1.04);
+  }
 }
-.animate-milk-drop { animation: milk-drop 4.5s ease-in-out infinite; }
+.animate-milk-drop {
+  animation: milk-drop 4.5s ease-in-out infinite;
+}
 @media (prefers-reduced-motion: reduce) {
-  .animate-milk-drop { animation: none; }
+  .animate-milk-drop {
+    animation: none;
+  }
 }
-
 
 /* 🥛 เส้นของเหลวสีนมหมุนวนรอบแก้ว ช้า ๆ */
-@keyframes milk-swirl { to { transform: rotate(360deg); } }
-@keyframes milk-swirl-rev { to { transform: rotate(-360deg); } }
-.animate-milk-swirl { animation: milk-swirl 30s linear infinite; }
-.animate-milk-swirl-rev { animation: milk-swirl-rev 30s linear infinite; }
-@media (prefers-reduced-motion: reduce) {
-  .animate-milk-swirl, .animate-milk-swirl-rev { animation: none; }
+@keyframes milk-swirl {
+  to {
+    transform: rotate(360deg);
+  }
 }
-
+@keyframes milk-swirl-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+.animate-milk-swirl {
+  animation: milk-swirl 30s linear infinite;
+}
+.animate-milk-swirl-rev {
+  animation: milk-swirl-rev 30s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-milk-swirl,
+  .animate-milk-swirl-rev {
+    animation: none;
+  }
+}
 
 /* 🍵 กลิ่นหอมใบชา ลอยขึ้นโค้งซ้าย-ขวา โปร่ง จางหายด้านบน (ไม่ใช่ควัน) */
 @keyframes tea-aroma {
-  0% { transform: translateY(14px) scale(0.85); opacity: 0; }
-  20% { opacity: 0.95; }
-  60% { opacity: 0.7; }
-  100% { transform: translateY(-46px) scale(1.12); opacity: 0; }
+  0% {
+    transform: translateY(14px) scale(0.85);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.95;
+  }
+  60% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-46px) scale(1.12);
+    opacity: 0;
+  }
 }
-.animate-tea-aroma { animation: tea-aroma 7s ease-in-out infinite; }
+.animate-tea-aroma {
+  animation: tea-aroma 7s ease-in-out infinite;
+}
 /* 🍃 ใบชาเล็กลอยตามกลิ่น: ขึ้นช้า ๆ แกว่ง หมุนเบา ๆ */
 @keyframes tea-leaf-drift {
-  0% { transform: translate(0, 10px) rotate(0deg) scale(0.6); opacity: 0; }
-  15% { opacity: 0.95; }
-  40% { transform: translate(-14px, -50px) rotate(40deg) scale(1); }
-  70% { transform: translate(12px, -100px) rotate(-30deg) scale(1); opacity: 0.8; }
-  100% { transform: translate(-6px, -150px) rotate(20deg) scale(0.9); opacity: 0; }
+  0% {
+    transform: translate(0, 10px) rotate(0deg) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.95;
+  }
+  40% {
+    transform: translate(-14px, -50px) rotate(40deg) scale(1);
+  }
+  70% {
+    transform: translate(12px, -100px) rotate(-30deg) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-6px, -150px) rotate(20deg) scale(0.9);
+    opacity: 0;
+  }
 }
-.animate-tea-leaf-drift { animation: tea-leaf-drift 9s ease-in-out infinite; }
+.animate-tea-leaf-drift {
+  animation: tea-leaf-drift 9s ease-in-out infinite;
+}
 @media (prefers-reduced-motion: reduce) {
-  .animate-tea-aroma { animation: none; opacity: 0.55; }
-  .animate-tea-leaf-drift { animation: none; opacity: 0.7; transform: translateY(-60px); }
+  .animate-tea-aroma {
+    animation: none;
+    opacity: 0.55;
+  }
+  .animate-tea-leaf-drift {
+    animation: none;
+    opacity: 0.7;
+    transform: translateY(-60px);
+  }
 }
-
 
 /* 🍓 สมูทตี้ — ไทม์ไลน์รวม 11 วิ: 0–25% วัตถุดิบลอยเข้า · 25–55% ปั่น · 55–75% เท · 75–100% แก้วเด้ง */
 @keyframes smoothie-ingredient {
-  0% { transform: translate(0, 0) rotate(0) scale(0.9); opacity: 0; }
-  6% { opacity: 1; transform: translate(0, -8px) rotate(calc(var(--spin, 1) * 12deg)) scale(1.05); }
-  18% { opacity: 1; transform: translate(calc(var(--tx) * 0.6), calc(var(--ty) * 0.6)) rotate(calc(var(--spin, 1) * 180deg)) scale(0.9); }
-  25% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(calc(var(--spin, 1) * 300deg)) scale(0.3); }
-  90% { opacity: 0; transform: translate(0, 0) scale(0.9); }
-  100% { opacity: 0; transform: translate(0, 0) scale(0.9); }
+  0% {
+    transform: translate(0, 0) rotate(0) scale(0.9);
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+    transform: translate(0, -8px) rotate(calc(var(--spin, 1) * 12deg))
+      scale(1.05);
+  }
+  18% {
+    opacity: 1;
+    transform: translate(calc(var(--tx) * 0.6), calc(var(--ty) * 0.6))
+      rotate(calc(var(--spin, 1) * 180deg)) scale(0.9);
+  }
+  25% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty))
+      rotate(calc(var(--spin, 1) * 300deg)) scale(0.3);
+  }
+  90% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.9);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.9);
+  }
 }
-.animate-smoothie-ingredient { animation: smoothie-ingredient 11s ease-in-out infinite; }
+.animate-smoothie-ingredient {
+  animation: smoothie-ingredient 4.4s ease-in-out 1 both;
+}
 @keyframes smoothie-fill {
-  0%, 20% { transform: scaleY(0); }
-  30% { transform: scaleY(0.95); }
-  55% { transform: scaleY(1); }
-  75% { transform: scaleY(0.15); }
-  100% { transform: scaleY(0.15); }
+  0%,
+  20% {
+    transform: scaleY(0);
+  }
+  30% {
+    transform: scaleY(0.95);
+  }
+  55% {
+    transform: scaleY(1);
+  }
+  75% {
+    transform: scaleY(0.15);
+  }
+  100% {
+    transform: scaleY(0.12);
+  }
 }
-.animate-smoothie-fill { animation: smoothie-fill 11s ease-in-out infinite; }
+.animate-smoothie-fill {
+  animation: smoothie-fill 4.4s ease-in-out 1 both;
+}
 @keyframes smoothie-swirl {
-  0%, 24% { transform: rotate(0deg) scale(0.6); opacity: 0; }
-  28% { opacity: 1; }
-  55% { transform: rotate(1080deg) scale(1); opacity: 1; }
-  62% { opacity: 0; }
-  100% { opacity: 0; transform: rotate(1080deg) scale(0.6); }
+  0%,
+  24% {
+    transform: rotate(0deg) scale(0.6);
+    opacity: 0;
+  }
+  28% {
+    opacity: 1;
+  }
+  55% {
+    transform: rotate(1080deg) scale(1);
+    opacity: 1;
+  }
+  62% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(1080deg) scale(0.6);
+  }
 }
-.animate-smoothie-swirl { animation: smoothie-swirl 11s ease-in-out infinite; }
+.animate-smoothie-swirl {
+  animation: smoothie-swirl 4.4s ease-in-out 1 both;
+}
 @keyframes smoothie-blade {
-  0%, 26% { transform: rotate(0); }
-  55% { transform: rotate(2160deg); }
-  100% { transform: rotate(2160deg); }
+  0%,
+  26% {
+    transform: rotate(0);
+  }
+  55% {
+    transform: rotate(2160deg);
+  }
+  100% {
+    transform: rotate(2160deg);
+  }
 }
-.animate-smoothie-blade { animation: smoothie-blade 11s linear infinite; }
+.animate-smoothie-blade {
+  animation: smoothie-blade 4.4s linear 1 both;
+}
 @keyframes smoothie-blender {
-  0%, 26%, 56%, 100% { transform: translate(0, 0) rotate(0); }
-  30% { transform: translate(-1.5px, 1px) rotate(-1deg); }
-  34% { transform: translate(1.5px, -1px) rotate(1deg); }
-  38% { transform: translate(-1.5px, 1px) rotate(-1deg); }
-  42% { transform: translate(1.5px, 0) rotate(1deg); }
-  46% { transform: translate(-1px, 1px) rotate(-1deg); }
-  50% { transform: translate(1px, -1px) rotate(1deg); }
-  54% { transform: translate(-1px, 0) rotate(0); }
+  0%,
+  26%,
+  56%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+  30% {
+    transform: translate(-1.5px, 1px) rotate(-1deg);
+  }
+  34% {
+    transform: translate(1.5px, -1px) rotate(1deg);
+  }
+  38% {
+    transform: translate(-1.5px, 1px) rotate(-1deg);
+  }
+  42% {
+    transform: translate(1.5px, 0) rotate(1deg);
+  }
+  46% {
+    transform: translate(-1px, 1px) rotate(-1deg);
+  }
+  50% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  54% {
+    transform: translate(-1px, 0) rotate(0);
+  }
 }
-.animate-smoothie-blender { animation: smoothie-blender 11s linear infinite; }
+.animate-smoothie-blender {
+  animation: smoothie-blender 4.4s linear 1 both;
+}
 @keyframes smoothie-pour {
-  0%, 55% { opacity: 0; stroke-dasharray: 0 400; }
-  60% { opacity: 1; stroke-dasharray: 400 400; }
-  74% { opacity: 1; }
-  78% { opacity: 0; stroke-dasharray: 400 400; }
-  100% { opacity: 0; }
+  0%,
+  55% {
+    opacity: 0;
+    stroke-dasharray: 0 400;
+  }
+  60% {
+    opacity: 1;
+    stroke-dasharray: 400 400;
+  }
+  74% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 0;
+    stroke-dasharray: 400 400;
+  }
+  100% {
+    opacity: 0;
+  }
 }
-.animate-smoothie-pour { animation: smoothie-pour 11s ease-in-out infinite; }
+.animate-smoothie-pour {
+  animation: smoothie-pour 4.4s ease-in-out 1 both;
+}
 @keyframes smoothie-cup-fill {
-  0%, 56% { transform: scaleY(0); }
-  76% { transform: scaleY(1); }
-  100% { transform: scaleY(1); }
+  0%,
+  56% {
+    transform: scaleY(0);
+  }
+  76% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
 }
-.animate-smoothie-cup-fill { animation: smoothie-cup-fill 11s ease-out infinite; }
+.animate-smoothie-cup-fill {
+  animation: smoothie-cup-fill 4.4s ease-out 1 both;
+}
 @keyframes smoothie-cup {
-  0%, 74% { transform: translateY(0) scale(1); }
-  79% { transform: translateY(-14px) scale(1.06) rotate(-3deg); }
-  84% { transform: translateY(2px) scale(0.98) rotate(2deg); }
-  89% { transform: translateY(-4px) scale(1.02) rotate(-1deg); }
-  94%, 100% { transform: translateY(0) scale(1) rotate(0); }
+  0%,
+  74% {
+    transform: translateY(0) scale(1);
+  }
+  79% {
+    transform: translateY(-14px) scale(1.06) rotate(-3deg);
+  }
+  84% {
+    transform: translateY(2px) scale(0.98) rotate(2deg);
+  }
+  89% {
+    transform: translateY(-4px) scale(1.02) rotate(-1deg);
+  }
+  94%,
+  100% {
+    transform: translateY(0) scale(1) rotate(0);
+  }
 }
-.animate-smoothie-cup { animation: smoothie-cup 11s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+.animate-smoothie-cup {
+  animation: smoothie-cup 4.4s cubic-bezier(0.34, 1.56, 0.64, 1) 1 both;
+}
 @keyframes smoothie-spark {
-  0%, 76% { opacity: 0; transform: scale(0.3) rotate(0); }
-  82% { opacity: 1; transform: scale(1.2) rotate(15deg); }
-  92% { opacity: 1; transform: scale(1) rotate(25deg); }
-  100% { opacity: 0; transform: scale(0.8) rotate(35deg); }
+  0%,
+  76% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0);
+  }
+  82% {
+    opacity: 1;
+    transform: scale(1.2) rotate(15deg);
+  }
+  92% {
+    opacity: 1;
+    transform: scale(1) rotate(25deg);
+  }
+  100% {
+    opacity: 0.9;
+    transform: scale(1) rotate(30deg);
+  }
 }
-.animate-smoothie-spark { animation: smoothie-spark 11s ease-out infinite; }
+.animate-smoothie-spark {
+  animation: smoothie-spark 4.4s ease-out 1 both;
+}
 @media (prefers-reduced-motion: reduce) {
-  .animate-smoothie-ingredient { animation: none; opacity: 1; }
-  .animate-smoothie-fill { animation: none; transform: scaleY(0.6); }
-  .animate-smoothie-swirl { animation: none; opacity: 1; }
-  .animate-smoothie-blade, .animate-smoothie-blender { animation: none; }
-  .animate-smoothie-pour { animation: none; opacity: 0; }
-  .animate-smoothie-cup-fill { animation: none; transform: scaleY(1); }
-  .animate-smoothie-cup { animation: none; }
-  .animate-smoothie-spark { animation: none; opacity: 0.8; }
+  .animate-smoothie-ingredient {
+    animation: none;
+    opacity: 1;
+  }
+  .animate-smoothie-fill {
+    animation: none;
+    transform: scaleY(0.6);
+  }
+  .animate-smoothie-swirl {
+    animation: none;
+    opacity: 1;
+  }
+  .animate-smoothie-blade,
+  .animate-smoothie-blender {
+    animation: none;
+  }
+  .animate-smoothie-pour {
+    animation: none;
+    opacity: 0;
+  }
+  .animate-smoothie-cup-fill {
+    animation: none;
+    transform: scaleY(1);
+  }
+  .animate-smoothie-cup {
+    animation: none;
+  }
+  .animate-smoothie-spark {
+    animation: none;
+    opacity: 0.8;
+  }
 }
-
 
 /* 🍯 ดริปนมเหนียว: ชั้นย้อยตัวช้า ๆ + หยดยืดแล้วหลุดตก */
 @keyframes drip-sway {
-  0%, 100% { transform: scaleY(1); }
-  50% { transform: scaleY(1.045); }
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.045);
+  }
 }
-.animate-drip-sway { animation: drip-sway 6s ease-in-out infinite; }
+.animate-drip-sway {
+  animation: drip-sway 6s ease-in-out infinite;
+}
 @keyframes drip-fall {
-  0% { transform: translateY(0) scale(1, 0.7); opacity: 1; }
-  35% { transform: translateY(0) scale(0.9, 1.35); opacity: 1; }
-  45% { transform: translateY(6px) scale(1, 1); opacity: 1; }
-  75% { transform: translateY(150px) scale(0.85, 1.2); opacity: 0.9; }
-  82% { transform: translateY(190px) scale(1.3, 0.5); opacity: 0; }
-  100% { transform: translateY(0) scale(1, 0.7); opacity: 0; }
+  0% {
+    transform: translateY(0) scale(1, 0.7);
+    opacity: 1;
+  }
+  35% {
+    transform: translateY(0) scale(0.9, 1.35);
+    opacity: 1;
+  }
+  45% {
+    transform: translateY(6px) scale(1, 1);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(150px) scale(0.85, 1.2);
+    opacity: 0.9;
+  }
+  82% {
+    transform: translateY(190px) scale(1.3, 0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1, 0.7);
+    opacity: 0;
+  }
 }
-.animate-drip-fall { animation: drip-fall 8s ease-in infinite; }
+.animate-drip-fall {
+  animation: drip-fall 8s ease-in infinite;
+}
 @media (prefers-reduced-motion: reduce) {
-  .animate-drip-sway, .animate-drip-fall { animation: none; opacity: 1; }
+  .animate-drip-sway,
+  .animate-drip-fall {
+    animation: none;
+    opacity: 1;
+  }
 }
-
 
 /* 🥤 น้ำอัดลม: ฟองซ่าลอยขึ้น จาง/แตกด้านบน · น้ำแข็งเด้งเบา ๆ */
 @keyframes fizz-bubble {
-  0% { transform: translateY(0) scale(0.5); opacity: 0; }
-  15% { opacity: 0.9; }
-  80% { opacity: 0.8; transform: translateY(-96px) scale(1); }
-  100% { opacity: 0; transform: translateY(-112px) scale(1.5); }
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.8;
+    transform: translateY(-96px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-112px) scale(1.5);
+  }
 }
-.animate-fizz-bubble { animation: fizz-bubble 3s ease-out infinite; }
+.animate-fizz-bubble {
+  animation: fizz-bubble 3s ease-out infinite;
+}
 @keyframes ice-bob {
-  0%, 100% { transform: translateY(0) rotate(0); }
-  50% { transform: translateY(-4px) rotate(3deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-4px) rotate(3deg);
+  }
 }
-.animate-ice-bob { animation: ice-bob 3.4s ease-in-out infinite; }
+.animate-ice-bob {
+  animation: ice-bob 3.4s ease-in-out infinite;
+}
 /* ✨ แสงวิ่งผ่านแก้ว (ใช้กับหน้าชา) */
 @keyframes glass-shine {
-  0%, 70% { transform: translateX(-60px) skewX(-15deg); opacity: 0; }
-  75% { opacity: 0.7; }
-  85% { transform: translateX(60px) skewX(-15deg); opacity: 0.6; }
-  90%, 100% { transform: translateX(80px) skewX(-15deg); opacity: 0; }
+  0%,
+  70% {
+    transform: translateX(-60px) skewX(-15deg);
+    opacity: 0;
+  }
+  75% {
+    opacity: 0.7;
+  }
+  85% {
+    transform: translateX(60px) skewX(-15deg);
+    opacity: 0.6;
+  }
+  90%,
+  100% {
+    transform: translateX(80px) skewX(-15deg);
+    opacity: 0;
+  }
 }
-.animate-glass-shine { animation: glass-shine 7s ease-in-out infinite; }
+.animate-glass-shine {
+  animation: glass-shine 7s ease-in-out infinite;
+}
 @media (prefers-reduced-motion: reduce) {
-  .animate-fizz-bubble { animation: none; opacity: 0.6; transform: translateY(-40px); }
-  .animate-ice-bob, .animate-glass-shine { animation: none; }
+  .animate-fizz-bubble {
+    animation: none;
+    opacity: 0.6;
+    transform: translateY(-40px);
+  }
+  .animate-ice-bob,
+  .animate-glass-shine {
+    animation: none;
+  }
+}
+
+/* 🍦 น้องแก้ววิปครีม — ตัวการ์ตูนมีชีวิต */
+@keyframes whip-enter {
+  0% {
+    transform: translateY(40px) scale(0.6) rotate(0);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(-12px) scale(1.08) rotate(-6deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(2px) scale(0.98) rotate(5deg);
+  }
+  80% {
+    transform: translateY(-4px) scale(1.02) rotate(-2deg);
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+.whip-enter {
+  animation: whip-enter 1.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transform-origin: 50% 100%;
+}
+@keyframes whip-idle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-7px) rotate(1.2deg);
+  }
+}
+.whip-idle {
+  animation: whip-idle 4s ease-in-out infinite;
+  transform-origin: 50% 100%;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes whip-cream {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.03, 0.97) translateY(1px);
+  }
+}
+.whip-cream {
+  animation: whip-cream 3.2s ease-in-out infinite;
+}
+@keyframes whip-fruit {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-4px) rotate(6deg);
+  }
+}
+.whip-fruit {
+  animation: whip-fruit 2.6s ease-in-out infinite;
+}
+@keyframes whip-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+.whip-blink {
+  animation: whip-blink 5s ease-in-out infinite;
+}
+/* hover: เด้งขึ้น เอียงน่ารัก วิป/ผลไม้ขยับตาม */
+.whip-char--hover:hover .whip-idle {
+  animation-play-state: paused;
+  transform: translateY(-14px) rotate(-6deg) scale(1.05);
+}
+.whip-char--hover:hover .whip-cream {
+  animation-duration: 0.8s;
+}
+.whip-char--hover:hover .whip-fruit {
+  animation-duration: 0.7s;
+}
+.whip-char--hover:hover .animate-twinkle {
+  animation-duration: 0.9s;
+}
+/* happy: bounce + wobble (เล่นครั้งเดียวเมื่อ mood เปลี่ยน) */
+@keyframes whip-happy {
+  0% {
+    transform: translateY(0) rotate(0) scale(1);
+  }
+  20% {
+    transform: translateY(-22px) rotate(-8deg) scale(1.08);
+  }
+  40% {
+    transform: translateY(0) rotate(8deg) scale(0.96);
+  }
+  60% {
+    transform: translateY(-10px) rotate(-5deg) scale(1.04);
+  }
+  80% {
+    transform: translateY(0) rotate(3deg) scale(0.99);
+  }
+  100% {
+    transform: translateY(0) rotate(0) scale(1);
+  }
+}
+.whip-happy {
+  animation: whip-happy 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .whip-enter,
+  .whip-idle,
+  .whip-cream,
+  .whip-fruit,
+  .whip-blink,
+  .whip-happy {
+    animation: none;
+  }
+  .whip-char--hover:hover .whip-idle {
+    transform: none;
+  }
+}
+
+/* 🧋 Boba cursor — แก้วชาไข่มุกแทนลูกศร (เฉพาะเมาส์) */
+.boba-cursor-on,
+.boba-cursor-on * {
+  cursor: none !important;
+}
+.boba-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: 3px 3px; /* หมุนรอบจุดปลายชี้ */
+  will-change: transform;
+  transition: opacity 0.15s ease;
+}
+.boba-cursor__cup {
+  display: block;
+  filter: drop-shadow(0 2px 3px rgba(59, 47, 69, 0.35));
+  transform-origin: 3px 3px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.boba-cursor__spark {
+  position: absolute;
+  font-size: 10px;
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.boba-cursor__spark--1 {
+  left: 24px;
+  top: -4px;
+}
+.boba-cursor__spark--2 {
+  left: -6px;
+  top: 22px;
+}
+/* hover ปุ่ม/การ์ด: ขยาย + เด้ง + ประกาย */
+.boba-cursor--hover .boba-cursor__cup {
+  transform: scale(1.25) rotate(-8deg);
+  animation: boba-bounce 0.7s ease-in-out infinite;
+}
+.boba-cursor--hover .boba-cursor__spark {
+  opacity: 1;
+  transform: scale(1);
+}
+.boba-cursor--hover .boba-cursor__spark--2 {
+  transition-delay: 0.08s;
+}
+/* กดคลิก: หดเล็กน้อย */
+.boba-cursor--down .boba-cursor__cup {
+  transform: scale(0.9);
+}
+@keyframes boba-bounce {
+  0%,
+  100% {
+    transform: scale(1.25) rotate(-8deg) translateY(0);
+  }
+  50% {
+    transform: scale(1.3) rotate(-4deg) translateY(-2px);
+  }
+}
+/* touch / ไม่มี hover → ไม่ใช้ */
+@media (hover: none), (pointer: coarse) {
+  .boba-cursor {
+    display: none !important;
+  }
+  .boba-cursor-on,
+  .boba-cursor-on * {
+    cursor: auto !important;
+  }
+}
+
+/* 💬 ปุ่มแชตลอยเบา ๆ */
+@keyframes fang-fab {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+.fang-chat-fab {
+  animation: fang-fab 3s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fang-chat-fab {
+    animation: none;
+  }
+}
+
+/* 🎰 สุ่มแก้วกับฟ่าง — ตู้กาชาปอง */
+@keyframes gacha-idle { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px) rotate(0.4deg); } }
+.gacha-idle { animation: gacha-idle 3.2s ease-in-out infinite; }
+@keyframes gacha-sign { 0%, 100% { transform: rotate(-1.2deg); } 50% { transform: rotate(1.2deg); } }
+.gacha-sign { animation: gacha-sign 2.6s ease-in-out infinite; }
+@keyframes gacha-glow { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.9; } }
+.gacha-glow { animation: gacha-glow 2.2s ease-in-out infinite; }
+@keyframes gacha-shine { 0% { transform: translateX(-140%) skewX(-20deg); } 60%, 100% { transform: translateX(260%) skewX(-20deg); } }
+.gacha-shine { animation: gacha-shine 4.5s ease-in-out infinite; }
+@keyframes gacha-cap-idle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.gacha-cap-idle { animation: gacha-cap-idle 2.4s ease-in-out infinite; }
+@keyframes gacha-shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  15% { transform: translateX(-6px) rotate(-1.6deg); }
+  30% { transform: translateX(6px) rotate(1.6deg); }
+  45% { transform: translateX(-5px) rotate(-1.2deg); }
+  60% { transform: translateX(5px) rotate(1.2deg); }
+  80% { transform: translateX(-3px) rotate(-0.6deg); }
+}
+.gacha-shake { animation: gacha-shake 0.5s ease-in-out infinite; }
+@keyframes gacha-tumble {
+  0% { transform: translate(0, 0) rotate(0); }
+  20% { transform: translate(-14px, -26px) rotate(-90deg); }
+  40% { transform: translate(12px, -8px) rotate(60deg); }
+  60% { transform: translate(-8px, -30px) rotate(-200deg); }
+  80% { transform: translate(16px, -12px) rotate(280deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+.gacha-tumble { animation: gacha-tumble 0.9s ease-in-out infinite; }
+@keyframes gacha-knob { to { transform: rotate(360deg); } }
+.gacha-knob { animation: gacha-knob 0.8s cubic-bezier(0.45, 0, 0.2, 1) 1; }
+@keyframes gacha-ring { to { transform: rotate(360deg); } }
+.gacha-ring { animation: gacha-ring 1.2s linear infinite; }
+@keyframes gacha-out {
+  0% { transform: translate(0, -70px) rotate(0); opacity: 0; }
+  25% { transform: translate(-6px, -30px) rotate(-60deg); opacity: 1; }
+  55% { transform: translate(4px, 6px) rotate(40deg); }
+  70% { transform: translate(0, -10px) rotate(70deg); }
+  85% { transform: translate(0, 2px) rotate(90deg); }
+  100% { transform: translate(0, 0) rotate(90deg); opacity: 1; }
+}
+.gacha-out { animation: gacha-out 0.9s cubic-bezier(0.3, 0.9, 0.4, 1) both; }
+@keyframes gacha-wiggle { 0%, 100% { transform: rotate(90deg); } 25% { transform: rotate(80deg) scale(1.04); } 75% { transform: rotate(100deg) scale(1.04); } }
+.gacha-wiggle { animation: gacha-wiggle 0.5s ease-in-out infinite; }
+@keyframes gacha-open-top { to { transform: translate(-22px, -46px) rotate(-40deg); opacity: 0.2; } }
+.gacha-open-top { animation: gacha-open-top 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@keyframes gacha-open-bottom { to { transform: translate(22px, 30px) rotate(35deg); opacity: 0.2; } }
+.gacha-open-bottom { animation: gacha-open-bottom 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@keyframes gacha-prize { 0% { transform: scale(0.2); opacity: 0; } 70% { transform: scale(1.25); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+.gacha-prize { animation: gacha-prize 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both; }
+@keyframes gacha-flash { 0% { opacity: 0; transform: scale(0.4); } 30% { opacity: 0.9; } 100% { opacity: 0; transform: scale(2.4); } }
+.gacha-flash { animation: gacha-flash 0.8s ease-out both; }
+@keyframes gacha-confetti {
+  0% { transform: translate(0, 0) rotate(0); opacity: 1; }
+  100% { transform: translate(var(--cx), var(--cy)) rotate(540deg); opacity: 0; }
+}
+.gacha-confetti { animation: gacha-confetti 1.3s cubic-bezier(0.2, 0.8, 0.4, 1) both; }
+@keyframes gacha-reveal { 0% { transform: translateY(20px) scale(0.9); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
+.gacha-reveal { animation: gacha-reveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@keyframes gacha-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); } 50% { box-shadow: 0 0 0 16px rgba(255, 255, 255, 0); } }
+.gacha-pulse { animation: gacha-pulse 1.8s ease-out infinite; }
+@keyframes gacha-tick { 0% { transform: translateY(-6px); opacity: 0.3; } 100% { transform: translateY(0); opacity: 1; } }
+.gacha-tick { display: inline-block; animation: gacha-tick 0.12s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .gacha-idle, .gacha-sign, .gacha-glow, .gacha-shine, .gacha-cap-idle, .gacha-shake, .gacha-tumble, .gacha-knob, .gacha-ring,
+  .gacha-out, .gacha-wiggle, .gacha-open-top, .gacha-open-bottom, .gacha-prize, .gacha-flash, .gacha-confetti, .gacha-reveal, .gacha-pulse, .gacha-tick { animation: none; }
+  .gacha-open-top, .gacha-open-bottom { opacity: 0; }
 }
 
 /* ♿ ลดการเคลื่อนไหวสำหรับผู้ที่ตั้งค่า prefers-reduced-motion */

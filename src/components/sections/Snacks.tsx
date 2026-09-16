@@ -4,10 +4,19 @@ import { useState } from "react";
 import { Heart, Plus } from "lucide-react";
 import { SNACK_GROUPS, type SnackItem } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
+import SandwichCharacter, {
+  fillingOf,
+  type SandwichMood,
+} from "@/components/SandwichCharacter";
+import AddToCartFx from "@/components/AddToCartFx";
 
 export function SnackCard({ item }: { item: SnackItem }) {
-  const { addItem, openCart } = useCart();
+  const { addItem, openCart, showToast } = useCart();
   const [liked, setLiked] = useState(false);
+  /* 🥪 แซนด์วิช: ใช้น้องแซนด์วิชแทน placeholder + ดีใจ + บินเข้าตะกร้า */
+  const isSandwich = item.id.startsWith("sw-");
+  const [mood, setMood] = useState<SandwichMood>("idle");
+  const [flying, setFlying] = useState(false);
 
   const add = () => {
     addItem({
@@ -15,11 +24,33 @@ export function SnackCard({ item }: { item: SnackItem }) {
       name: item.nameTh,
       price: item.price,
     });
+    if (isSandwich) {
+      setMood("happy");
+      setFlying(true);
+      return;
+    }
     openCart();
+  };
+  const finishFly = () => {
+    setFlying(false);
+    setMood("idle");
+    showToast({
+      emoji: "🥪",
+      name: item.nameTh,
+      title: "🥪 เพิ่มแซนด์วิชแล้ว! พร้อมอร่อย ✨",
+    });
   };
 
   return (
     <article className="hover-lift group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white/85 p-4 shadow-card ring-1 ring-white/70">
+      {flying && (
+        <AddToCartFx
+          variant="sandwich"
+          palette={{ foam: "#fff3d6", top: "#f5dfae", bottom: "#e3a85a" }}
+          emoji="🥪"
+          onDone={finishFly}
+        />
+      )}
       {item.badge && (
         <span className="absolute left-4 top-4 z-10 rounded-full bg-blossom-500 px-2.5 py-1 text-[11px] font-bold text-white shadow">
           {item.badge}
@@ -41,6 +72,13 @@ export function SnackCard({ item }: { item: SnackItem }) {
             src={item.image}
             alt={item.nameTh}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : isSandwich ? (
+          <SandwichCharacter
+            filling={fillingOf(item.id)}
+            mood={mood}
+            size={140}
+            interactive
           />
         ) : (
           <span className="flex flex-col items-center gap-1 text-6xl transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3">

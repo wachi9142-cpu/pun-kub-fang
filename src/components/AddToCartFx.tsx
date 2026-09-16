@@ -23,6 +23,8 @@ export type AddToCartVariant =
   | "tea"
   | "smoothie"
   | "sticky"
+  | "whip"
+  | "sandwich"
   | "default";
 
 export type AddToCartFxProps = {
@@ -43,6 +45,8 @@ const FX_MS: Record<AddToCartVariant, number> = {
   tea: 1200,
   smoothie: 1200,
   sticky: 1300,
+  whip: 1300,
+  sandwich: 1200,
   default: 1000,
 };
 const FLY_MS = 650;
@@ -56,6 +60,8 @@ const LABEL: Record<AddToCartVariant, string> = {
   tea: "🍵 หอมชา เข้าตะกร้าแล้ว!",
   smoothie: "🍓 ปั่นสด เข้าตะกร้าแล้ว!",
   sticky: "🍪 เหนียวหนึบ เข้าตะกร้าแล้ว!",
+  whip: "🍦 วิปฟู ๆ เข้าตะกร้าแล้ว!",
+  sandwich: "🥪 แซนด์วิชเข้าแก้ว... เอ๊ะ! เข้าตะกร้าแล้ว! 💜",
   default: "✨ เพิ่มลงตะกร้าแล้ว!",
 };
 
@@ -365,6 +371,12 @@ export default function AddToCartFx({
                 )}
                 {variant === "smoothie" && (
                   <FloatEmojis items={["🍓", "🥭", "🫐", "🍌"]} up={false} />
+                )}
+                {variant === "sandwich" && (
+                  <FloatEmojis items={["🥪", "🧀", "✨", "🍓"]} up={false} />
+                )}
+                {variant === "whip" && (
+                  <FloatEmojis items={["🍦", "💜", "✨", "🍓"]} up={false} />
                 )}
                 {variant === "sticky" && (
                   <FloatEmojis items={["🥄", "🍪", "🍪"]} up={false} />

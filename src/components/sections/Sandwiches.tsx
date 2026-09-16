@@ -1,17 +1,12 @@
 import { SANDWICH_GROUPS } from "@/data/site";
 import { SnackCard } from "@/components/sections/Snacks";
+import SandwichHero from "@/components/sections/SandwichHero";
 
 export default function Sandwiches() {
   return (
     <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
-      <div className="mb-8 text-center">
-        <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-          🥪 แซนด์วิช <span className="text-blossom-400">| Sandwiches</span>
-        </h1>
-        <p className="mt-2 text-ink/60">
-          ไส้คาว · ผลไม้ครีมสด · แยม เลือกอร่อยได้ตามใจ 💜
-        </p>
-      </div>
+      {/* 🥪 Hero: น้องแซนด์วิช 3 กลุ่ม */}
+      <SandwichHero />
 
       <div className="space-y-10">
         {SANDWICH_GROUPS.map((group) => (

@@ -4,6 +4,7 @@ import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
 import Categories from "@/components/sections/Categories";
 import BestSellers from "@/components/sections/BestSellers";
+import LuckyDrink from "@/components/sections/LuckyDrink";
 import MixTeaser from "@/components/sections/MixTeaser";
 import FreshBuffetTeaser from "@/components/sections/FreshBuffetTeaser";
 import MixPairings from "@/components/sections/MixPairings";
@@ -21,6 +22,7 @@ export default function HomePage() {
         <Hero />
         <Categories />
         <BestSellers />
+        <LuckyDrink />
         <MixTeaser />
         <FreshBuffetTeaser />
         <MixPairings />

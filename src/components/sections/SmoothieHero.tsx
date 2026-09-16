@@ -13,35 +13,35 @@ import { FRESH_FRUITS, FRESH_VEGGIES, type FreshItem } from "@/data/site";
 
 /* สีของวัตถุดิบ (ใช้ผสมเป็นสีสมูทตี้ + จุดสีในโถ) */
 const COLOR: Record<string, string> = {
-  banana: "#f6d35c",
-  strawberry: "#f0507f",
-  apple: "#e8333f",
-  pineapple: "#f2d130",
-  watermelon: "#f26a6a",
-  orange: "#ff9a3c",
-  kiwi: "#7cc244",
-  grape: "#7c3fc4",
+  banana: "#f2c118",
+  strawberry: "#e5194f",
+  apple: "#d4141f",
+  pineapple: "#f5c400",
+  watermelon: "#f04a4a",
+  orange: "#ff7f11",
+  kiwi: "#5cb52e",
+  grape: "#5e1fb0",
   "shine-muscat": "#b9dd8a",
-  blueberry: "#4a5fd0",
-  mulberry: "#6b2d8f",
-  dragonfruit: "#f05a9a",
-  pomegranate: "#c8163a",
-  passion: "#f4c542",
+  blueberry: "#2f3fc4",
+  mulberry: "#4d1170",
+  dragonfruit: "#f0307f",
+  pomegranate: "#b30d2f",
+  passion: "#f5b400",
   pear: "#cfe38a",
-  persimmon: "#f28c28",
+  persimmon: "#f07b0f",
   cantaloupe: "#f7b56d",
-  melon: "#8fd35a",
+  melon: "#6dc63a",
   roseapple: "#f5a3bd",
   guava: "#a8ce7a",
   jicama: "#e9d9c2",
-  carrot: "#f28c28",
-  cucumber: "#9bd66a",
+  carrot: "#f07b0f",
+  cucumber: "#7dcc3a",
   tomato: "#e8433f",
-  spinach: "#3f8f35",
+  spinach: "#2e8a26",
   lettuce: "#a8ce7a",
   celery: "#7cc27a",
-  beetroot: "#a3122f",
-  kale: "#2f6f2a",
+  beetroot: "#8e0b26",
+  kale: "#246421",
 };
 const fallback = "#c9b3e8";
 const colorOf = (it: FreshItem) => COLOR[it.id] ?? fallback;
@@ -77,9 +77,9 @@ export function SmoothieHeroArt({
     [items],
   );
   const colors = list.map(colorOf);
-  const mixTop = colors[0] ?? "#f0507f";
-  const mixMid = colors[Math.floor(colors.length / 2)] ?? "#f6d35c";
-  const mixBot = colors[colors.length - 1] ?? "#7c3fc4";
+  const mixTop = colors[0] ?? "#e5194f";
+  const mixMid = colors[Math.floor(colors.length / 2)] ?? "#f2c118";
+  const mixBot = colors[colors.length - 1] ?? "#5e1fb0";
 
   return (
     <div className={`pointer-events-none select-none ${className}`} aria-hidden>
@@ -96,9 +96,9 @@ export function SmoothieHeroArt({
             <stop offset="100%" stopColor="#c9b3e8" stopOpacity="0.4" />
           </linearGradient>
           <radialGradient id="sm-bg" cx="0.5" cy="0.5" r="0.5">
-            <stop offset="0%" stopColor="#fff0f6" />
-            <stop offset="60%" stopColor="#efe6fb" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#c9b3e8" stopOpacity="0" />
+            <stop offset="0%" stopColor="#ffd1e6" stopOpacity="0.9" />
+            <stop offset="60%" stopColor="#b98cf0" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#5e1fb0" stopOpacity="0" />
           </radialGradient>
           <clipPath id="sm-jar-clip">
             <path d="M160 92 h100 l-8 96 H168 Z" />
@@ -117,7 +117,7 @@ export function SmoothieHeroArt({
         >
           <path
             d="M30 270 C12 240 30 200 66 190 C70 232 58 262 30 270 Z"
-            fill="#7cc27a"
+            fill="#7dcc3a"
           />
           <path
             d="M34 266 C42 236 50 214 66 194"
@@ -132,7 +132,7 @@ export function SmoothieHeroArt({
         >
           <path
             d="M400 270 C418 240 400 200 364 190 C360 232 372 262 400 270 Z"
-            fill="#9bd66a"
+            fill="#7dcc3a"
           />
           <path
             d="M396 266 C388 236 380 214 364 194"
@@ -376,7 +376,7 @@ export function SmoothieHeroArt({
         {/* 🍃 เศษใบไม้/ชิ้นเล็กลอยรอบ ๆ */}
         {[
           [80, 80, "#7cc27a", "0s"],
-          [340, 60, "#9bd66a", "1.4s"],
+          [340, 60, "#7dcc3a", "1.4s"],
           [120, 300, "#a8ce7a", "2.6s"],
         ].map(([x, y, c, d], i) => (
           <g
@@ -403,39 +403,41 @@ export function SmoothieHeroArt({
 
 export default function SmoothieHero({ items }: { items?: FreshItem[] }) {
   return (
-    <div className="relative mb-6 overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#ffe9f2] via-cream-white to-grape-100 px-6 py-8 ring-1 ring-white/80 sm:px-10 lg:py-10">
-      <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-[#f0507f]/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-[#f6d35c]/30 blur-3xl" />
-      <div className="pointer-events-none absolute -right-16 -top-8 h-80 w-80 rounded-full bg-[#9bd66a]/25 blur-3xl" />
+    <div className="relative mb-6 overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#4a1a8f] via-[#b3186b] to-[#ff7f11] px-6 py-8 text-white shadow-card ring-1 ring-white/10 sm:px-10 lg:py-10">
+      {/* 🫧 organic blobs สีผลไม้ไหลผสมกัน */}
+      <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-[#2f3fc4]/50 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-28 left-1/4 h-72 w-72 rounded-full bg-[#e5194f]/55 blur-3xl" />
+      <div className="pointer-events-none absolute -right-20 -top-16 h-80 w-80 rounded-full bg-[#5cb52e]/45 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-1/3 h-56 w-56 rounded-full bg-[#f5c400]/40 blur-3xl" />
       <div className="relative grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_460px]">
         <div className="text-center lg:text-left">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-blossom-500 ring-1 ring-blossom-200">
-            🍓🥬 สวนผลไม้และผักสด → ปั่นสด ๆ ตรงหน้า ✨
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-[#fff6dc] ring-1 ring-white/25 backdrop-blur-sm">
+            🍓🥬 สดมาก! ผลไม้เยอะ สีฉ่ำ กำลังจะปั่นให้ ✨
           </span>
-          <h1 className="font-display mt-3 text-3xl font-bold text-ink sm:text-4xl lg:text-5xl">
+          <h1 className="font-display mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             สมูทตี้
           </h1>
-          <p className="font-display mt-1 text-lg font-semibold text-blossom-400">
+          <p className="font-display mt-1 text-lg font-semibold text-[#f5c400]">
             Smoothies
           </p>
-          <p className="mx-auto mt-3 max-w-xl text-ink/60 lg:mx-0">
-            ผลไม้และผักสดหลากสี ปั่นรวมกันเป็นแก้วฉ่ำ ๆ — สตรอว์เบอร์รี กล้วย
-            กีวี บลูเบอร์รี แครอท ผักโขม บีตรูท เลือกได้ตามใจ 🍹💜
+          <p className="mx-auto mt-3 max-w-xl text-white/85 lg:mx-0">
+            ผลไม้และผักสดสีฉ่ำ ๆ ปั่นรวมกันเป็นแก้วเดียว — สตรอว์เบอร์รี กล้วย
+            กีวี บลูเบอร์รี ส้ม แก้วมังกร แครอท ผักโขม บีตรูท เลือกได้ตามใจ 🍹💜
           </p>
           <div className="mt-4 flex flex-wrap justify-center gap-1.5 lg:justify-start">
             {[
-              ["🍓 แดง/ชมพู", "#f0507f"],
-              ["🍌 เหลือง/ส้ม", "#f6d35c"],
-              ["🥝 เขียว", "#7cc244"],
-              ["🫐 ม่วง/น้ำเงิน", "#4a5fd0"],
-              ["🩷 แก้วมังกร/ทับทิม", "#f05a9a"],
+              ["🍓 แดง/ชมพู", "#e5194f"],
+              ["🫐 ม่วง/น้ำเงิน", "#2f3fc4"],
+              ["🍊 ส้ม/เหลือง", "#ff7f11"],
+              ["🥝 เขียว", "#5cb52e"],
+              ["🍌 ครีม/เหลืองนวล", "#f2c118"],
             ].map(([t, c]) => (
               <span
                 key={t}
-                className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-2.5 py-1 text-[11px] font-semibold text-ink ring-1 ring-ink/5"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white ring-1 ring-white/20 backdrop-blur-sm"
               >
                 <span
-                  className="h-2.5 w-2.5 rounded-full ring-1 ring-white"
+                  className="h-2.5 w-2.5 rounded-full ring-1 ring-white/80"
                   style={{ background: c }}
                 />
                 {t}

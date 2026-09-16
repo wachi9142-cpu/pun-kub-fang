@@ -99,42 +99,42 @@ export default function HomemadeHerbal() {
     <section id="herbal" className="scroll-mt-24 py-14 lg:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* 🌿 Hero: ชื่อหมวดเด่น + ภาพขวดน้ำสมุนไพร 5 สี (ขวาบน Desktop / บนสุดบน Mobile) */}
-        <div className="relative mb-6 overflow-hidden rounded-[2rem] bg-gradient-to-br from-cream-white via-grape-50 to-[#eef8e6] px-6 py-8 ring-1 ring-white/80 sm:px-10 lg:py-10">
-          <div className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full bg-[#9bd66a]/20 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-20 -right-10 h-64 w-64 rounded-full bg-grape-300/25 blur-3xl" />
+        <div className="relative mb-6 overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#3a1f6b] via-[#2f6b3a] to-[#8a5a1e] px-6 py-8 text-white shadow-card ring-1 ring-white/10 sm:px-10 lg:py-10">
+          <div className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full bg-[#c8163a]/45 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -right-10 h-64 w-64 rounded-full bg-[#2d4ec9]/45 blur-3xl" />
           <div className="relative grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
             <div className="text-center lg:text-left">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-[#fff6dc] ring-1 ring-white/25 backdrop-blur-sm">
                 🌿 ชั้นวางน้ำสมุนไพรจากบ้านฟ่าง · ทำสดใหม่ทุกวัน
               </span>
-              <h2 className="font-display mt-3 text-3xl font-bold text-ink sm:text-4xl lg:text-5xl">
+              <h2 className="font-display mt-3 text-3xl font-bold text-[#fff6dc] sm:text-4xl lg:text-5xl">
                 น้ำสมุนไพรโฮมเมด
               </h2>
-              <p className="font-display mt-1 text-lg font-semibold text-blossom-400">
+              <p className="font-display mt-1 text-lg font-semibold text-[#f4d35e]">
                 Homemade Herbal Drinks
               </p>
-              <p className="mx-auto mt-3 max-w-xl text-ink/60 lg:mx-0">
+              <p className="mx-auto mt-3 max-w-xl text-white/85 lg:mx-0">
                 เปิดมาเจอขวดน้ำสมุนไพรหลายสีเรียงกันบนชั้น — กระเจี๊ยบ เก๊กฮวย
                 อัญชัน ใบเตย มะตูม ต้มเองในครัว บรรจุขวดสดใหม่ทุกวัน 💜
               </p>
-              <p className="mt-2 text-xs text-ink/45">
+              <p className="mt-2 text-xs text-white/60">
                 แตะเมนูเพื่อเลือกปั่น/ไม่ปั่น + ท็อปปิ้ง แล้วเพิ่มลงตะกร้าได้เลย
               </p>
               {/* ป้ายสีน้ำสมุนไพร */}
               <div className="mt-4 flex flex-wrap justify-center gap-1.5 lg:justify-start">
                 {[
-                  ["🌺 กระเจี๊ยบ", "#e0435c"],
-                  ["🌼 เก๊กฮวย", "#e0a11c"],
-                  ["🦋 อัญชัน", "#3f63d6"],
-                  ["🌿 ใบเตย", "#3f8f35"],
-                  ["🌳 มะตูม", "#b07a3a"],
+                  ["🌺 กระเจี๊ยบ", "#b0102f"],
+                  ["🌼 เก๊กฮวย", "#f2b71c"],
+                  ["🦋 อัญชัน", "#2a3fb5"],
+                  ["🌿 ใบเตย", "#2e8a26"],
+                  ["🌳 มะตูม", "#a8641c"],
                 ].map(([t, c]) => (
                   <span
                     key={t}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-2.5 py-1 text-[11px] font-semibold text-ink ring-1 ring-ink/5"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-[#fff6dc] ring-1 ring-white/20 backdrop-blur-sm"
                   >
                     <span
-                      className="h-2.5 w-2.5 rounded-full"
+                      className="h-2.5 w-2.5 rounded-full ring-1 ring-white/70"
                       style={{ background: c }}
                     />
                     {t}
