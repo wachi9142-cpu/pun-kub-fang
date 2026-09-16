@@ -3,14 +3,16 @@
 import { useState } from "react";
 import { MENU_ITEMS } from "@/data/site";
 import DrinkCard from "@/components/DrinkCard";
+import SmoothieHero from "@/components/sections/SmoothieHero";
 
 type Group = "all" | "fruit" | "tea" | "milk" | "soda" | "yogurt";
 
-const FILTERS: { id: Group; label: string; labelEn: string; emoji: string }[] = [
-  { id: "all", label: "ทั้งหมด", labelEn: "All", emoji: "" },
-  { id: "fruit", label: "ผลไม้สดปั่น", labelEn: "Fresh Fruit", emoji: "🍓" },
-  { id: "yogurt", label: "โยเกิร์ตปั่น", labelEn: "Yogurt", emoji: "🍦" },
-];
+const FILTERS: { id: Group; label: string; labelEn: string; emoji: string }[] =
+  [
+    { id: "all", label: "ทั้งหมด", labelEn: "All", emoji: "" },
+    { id: "fruit", label: "ผลไม้สดปั่น", labelEn: "Fresh Fruit", emoji: "🍓" },
+    { id: "yogurt", label: "โยเกิร์ตปั่น", labelEn: "Yogurt", emoji: "🍦" },
+  ];
 
 /* จัดกลุ่มย่อยของเมนูปั่น (ตาม id) */
 const SMOOTHIE_GROUP: Record<string, Exclude<Group, "all">> = {
@@ -34,16 +36,14 @@ export default function SmoothieMenuView() {
 
   const items = MENU_ITEMS.filter((m) => m.category === "smoothie");
   const shown =
-    group === "all" ? items : items.filter((m) => SMOOTHIE_GROUP[m.id] === group);
+    group === "all"
+      ? items
+      : items.filter((m) => SMOOTHIE_GROUP[m.id] === group);
 
   return (
     <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
-      <div className="mb-6 text-center">
-        <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-          🍓 สมูทตี้ <span className="text-blossom-400">| Smoothies</span>
-        </h1>
-        <p className="mt-2 text-ink/60">ปั่นสดใหม่ทุกแก้ว เลือกหมวดที่ชอบได้เลย</p>
-      </div>
+      {/* 🍓 Hero: สวนผลไม้และผักสด → ปั่นรวมกัน (วัตถุดิบดึงจาก FRESH_FRUITS/FRESH_VEGGIES) */}
+      <SmoothieHero />
 
       {/* ปุ่มฟิลเตอร์ */}
       <div className="no-scrollbar mb-8 flex snap-x gap-2.5 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center">
@@ -79,7 +79,9 @@ export default function SmoothieMenuView() {
           ))}
         </div>
       ) : (
-        <p className="py-10 text-center text-ink/50">ยังไม่มีเมนูในหมวดนี้ 🍓</p>
+        <p className="py-10 text-center text-ink/50">
+          ยังไม่มีเมนูในหมวดนี้ 🍓
+        </p>
       )}
     </section>
   );

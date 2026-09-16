@@ -5,6 +5,7 @@ import { Check, Plus } from "lucide-react";
 import { SOFT_DRINKS, type SoftDrink } from "@/data/site";
 import { useCart } from "@/components/cart/CartContext";
 import SmoothieCup from "@/components/SmoothieCup";
+import SoftDrinkHero from "@/components/sections/SoftDrinkHero";
 
 function SoftRow({ item }: { item: SoftDrink }) {
   const { addItem, openCart } = useCart();
@@ -72,15 +73,9 @@ function SoftRow({ item }: { item: SoftDrink }) {
 
 export default function BottledDrinks() {
   return (
-    <section className="mx-auto max-w-4xl px-4 pt-8 sm:px-6 lg:px-8">
-      <div className="mb-6 text-center">
-        <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-          🥤 น้ำอัดลม <span className="text-blossom-400">| Soft Drinks</span>
-        </h1>
-        <p className="mt-2 text-ink/60">
-          น้ำอัดลมขวด พร้อมดื่ม เย็น ๆ ซ่า ๆ (แยกจากโซดาที่ร้านชงเอง)
-        </p>
-      </div>
+    <section className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
+      {/* 🥤 Hero: น้ำอัดลมเย็น ๆ กำลังซ่า (สีจาก SOFT_DRINKS) */}
+      <SoftDrinkHero />
 
       <div className="grid gap-2.5 sm:grid-cols-2">
         {SOFT_DRINKS.map((item) => (

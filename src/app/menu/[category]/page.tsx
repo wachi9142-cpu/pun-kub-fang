@@ -17,6 +17,7 @@ import SnackShopFrame from "@/components/sections/SnackShopFrame";
 import SodaBubbleFrame from "@/components/sections/SodaBubbleFrame";
 import CoffeeHero from "@/components/sections/CoffeeHero";
 import MilkHero from "@/components/sections/MilkHero";
+import HotHero from "@/components/sections/HotHero";
 import IngredientNote from "@/components/sections/IngredientNote";
 
 const DRINK_IDS = DRINK_CATEGORIES.map((c) => c.id) as string[];
@@ -82,6 +83,8 @@ export default async function CategoryPage({
         <SmoothieMenuView />
       ) : category === "drinks" ? (
         <CategoryMenuView categoryId="drinks" hero={<CoffeeHero />} />
+      ) : category === "hot" ? (
+        <CategoryMenuView categoryId="hot" hero={<HotHero />} />
       ) : category === "milk" ? (
         <CategoryMenuView categoryId="milk" hero={<MilkHero />} />
       ) : category === "soda" ? (

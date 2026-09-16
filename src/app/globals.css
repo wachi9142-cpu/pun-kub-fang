@@ -789,6 +789,160 @@ body {
   .animate-milk-swirl, .animate-milk-swirl-rev { animation: none; }
 }
 
+
+/* 🍵 กลิ่นหอมใบชา ลอยขึ้นโค้งซ้าย-ขวา โปร่ง จางหายด้านบน (ไม่ใช่ควัน) */
+@keyframes tea-aroma {
+  0% { transform: translateY(14px) scale(0.85); opacity: 0; }
+  20% { opacity: 0.95; }
+  60% { opacity: 0.7; }
+  100% { transform: translateY(-46px) scale(1.12); opacity: 0; }
+}
+.animate-tea-aroma { animation: tea-aroma 7s ease-in-out infinite; }
+/* 🍃 ใบชาเล็กลอยตามกลิ่น: ขึ้นช้า ๆ แกว่ง หมุนเบา ๆ */
+@keyframes tea-leaf-drift {
+  0% { transform: translate(0, 10px) rotate(0deg) scale(0.6); opacity: 0; }
+  15% { opacity: 0.95; }
+  40% { transform: translate(-14px, -50px) rotate(40deg) scale(1); }
+  70% { transform: translate(12px, -100px) rotate(-30deg) scale(1); opacity: 0.8; }
+  100% { transform: translate(-6px, -150px) rotate(20deg) scale(0.9); opacity: 0; }
+}
+.animate-tea-leaf-drift { animation: tea-leaf-drift 9s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-tea-aroma { animation: none; opacity: 0.55; }
+  .animate-tea-leaf-drift { animation: none; opacity: 0.7; transform: translateY(-60px); }
+}
+
+
+/* 🍓 สมูทตี้ — ไทม์ไลน์รวม 11 วิ: 0–25% วัตถุดิบลอยเข้า · 25–55% ปั่น · 55–75% เท · 75–100% แก้วเด้ง */
+@keyframes smoothie-ingredient {
+  0% { transform: translate(0, 0) rotate(0) scale(0.9); opacity: 0; }
+  6% { opacity: 1; transform: translate(0, -8px) rotate(calc(var(--spin, 1) * 12deg)) scale(1.05); }
+  18% { opacity: 1; transform: translate(calc(var(--tx) * 0.6), calc(var(--ty) * 0.6)) rotate(calc(var(--spin, 1) * 180deg)) scale(0.9); }
+  25% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(calc(var(--spin, 1) * 300deg)) scale(0.3); }
+  90% { opacity: 0; transform: translate(0, 0) scale(0.9); }
+  100% { opacity: 0; transform: translate(0, 0) scale(0.9); }
+}
+.animate-smoothie-ingredient { animation: smoothie-ingredient 11s ease-in-out infinite; }
+@keyframes smoothie-fill {
+  0%, 20% { transform: scaleY(0); }
+  30% { transform: scaleY(0.95); }
+  55% { transform: scaleY(1); }
+  75% { transform: scaleY(0.15); }
+  100% { transform: scaleY(0.15); }
+}
+.animate-smoothie-fill { animation: smoothie-fill 11s ease-in-out infinite; }
+@keyframes smoothie-swirl {
+  0%, 24% { transform: rotate(0deg) scale(0.6); opacity: 0; }
+  28% { opacity: 1; }
+  55% { transform: rotate(1080deg) scale(1); opacity: 1; }
+  62% { opacity: 0; }
+  100% { opacity: 0; transform: rotate(1080deg) scale(0.6); }
+}
+.animate-smoothie-swirl { animation: smoothie-swirl 11s ease-in-out infinite; }
+@keyframes smoothie-blade {
+  0%, 26% { transform: rotate(0); }
+  55% { transform: rotate(2160deg); }
+  100% { transform: rotate(2160deg); }
+}
+.animate-smoothie-blade { animation: smoothie-blade 11s linear infinite; }
+@keyframes smoothie-blender {
+  0%, 26%, 56%, 100% { transform: translate(0, 0) rotate(0); }
+  30% { transform: translate(-1.5px, 1px) rotate(-1deg); }
+  34% { transform: translate(1.5px, -1px) rotate(1deg); }
+  38% { transform: translate(-1.5px, 1px) rotate(-1deg); }
+  42% { transform: translate(1.5px, 0) rotate(1deg); }
+  46% { transform: translate(-1px, 1px) rotate(-1deg); }
+  50% { transform: translate(1px, -1px) rotate(1deg); }
+  54% { transform: translate(-1px, 0) rotate(0); }
+}
+.animate-smoothie-blender { animation: smoothie-blender 11s linear infinite; }
+@keyframes smoothie-pour {
+  0%, 55% { opacity: 0; stroke-dasharray: 0 400; }
+  60% { opacity: 1; stroke-dasharray: 400 400; }
+  74% { opacity: 1; }
+  78% { opacity: 0; stroke-dasharray: 400 400; }
+  100% { opacity: 0; }
+}
+.animate-smoothie-pour { animation: smoothie-pour 11s ease-in-out infinite; }
+@keyframes smoothie-cup-fill {
+  0%, 56% { transform: scaleY(0); }
+  76% { transform: scaleY(1); }
+  100% { transform: scaleY(1); }
+}
+.animate-smoothie-cup-fill { animation: smoothie-cup-fill 11s ease-out infinite; }
+@keyframes smoothie-cup {
+  0%, 74% { transform: translateY(0) scale(1); }
+  79% { transform: translateY(-14px) scale(1.06) rotate(-3deg); }
+  84% { transform: translateY(2px) scale(0.98) rotate(2deg); }
+  89% { transform: translateY(-4px) scale(1.02) rotate(-1deg); }
+  94%, 100% { transform: translateY(0) scale(1) rotate(0); }
+}
+.animate-smoothie-cup { animation: smoothie-cup 11s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+@keyframes smoothie-spark {
+  0%, 76% { opacity: 0; transform: scale(0.3) rotate(0); }
+  82% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+  92% { opacity: 1; transform: scale(1) rotate(25deg); }
+  100% { opacity: 0; transform: scale(0.8) rotate(35deg); }
+}
+.animate-smoothie-spark { animation: smoothie-spark 11s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-smoothie-ingredient { animation: none; opacity: 1; }
+  .animate-smoothie-fill { animation: none; transform: scaleY(0.6); }
+  .animate-smoothie-swirl { animation: none; opacity: 1; }
+  .animate-smoothie-blade, .animate-smoothie-blender { animation: none; }
+  .animate-smoothie-pour { animation: none; opacity: 0; }
+  .animate-smoothie-cup-fill { animation: none; transform: scaleY(1); }
+  .animate-smoothie-cup { animation: none; }
+  .animate-smoothie-spark { animation: none; opacity: 0.8; }
+}
+
+
+/* 🍯 ดริปนมเหนียว: ชั้นย้อยตัวช้า ๆ + หยดยืดแล้วหลุดตก */
+@keyframes drip-sway {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.045); }
+}
+.animate-drip-sway { animation: drip-sway 6s ease-in-out infinite; }
+@keyframes drip-fall {
+  0% { transform: translateY(0) scale(1, 0.7); opacity: 1; }
+  35% { transform: translateY(0) scale(0.9, 1.35); opacity: 1; }
+  45% { transform: translateY(6px) scale(1, 1); opacity: 1; }
+  75% { transform: translateY(150px) scale(0.85, 1.2); opacity: 0.9; }
+  82% { transform: translateY(190px) scale(1.3, 0.5); opacity: 0; }
+  100% { transform: translateY(0) scale(1, 0.7); opacity: 0; }
+}
+.animate-drip-fall { animation: drip-fall 8s ease-in infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-drip-sway, .animate-drip-fall { animation: none; opacity: 1; }
+}
+
+
+/* 🥤 น้ำอัดลม: ฟองซ่าลอยขึ้น จาง/แตกด้านบน · น้ำแข็งเด้งเบา ๆ */
+@keyframes fizz-bubble {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  15% { opacity: 0.9; }
+  80% { opacity: 0.8; transform: translateY(-96px) scale(1); }
+  100% { opacity: 0; transform: translateY(-112px) scale(1.5); }
+}
+.animate-fizz-bubble { animation: fizz-bubble 3s ease-out infinite; }
+@keyframes ice-bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-4px) rotate(3deg); }
+}
+.animate-ice-bob { animation: ice-bob 3.4s ease-in-out infinite; }
+/* ✨ แสงวิ่งผ่านแก้ว (ใช้กับหน้าชา) */
+@keyframes glass-shine {
+  0%, 70% { transform: translateX(-60px) skewX(-15deg); opacity: 0; }
+  75% { opacity: 0.7; }
+  85% { transform: translateX(60px) skewX(-15deg); opacity: 0.6; }
+  90%, 100% { transform: translateX(80px) skewX(-15deg); opacity: 0; }
+}
+.animate-glass-shine { animation: glass-shine 7s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-fizz-bubble { animation: none; opacity: 0.6; transform: translateY(-40px); }
+  .animate-ice-bob, .animate-glass-shine { animation: none; }
+}
+
 /* ♿ ลดการเคลื่อนไหวสำหรับผู้ที่ตั้งค่า prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-drop-in,

@@ -3,17 +3,19 @@
 import { useState } from "react";
 import { MENU_ITEMS } from "@/data/site";
 import DrinkCard from "@/components/DrinkCard";
+import TeaHero from "@/components/sections/TeaHero";
 
 type Group = "all" | "milk" | "thai" | "fruit" | "clear" | "other";
 
-const FILTERS: { id: Group; label: string; labelEn: string; emoji: string }[] = [
-  { id: "all", label: "ทั้งหมด", labelEn: "All", emoji: "" },
-  { id: "milk", label: "ชานม", labelEn: "Milk Tea", emoji: "🧋" },
-  { id: "thai", label: "ชาไทย", labelEn: "Thai Tea", emoji: "🍵" },
-  { id: "fruit", label: "ชาผลไม้", labelEn: "Fruit Tea", emoji: "🍓" },
-  { id: "clear", label: "ชาใส", labelEn: "Clear Tea", emoji: "🌿" },
-  { id: "other", label: "ชาอื่น ๆ", labelEn: "Other Tea", emoji: "🍋" },
-];
+const FILTERS: { id: Group; label: string; labelEn: string; emoji: string }[] =
+  [
+    { id: "all", label: "ทั้งหมด", labelEn: "All", emoji: "" },
+    { id: "milk", label: "ชานม", labelEn: "Milk Tea", emoji: "🧋" },
+    { id: "thai", label: "ชาไทย", labelEn: "Thai Tea", emoji: "🍵" },
+    { id: "fruit", label: "ชาผลไม้", labelEn: "Fruit Tea", emoji: "🍓" },
+    { id: "clear", label: "ชาใส", labelEn: "Clear Tea", emoji: "🌿" },
+    { id: "other", label: "ชาอื่น ๆ", labelEn: "Other Tea", emoji: "🍋" },
+  ];
 
 /* จัดกลุ่มย่อยของเมนูชา (ตาม id) */
 const TEA_GROUP: Record<string, Exclude<Group, "all">> = {
@@ -50,14 +52,8 @@ export default function TeaMenuView() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
-      <div className="mb-6 text-center">
-        <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-          🍵 เมนูชา
-        </h1>
-        <p className="mt-2 text-ink/60">
-          ชาหอม ๆ หลากสไตล์ เลือกหมวดที่ชอบได้เลย
-        </p>
-      </div>
+      {/* 🍵 Hero: หอมใบชาออกมาจากหน้าจอ */}
+      <TeaHero />
 
       {/* ปุ่มฟิลเตอร์ */}
       <div className="no-scrollbar mb-8 flex snap-x gap-2.5 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center">
