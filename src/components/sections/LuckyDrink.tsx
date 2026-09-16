@@ -13,6 +13,7 @@ import SmoothieCup from "@/components/SmoothieCup";
 import DrinkCustomizer from "@/components/DrinkCustomizer";
 import { HelperCat } from "@/components/MagicCats";
 import { ImageCaption } from "@/components/sections/IngredientNote";
+import ImageLightbox from "@/components/ImageLightbox";
 
 /**
  * 🎰 LuckyDrink — "สุ่มแก้วกับฟ่าง ✨ / Fang's Lucky Drink" ตู้กาชาปองทรงลูกโลก
@@ -123,6 +124,7 @@ export default function LuckyDrink() {
   const [tick, setTick] = useState(0);
   const [customizing, setCustomizing] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
+  const [zoom, setZoom] = useState(false);
   const timers = useRef<number[]>([]);
   const pending = useRef<GachaMenu | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
@@ -379,13 +381,20 @@ export default function LuckyDrink() {
               <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row sm:items-start">
                 <div className="relative grid h-32 w-32 shrink-0 place-items-center overflow-hidden rounded-3xl bg-gradient-to-b from-grape-50 to-blossom-50/70 ring-2 ring-grape-100">
                   {prize.image && !imgFailed ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={prize.image}
-                      alt={prize.name}
-                      onError={() => setImgFailed(true)}
-                      className="h-full w-full object-cover"
-                    />
+                    <button
+                      type="button"
+                      onClick={() => setZoom(true)}
+                      aria-label={`ดูรูป ${prize.name} เต็มจอ`}
+                      className="h-full w-full cursor-zoom-in"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={prize.image}
+                        alt={prize.name}
+                        onError={() => setImgFailed(true)}
+                        className="h-full w-full object-contain p-1"
+                      />
+                    </button>
                   ) : (
                     <SmoothieCup
                       palette={prize.palette}
@@ -465,6 +474,14 @@ export default function LuckyDrink() {
           </p>
         </div>
       </div>
+
+      {zoom && prize?.image && (
+        <ImageLightbox
+          src={prize.image}
+          alt={prize.name}
+          onClose={() => setZoom(false)}
+        />
+      )}
 
       {/* 🛒 ตัวปรับแต่ง + ตะกร้าเดิม */}
       {customizing && prize && (

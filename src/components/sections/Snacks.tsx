@@ -1,5 +1,7 @@
 "use client";
 
+import ImageLightbox from "@/components/ImageLightbox";
+
 import { useState } from "react";
 import { Heart, Plus } from "lucide-react";
 import { SNACK_GROUPS, type SnackItem } from "@/data/site";
@@ -16,6 +18,7 @@ export function SnackCard({ item }: { item: SnackItem }) {
   /* 🥪 แซนด์วิช: ใช้น้องแซนด์วิชแทน placeholder + ดีใจ + บินเข้าตะกร้า */
   const isSandwich = item.id.startsWith("sw-");
   const [mood, setMood] = useState<SandwichMood>("idle");
+  const [zoom, setZoom] = useState(false);
   const [flying, setFlying] = useState(false);
 
   const add = () => {
@@ -67,12 +70,19 @@ export function SnackCard({ item }: { item: SnackItem }) {
       {/* พื้นที่รูปสินค้า (placeholder ถ้ายังไม่มีรูป) */}
       <div className="grid h-40 place-items-center overflow-hidden rounded-2xl bg-gradient-to-b from-amber-50 to-blossom-50/60">
         {item.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={item.image}
-            alt={item.nameTh}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          <button
+            type="button"
+            onClick={() => setZoom(true)}
+            aria-label={`ดูรูป ${item.nameTh} เต็มจอ`}
+            className="h-full w-full cursor-zoom-in"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={item.image}
+              alt={item.nameTh}
+              className="h-full w-full object-contain p-1 transition-transform duration-500 group-hover:scale-105"
+            />
+          </button>
         ) : isSandwich ? (
           <SandwichCharacter
             filling={fillingOf(item.id)}
@@ -122,6 +132,13 @@ export function SnackCard({ item }: { item: SnackItem }) {
           <Plus size={16} /> เพิ่มลงตะกร้า
         </button>
       </div>
+      {zoom && item.image && (
+        <ImageLightbox
+          src={item.image}
+          alt={item.nameTh}
+          onClose={() => setZoom(false)}
+        />
+      )}
     </article>
   );
 }

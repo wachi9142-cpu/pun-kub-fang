@@ -5,7 +5,8 @@ import { Heart, Plus } from "lucide-react";
 import type { MenuItem } from "@/data/site";
 import SmoothieCup from "@/components/SmoothieCup";
 import DrinkCustomizer from "@/components/DrinkCustomizer";
-import { ImageCaption } from "@/components/sections/IngredientNote";
+import { ImageCaption, IMAGE_NOTE } from "@/components/sections/IngredientNote";
+import ImageLightbox from "@/components/ImageLightbox";
 
 type DrinkCardProps = {
   item: MenuItem;
@@ -13,16 +14,22 @@ type DrinkCardProps = {
   buttonLabel?: string;
 };
 
-export default function DrinkCard({ item, buttonLabel = "เลือกเมนู" }: DrinkCardProps) {
+export default function DrinkCard({
+  item,
+  buttonLabel = "เลือกเมนู",
+}: DrinkCardProps) {
   const [liked, setLiked] = useState(false);
   const [imgAttempt, setImgAttempt] = useState(0);
   const [imgFailed, setImgFailed] = useState(false);
   const [customizing, setCustomizing] = useState(false);
+  const [zoom, setZoom] = useState(false);
 
   const showImage = Boolean(item.image) && !imgFailed;
   // retry โหลดรูปชั่วคราวก่อน fallback เป็นแก้ว SVG — กันรูปหายจนต้องรีเฟรช
   const imgSrc =
-    imgAttempt === 0 ? item.image : `${item.image}${item.image?.includes("?") ? "&" : "?"}retry=${imgAttempt}`;
+    imgAttempt === 0
+      ? item.image
+      : `${item.image}${item.image?.includes("?") ? "&" : "?"}retry=${imgAttempt}`;
 
   return (
     <article className="hover-lift group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white/85 p-4 shadow-card ring-1 ring-white/70">
@@ -42,16 +49,29 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
 
       <div className="relative grid h-44 place-items-center overflow-hidden rounded-2xl bg-gradient-to-b from-grape-50 to-blossom-50/70">
         {showImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            key={imgSrc}
-            src={imgSrc}
-            alt={item.name}
-            onError={() =>
-              imgAttempt < 3 ? setImgAttempt((a) => a + 1) : setImgFailed(true)
-            }
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          // กดรูปแล้วเด้งเต็มจอ · object-contain ให้เห็นทั้งแก้วไม่โดนตัด
+          <button
+            type="button"
+            onClick={() => setZoom(true)}
+            aria-label={`ดูรูป ${item.name} เต็มจอ`}
+            className="group/img relative h-full w-full cursor-zoom-in"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              key={imgSrc}
+              src={imgSrc}
+              alt={item.name}
+              onError={() =>
+                imgAttempt < 3
+                  ? setImgAttempt((a) => a + 1)
+                  : setImgFailed(true)
+              }
+              className="h-full w-full object-contain p-1 transition-transform duration-500 group-hover:scale-105"
+            />
+            <span className="pointer-events-none absolute bottom-2 right-2 rounded-full bg-white/85 px-2 py-0.5 text-[10px] font-semibold text-grape-600 opacity-0 shadow transition-opacity group-hover/img:opacity-100">
+              🔍 ดูเต็มจอ
+            </span>
+          </button>
         ) : (
           <div className="transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-3">
             <SmoothieCup palette={item.palette} emoji={item.emoji} size={128} />
@@ -75,7 +95,9 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
 
         <div className="mt-auto flex items-center justify-between pt-3">
           <span className="leading-none">
-            <span className="mr-1 text-[11px] font-medium text-grape-400">เริ่มต้น</span>
+            <span className="mr-1 text-[11px] font-medium text-grape-400">
+              เริ่มต้น
+            </span>
             <span className="font-display text-xl font-bold text-blossom-500">
               {item.price}
             </span>
@@ -97,6 +119,14 @@ export default function DrinkCard({ item, buttonLabel = "เลือกเม�
 
       {customizing && (
         <DrinkCustomizer item={item} onClose={() => setCustomizing(false)} />
+      )}
+      {zoom && item.image && (
+        <ImageLightbox
+          src={item.image}
+          alt={item.name}
+          caption={IMAGE_NOTE}
+          onClose={() => setZoom(false)}
+        />
       )}
     </article>
   );

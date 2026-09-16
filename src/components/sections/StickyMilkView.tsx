@@ -739,12 +739,21 @@ export default function StickyMilkView() {
                     : "🍪 นมเหนียว + แครกเกอร์ · 30"}
                 </span>
                 <div className="my-1 transition-transform group-hover:-rotate-3 group-hover:scale-105">
-                  <StickyCup
-                    base={b}
-                    flavor={f}
-                    cracker={ex.cracker}
-                    size={96}
-                  />
+                  {ex.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={ex.image}
+                      alt={nameOf(ex.base, ex.flavor)}
+                      className="h-24 w-24 object-contain"
+                    />
+                  ) : (
+                    <StickyCup
+                      base={b}
+                      flavor={f}
+                      cracker={ex.cracker}
+                      size={96}
+                    />
+                  )}
                 </div>
                 <p className="text-xs font-semibold leading-snug text-ink">
                   {nameOf(ex.base, ex.flavor)}
