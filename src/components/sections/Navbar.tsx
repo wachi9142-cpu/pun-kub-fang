@@ -12,6 +12,7 @@ const NAV_ICONS: Record<string, string> = {
   "#home": "🏠",
   "/menu": "🧋",
   "/mix": "🌀",
+  "/lucky-drink": "🎰",
   "/promotions": "🎁",
   "#about": "💜",
   "#contact": "📞",
@@ -71,7 +72,9 @@ export default function Navbar() {
                     : "font-medium text-ink/75 hover:bg-grape-50 hover:text-grape-deep"
                 }`}
               >
-                <span className="text-[13px] leading-none">{NAV_ICONS[item.href]}</span>
+                <span className="text-[13px] leading-none">
+                  {NAV_ICONS[item.href]}
+                </span>
                 {item.label}
               </a>
             </li>
@@ -153,7 +156,9 @@ export default function Navbar() {
                       : "text-grape-600 hover:bg-grape-50"
                   }`}
                 >
-                  <span className="text-[15px] leading-none">{NAV_ICONS[item.href]}</span>
+                  <span className="text-[15px] leading-none">
+                    {NAV_ICONS[item.href]}
+                  </span>
                   {item.label}
                 </a>
               </li>

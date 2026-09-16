@@ -6,23 +6,28 @@ import { useEffect, useRef, useState } from "react";
  * 🧋 BobaCursor — เปลี่ยนลูกศรเมาส์เป็นแก้วชาไข่มุกเล็ก ๆ (Desktop/เมาส์เท่านั้น)
  * - ตามเมาส์ทันที (อัปเดต transform ตรง ๆ ใน pointermove ไม่ผ่าน React state → ไม่หน่วง)
  * - เอียงตามทิศทางที่ลาก · hover ปุ่ม/ลิงก์/การ์ด = ขยาย + เด้ง + ✨ · กดคลิก = หดเล็กน้อย
- * - อุปกรณ์ touch / ไม่มี hover / prefers-reduced-motion → ไม่แสดง (ใช้ cursor ปกติ)
+ * - อุปกรณ์ touch / ไม่มี hover → ไม่แสดง (ใช้ cursor ปกติ) · prefers-reduced-motion → ยังแสดงแต่ไม่เด้ง (CSS ปิด animation ให้)
  * - pointer-events: none → ไม่กระทบ click/hover/drag/scroll เดิม · ไม่ทำให้เกิด overflow (fixed + ซ่อนใน body overflow)
  */
 export default function BobaCursor() {
   const ref = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState(false);
 
+  /* 1) ตรวจอุปกรณ์ก่อน → ค่อยเปิดใช้ (เดิม wiring ใน effect เดียวกัน → ref ยังเป็น null ตอน enabled=false → error เงียบ ๆ cursor เลยไม่ขึ้น) */
   useEffect(() => {
-    // เฉพาะอุปกรณ์ที่มี pointer ละเอียด + hover ได้ (เมาส์) และไม่ได้ลดการเคลื่อนไหว
-    const ok =
-      window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!ok) return;
-    setEnabled(true);
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const sync = () => setEnabled(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  /* 2) เมื่อเปิดใช้และ div ถูก render แล้ว → ผูก event */
+  useEffect(() => {
+    const el = ref.current;
+    if (!enabled || !el) return;
     document.documentElement.classList.add("boba-cursor-on");
 
-    const el = ref.current!;
     let lastX = 0;
     let lastY = 0;
     let tilt = 0;
@@ -55,7 +60,7 @@ export default function BobaCursor() {
     const isInteractive = (t: EventTarget | null) =>
       t instanceof Element &&
       !!t.closest(
-        "a, button, [role='button'], input, select, textarea, label, article, .hover-lift, .cursor-pointer",
+        "a, button, [role='button'], [role='tab'], [role='option'], [role='checkbox'], [role='radio'], summary, input, select, textarea, label, article, .hover-lift, .cursor-pointer, [data-cursor='hover']",
       );
     const onOver = (e: PointerEvent) => {
       el.classList.toggle("boba-cursor--hover", isInteractive(e.target));
@@ -87,7 +92,7 @@ export default function BobaCursor() {
       document.documentElement.removeEventListener("mouseenter", onEnter);
       document.documentElement.classList.remove("boba-cursor-on");
     };
-  }, []);
+  }, [enabled]);
 
   if (!enabled) return null;
 

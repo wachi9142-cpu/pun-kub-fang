@@ -6,6 +6,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "หน้าแรก", href: "#home" },
   { label: "เมนูทั้งหมด", href: "/menu" },
   { label: "มิกซ์กับฟ่าง ✨", href: "/mix" },
+  { label: "สุ่มแก้วกับฟ่าง 🎲", href: "/lucky-drink" },
   { label: "โปรโมชั่น", href: "/promotions" },
   { label: "เกี่ยวกับร้าน", href: "#about" },
   { label: "ติดต่อเรา", href: "#contact" },
@@ -37,13 +38,7 @@ export type SmoothiePalette = {
 /* ---------- หมวดหมู่เครื่องดื่ม ---------- */
 /* หมวดเครื่องดื่มที่แสดงเป็นการ์ด (DrinkCard) — แยกเป็นหน้าละหมวด */
 export type CategoryId =
-  | "drinks"
-  | "milk"
-  | "tea"
-  | "smoothie"
-  | "soda"
-  | "hot"
-  | "sticky";
+  "drinks" | "milk" | "tea" | "smoothie" | "soda" | "hot" | "sticky";
 
 export type DrinkCategory = {
   id: CategoryId;
@@ -1030,23 +1025,101 @@ export type MixOption = {
 };
 
 export const MIX_BASES: MixOption[] = [
-  { id: "milk", label: "นมสด", labelEn: "Fresh Milk", emoji: "🥛", palette: { foam: "#fff7ef", top: "#ffe3c2", bottom: "#f4c48a" } },
-  { id: "yogurt", label: "โยเกิร์ต", labelEn: "Yogurt", emoji: "🍦", palette: { foam: "#fef1f7", top: "#ffd0e4", bottom: "#f89bc4" } },
-  { id: "soda", label: "โซดา", labelEn: "Soda", emoji: "🧊", palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" } },
-  { id: "smoothie", label: "สมูทตี้", labelEn: "Smoothie", emoji: "🍓", palette: { foam: "#fff2f6", top: "#ff9ec0", bottom: "#f0507f" } },
-  { id: "coffee", label: "กาแฟ", labelEn: "Coffee", emoji: "☕", palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" } },
+  {
+    id: "milk",
+    label: "นมสด",
+    labelEn: "Fresh Milk",
+    emoji: "🥛",
+    palette: { foam: "#fff7ef", top: "#ffe3c2", bottom: "#f4c48a" },
+  },
+  {
+    id: "yogurt",
+    label: "โยเกิร์ต",
+    labelEn: "Yogurt",
+    emoji: "🍦",
+    palette: { foam: "#fef1f7", top: "#ffd0e4", bottom: "#f89bc4" },
+  },
+  {
+    id: "soda",
+    label: "โซดา",
+    labelEn: "Soda",
+    emoji: "🧊",
+    palette: { foam: "#eaf7ff", top: "#8fd6ff", bottom: "#2b9be0" },
+  },
+  {
+    id: "smoothie",
+    label: "สมูทตี้",
+    labelEn: "Smoothie",
+    emoji: "🍓",
+    palette: { foam: "#fff2f6", top: "#ff9ec0", bottom: "#f0507f" },
+  },
+  {
+    id: "coffee",
+    label: "กาแฟ",
+    labelEn: "Coffee",
+    emoji: "☕",
+    palette: { foam: "#efe2d6", top: "#a9764f", bottom: "#5b3a24" },
+  },
 ];
 
 /* ชนิดน้ำสมุนไพรโฮมเมด (ฐานหมวด "น้ำสมุนไพร" — เลือกได้ 1 ชนิด นับเป็น 1 ฐาน) */
 export const MIX_HERBAL_TYPES: MixOption[] = [
-  { id: "chrysanth", label: "เก๊กฮวย", labelEn: "Chrysanthemum", emoji: "🌼", palette: { foam: "#fff8e6", top: "#f4d97a", bottom: "#d9a520" } },
-  { id: "butterfly", label: "อัญชันมะนาว", labelEn: "Butterfly Pea Lemon", emoji: "🦋", palette: { foam: "#eef0ff", top: "#9db4f0", bottom: "#5566c9" } },
-  { id: "pandan", label: "ใบเตย", labelEn: "Pandan", emoji: "🌿", palette: { foam: "#eefae8", top: "#a8ce7a", bottom: "#5f9a3f" } },
-  { id: "passion", label: "เสาวรส", labelEn: "Passion Fruit", emoji: "🥭", palette: { foam: "#fff3e0", top: "#ffc46b", bottom: "#e88a1f" } },
-  { id: "honeylemon", label: "มะนาวน้ำผึ้ง", labelEn: "Honey Lemon", emoji: "🍋", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" } },
-  { id: "grassjelly", label: "เฉาก๊วย", labelEn: "Grass Jelly", emoji: "🖤", palette: { foam: "#e9e6ea", top: "#7a7280", bottom: "#332b3a" } },
-  { id: "longan", label: "ลำไย", labelEn: "Longan", emoji: "🌰", palette: { foam: "#f6ece0", top: "#d3a976", bottom: "#9a6a3f" } },
-  { id: "roselle", label: "กระเจี๊ยบ", labelEn: "Roselle", emoji: "🌺", palette: { foam: "#fdeaf0", top: "#e77aa0", bottom: "#c02a5a" } },
+  {
+    id: "chrysanth",
+    label: "เก๊กฮวย",
+    labelEn: "Chrysanthemum",
+    emoji: "🌼",
+    palette: { foam: "#fff8e6", top: "#f4d97a", bottom: "#d9a520" },
+  },
+  {
+    id: "butterfly",
+    label: "อัญชันมะนาว",
+    labelEn: "Butterfly Pea Lemon",
+    emoji: "🦋",
+    palette: { foam: "#eef0ff", top: "#9db4f0", bottom: "#5566c9" },
+  },
+  {
+    id: "pandan",
+    label: "ใบเตย",
+    labelEn: "Pandan",
+    emoji: "🌿",
+    palette: { foam: "#eefae8", top: "#a8ce7a", bottom: "#5f9a3f" },
+  },
+  {
+    id: "passion",
+    label: "เสาวรส",
+    labelEn: "Passion Fruit",
+    emoji: "🥭",
+    palette: { foam: "#fff3e0", top: "#ffc46b", bottom: "#e88a1f" },
+  },
+  {
+    id: "honeylemon",
+    label: "มะนาวน้ำผึ้ง",
+    labelEn: "Honey Lemon",
+    emoji: "🍋",
+    palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" },
+  },
+  {
+    id: "grassjelly",
+    label: "เฉาก๊วย",
+    labelEn: "Grass Jelly",
+    emoji: "🖤",
+    palette: { foam: "#e9e6ea", top: "#7a7280", bottom: "#332b3a" },
+  },
+  {
+    id: "longan",
+    label: "ลำไย",
+    labelEn: "Longan",
+    emoji: "🌰",
+    palette: { foam: "#f6ece0", top: "#d3a976", bottom: "#9a6a3f" },
+  },
+  {
+    id: "roselle",
+    label: "กระเจี๊ยบ",
+    labelEn: "Roselle",
+    emoji: "🌺",
+    palette: { foam: "#fdeaf0", top: "#e77aa0", bottom: "#c02a5a" },
+  },
 ];
 
 /* ---------- 🥝 ตักสด ปั่นฟิน — บุฟเฟ่ต์ผัก/ผลไม้สดปั่น ---------- */
@@ -1075,7 +1148,12 @@ export const FRESH_FRUITS: FreshItem[] = [
   { id: "orange", label: "ส้ม", en: "Orange", emoji: "🍊" },
   { id: "kiwi", label: "กีวี", en: "Kiwi", emoji: "🥝" },
   { id: "grape", label: "องุ่น", en: "Grapes", emoji: "🍇" },
-  { id: "shine-muscat", label: "องุ่นไชน์มัสแคท", en: "Shine Muscat Grapes", emoji: "🍇" },
+  {
+    id: "shine-muscat",
+    label: "องุ่นไชน์มัสแคท",
+    en: "Shine Muscat Grapes",
+    emoji: "🍇",
+  },
   { id: "blueberry", label: "บลูเบอร์รี", en: "Blueberry", emoji: "🫐" },
   { id: "mulberry", label: "มัลเบอร์รี", en: "Mulberry", emoji: "🫐" },
   { id: "dragonfruit", label: "แก้วมังกร", en: "Dragon Fruit", emoji: "🩷" },
@@ -1111,32 +1189,113 @@ export const FRESH_FLAVORS: FreshItem[] = [
 
 /* ชนิดชา (ฐานหมวด "ชา" — เลือกได้ 1 ชนิด นับเป็น 1 ฐาน) */
 export const MIX_TEA_TYPES: MixOption[] = [
-  { id: "thai", label: "ชาไทย", labelEn: "Thai Tea", emoji: "🍵", palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" } },
-  { id: "green", label: "ชาเขียว", labelEn: "Green Tea", emoji: "🍵", palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" } },
-  { id: "black", label: "ชาดำ", labelEn: "Black Tea", emoji: "🍵", palette: { foam: "#efe0cf", top: "#9a6a3f", bottom: "#4f3016" } },
-  { id: "lemon", label: "ชามะนาว", labelEn: "Lemon Tea", emoji: "🍋", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" } },
-  { id: "peach", label: "ชาพีช", labelEn: "Peach Tea", emoji: "🍑", palette: { foam: "#fff1ea", top: "#ffb99a", bottom: "#f77e4f" } },
-  { id: "apple", label: "ชาแอปเปิล", labelEn: "Apple Tea", emoji: "🍏", palette: { foam: "#f5ffe8", top: "#c3e87a", bottom: "#7cb32b" } },
-  { id: "honey", label: "ชาน้ำผึ้ง", labelEn: "Honey Tea", emoji: "🍯", palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#d9a520" } },
-  { id: "rose", label: "ชากุหลาบ", labelEn: "Rose Tea", emoji: "🌹", palette: { foam: "#fdeef4", top: "#f3a9c6", bottom: "#d95f8f" } },
-  { id: "jasmine", label: "ชามะลิ", labelEn: "Jasmine Tea", emoji: "🌼", palette: { foam: "#fbf8ec", top: "#ecdfa8", bottom: "#c9b85e" } },
-  { id: "lychee", label: "ชาลิ้นจี่", labelEn: "Lychee Tea", emoji: "🌸", palette: { foam: "#fdf0f2", top: "#f2c0c8", bottom: "#d97b88" } },
-  { id: "strawberry", label: "ชาสตรอว์เบอร์รี", labelEn: "Strawberry Tea", emoji: "🍓", palette: { foam: "#fff0f3", top: "#ff9fb0", bottom: "#e8536f" } },
+  {
+    id: "thai",
+    label: "ชาไทย",
+    labelEn: "Thai Tea",
+    emoji: "🍵",
+    palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" },
+  },
+  {
+    id: "green",
+    label: "ชาเขียว",
+    labelEn: "Green Tea",
+    emoji: "🍵",
+    palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" },
+  },
+  {
+    id: "black",
+    label: "ชาดำ",
+    labelEn: "Black Tea",
+    emoji: "🍵",
+    palette: { foam: "#efe0cf", top: "#9a6a3f", bottom: "#4f3016" },
+  },
+  {
+    id: "lemon",
+    label: "ชามะนาว",
+    labelEn: "Lemon Tea",
+    emoji: "🍋",
+    palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#c9a52a" },
+  },
+  {
+    id: "peach",
+    label: "ชาพีช",
+    labelEn: "Peach Tea",
+    emoji: "🍑",
+    palette: { foam: "#fff1ea", top: "#ffb99a", bottom: "#f77e4f" },
+  },
+  {
+    id: "apple",
+    label: "ชาแอปเปิล",
+    labelEn: "Apple Tea",
+    emoji: "🍏",
+    palette: { foam: "#f5ffe8", top: "#c3e87a", bottom: "#7cb32b" },
+  },
+  {
+    id: "honey",
+    label: "ชาน้ำผึ้ง",
+    labelEn: "Honey Tea",
+    emoji: "🍯",
+    palette: { foam: "#fdf7d8", top: "#f2d873", bottom: "#d9a520" },
+  },
+  {
+    id: "rose",
+    label: "ชากุหลาบ",
+    labelEn: "Rose Tea",
+    emoji: "🌹",
+    palette: { foam: "#fdeef4", top: "#f3a9c6", bottom: "#d95f8f" },
+  },
+  {
+    id: "jasmine",
+    label: "ชามะลิ",
+    labelEn: "Jasmine Tea",
+    emoji: "🌼",
+    palette: { foam: "#fbf8ec", top: "#ecdfa8", bottom: "#c9b85e" },
+  },
+  {
+    id: "lychee",
+    label: "ชาลิ้นจี่",
+    labelEn: "Lychee Tea",
+    emoji: "🌸",
+    palette: { foam: "#fdf0f2", top: "#f2c0c8", bottom: "#d97b88" },
+  },
+  {
+    id: "strawberry",
+    label: "ชาสตรอว์เบอร์รี",
+    labelEn: "Strawberry Tea",
+    emoji: "🍓",
+    palette: { foam: "#fff0f3", top: "#ff9fb0", bottom: "#e8536f" },
+  },
 ];
 
 /* 🍬 รสชาติ/ไซรัป (ไม่ใช่ผลไม้สด) — ใช้ชื่อผลไม้เฉย ๆ ไม่ต้องมีคำว่า "ไซรัป" */
 export const MIX_SYRUPS: MixOption[] = [
   { id: "apple", label: "แอปเปิล", labelEn: "Apple", emoji: "🍏" },
   { id: "peach", label: "พีช", labelEn: "Peach", emoji: "🍑" },
-  { id: "strawberry-syrup", label: "สตรอว์เบอร์รี", labelEn: "Strawberry", emoji: "🍓" },
+  {
+    id: "strawberry-syrup",
+    label: "สตรอว์เบอร์รี",
+    labelEn: "Strawberry",
+    emoji: "🍓",
+  },
   { id: "lychee", label: "ลิ้นจี่", labelEn: "Lychee", emoji: "🌸" },
   { id: "mango-syrup", label: "มะม่วง", labelEn: "Mango", emoji: "🥭" },
-  { id: "blueberry-syrup", label: "บลูเบอร์รี", labelEn: "Blueberry", emoji: "🫐" },
+  {
+    id: "blueberry-syrup",
+    label: "บลูเบอร์รี",
+    labelEn: "Blueberry",
+    emoji: "🫐",
+  },
 ];
 
 /* 🍓 ผลไม้สด */
 export const MIX_FRUITS: MixOption[] = [
-  { id: "strawberry", label: "สตรอว์เบอร์รี", labelEn: "Strawberry", emoji: "🍓" },
+  {
+    id: "strawberry",
+    label: "สตรอว์เบอร์รี",
+    labelEn: "Strawberry",
+    emoji: "🍓",
+  },
   { id: "grape", label: "องุ่น", labelEn: "Grape", emoji: "🍇" },
   { id: "mango", label: "มะม่วง", labelEn: "Mango", emoji: "🥭" },
   { id: "blueberry", label: "บลูเบอร์รี", labelEn: "Blueberry", emoji: "🫐" },
@@ -1180,10 +1339,18 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
     titleEn: "Tapioca Pearls",
     emoji: "🟤",
     items: [
-      { nameTh: "ไข่มุกดำ / ไข่มุกคลาสสิก", nameEn: "Classic Black Tapioca Pearls", price: 5 },
+      {
+        nameTh: "ไข่มุกดำ / ไข่มุกคลาสสิก",
+        nameEn: "Classic Black Tapioca Pearls",
+        price: 5,
+      },
       { nameTh: "ไข่มุกสีทอง", nameEn: "Golden Tapioca Pearls", price: 5 },
       { nameTh: "ไข่มุกสีมรกต", nameEn: "Emerald Tapioca Pearls", price: 5 },
-      { nameTh: "ไข่มุกบราวน์ชูการ์", nameEn: "Brown Sugar Tapioca Pearls", price: 10 },
+      {
+        nameTh: "ไข่มุกบราวน์ชูการ์",
+        nameEn: "Brown Sugar Tapioca Pearls",
+        price: 10,
+      },
     ],
   },
   {
@@ -1192,10 +1359,22 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
     titleEn: "Popping Boba",
     emoji: "🟣",
     items: [
-      { nameTh: "ไข่มุกป๊อปรสสตรอว์เบอร์รี", nameEn: "Strawberry Popping Boba", price: 10 },
-      { nameTh: "ไข่มุกป๊อปรสลิ้นจี่", nameEn: "Lychee Popping Boba", price: 10 },
+      {
+        nameTh: "ไข่มุกป๊อปรสสตรอว์เบอร์รี",
+        nameEn: "Strawberry Popping Boba",
+        price: 10,
+      },
+      {
+        nameTh: "ไข่มุกป๊อปรสลิ้นจี่",
+        nameEn: "Lychee Popping Boba",
+        price: 10,
+      },
       { nameTh: "ไข่มุกป๊อปรสมะม่วง", nameEn: "Mango Popping Boba", price: 10 },
-      { nameTh: "ไข่มุกป๊อปรสเสาวรส", nameEn: "Passion Fruit Popping Boba", price: 10 },
+      {
+        nameTh: "ไข่มุกป๊อปรสเสาวรส",
+        nameEn: "Passion Fruit Popping Boba",
+        price: 10,
+      },
     ],
   },
   {
@@ -1205,7 +1384,11 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
     emoji: "🟢",
     items: [
       { nameTh: "บุกใส / บุกเพชร", nameEn: "Crystal Konjac Jelly", price: 5 },
-      { nameTh: "บุกบราวน์ชูการ์", nameEn: "Brown Sugar Konjac Jelly", price: 5 },
+      {
+        nameTh: "บุกบราวน์ชูการ์",
+        nameEn: "Brown Sugar Konjac Jelly",
+        price: 5,
+      },
     ],
   },
   {
@@ -1219,9 +1402,21 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
       { nameTh: "เฉาก๊วย", nameEn: "Grass Jelly", price: 5 },
       { nameTh: "เยลลี่องุ่น", nameEn: "Grape Jelly", price: 5 },
       { nameTh: "เยลลี่สตรอว์เบอร์รี", nameEn: "Strawberry Jelly", price: 5 },
-      { nameTh: "ฟรุตสลัด กลิ่นแอปเปิล", nameEn: "Apple Fruit Cocktail Jelly", price: 5 },
-      { nameTh: "ฟรุตสลัด กลิ่นบลูฮาวาย", nameEn: "Blue Hawaii Fruit Cocktail Jelly", price: 5 },
-      { nameTh: "ฟรุตสลัด กลิ่นสตรอว์เบอร์รี", nameEn: "Strawberry Fruit Cocktail Jelly", price: 5 },
+      {
+        nameTh: "ฟรุตสลัด กลิ่นแอปเปิล",
+        nameEn: "Apple Fruit Cocktail Jelly",
+        price: 5,
+      },
+      {
+        nameTh: "ฟรุตสลัด กลิ่นบลูฮาวาย",
+        nameEn: "Blue Hawaii Fruit Cocktail Jelly",
+        price: 5,
+      },
+      {
+        nameTh: "ฟรุตสลัด กลิ่นสตรอว์เบอร์รี",
+        nameEn: "Strawberry Fruit Cocktail Jelly",
+        price: 5,
+      },
       { nameTh: "เยลลี่น้องทะเล", nameEn: "Ocean Animal Jelly", price: 5 },
     ],
   },
@@ -1250,7 +1445,11 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
       "Fresh fruit availability varies by day, depending on freshness and daily ingredients. Please check before ordering.",
     items: [
       { nameTh: "กล้วยหั่นบาง", nameEn: "Sliced Banana", price: 10 },
-      { nameTh: "สตรอว์เบอร์รีหั่นบาง", nameEn: "Sliced Strawberry", price: 10 },
+      {
+        nameTh: "สตรอว์เบอร์รีหั่นบาง",
+        nameEn: "Sliced Strawberry",
+        price: 10,
+      },
       { nameTh: "สตรอว์เบอร์รีลูก", nameEn: "Whole Strawberry", price: 10 },
       { nameTh: "อะโวคาโดหั่นบาง", nameEn: "Sliced Avocado", price: 10 },
       { nameTh: "เนื้อมะพร้าว", nameEn: "Fresh Coconut Meat", price: 10 },
@@ -1265,7 +1464,11 @@ export const TOPPING_GROUPS: ToppingGroup[] = [
       { nameTh: "บลูเบอร์รี", nameEn: "Blueberries", price: 10 },
       { nameTh: "มัลเบอร์รี", nameEn: "Mulberries", price: 10 },
       { nameTh: "แก้วมังกรหั่นบาง", nameEn: "Sliced Dragon Fruit", price: 10 },
-      { nameTh: "แก้วมังกรสีแดงหั่นบาง", nameEn: "Sliced Red Dragon Fruit", price: 10 },
+      {
+        nameTh: "แก้วมังกรสีแดงหั่นบาง",
+        nameEn: "Sliced Red Dragon Fruit",
+        price: 10,
+      },
       { nameTh: "ทับทิม", nameEn: "Pomegranate Arils", price: 10 },
     ],
   },
@@ -1380,7 +1583,12 @@ export type PriceTier = {
 };
 
 export const PRICE_TIERS: PriceTier[] = [
-  { emoji: "🥤", labelTh: "เมนูธรรมดา", labelEn: "Regular Drinks", price: "เริ่มต้น 30฿" },
+  {
+    emoji: "🥤",
+    labelTh: "เมนูธรรมดา",
+    labelEn: "Regular Drinks",
+    price: "เริ่มต้น 30฿",
+  },
   { emoji: "🥛", labelTh: "เมนูนม", labelEn: "Milk Drinks", price: "35–40฿" },
   {
     emoji: "🍓",
@@ -1389,9 +1597,24 @@ export const PRICE_TIERS: PriceTier[] = [
     price: "45 / 50 / 60฿",
     note: "ตามชนิดและต้นทุนวัตถุดิบ",
   },
-  { emoji: "🥑", labelTh: "อะโวคาโดปั่น", labelEn: "Avocado Smoothie", price: "50฿" },
-  { emoji: "🌿", labelTh: "น้ำสมุนไพรโฮมเมด", labelEn: "Homemade Herbal Drinks", price: "25฿" },
-  { emoji: "🧊", labelTh: "น้ำสมุนไพรปั่น", labelEn: "Blended Herbal Drinks", price: "30฿" },
+  {
+    emoji: "🥑",
+    labelTh: "อะโวคาโดปั่น",
+    labelEn: "Avocado Smoothie",
+    price: "50฿",
+  },
+  {
+    emoji: "🌿",
+    labelTh: "น้ำสมุนไพรโฮมเมด",
+    labelEn: "Homemade Herbal Drinks",
+    price: "25฿",
+  },
+  {
+    emoji: "🧊",
+    labelTh: "น้ำสมุนไพรปั่น",
+    labelEn: "Blended Herbal Drinks",
+    price: "30฿",
+  },
   {
     emoji: "🥥",
     labelTh: "เพิ่มเนื้อผลไม้ / ท็อปปิ้ง",
@@ -1416,15 +1639,46 @@ export type HomemadeDrink = {
 /* 🧋 น้ำโฮมเมดใส่แก้ว — 20 บาท/แก้ว (ยกเว้นที่ระบุ) */
 export const HOMEMADE_BOTTLED: HomemadeDrink[] = [
   { emoji: "🌼", nameTh: "น้ำเก๊กฮวย", nameEn: "Chrysanthemum Tea", price: 25 },
-  { emoji: "🌺", nameTh: "น้ำกระเจี๊ยบ", nameEn: "Roselle Juice", price: 25, soldOut: true },
-  { emoji: "🦋", nameTh: "น้ำอัญชันมะนาว", nameEn: "Butterfly Pea Lemonade", price: 25 },
+  {
+    emoji: "🌺",
+    nameTh: "น้ำกระเจี๊ยบ",
+    nameEn: "Roselle Juice",
+    price: 25,
+    soldOut: true,
+  },
+  {
+    emoji: "🦋",
+    nameTh: "น้ำอัญชันมะนาว",
+    nameEn: "Butterfly Pea Lemonade",
+    price: 25,
+  },
   { emoji: "🌿", nameTh: "น้ำใบเตย", nameEn: "Pandan Drink", price: 25 },
-  { emoji: "❤️", nameTh: "น้ำมะม่วงหาวมะนาวโห่", nameEn: "Karonda Juice", price: 25 },
-  { emoji: "🥭", nameTh: "น้ำเสาวรส", nameEn: "Passion Fruit Juice", price: 25 },
-  { emoji: "🍋", nameTh: "มะนาวน้ำผึ้ง", nameEn: "Honey Lemon Drink", price: 25 },
+  {
+    emoji: "❤️",
+    nameTh: "น้ำมะม่วงหาวมะนาวโห่",
+    nameEn: "Karonda Juice",
+    price: 25,
+  },
+  {
+    emoji: "🥭",
+    nameTh: "น้ำเสาวรส",
+    nameEn: "Passion Fruit Juice",
+    price: 25,
+  },
+  {
+    emoji: "🍋",
+    nameTh: "มะนาวน้ำผึ้ง",
+    nameEn: "Honey Lemon Drink",
+    price: 25,
+  },
   { emoji: "🖤", nameTh: "น้ำเฉาก๊วย", nameEn: "Grass Jelly Drink", price: 25 },
   { emoji: "🌰", nameTh: "น้ำลำไย", nameEn: "Longan Drink", price: 25 },
-  { emoji: "🥤", nameTh: "น้ำลำไยพร้อมเนื้อ", nameEn: "Longan Drink with Pulp", price: 30 },
+  {
+    emoji: "🥤",
+    nameTh: "น้ำลำไยพร้อมเนื้อ",
+    nameEn: "Longan Drink with Pulp",
+    price: 30,
+  },
   { emoji: "🌳", nameTh: "น้ำมะตูม", nameEn: "Bael Fruit Drink", price: 25 },
   { emoji: "🫚", nameTh: "น้ำขิง", nameEn: "Ginger Drink", price: 25 },
   { emoji: "🌿", nameTh: "น้ำใบบัวบก", nameEn: "Centella Juice", price: 25 },
@@ -1432,9 +1686,24 @@ export const HOMEMADE_BOTTLED: HomemadeDrink[] = [
 
 /* 🥤 เมนูปั่น — เริ่มต้น 30 บาท (บางรสทำแบบปั่นได้) */
 export const HOMEMADE_BLENDED: HomemadeDrink[] = [
-  { emoji: "🥭", nameTh: "น้ำเสาวรสปั่น", nameEn: "Blended Passion Fruit", price: 30 },
-  { emoji: "❤️", nameTh: "น้ำมะม่วงหาวมะนาวโห่ปั่น", nameEn: "Blended Karonda", price: 30 },
-  { emoji: "🍋", nameTh: "น้ำมะนาวน้ำผึ้งปั่น", nameEn: "Blended Honey Lemon", price: 30 },
+  {
+    emoji: "🥭",
+    nameTh: "น้ำเสาวรสปั่น",
+    nameEn: "Blended Passion Fruit",
+    price: 30,
+  },
+  {
+    emoji: "❤️",
+    nameTh: "น้ำมะม่วงหาวมะนาวโห่ปั่น",
+    nameEn: "Blended Karonda",
+    price: 30,
+  },
+  {
+    emoji: "🍋",
+    nameTh: "น้ำมะนาวน้ำผึ้งปั่น",
+    nameEn: "Blended Honey Lemon",
+    price: 30,
+  },
   { emoji: "🌰", nameTh: "น้ำลำไยปั่น", nameEn: "Blended Longan", price: 30 },
 ];
 
@@ -1501,22 +1770,106 @@ export const SODA_MODES: SodaMode[] = [
 ];
 
 /** ไซรัปที่ร้านมี — ใช้กับ "ซ่าผสมเอง" (เลือกได้สูงสุด SODA_DIY_MAX) */
-export type SodaSyrup = { id: string; label: string; labelEn: string; emoji: string; color: string };
+export type SodaSyrup = {
+  id: string;
+  label: string;
+  labelEn: string;
+  emoji: string;
+  color: string;
+};
 export const SODA_SYRUPS: SodaSyrup[] = [
-  { id: "strawberry", label: "สตรอว์เบอร์รี", labelEn: "Strawberry", emoji: "🍓", color: "#f0507f" },
-  { id: "grape", label: "องุ่น", labelEn: "Grape", emoji: "🍇", color: "#7c3fc4" },
-  { id: "mango", label: "มะม่วง", labelEn: "Mango", emoji: "🥭", color: "#f5b32d" },
-  { id: "peach", label: "พีช", labelEn: "Peach", emoji: "🍑", color: "#ff9c7a" },
+  {
+    id: "strawberry",
+    label: "สตรอว์เบอร์รี",
+    labelEn: "Strawberry",
+    emoji: "🍓",
+    color: "#f0507f",
+  },
+  {
+    id: "grape",
+    label: "องุ่น",
+    labelEn: "Grape",
+    emoji: "🍇",
+    color: "#7c3fc4",
+  },
+  {
+    id: "mango",
+    label: "มะม่วง",
+    labelEn: "Mango",
+    emoji: "🥭",
+    color: "#f5b32d",
+  },
+  {
+    id: "peach",
+    label: "พีช",
+    labelEn: "Peach",
+    emoji: "🍑",
+    color: "#ff9c7a",
+  },
   { id: "kiwi", label: "กีวี", labelEn: "Kiwi", emoji: "🥝", color: "#7cc244" },
-  { id: "blueberry", label: "บลูเบอร์รี", labelEn: "Blueberry", emoji: "🫐", color: "#4a5fd0" },
-  { id: "pineapple", label: "สับปะรด", labelEn: "Pineapple", emoji: "🍍", color: "#f2d130" },
-  { id: "passionfruit", label: "เสาวรส", labelEn: "Passion Fruit", emoji: "🍈", color: "#e89b2c" },
-  { id: "lychee", label: "ลิ้นจี่", labelEn: "Lychee", emoji: "🌸", color: "#f3a6c8" },
-  { id: "apple", label: "แอปเปิล", labelEn: "Apple", emoji: "🍏", color: "#8fd35a" },
-  { id: "lime", label: "มะนาว", labelEn: "Lime", emoji: "🍋", color: "#c9e34a" },
-  { id: "honey-lemon", label: "น้ำผึ้งมะนาว", labelEn: "Honey Lemon", emoji: "🍯", color: "#f4c542" },
-  { id: "red", label: "แดง (สละ)", labelEn: "Red (Sala)", emoji: "❤️", color: "#e8333f" },
-  { id: "green", label: "เขียว (ครีมโซดา)", labelEn: "Green (Cream Soda)", emoji: "💚", color: "#3ecf8e" },
+  {
+    id: "blueberry",
+    label: "บลูเบอร์รี",
+    labelEn: "Blueberry",
+    emoji: "🫐",
+    color: "#4a5fd0",
+  },
+  {
+    id: "pineapple",
+    label: "สับปะรด",
+    labelEn: "Pineapple",
+    emoji: "🍍",
+    color: "#f2d130",
+  },
+  {
+    id: "passionfruit",
+    label: "เสาวรส",
+    labelEn: "Passion Fruit",
+    emoji: "🍈",
+    color: "#e89b2c",
+  },
+  {
+    id: "lychee",
+    label: "ลิ้นจี่",
+    labelEn: "Lychee",
+    emoji: "🌸",
+    color: "#f3a6c8",
+  },
+  {
+    id: "apple",
+    label: "แอปเปิล",
+    labelEn: "Apple",
+    emoji: "🍏",
+    color: "#8fd35a",
+  },
+  {
+    id: "lime",
+    label: "มะนาว",
+    labelEn: "Lime",
+    emoji: "🍋",
+    color: "#c9e34a",
+  },
+  {
+    id: "honey-lemon",
+    label: "น้ำผึ้งมะนาว",
+    labelEn: "Honey Lemon",
+    emoji: "🍯",
+    color: "#f4c542",
+  },
+  {
+    id: "red",
+    label: "แดง (สละ)",
+    labelEn: "Red (Sala)",
+    emoji: "❤️",
+    color: "#e8333f",
+  },
+  {
+    id: "green",
+    label: "เขียว (ครีมโซดา)",
+    labelEn: "Green (Cream Soda)",
+    emoji: "💚",
+    color: "#3ecf8e",
+  },
 ];
 export const SODA_DIY_MAX = 3;
 
@@ -1545,13 +1898,62 @@ export type StickyBase = {
 
 /** น้ำพื้นฐานสำหรับแพ็กเกจ "น้ำ + นมเหนียว" (ราคารวมในแพ็กเกจแล้ว) */
 export const STICKY_BASES: StickyBase[] = [
-  { id: "thaitea", nameTh: "ชาไทย", nameEn: "Thai Tea", price: 0, emoji: "🧋", palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" } },
-  { id: "cocoa", nameTh: "โกโก้", nameEn: "Cocoa", price: 0, emoji: "🍫", palette: { foam: "#f4e9e2", top: "#a8735a", bottom: "#5c3a2a" } },
-  { id: "greentea", nameTh: "ชาเขียว", nameEn: "Green Tea", price: 0, emoji: "🍵", palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" } },
-  { id: "pinkmilk", nameTh: "นมชมพู", nameEn: "Pink Milk", price: 0, emoji: "🌸", palette: { foam: "#fff5f9", top: "#ffc2d8", bottom: "#f38bb1" } },
-  { id: "milo", nameTh: "ไมโล", nameEn: "Milo", price: 0, emoji: "🥛", palette: { foam: "#f5ece4", top: "#b8865e", bottom: "#6b4a30" } },
-  { id: "ovaltine", nameTh: "โอวัลติน", nameEn: "Ovaltine", price: 0, emoji: "🥛", palette: { foam: "#f5ede3", top: "#c4a37a", bottom: "#7d5a3a" } },
-  { id: "milk", nameTh: "นมสด", nameEn: "Fresh Milk", price: 0, emoji: "🥛", palette: { foam: "#fffaf0", top: "#fff4e4", bottom: "#f3d9b4" } },
+  {
+    id: "thaitea",
+    nameTh: "ชาไทย",
+    nameEn: "Thai Tea",
+    price: 0,
+    emoji: "🧋",
+    palette: { foam: "#fff0df", top: "#f0a962", bottom: "#cf6f26" },
+  },
+  {
+    id: "cocoa",
+    nameTh: "โกโก้",
+    nameEn: "Cocoa",
+    price: 0,
+    emoji: "🍫",
+    palette: { foam: "#f4e9e2", top: "#a8735a", bottom: "#5c3a2a" },
+  },
+  {
+    id: "greentea",
+    nameTh: "ชาเขียว",
+    nameEn: "Green Tea",
+    price: 0,
+    emoji: "🍵",
+    palette: { foam: "#f1f7e8", top: "#a8ce7a", bottom: "#5f9a3f" },
+  },
+  {
+    id: "pinkmilk",
+    nameTh: "นมชมพู",
+    nameEn: "Pink Milk",
+    price: 0,
+    emoji: "🌸",
+    palette: { foam: "#fff5f9", top: "#ffc2d8", bottom: "#f38bb1" },
+  },
+  {
+    id: "milo",
+    nameTh: "ไมโล",
+    nameEn: "Milo",
+    price: 0,
+    emoji: "🥛",
+    palette: { foam: "#f5ece4", top: "#b8865e", bottom: "#6b4a30" },
+  },
+  {
+    id: "ovaltine",
+    nameTh: "โอวัลติน",
+    nameEn: "Ovaltine",
+    price: 0,
+    emoji: "🥛",
+    palette: { foam: "#f5ede3", top: "#c4a37a", bottom: "#7d5a3a" },
+  },
+  {
+    id: "milk",
+    nameTh: "นมสด",
+    nameEn: "Fresh Milk",
+    price: 0,
+    emoji: "🥛",
+    palette: { foam: "#fffaf0", top: "#fff4e4", bottom: "#f3d9b4" },
+  },
 ];
 
 export type StickyFlavor = {
@@ -1568,16 +1970,59 @@ export type StickyFlavor = {
 
 /** รสนมเหนียว (ราคารวมในแพ็กเกจแล้ว) */
 export const STICKY_FLAVORS: StickyFlavor[] = [
-  { id: "milk", nameTh: "นมเหนียวนมสด", nameEn: "Fresh Milk Sticky Cream", price: 0, emoji: "🥛", color: "#f7e7c8" },
-  { id: "thaitea", nameTh: "นมเหนียวชาไทย", nameEn: "Thai Tea Sticky Cream", price: 0, emoji: "🧋", color: "#e8a35c" },
-  { id: "pinkmilk", nameTh: "นมเหนียวนมชมพู", nameEn: "Pink Milk Sticky Cream", price: 0, emoji: "🌸", color: "#f7b8cf" },
-  { id: "greentea", nameTh: "นมเหนียวชาเขียว", nameEn: "Green Tea Sticky Cream", price: 0, emoji: "🍵", color: "#9cc47a" },
-  { id: "cocoa", nameTh: "นมเหนียวโกโก้", nameEn: "Cocoa Sticky Cream", price: 0, emoji: "🍫", color: "#8a5a3c" },
-  { id: "taro", nameTh: "นมเหนียวเผือกหอม", nameEn: "Taro Sticky Cream", price: 0, emoji: "🍠", color: "#b795d8" },
+  {
+    id: "milk",
+    nameTh: "นมเหนียวนมสด",
+    nameEn: "Fresh Milk Sticky Cream",
+    price: 0,
+    emoji: "🥛",
+    color: "#f7e7c8",
+  },
+  {
+    id: "thaitea",
+    nameTh: "นมเหนียวชาไทย",
+    nameEn: "Thai Tea Sticky Cream",
+    price: 0,
+    emoji: "🧋",
+    color: "#e8a35c",
+  },
+  {
+    id: "pinkmilk",
+    nameTh: "นมเหนียวนมชมพู",
+    nameEn: "Pink Milk Sticky Cream",
+    price: 0,
+    emoji: "🌸",
+    color: "#f7b8cf",
+  },
+  {
+    id: "greentea",
+    nameTh: "นมเหนียวชาเขียว",
+    nameEn: "Green Tea Sticky Cream",
+    price: 0,
+    emoji: "🍵",
+    color: "#9cc47a",
+  },
+  {
+    id: "cocoa",
+    nameTh: "นมเหนียวโกโก้",
+    nameEn: "Cocoa Sticky Cream",
+    price: 0,
+    emoji: "🍫",
+    color: "#8a5a3c",
+  },
+  {
+    id: "taro",
+    nameTh: "นมเหนียวเผือกหอม",
+    nameEn: "Taro Sticky Cream",
+    price: 0,
+    emoji: "🍠",
+    color: "#b795d8",
+  },
 ];
 
 /** 📦 แพ็กเกจนมเหนียว 4 แบบ — เลือกได้ตามใจ ไม่บังคับสั่งน้ำ (ราคาเหมา) */
-export type StickyPackageId = "milkOnly" | "crackerOnly" | "drinkMilk" | "milkCracker";
+export type StickyPackageId =
+  "milkOnly" | "crackerOnly" | "drinkMilk" | "milkCracker";
 export type StickyPackage = {
   id: StickyPackageId;
   nameTh: string;
@@ -1639,7 +2084,11 @@ export const STICKY_PACKAGES: StickyPackage[] = [
 /** วิธีรับสำหรับชุด "นมเหนียว + แครกเกอร์" */
 export const STICKY_SERVE = [
   { id: "together", label: "🍪 กินคู่กัน", desc: "จัดมาพร้อมกิน" },
-  { id: "separate", label: "📦 แยกไว้ผสมเอง", desc: "นมเหนียวใส่กระปุก + แครกเกอร์ใส่แก้วมีฝา ไม่ผสม" },
+  {
+    id: "separate",
+    label: "📦 แยกไว้ผสมเอง",
+    desc: "นมเหนียวใส่กระปุก + แครกเกอร์ใส่แก้วมีฝา ไม่ผสม",
+  },
 ] as const;
 
 export const STICKY_SEPARATE_NOTE = {
@@ -1659,10 +2108,28 @@ export const STICKY_EXAMPLES: {
   cracker?: boolean;
   desc: string;
 }[] = [
-  { base: "thaitea", flavor: "milk", desc: "ชาไทยหอม ๆ ราดนมเหนียวนมสดนุ่มละมุน" },
-  { base: "cocoa", flavor: "greentea", desc: "โกโก้เข้ม ตัดด้วยนมเหนียวชาเขียวหอม" },
-  { base: null, flavor: "cocoa", cracker: true, desc: "ไม่ใส่น้ำ — แครกเกอร์กรอบ ๆ จิ้มนมเหนียวโกโก้เข้มข้น" },
-  { base: null, flavor: "thaitea", cracker: true, desc: "ไม่ใส่น้ำ — แครกเกอร์กรอบคู่นมเหนียวชาไทยหอมหวาน" },
+  {
+    base: "thaitea",
+    flavor: "milk",
+    desc: "ชาไทยหอม ๆ ราดนมเหนียวนมสดนุ่มละมุน",
+  },
+  {
+    base: "cocoa",
+    flavor: "greentea",
+    desc: "โกโก้เข้ม ตัดด้วยนมเหนียวชาเขียวหอม",
+  },
+  {
+    base: null,
+    flavor: "cocoa",
+    cracker: true,
+    desc: "ไม่ใส่น้ำ — แครกเกอร์กรอบ ๆ จิ้มนมเหนียวโกโก้เข้มข้น",
+  },
+  {
+    base: null,
+    flavor: "thaitea",
+    cracker: true,
+    desc: "ไม่ใส่น้ำ — แครกเกอร์กรอบคู่นมเหนียวชาไทยหอมหวาน",
+  },
   { base: "milk", flavor: "thaitea", desc: "นมสดละมุน ราดนมเหนียวชาไทยเข้ม" },
 ];
 
@@ -1691,10 +2158,18 @@ export const WHIP_TOPPING_GROUPS: WhipToppingGroup[] = [
     titleTh: "ไข่มุกแป้งมันสำปะหลัง",
     titleEn: "Tapioca Pearls",
     items: [
-      { nameTh: "ไข่มุกดำ / คลาสสิก", nameEn: "Classic Black Tapioca Pearls", price: 5 },
+      {
+        nameTh: "ไข่มุกดำ / คลาสสิก",
+        nameEn: "Classic Black Tapioca Pearls",
+        price: 5,
+      },
       { nameTh: "ไข่มุกสีทอง", nameEn: "Golden Tapioca Pearls", price: 5 },
       { nameTh: "ไข่มุกสีมรกต", nameEn: "Emerald Tapioca Pearls", price: 5 },
-      { nameTh: "ไข่มุกบราวน์ชูการ์", nameEn: "Brown Sugar Tapioca Pearls", price: 10 },
+      {
+        nameTh: "ไข่มุกบราวน์ชูการ์",
+        nameEn: "Brown Sugar Tapioca Pearls",
+        price: 10,
+      },
     ],
   },
   {
@@ -1703,7 +2178,11 @@ export const WHIP_TOPPING_GROUPS: WhipToppingGroup[] = [
     titleTh: "ไข่มุกป๊อป",
     titleEn: "Popping Boba",
     items: [
-      { nameTh: "ป๊อปสตรอว์เบอร์รี", nameEn: "Strawberry Popping Boba", price: 10 },
+      {
+        nameTh: "ป๊อปสตรอว์เบอร์รี",
+        nameEn: "Strawberry Popping Boba",
+        price: 10,
+      },
       { nameTh: "ป๊อปลิ้นจี่", nameEn: "Lychee Popping Boba", price: 10 },
       { nameTh: "ป๊อปมะม่วง", nameEn: "Mango Popping Boba", price: 10 },
       { nameTh: "ป๊อปเสาวรส", nameEn: "Passion Fruit Popping Boba", price: 10 },
@@ -1716,7 +2195,11 @@ export const WHIP_TOPPING_GROUPS: WhipToppingGroup[] = [
     titleEn: "Konjac & Crystal Jelly",
     items: [
       { nameTh: "บุกใส / บุกเพชร", nameEn: "Crystal Konjac Jelly", price: 5 },
-      { nameTh: "บุกบราวน์ชูการ์", nameEn: "Brown Sugar Konjac Jelly", price: 5 },
+      {
+        nameTh: "บุกบราวน์ชูการ์",
+        nameEn: "Brown Sugar Konjac Jelly",
+        price: 5,
+      },
     ],
   },
   {
@@ -1730,9 +2213,21 @@ export const WHIP_TOPPING_GROUPS: WhipToppingGroup[] = [
       { nameTh: "เฉาก๊วย", nameEn: "Grass Jelly", price: 5 },
       { nameTh: "เยลลี่องุ่น", nameEn: "Grape Jelly", price: 5 },
       { nameTh: "เยลลี่สตรอว์เบอร์รี", nameEn: "Strawberry Jelly", price: 5 },
-      { nameTh: "ฟรุตสลัด กลิ่นแอปเปิล", nameEn: "Apple Fruit Cocktail Jelly", price: 5 },
-      { nameTh: "ฟรุตสลัด กลิ่นบลูฮาวาย", nameEn: "Blue Hawaii Fruit Cocktail Jelly", price: 5 },
-      { nameTh: "ฟรุตสลัด กลิ่นสตรอว์เบอร์รี", nameEn: "Strawberry Fruit Cocktail Jelly", price: 5 },
+      {
+        nameTh: "ฟรุตสลัด กลิ่นแอปเปิล",
+        nameEn: "Apple Fruit Cocktail Jelly",
+        price: 5,
+      },
+      {
+        nameTh: "ฟรุตสลัด กลิ่นบลูฮาวาย",
+        nameEn: "Blue Hawaii Fruit Cocktail Jelly",
+        price: 5,
+      },
+      {
+        nameTh: "ฟรุตสลัด กลิ่นสตรอว์เบอร์รี",
+        nameEn: "Strawberry Fruit Cocktail Jelly",
+        price: 5,
+      },
       { nameTh: "เยลลี่น้องทะเล", nameEn: "Ocean Animal Jelly", price: 5 },
     ],
   },
@@ -1799,10 +2294,42 @@ export type SoftDrink = {
 };
 
 export const SOFT_DRINKS: SoftDrink[] = [
-  { id: "coke", nameTh: "โค้ก", nameEn: "Coca-Cola", price: 20, emoji: "🥤", desc: "รสโคล่าหอมเข้ม ซ่า สดชื่น มีความหวานกลมกล่อม", palette: { foam: "#e8ddd5", top: "#8a4a3a", bottom: "#3a1a14" } },
-  { id: "coke-zero", nameTh: "โค้กไม่มีน้ำตาล", nameEn: "Coca-Cola Zero Sugar", price: 20, emoji: "🥤", desc: "รสโคล่าเข้ม หอมซ่า สดชื่น หวานน้อยโดยไม่มีน้ำตาล", palette: { foam: "#dcdcdc", top: "#3a3a3a", bottom: "#141414" } },
-  { id: "fanta-orange", nameTh: "แฟนต้าส้ม", nameEn: "Fanta Orange", price: 20, emoji: "🥤", desc: "รสส้มหวานอมเปรี้ยว หอมกลิ่นส้ม ซ่าชื่นใจ", palette: { foam: "#fff1e0", top: "#ff9a3c", bottom: "#e2620f" } },
-  { id: "fanta-strawberry", nameTh: "แฟนต้าแดง", nameEn: "Fanta Strawberry", price: 20, emoji: "🥤", desc: "หวานหอมกลิ่นสตรอว์เบอร์รี ซ่า สดชื่น ดื่มง่าย", palette: { foam: "#ffe9ee", top: "#ff6a86", bottom: "#d61e42" } },
+  {
+    id: "coke",
+    nameTh: "โค้ก",
+    nameEn: "Coca-Cola",
+    price: 20,
+    emoji: "🥤",
+    desc: "รสโคล่าหอมเข้ม ซ่า สดชื่น มีความหวานกลมกล่อม",
+    palette: { foam: "#e8ddd5", top: "#8a4a3a", bottom: "#3a1a14" },
+  },
+  {
+    id: "coke-zero",
+    nameTh: "โค้กไม่มีน้ำตาล",
+    nameEn: "Coca-Cola Zero Sugar",
+    price: 20,
+    emoji: "🥤",
+    desc: "รสโคล่าเข้ม หอมซ่า สดชื่น หวานน้อยโดยไม่มีน้ำตาล",
+    palette: { foam: "#dcdcdc", top: "#3a3a3a", bottom: "#141414" },
+  },
+  {
+    id: "fanta-orange",
+    nameTh: "แฟนต้าส้ม",
+    nameEn: "Fanta Orange",
+    price: 20,
+    emoji: "🥤",
+    desc: "รสส้มหวานอมเปรี้ยว หอมกลิ่นส้ม ซ่าชื่นใจ",
+    palette: { foam: "#fff1e0", top: "#ff9a3c", bottom: "#e2620f" },
+  },
+  {
+    id: "fanta-strawberry",
+    nameTh: "แฟนต้าแดง",
+    nameEn: "Fanta Strawberry",
+    price: 20,
+    emoji: "🥤",
+    desc: "หวานหอมกลิ่นสตรอว์เบอร์รี ซ่า สดชื่น ดื่มง่าย",
+    palette: { foam: "#ffe9ee", top: "#ff6a86", bottom: "#d61e42" },
+  },
   {
     id: "fanta-blue",
     nameTh: "แฟนต้าสีฟ้า",
@@ -1812,8 +2339,24 @@ export const SOFT_DRINKS: SoftDrink[] = [
     desc: "รสชาติเปรี้ยว ๆ หวาน ๆ หอมกลิ่นบลูเบอร์รี ผสมผสานกับกลิ่นดอกไม้จากดอกชบา",
     palette: { foam: "#e6f3ff", top: "#5ab0f0", bottom: "#1f6fc4" },
   },
-  { id: "sprite", nameTh: "สไปรท์", nameEn: "Sprite", price: 20, emoji: "🥤", desc: "รสมะนาวเลมอน หอมสดชื่น เปรี้ยวหวาน ซ่าชื่นใจ", palette: { foam: "#eafdf0", top: "#7fd69a", bottom: "#2f9b57" } },
-  { id: "est-cola", nameTh: "เอสโคล่า", nameEn: "est Cola", price: 20, emoji: "🥤", desc: "รสโคล่าหอมหวาน ซ่ากำลังดี ดื่มแล้วสดชื่น", palette: { foam: "#e5dbe8", top: "#6a3f7a", bottom: "#331a3d" } },
+  {
+    id: "sprite",
+    nameTh: "สไปรท์",
+    nameEn: "Sprite",
+    price: 20,
+    emoji: "🥤",
+    desc: "รสมะนาวเลมอน หอมสดชื่น เปรี้ยวหวาน ซ่าชื่นใจ",
+    palette: { foam: "#eafdf0", top: "#7fd69a", bottom: "#2f9b57" },
+  },
+  {
+    id: "est-cola",
+    nameTh: "เอสโคล่า",
+    nameEn: "est Cola",
+    price: 20,
+    emoji: "🥤",
+    desc: "รสโคล่าหอมหวาน ซ่ากำลังดี ดื่มแล้วสดชื่น",
+    palette: { foam: "#e5dbe8", top: "#6a3f7a", bottom: "#331a3d" },
+  },
 ];
 
 /* ---------- 🍪 ขนมกินเพลิน | Snacks & Bakery ---------- */
@@ -1850,17 +2393,96 @@ export const SNACK_GROUPS: SnackGroup[] = [
     emoji: "🥣",
     note: "ขนาด 80 กรัม / ถุง",
     items: [
-      { id: "cf-caramel", nameTh: "คอนเฟลคคาราเมลเนย", nameEn: "Caramel Butter Cornflakes", desc: "เคลือบคาราเมลหอมเนย + ลูกเกด + อัลมอนด์สไลด์", price: 39, emoji: "🍯", badge: "ขายดี" },
-      { id: "cf-honey-caramel", nameTh: "คอนเฟลคคาราเมลน้ำผึ้ง", nameEn: "Honey Caramel Cornflakes", desc: "เคลือบคาราเมลหอมน้ำผึ้ง + ลูกเกด + อัลมอนด์สไลด์", price: 39, emoji: "🍯" },
-      { id: "cf-dubai", nameTh: "คอนเฟลคช็อกโกแลตดูไบ", nameEn: "Dubai Chocolate Cornflakes", desc: "ช็อกโกแลตเข้มข้น + คูนาฟ่ากรอบ ๆ ดับเบิลครันช์", price: 59, emoji: "🍫", badge: "พิเศษ" },
-      { id: "cf-salt", nameTh: "คอนเฟลครสเค็ม", nameEn: "Salted Cornflakes", desc: "รสเค็มหอมมัน กินเพลิน ฟีลป๊อปคอร์นรสเค็ม", price: 39, emoji: "🧂" },
-      { id: "cf-tomyum", nameTh: "คอนเฟลครสต้มยำ", nameEn: "Tom Yum Cornflakes", desc: "หอมเครื่องต้มยำ เปรี้ยว เผ็ด เค็ม กินเล่นเพลิน", price: 39, emoji: "🌶️" },
-      { id: "cf-mala", nameTh: "คอนเฟลครสหม่าล่า", nameEn: "Mala Cornflakes", desc: "หอมเครื่องเทศหม่าล่า เผ็ดชา เคี้ยวกรุบกรอบ", price: 39, emoji: "🌶️" },
-      { id: "cf-greentea", nameTh: "คอนเฟลครสชาเขียว", nameEn: "Green Tea Cornflakes", desc: "หอมชาเขียว รสละมุน หวานพอดี", price: 39, emoji: "🍵" },
-      { id: "cf-thaitea", nameTh: "คอนเฟลครสชาไทย", nameEn: "Thai Tea Cornflakes", desc: "หอมชาไทย รสหวานละมุน กรอบเคี้ยวเพลิน", price: 39, emoji: "🧋" },
-      { id: "cf-cheese", nameTh: "คอนเฟลครสชีส", nameEn: "Cheese Cornflakes", desc: "หอมชีส รสเค็มมัน กรอบเพลิน", price: 39, emoji: "🧀" },
-      { id: "cf-milkgrain", nameTh: "คอนเฟลครสครีมนมธัญพืช", nameEn: "Creamy Milk & Grain Cornflakes", desc: "หอมครีมนม รสหวานมัน ผสมธัญพืช เคี้ยวเพลิน", price: 39, emoji: "🥛" },
-      { id: "cf-passion", nameTh: "คอนเฟลครสเสาวรส", nameEn: "Passion Fruit Cornflakes", desc: "เคลือบซอสเสาวรส หอมกลิ่นเสาวรส เปรี้ยวหวานสดชื่น", price: 39, emoji: "💛" },
+      {
+        id: "cf-caramel",
+        nameTh: "คอนเฟลคคาราเมลเนย",
+        nameEn: "Caramel Butter Cornflakes",
+        desc: "เคลือบคาราเมลหอมเนย + ลูกเกด + อัลมอนด์สไลด์",
+        price: 39,
+        emoji: "🍯",
+        badge: "ขายดี",
+      },
+      {
+        id: "cf-honey-caramel",
+        nameTh: "คอนเฟลคคาราเมลน้ำผึ้ง",
+        nameEn: "Honey Caramel Cornflakes",
+        desc: "เคลือบคาราเมลหอมน้ำผึ้ง + ลูกเกด + อัลมอนด์สไลด์",
+        price: 39,
+        emoji: "🍯",
+      },
+      {
+        id: "cf-dubai",
+        nameTh: "คอนเฟลคช็อกโกแลตดูไบ",
+        nameEn: "Dubai Chocolate Cornflakes",
+        desc: "ช็อกโกแลตเข้มข้น + คูนาฟ่ากรอบ ๆ ดับเบิลครันช์",
+        price: 59,
+        emoji: "🍫",
+        badge: "พิเศษ",
+      },
+      {
+        id: "cf-salt",
+        nameTh: "คอนเฟลครสเค็ม",
+        nameEn: "Salted Cornflakes",
+        desc: "รสเค็มหอมมัน กินเพลิน ฟีลป๊อปคอร์นรสเค็ม",
+        price: 39,
+        emoji: "🧂",
+      },
+      {
+        id: "cf-tomyum",
+        nameTh: "คอนเฟลครสต้มยำ",
+        nameEn: "Tom Yum Cornflakes",
+        desc: "หอมเครื่องต้มยำ เปรี้ยว เผ็ด เค็ม กินเล่นเพลิน",
+        price: 39,
+        emoji: "🌶️",
+      },
+      {
+        id: "cf-mala",
+        nameTh: "คอนเฟลครสหม่าล่า",
+        nameEn: "Mala Cornflakes",
+        desc: "หอมเครื่องเทศหม่าล่า เผ็ดชา เคี้ยวกรุบกรอบ",
+        price: 39,
+        emoji: "🌶️",
+      },
+      {
+        id: "cf-greentea",
+        nameTh: "คอนเฟลครสชาเขียว",
+        nameEn: "Green Tea Cornflakes",
+        desc: "หอมชาเขียว รสละมุน หวานพอดี",
+        price: 39,
+        emoji: "🍵",
+      },
+      {
+        id: "cf-thaitea",
+        nameTh: "คอนเฟลครสชาไทย",
+        nameEn: "Thai Tea Cornflakes",
+        desc: "หอมชาไทย รสหวานละมุน กรอบเคี้ยวเพลิน",
+        price: 39,
+        emoji: "🧋",
+      },
+      {
+        id: "cf-cheese",
+        nameTh: "คอนเฟลครสชีส",
+        nameEn: "Cheese Cornflakes",
+        desc: "หอมชีส รสเค็มมัน กรอบเพลิน",
+        price: 39,
+        emoji: "🧀",
+      },
+      {
+        id: "cf-milkgrain",
+        nameTh: "คอนเฟลครสครีมนมธัญพืช",
+        nameEn: "Creamy Milk & Grain Cornflakes",
+        desc: "หอมครีมนม รสหวานมัน ผสมธัญพืช เคี้ยวเพลิน",
+        price: 39,
+        emoji: "🥛",
+      },
+      {
+        id: "cf-passion",
+        nameTh: "คอนเฟลครสเสาวรส",
+        nameEn: "Passion Fruit Cornflakes",
+        desc: "เคลือบซอสเสาวรส หอมกลิ่นเสาวรส เปรี้ยวหวานสดชื่น",
+        price: 39,
+        emoji: "💛",
+      },
     ],
   },
   {
@@ -1870,8 +2492,26 @@ export const SNACK_GROUPS: SnackGroup[] = [
     emoji: "🍓",
     note: "เพิ่มผลไม้อบแห้ง/แปรรูป · เพิ่มรสอื่นได้ในอนาคต",
     items: [
-      { id: "cf-mango", nameTh: "คอนเฟลคมะม่วงอบแห้ง", nameEn: "Dried Mango Cornflakes", desc: "คอนเฟลคกรุบกรอบ + มะม่วงอบแห้งเคี้ยวหนึบ ๆ", price: 39, oldPrice: 49, emoji: "🥭", badge: "โปรฯ" },
-      { id: "cf-banana", nameTh: "คอนเฟลคกล้วยตาก", nameEn: "Dried Banana Cornflakes", desc: "คอนเฟลคกรุบกรอบ + กล้วยตากหอมหวาน เนื้อนุ่มหนึบ", price: 39, oldPrice: 49, emoji: "🍌", badge: "โปรฯ" },
+      {
+        id: "cf-mango",
+        nameTh: "คอนเฟลคมะม่วงอบแห้ง",
+        nameEn: "Dried Mango Cornflakes",
+        desc: "คอนเฟลคกรุบกรอบ + มะม่วงอบแห้งเคี้ยวหนึบ ๆ",
+        price: 39,
+        oldPrice: 49,
+        emoji: "🥭",
+        badge: "โปรฯ",
+      },
+      {
+        id: "cf-banana",
+        nameTh: "คอนเฟลคกล้วยตาก",
+        nameEn: "Dried Banana Cornflakes",
+        desc: "คอนเฟลคกรุบกรอบ + กล้วยตากหอมหวาน เนื้อนุ่มหนึบ",
+        price: 39,
+        oldPrice: 49,
+        emoji: "🍌",
+        badge: "โปรฯ",
+      },
     ],
   },
   {
@@ -1880,10 +2520,38 @@ export const SNACK_GROUPS: SnackGroup[] = [
     titleEn: "Snacks & Bakery",
     emoji: "🍪",
     items: [
-      { id: "butter-corn", nameTh: "ข้าวโพดอบเนย", nameEn: "Buttered Corn", desc: "ข้าวโพดหวานอบเนยหอม ๆ กินเพลิน", price: 30, emoji: "🌽" },
-      { id: "cookie", nameTh: "คุกกี้", nameEn: "Cookie", desc: "คุกกี้หอมเนย กรอบนอกนุ่มใน", price: 25, emoji: "🍪" },
-      { id: "brownie", nameTh: "บราวนี่", nameEn: "Brownie", desc: "บราวนี่ช็อกโกแลตเข้มข้น เนื้อหนึบ", price: 35, emoji: "🍫" },
-      { id: "cake", nameTh: "เค้ก/ขนมหวาน", nameEn: "Cake & Dessert", desc: "เค้กนุ่ม ๆ ขนมหวานประจำวัน", price: 45, emoji: "🍰" },
+      {
+        id: "butter-corn",
+        nameTh: "ข้าวโพดอบเนย",
+        nameEn: "Buttered Corn",
+        desc: "ข้าวโพดหวานอบเนยหอม ๆ กินเพลิน",
+        price: 30,
+        emoji: "🌽",
+      },
+      {
+        id: "cookie",
+        nameTh: "คุกกี้",
+        nameEn: "Cookie",
+        desc: "คุกกี้หอมเนย กรอบนอกนุ่มใน",
+        price: 25,
+        emoji: "🍪",
+      },
+      {
+        id: "brownie",
+        nameTh: "บราวนี่",
+        nameEn: "Brownie",
+        desc: "บราวนี่ช็อกโกแลตเข้มข้น เนื้อหนึบ",
+        price: 35,
+        emoji: "🍫",
+      },
+      {
+        id: "cake",
+        nameTh: "เค้ก/ขนมหวาน",
+        nameEn: "Cake & Dessert",
+        desc: "เค้กนุ่ม ๆ ขนมหวานประจำวัน",
+        price: 45,
+        emoji: "🍰",
+      },
     ],
   },
 ];
@@ -1896,11 +2564,47 @@ export const SANDWICH_GROUPS: SnackGroup[] = [
     titleEn: "Savory Sandwiches",
     emoji: "🥪",
     items: [
-      { id: "sw-ham-cheese", nameTh: "แซนด์วิชแฮมชีส", nameEn: "Ham & Cheese Sandwich", desc: "แฮม + ชีสละมุน ในขนมปังนุ่ม", price: 49, emoji: "🥪", badge: "ขายดี" },
-      { id: "sw-crab", nameTh: "แซนด์วิชปูอัด", nameEn: "Crab Stick Sandwich", desc: "ปูอัดผสมสลัดครีม รสกลมกล่อม", price: 49, emoji: "🦀" },
-      { id: "sw-sausage", nameTh: "แซนด์วิชไส้กรอก", nameEn: "Sausage Sandwich", desc: "ไส้กรอกหมูรมควัน หอมอร่อย", price: 49, emoji: "🌭" },
-      { id: "sw-tuna", nameTh: "แซนด์วิชทูน่า", nameEn: "Tuna Sandwich", desc: "ทูน่าผสมมายองเนส เนื้อแน่น", price: 49, emoji: "🐟" },
-      { id: "sw-thai", nameTh: "แซนด์วิชโบราณ", nameEn: "Thai-Style Sandwich", desc: "แซนด์วิชสไตล์ไทยโบราณ รสคุ้นเคย", price: 45, emoji: "🥪" },
+      {
+        id: "sw-ham-cheese",
+        nameTh: "แซนด์วิชแฮมชีส",
+        nameEn: "Ham & Cheese Sandwich",
+        desc: "แฮม + ชีสละมุน ในขนมปังนุ่ม",
+        price: 49,
+        emoji: "🥪",
+        badge: "ขายดี",
+      },
+      {
+        id: "sw-crab",
+        nameTh: "แซนด์วิชปูอัด",
+        nameEn: "Crab Stick Sandwich",
+        desc: "ปูอัดผสมสลัดครีม รสกลมกล่อม",
+        price: 49,
+        emoji: "🦀",
+      },
+      {
+        id: "sw-sausage",
+        nameTh: "แซนด์วิชไส้กรอก",
+        nameEn: "Sausage Sandwich",
+        desc: "ไส้กรอกหมูรมควัน หอมอร่อย",
+        price: 49,
+        emoji: "🌭",
+      },
+      {
+        id: "sw-tuna",
+        nameTh: "แซนด์วิชทูน่า",
+        nameEn: "Tuna Sandwich",
+        desc: "ทูน่าผสมมายองเนส เนื้อแน่น",
+        price: 49,
+        emoji: "🐟",
+      },
+      {
+        id: "sw-thai",
+        nameTh: "แซนด์วิชโบราณ",
+        nameEn: "Thai-Style Sandwich",
+        desc: "แซนด์วิชสไตล์ไทยโบราณ รสคุ้นเคย",
+        price: 45,
+        emoji: "🥪",
+      },
     ],
   },
   {
@@ -1920,7 +2624,15 @@ export const SANDWICH_GROUPS: SnackGroup[] = [
       "🫐 บลูเบอร์รี",
     ],
     items: [
-      { id: "sw-fruit-cream", nameTh: "แซนด์วิชผลไม้ครีมสด", nameEn: "Fresh Fruit & Cream Sandwich", desc: "ครีมสดนุ่ม + ผลไม้สดหมุนเวียนตามวัน", price: 59, emoji: "🍓", badge: "แนะนำ" },
+      {
+        id: "sw-fruit-cream",
+        nameTh: "แซนด์วิชผลไม้ครีมสด",
+        nameEn: "Fresh Fruit & Cream Sandwich",
+        desc: "ครีมสดนุ่ม + ผลไม้สดหมุนเวียนตามวัน",
+        price: 59,
+        emoji: "🍓",
+        badge: "แนะนำ",
+      },
     ],
   },
   {
@@ -1929,16 +2641,86 @@ export const SANDWICH_GROUPS: SnackGroup[] = [
     titleEn: "Jam Sandwiches",
     emoji: "🍯",
     items: [
-      { id: "sw-jam-strawberry", nameTh: "แซนด์วิชแยมสตรอว์เบอร์รี", nameEn: "Strawberry Jam", desc: "แยมสตรอว์เบอร์รีหวานอมเปรี้ยว", price: 35, emoji: "🍓" },
-      { id: "sw-jam-orange", nameTh: "แซนด์วิชแยมส้ม", nameEn: "Orange Marmalade", desc: "แยมส้มหอม ๆ รสสดชื่น", price: 35, emoji: "🍊" },
-      { id: "sw-jam-choco", nameTh: "แซนด์วิชแยมช็อกโกแลต", nameEn: "Chocolate Spread", desc: "ช็อกโกแลตสเปรดเข้มข้น", price: 35, emoji: "🍫" },
-      { id: "sw-jam-banana", nameTh: "แซนด์วิชแยมกล้วย", nameEn: "Banana Spread", desc: "แยมกล้วยหอมหวาน", price: 35, emoji: "🍌" },
-      { id: "sw-jam-pandan", nameTh: "แซนด์วิชใบเตยสังขยา", nameEn: "Pandan Custard", desc: "สังขยาใบเตยหอมละมุน", price: 35, emoji: "🌿" },
-      { id: "sw-jam-thaitea", nameTh: "แซนด์วิชสังขยาชาไทย", nameEn: "Thai Tea Custard", desc: "สังขยาชาไทยหวานหอม", price: 35, emoji: "🧋" },
-      { id: "sw-jam-blueberry", nameTh: "แซนด์วิชแยมบลูเบอร์รี", nameEn: "Blueberry Jam", desc: "แยมบลูเบอร์รีหวานอมเปรี้ยว", price: 35, emoji: "🫐" },
-      { id: "sw-jam-butter", nameTh: "แซนด์วิชเนยนมน้ำตาล", nameEn: "Butter, Milk & Sugar", desc: "เนย + นมข้น + น้ำตาล คลาสสิก", price: 30, emoji: "🧈" },
-      { id: "sw-jam-ovaltine", nameTh: "แซนด์วิชโอวัลติน", nameEn: "Ovaltine Spread", desc: "โอวัลตินสเปรดหอมมอลต์", price: 35, emoji: "🥛" },
-      { id: "sw-jam-milo", nameTh: "แซนด์วิชไมโล", nameEn: "Milo Spread", desc: "ไมโลสเปรดเข้มข้น", price: 35, emoji: "🍫" },
+      {
+        id: "sw-jam-strawberry",
+        nameTh: "แซนด์วิชแยมสตรอว์เบอร์รี",
+        nameEn: "Strawberry Jam",
+        desc: "แยมสตรอว์เบอร์รีหวานอมเปรี้ยว",
+        price: 35,
+        emoji: "🍓",
+      },
+      {
+        id: "sw-jam-orange",
+        nameTh: "แซนด์วิชแยมส้ม",
+        nameEn: "Orange Marmalade",
+        desc: "แยมส้มหอม ๆ รสสดชื่น",
+        price: 35,
+        emoji: "🍊",
+      },
+      {
+        id: "sw-jam-choco",
+        nameTh: "แซนด์วิชแยมช็อกโกแลต",
+        nameEn: "Chocolate Spread",
+        desc: "ช็อกโกแลตสเปรดเข้มข้น",
+        price: 35,
+        emoji: "🍫",
+      },
+      {
+        id: "sw-jam-banana",
+        nameTh: "แซนด์วิชแยมกล้วย",
+        nameEn: "Banana Spread",
+        desc: "แยมกล้วยหอมหวาน",
+        price: 35,
+        emoji: "🍌",
+      },
+      {
+        id: "sw-jam-pandan",
+        nameTh: "แซนด์วิชใบเตยสังขยา",
+        nameEn: "Pandan Custard",
+        desc: "สังขยาใบเตยหอมละมุน",
+        price: 35,
+        emoji: "🌿",
+      },
+      {
+        id: "sw-jam-thaitea",
+        nameTh: "แซนด์วิชสังขยาชาไทย",
+        nameEn: "Thai Tea Custard",
+        desc: "สังขยาชาไทยหวานหอม",
+        price: 35,
+        emoji: "🧋",
+      },
+      {
+        id: "sw-jam-blueberry",
+        nameTh: "แซนด์วิชแยมบลูเบอร์รี",
+        nameEn: "Blueberry Jam",
+        desc: "แยมบลูเบอร์รีหวานอมเปรี้ยว",
+        price: 35,
+        emoji: "🫐",
+      },
+      {
+        id: "sw-jam-butter",
+        nameTh: "แซนด์วิชเนยนมน้ำตาล",
+        nameEn: "Butter, Milk & Sugar",
+        desc: "เนย + นมข้น + น้ำตาล คลาสสิก",
+        price: 30,
+        emoji: "🧈",
+      },
+      {
+        id: "sw-jam-ovaltine",
+        nameTh: "แซนด์วิชโอวัลติน",
+        nameEn: "Ovaltine Spread",
+        desc: "โอวัลตินสเปรดหอมมอลต์",
+        price: 35,
+        emoji: "🥛",
+      },
+      {
+        id: "sw-jam-milo",
+        nameTh: "แซนด์วิชไมโล",
+        nameEn: "Milo Spread",
+        desc: "ไมโลสเปรดเข้มข้น",
+        price: 35,
+        emoji: "🍫",
+      },
     ],
   },
 ];
@@ -2134,8 +2916,7 @@ export const PROMO_CAMPAIGNS: PromoCampaign[] = [
       "✍️ ใส่แคปชั่นเกี่ยวกับ Halloween หรือเครื่องดื่มของร้าน",
       "🏷️ แท็กเพจร้าน PunKubFang",
     ],
-    reward:
-      "รับส่วนลดทันที 5 บาท! เมื่อแสดงโพสต์ให้ทางร้านตรวจสอบก่อนชำระเงิน",
+    reward: "รับส่วนลดทันที 5 บาท! เมื่อแสดงโพสต์ให้ทางร้านตรวจสอบก่อนชำระเงิน",
     steps: [
       "แต่งหน้า หรือแต่งตัวในธีม Halloween",
       "ซื้อเครื่องดื่มจากร้าน “ปั่นกับฟ่าง”",
@@ -2238,10 +3019,7 @@ export const PROMO_CAMPAIGNS: PromoCampaign[] = [
     month: 12,
     day: 25,
     slogan: "Christmas Special 🎄",
-    points: [
-      "เมนูธีมสีแดง – เขียว – ขาว",
-      "โปรโมชั่นซื้อคู่ราคาพิเศษ",
-    ],
+    points: ["เมนูธีมสีแดง – เขียว – ขาว", "โปรโมชั่นซื้อคู่ราคาพิเศษ"],
     theme: "christmas",
   },
   {
@@ -2280,9 +3058,7 @@ export function getActiveFestivalDecor(now: Date): string[] | null {
   for (const p of PROMO_CAMPAIGNS) {
     if (p.month == null || p.day == null) continue; // ข้ามโปรแบบ ongoing
     const target = new Date(now.getFullYear(), p.month - 1, p.day);
-    const diff = Math.round(
-      (target.getTime() - today.getTime()) / 86400000,
-    );
+    const diff = Math.round((target.getTime() - today.getTime()) / 86400000);
     if (diff >= 0 && diff <= 7 && (!best || diff < best.diff)) {
       best = { diff, theme: p.theme };
     }
@@ -2359,9 +3135,24 @@ export const GACHA_RARITY: Record<
   { label: string; labelEn: string; emoji: string; color: string }
 > = {
   common: { label: "ธรรมดา", labelEn: "Common", emoji: "🍀", color: "#8ee39a" },
-  special: { label: "พิเศษ", labelEn: "Special", emoji: "✨", color: "#ffd76a" },
-  lucky: { label: "Lucky Drink", labelEn: "Lucky", emoji: "💜", color: "#b48cff" },
-  secret: { label: "SECRET MENU", labelEn: "Secret", emoji: "👀", color: "#ff8fb1" },
+  special: {
+    label: "พิเศษ",
+    labelEn: "Special",
+    emoji: "✨",
+    color: "#ffd76a",
+  },
+  lucky: {
+    label: "Lucky Drink",
+    labelEn: "Lucky",
+    emoji: "💜",
+    color: "#b48cff",
+  },
+  secret: {
+    label: "SECRET MENU",
+    labelEn: "Secret",
+    emoji: "👀",
+    color: "#ff8fb1",
+  },
 };
 
 export type GachaMenu = {
@@ -2450,7 +3241,8 @@ export const GACHA_MENUS: GachaMenu[] = [
     id: "gacha-choco-banana-blend",
     name: "กล้วยช็อกโกปั่นลับ",
     englishName: "Secret Choco Banana Blend",
-    description: "กล้วยหอม + ช็อกโกแลตเข้ม + นมสด ปั่นเนียน ๆ ไม่ได้อยู่ในหมวดสมูทตี้ 🍌🍫",
+    description:
+      "กล้วยหอม + ช็อกโกแลตเข้ม + นมสด ปั่นเนียน ๆ ไม่ได้อยู่ในหมวดสมูทตี้ 🍌🍫",
     price: 55,
     emoji: "🍌",
     category: "smoothie",
@@ -2463,7 +3255,8 @@ export const GACHA_MENUS: GachaMenu[] = [
     id: "gacha-mango-thaitea-blend",
     name: "มะม่วงชาไทยปั่น",
     englishName: "Mango Thai Tea Blend",
-    description: "มะม่วงสุก + ชาไทยเข้ม ปั่นเป็นสองรสในแก้วเดียว มั่วแต่เข้ากัน 😂",
+    description:
+      "มะม่วงสุก + ชาไทยเข้ม ปั่นเป็นสองรสในแก้วเดียว มั่วแต่เข้ากัน 😂",
     price: 60,
     emoji: "🥭",
     category: "smoothie",
