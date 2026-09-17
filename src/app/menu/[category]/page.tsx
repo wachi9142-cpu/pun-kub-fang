@@ -13,7 +13,6 @@ import Sandwiches from "@/components/sections/Sandwiches";
 import Toppings from "@/components/sections/Toppings";
 import StickyMilkView from "@/components/sections/StickyMilkView";
 import StickyDripFrame from "@/components/sections/StickyDripFrame";
-import SnackShopFrame from "@/components/sections/SnackShopFrame";
 import SodaBubbleFrame from "@/components/sections/SodaBubbleFrame";
 import CoffeeHero from "@/components/sections/CoffeeHero";
 import MilkHero from "@/components/sections/MilkHero";
@@ -66,9 +65,7 @@ export default async function CategoryPage({
       ) : category === "soft" ? (
         <BottledDrinks />
       ) : category === "snacks" ? (
-        <SnackShopFrame>
-          <Snacks />
-        </SnackShopFrame>
+        <Snacks />
       ) : category === "sandwiches" ? (
         <Sandwiches />
       ) : category === "toppings" ? (

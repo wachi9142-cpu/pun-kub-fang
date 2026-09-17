@@ -2570,6 +2570,43 @@ body {
   }
 }
 
+/* 🥪 Sandwich hero — ผัก/ผลไม้/ขวดนมลอยเบา ๆ */
+@keyframes sw-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+  50% {
+    transform: translate(2px, -7px) rotate(4deg);
+  }
+}
+.sw-drift {
+  animation: sw-drift 3.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sw-drift {
+    animation: none;
+  }
+}
+
+@keyframes snack-pour {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.03) translateX(1px);
+  }
+}
+.snack-pour {
+  animation: snack-pour 1.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .snack-pour {
+    animation: none;
+  }
+}
+
 /* ♿ ลดการเคลื่อนไหวสำหรับผู้ที่ตั้งค่า prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-drop-in,

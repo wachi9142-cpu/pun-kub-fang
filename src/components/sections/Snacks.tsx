@@ -146,7 +146,7 @@ export function SnackCard({ item }: { item: SnackItem }) {
 
 export default function Snacks() {
   return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
       {/* 🥣 Hero: กรุบกรอบ กินเพลิน (Illustration เท่านั้น — การ์ดด้านล่างใช้รูปสินค้าจริง) */}
       <SnackHero />
 
