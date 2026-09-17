@@ -1,4 +1,9 @@
-import { DRINK_CATEGORIES, MENU_ITEMS, type CategoryId } from "@/data/site";
+import {
+  DRINK_CATEGORIES,
+  MENU_ITEMS,
+  byRealImageFirst,
+  type CategoryId,
+} from "@/data/site";
 import DrinkCard from "@/components/DrinkCard";
 
 /** แสดงเมนูของหมวดเครื่องดื่มหมวดเดียว (ผลไม้ปั่น/นม/โซดา/เครื่องดื่ม) */
@@ -11,7 +16,9 @@ export default function CategoryMenuView({
   hero?: React.ReactNode;
 }) {
   const cat = DRINK_CATEGORIES.find((c) => c.id === categoryId)!;
-  const items = MENU_ITEMS.filter((m) => m.category === categoryId);
+  const items = MENU_ITEMS.filter((m) => m.category === categoryId).sort(
+    byRealImageFirst,
+  );
 
   return (
     <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">

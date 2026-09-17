@@ -385,7 +385,7 @@ export default function LuckyDrink() {
                       type="button"
                       onClick={() => setZoom(true)}
                       aria-label={`ดูรูป ${prize.name} เต็มจอ`}
-                      className="h-full w-full cursor-zoom-in"
+                      className="absolute inset-0 cursor-zoom-in"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img

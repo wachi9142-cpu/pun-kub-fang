@@ -54,7 +54,7 @@ export default function DrinkCard({
             type="button"
             onClick={() => setZoom(true)}
             aria-label={`ดูรูป ${item.name} เต็มจอ`}
-            className="group/img relative h-full w-full cursor-zoom-in"
+            className="group/img absolute inset-0 cursor-zoom-in"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

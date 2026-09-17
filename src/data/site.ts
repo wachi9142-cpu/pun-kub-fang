@@ -259,6 +259,10 @@ export type MenuItem = {
   soldOut?: boolean;
 };
 
+/** เรียงเมนู: มีรูปจริงขึ้นก่อน → แก้วการ์ตูน (SVG) ต่อท้าย (ลำดับเดิมภายในกลุ่มคงไว้) */
+export const byRealImageFirst = (a: MenuItem, b: MenuItem) =>
+  Number(Boolean(b.image)) - Number(Boolean(a.image));
+
 export const MENU_ITEMS: MenuItem[] = [
   /* ผลไม้สด */
   {

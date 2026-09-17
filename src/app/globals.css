@@ -2510,6 +2510,66 @@ body {
   }
 }
 
+/* 🥣 Snack hero — ชามโยก / คอนเฟลกเด้ง / ชิ้นขนมลอย / เศษกะพริบ */
+@keyframes snack-bowl {
+  0%,
+  100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1.5deg) translateY(-2px);
+  }
+}
+.snack-bowl {
+  animation: snack-bowl 3.4s ease-in-out infinite;
+}
+@keyframes snack-pop {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-14px) rotate(18deg);
+  }
+}
+.snack-pop {
+  animation: snack-pop 2.2s ease-in-out infinite;
+}
+@keyframes snack-float {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+  50% {
+    transform: translate(3px, -8px) rotate(6deg);
+  }
+}
+.snack-float {
+  animation: snack-float 3.6s ease-in-out infinite;
+}
+@keyframes snack-crumb {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+.snack-crumb {
+  animation: snack-crumb 2.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .snack-bowl,
+  .snack-pop,
+  .snack-float,
+  .snack-crumb {
+    animation: none;
+  }
+}
+
 /* ♿ ลดการเคลื่อนไหวสำหรับผู้ที่ตั้งค่า prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-drop-in,

@@ -1,6 +1,7 @@
 "use client";
 
 import ImageLightbox from "@/components/ImageLightbox";
+import SnackHero from "@/components/sections/SnackHero";
 
 import { useState } from "react";
 import { Heart, Plus } from "lucide-react";
@@ -68,13 +69,13 @@ export function SnackCard({ item }: { item: SnackItem }) {
       </button>
 
       {/* พื้นที่รูปสินค้า (placeholder ถ้ายังไม่มีรูป) */}
-      <div className="grid h-40 place-items-center overflow-hidden rounded-2xl bg-gradient-to-b from-amber-50 to-blossom-50/60">
+      <div className="relative grid h-40 place-items-center overflow-hidden rounded-2xl bg-gradient-to-b from-amber-50 to-blossom-50/60">
         {item.image ? (
           <button
             type="button"
             onClick={() => setZoom(true)}
             aria-label={`ดูรูป ${item.nameTh} เต็มจอ`}
-            className="h-full w-full cursor-zoom-in"
+            className="absolute inset-0 cursor-zoom-in"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -146,13 +147,8 @@ export function SnackCard({ item }: { item: SnackItem }) {
 export default function Snacks() {
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="mb-8 text-center">
-        <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-          🍪 ขนมกินเพลิน{" "}
-          <span className="text-blossom-400">| Snacks &amp; Bakery</span>
-        </h1>
-        <p className="mt-2 text-ink/60">ของกินเล่น จับคู่กับแก้วโปรด 💜</p>
-      </div>
+      {/* 🥣 Hero: กรุบกรอบ กินเพลิน (Illustration เท่านั้น — การ์ดด้านล่างใช้รูปสินค้าจริง) */}
+      <SnackHero />
 
       <div className="space-y-10">
         {SNACK_GROUPS.map((group) => (

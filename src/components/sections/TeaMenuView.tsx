@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MENU_ITEMS } from "@/data/site";
+import { MENU_ITEMS, byRealImageFirst } from "@/data/site";
 import DrinkCard from "@/components/DrinkCard";
 import TeaHero from "@/components/sections/TeaHero";
 
@@ -46,7 +46,9 @@ const TEA_GROUP: Record<string, Exclude<Group, "all">> = {
 export default function TeaMenuView() {
   const [group, setGroup] = useState<Group>("all");
 
-  const teas = MENU_ITEMS.filter((m) => m.category === "tea");
+  const teas = MENU_ITEMS.filter((m) => m.category === "tea").sort(
+    byRealImageFirst,
+  );
   const shown =
     group === "all" ? teas : teas.filter((m) => TEA_GROUP[m.id] === group);
 
