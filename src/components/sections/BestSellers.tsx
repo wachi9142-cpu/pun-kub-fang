@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { MENU_ITEMS } from "@/data/site";
+import { MENU_ITEMS, type MenuItem } from "@/data/site";
 import DrinkCard from "@/components/DrinkCard";
 import { IMAGE_NOTE } from "@/components/sections/IngredientNote";
 
@@ -16,11 +16,14 @@ const BEST_SELLER_IDS = [
   "mango-milk",
 ];
 
-const BEST_SELLERS = BEST_SELLER_IDS.map(
-  (id) => MENU_ITEMS.find((m) => m.id === id)!,
-).filter(Boolean);
-
-export default function BestSellers() {
+export default function BestSellers({ items = MENU_ITEMS }: { items?: MenuItem[] }) {
+  const featured = items.filter((item) => item.popular);
+  const bestSellers = BEST_SELLER_IDS.map(
+    (id) => items.find((m) => m.id === id)!,
+  ).filter(Boolean);
+  const shown = [...bestSellers, ...featured]
+    .filter((item, index, all) => all.findIndex((x) => x.id === item.id) === index)
+    .slice(0, 6);
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
@@ -42,7 +45,7 @@ export default function BestSellers() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-6">
-        {BEST_SELLERS.map((item) => (
+        {shown.map((item) => (
           <DrinkCard key={item.id} item={item} buttonLabel="เลือกเมนู" />
         ))}
       </div>

@@ -13,15 +13,19 @@ import About from "@/components/sections/About";
 import Reviews from "@/components/sections/Reviews";
 import SiteFooter from "@/components/sections/SiteFooter";
 import BackToTop from "@/components/sections/BackToTop";
+import { getMenuItems } from "@/lib/api";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const menuItems = await getMenuItems();
   return (
     <CartProvider>
       <Navbar />
       <main>
         <Hero />
         <Categories />
-        <BestSellers />
+        <BestSellers items={menuItems} />
         <MixTeaser />
         <LuckyTeaser />
         <FreshBuffetTeaser />

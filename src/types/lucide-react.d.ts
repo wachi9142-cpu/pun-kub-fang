@@ -35,6 +35,14 @@ declare module "lucide-react" {
   export const Instagram: LucideIcon;
   export const Send: LucideIcon;
   export const BookOpen: LucideIcon;
+  export const ImagePlus: LucideIcon;
+  export const LoaderCircle: LucideIcon;
+  export const LogOut: LucideIcon;
+  export const PackagePlus: LucideIcon;
+  export const Pencil: LucideIcon;
+  export const Save: LucideIcon;
+  export const Search: LucideIcon;
+  export const Trash2: LucideIcon;
 
   // ไอคอนอื่น ๆ ทั้งหมดของ lucide-react
   const _default: LucideIcon;

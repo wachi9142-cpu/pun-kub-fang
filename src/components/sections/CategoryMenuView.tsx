@@ -3,6 +3,7 @@ import {
   MENU_ITEMS,
   byRealImageFirst,
   type CategoryId,
+  type MenuItem,
 } from "@/data/site";
 import DrinkCard from "@/components/DrinkCard";
 
@@ -10,15 +11,18 @@ import DrinkCard from "@/components/DrinkCard";
 export default function CategoryMenuView({
   categoryId,
   hero,
+  items: suppliedItems,
 }: {
   categoryId: CategoryId;
   /** Hero เฉพาะหมวด (ถ้ามีจะใช้แทนหัวเรื่องมาตรฐาน) */
   hero?: React.ReactNode;
+  /** เมนูจาก API (fallback เป็น mock เดิมเพื่อให้ component ใช้เดี่ยวได้) */
+  items?: MenuItem[];
 }) {
   const cat = DRINK_CATEGORIES.find((c) => c.id === categoryId)!;
-  const items = MENU_ITEMS.filter((m) => m.category === categoryId).sort(
-    byRealImageFirst,
-  );
+  const items = (suppliedItems ?? MENU_ITEMS)
+    .filter((m) => m.category === categoryId)
+    .sort(byRealImageFirst);
 
   return (
     <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">

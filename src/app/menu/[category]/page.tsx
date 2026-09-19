@@ -18,6 +18,9 @@ import CoffeeHero from "@/components/sections/CoffeeHero";
 import MilkHero from "@/components/sections/MilkHero";
 import HotHero from "@/components/sections/HotHero";
 import IngredientNote from "@/components/sections/IngredientNote";
+import { getMenuItems } from "@/lib/api";
+
+export const dynamic = "force-dynamic";
 
 const DRINK_IDS = DRINK_CATEGORIES.map((c) => c.id) as string[];
 
@@ -55,6 +58,9 @@ export default async function CategoryPage({
   const { category } = await params;
   const sec = MENU_SECTIONS.find((s) => s.id === category);
   if (!sec) notFound();
+  const menuItems = DRINK_IDS.includes(category)
+    ? await getMenuItems(category as CategoryId)
+    : undefined;
 
   return (
     <MenuPageShell>
@@ -73,23 +79,37 @@ export default async function CategoryPage({
       ) : category === "sticky" ? (
         <StickyDripFrame>
           <StickyMilkView />
+          <CategoryMenuView
+            categoryId="sticky"
+            items={menuItems}
+            hero={
+              <div className="mb-8 text-center">
+                <h2 className="font-display text-3xl font-bold text-ink">
+                  เมนูนมเหนียวพร้อมสั่ง
+                </h2>
+                <p className="mt-2 text-ink/60">
+                  เลือกเมนูสำเร็จรูป หรือจัดชุดของตัวเองด้านบนได้เลย
+                </p>
+              </div>
+            }
+          />
         </StickyDripFrame>
       ) : category === "tea" ? (
-        <TeaMenuView />
+        <TeaMenuView items={menuItems} />
       ) : category === "smoothie" ? (
-        <SmoothieMenuView />
+        <SmoothieMenuView items={menuItems} />
       ) : category === "drinks" ? (
-        <CategoryMenuView categoryId="drinks" hero={<CoffeeHero />} />
+        <CategoryMenuView categoryId="drinks" hero={<CoffeeHero />} items={menuItems} />
       ) : category === "hot" ? (
-        <CategoryMenuView categoryId="hot" hero={<HotHero />} />
+        <CategoryMenuView categoryId="hot" hero={<HotHero />} items={menuItems} />
       ) : category === "milk" ? (
-        <CategoryMenuView categoryId="milk" hero={<MilkHero />} />
+        <CategoryMenuView categoryId="milk" hero={<MilkHero />} items={menuItems} />
       ) : category === "soda" ? (
         <SodaBubbleFrame>
-          <CategoryMenuView categoryId="soda" />
+          <CategoryMenuView categoryId="soda" items={menuItems} />
         </SodaBubbleFrame>
       ) : DRINK_IDS.includes(category) ? (
-        <CategoryMenuView categoryId={category as CategoryId} />
+        <CategoryMenuView categoryId={category as CategoryId} items={menuItems} />
       ) : (
         notFound()
       )}

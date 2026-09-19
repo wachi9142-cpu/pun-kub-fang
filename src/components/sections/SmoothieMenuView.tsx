@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MENU_ITEMS, byRealImageFirst } from "@/data/site";
+import { MENU_ITEMS, byRealImageFirst, type MenuItem } from "@/data/site";
 import DrinkCard from "@/components/DrinkCard";
 import SmoothieHero from "@/components/sections/SmoothieHero";
 
@@ -31,10 +31,10 @@ const SMOOTHIE_GROUP: Record<string, Exclude<Group, "all">> = {
   "grape-soda-smoothie": "soda",
 };
 
-export default function SmoothieMenuView() {
+export default function SmoothieMenuView({ items: suppliedItems }: { items?: MenuItem[] }) {
   const [group, setGroup] = useState<Group>("all");
 
-  const items = MENU_ITEMS.filter((m) => m.category === "smoothie").sort(
+  const items = (suppliedItems ?? MENU_ITEMS).filter((m) => m.category === "smoothie").sort(
     byRealImageFirst,
   );
   const shown =
