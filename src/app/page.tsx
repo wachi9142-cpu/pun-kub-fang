@@ -13,12 +13,14 @@ import About from "@/components/sections/About";
 import Reviews from "@/components/sections/Reviews";
 import SiteFooter from "@/components/sections/SiteFooter";
 import BackToTop from "@/components/sections/BackToTop";
-import { getMenuItems } from "@/lib/api";
+import { getMenuItems, getSiteData } from "@/lib/api";
+import { hydrateSiteData } from "@/data/site";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const menuItems = await getMenuItems();
+  const [menuItems, siteData] = await Promise.all([getMenuItems(), getSiteData()]);
+  hydrateSiteData(siteData);
   return (
     <CartProvider>
       <Navbar />

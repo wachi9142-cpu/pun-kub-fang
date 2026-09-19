@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PROMO_CAMPAIGNS } from "@/data/site";
+import { PROMO_CAMPAIGNS, hydrateSiteData } from "@/data/site";
+import { getSiteData } from "@/lib/api";
 import MenuPageShell from "@/components/sections/MenuPageShell";
 import PromoDetail from "@/components/sections/PromoDetail";
+
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return PROMO_CAMPAIGNS.map((p) => ({ id: p.id }));
@@ -13,6 +16,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
+  hydrateSiteData(await getSiteData());
   const { id } = await params;
   const p = PROMO_CAMPAIGNS.find((x) => x.id === id);
   return {
@@ -28,6 +32,7 @@ export default async function PromoDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  hydrateSiteData(await getSiteData());
   const { id } = await params;
   const campaign = PROMO_CAMPAIGNS.find((x) => x.id === id);
   if (!campaign) notFound();

@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import MixPageClient from "@/components/sections/MixPageClient";
+import { getSiteData } from "@/lib/api";
+import { hydrateSiteData } from "@/data/site";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "มิกซ์กับฟ่าง ✨ | ปั่นแก้วในแบบของคุณ",
@@ -18,6 +22,7 @@ export default async function MixPage({
 }: {
   searchParams: Promise<{ preset?: string }>;
 }) {
+  hydrateSiteData(await getSiteData());
   const { preset } = await searchParams;
   const mapped = preset ? PRESETS[preset] : undefined;
 

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import MenuPageShell from "@/components/sections/MenuPageShell";
 import LuckyDrink from "@/components/sections/LuckyDrink";
+import { getSiteData } from "@/lib/api";
+import { hydrateSiteData } from "@/data/site";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "สุ่มแก้วกับฟ่าง 🎲 | Fang's Lucky Drink",
@@ -9,7 +13,8 @@ export const metadata: Metadata = {
 };
 
 /* 🎰 หน้าตู้กาชาปองจริง — "เอาล่ะ มาลุ้นกันจริง ๆ!" */
-export default function LuckyDrinkPage() {
+export default async function LuckyDrinkPage() {
+  hydrateSiteData(await getSiteData());
   return (
     <MenuPageShell backHref="/" backLabel="กลับหน้าแรก">
       <div className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">

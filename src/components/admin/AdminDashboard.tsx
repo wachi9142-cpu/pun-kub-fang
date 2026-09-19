@@ -333,6 +333,8 @@ export default function AdminDashboard() {
             <p className="text-xs text-ink/45">{products.length} รายการในระบบ</p>
           </div>
           <div className="flex gap-2">
+            <Link href="/admin/content" className="rounded-xl px-3 py-2 text-sm font-semibold text-grape-600 hover:bg-grape-50">เนื้อหา</Link>
+            <Link href="/admin/orders" className="rounded-xl px-3 py-2 text-sm font-semibold text-grape-600 hover:bg-grape-50">ออเดอร์</Link>
             <Link href="/" className="rounded-xl px-3 py-2 text-sm font-semibold text-grape-600 hover:bg-grape-50">ดูหน้าร้าน</Link>
             <button onClick={logout} className="inline-flex items-center gap-1 rounded-xl px-3 py-2 text-sm font-semibold text-red-500 hover:bg-red-50"><LogOut size={16} /> ออกจากระบบ</button>
           </div>

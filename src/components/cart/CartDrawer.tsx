@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Plus, X, ArrowLeft, Check } from "lucide-react";
 import { useCart } from "@/components/cart/CartContext";
+import { API_URL } from "@/lib/api";
 
 type Phase = "cart" | "review" | "done";
 
@@ -53,6 +54,11 @@ export default function CartDrawer() {
   } = useCart();
   const [phase, setPhase] = useState<Phase>("cart");
   const [orderId, setOrderId] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("");
+  const [note, setNote] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const close = () => {
     closeCart();
@@ -60,27 +66,30 @@ export default function CartDrawer() {
     setTimeout(() => setPhase("cart"), 250);
   };
 
-  const confirmTestOrder = () => {
-    const id = "TEST-" + Math.random().toString(36).slice(2, 7).toUpperCase();
-    const payload = {
-      test: true,
-      orderId: id,
-      createdAt: new Date().toISOString(),
-      itemCount: count,
-      total,
-      items: lines.map((l) => ({
-        name: l.name,
-        options: l.options ?? [],
-        unitPrice: l.price,
-        qty: l.qty,
-        lineTotal: l.price * l.qty,
-      })),
-    };
-    // จำลองการส่งไป backend (เสียบ endpoint จริงตรงนี้ได้เลย)
-    // eslint-disable-next-line no-console
-    console.log("🧪 TEST ORDER payload →", payload);
-    setOrderId(id);
-    setPhase("done");
+  const confirmOrder = async () => {
+    setSubmitting(true);
+    setSubmitError("");
+    try {
+      const response = await fetch(`${API_URL}/api/orders`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customerName: customerName || null,
+          customerPhone: customerPhone || null,
+          note: note || null,
+          source: "web",
+          items: lines,
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || "ส่งออเดอร์ไม่สำเร็จ");
+      setOrderId(data.order.orderNumber);
+      setPhase("done");
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "ส่งออเดอร์ไม่สำเร็จ");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -104,11 +113,11 @@ export default function CartDrawer() {
             drawerOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          {/* หัว + ป้าย TEST */}
+          {/* หัวตะกร้า */}
           <div className="flex items-center justify-between gap-3 border-b border-ink/5 p-4">
             <div className="flex items-center gap-2">
-              <span className="rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-bold text-amber-700 ring-1 ring-amber-300/60">
-                🧪 โหมดทดลอง · TEST
+              <span className="rounded-full bg-grape-100 px-2.5 py-1 text-[11px] font-bold text-grape-700 ring-1 ring-grape-200">
+                🥤 สั่งกับฟ่าง
               </span>
               <h3 className="font-display text-lg font-bold text-ink">
                 {phase === "review"
@@ -210,7 +219,7 @@ export default function CartDrawer() {
                   disabled={lines.length === 0}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-grape-600 to-blossom-500 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
                 >
-                  🧪 สั่งซื้อ (ทดสอบ)
+                  ตรวจสอบออเดอร์
                 </button>
               </div>
             </>
@@ -220,11 +229,14 @@ export default function CartDrawer() {
           {phase === "review" && (
             <>
               <div className="flex-1 space-y-3 overflow-y-auto p-4">
-                <div className="rounded-2xl bg-amber-50 p-3 text-xs text-amber-900/80 ring-1 ring-amber-200/70">
-                  🧪 นี่คือ <b>ออเดอร์ทดลอง</b> — ไม่ใช้เงินจริง
-                  ไม่กระทบออเดอร์จริง
-                  ใช้ตรวจว่าข้อมูลที่ร้านได้รับตรงกับที่เลือก
+                <div className="rounded-2xl bg-grape-50 p-3 text-xs text-grape-800 ring-1 ring-grape-100">
+                  ตรวจรายการและกรอกข้อมูลติดต่อก่อนส่งออเดอร์ให้ร้าน
                 </div>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  <input value={customerName} onChange={(event) => setCustomerName(event.target.value)} placeholder="ชื่อผู้สั่ง" className="rounded-xl border border-grape-100 px-3 py-2.5 text-sm outline-none focus:border-grape-400" />
+                  <input value={customerPhone} onChange={(event) => setCustomerPhone(event.target.value)} placeholder="เบอร์โทร" inputMode="tel" className="rounded-xl border border-grape-100 px-3 py-2.5 text-sm outline-none focus:border-grape-400" />
+                </div>
+                <textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="หมายเหตุถึงร้าน (ถ้ามี)" className="min-h-20 resize-y rounded-xl border border-grape-100 px-3 py-2.5 text-sm outline-none focus:border-grape-400" />
                 <p className="text-xs font-semibold uppercase tracking-wide text-ink/45">
                   รายการที่ร้านจะได้รับ
                 </p>
@@ -270,12 +282,14 @@ export default function CartDrawer() {
                     <ArrowLeft size={16} /> แก้ไข
                   </button>
                   <button
-                    onClick={confirmTestOrder}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-grape-600 to-blossom-500 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02]"
+                    onClick={() => void confirmOrder()}
+                    disabled={submitting}
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-grape-600 to-blossom-500 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] disabled:opacity-60"
                   >
-                    ✅ ยืนยันสั่งทดสอบ
+                    {submitting ? "กำลังส่ง..." : "✅ ยืนยันออเดอร์"}
                   </button>
                 </div>
+                {submitError && <p className="mt-2 rounded-xl bg-red-50 p-2 text-xs text-red-600">{submitError}</p>}
               </div>
             </>
           )}
@@ -287,15 +301,14 @@ export default function CartDrawer() {
                 <Check size={40} />
               </div>
               <h3 className="font-display text-xl font-bold text-ink">
-                ส่งออเดอร์ทดสอบแล้ว! 🧪
+                ส่งออเดอร์แล้ว! ✨
               </h3>
               <p className="text-sm text-ink/60">
-                เลขออเดอร์ทดลอง:{" "}
+                เลขออเดอร์:{" "}
                 <span className="font-semibold text-grape-deep">{orderId}</span>
               </p>
               <p className="max-w-xs text-xs text-ink/50">
-                ไม่ใช้เงินจริง และไม่กระทบออเดอร์จริง · ข้อมูลออเดอร์ถูกส่ง
-                (จำลอง) เรียบร้อย ดูรายละเอียดได้ใน Console
+                ร้านได้รับรายการแล้ว สามารถแจ้งเลขออเดอร์นี้เมื่อติดต่อร้าน
               </p>
               <button
                 onClick={() => {

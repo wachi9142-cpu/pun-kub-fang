@@ -5,6 +5,11 @@ import { ConfigProvider } from "antd";
 import "./globals.css";
 import BobaCursor from "@/components/BobaCursor";
 import FangChat from "@/components/chat/FangChat";
+import SiteDataHydrator from "@/components/SiteDataHydrator";
+import { getSiteData } from "@/lib/api";
+import { hydrateSiteData } from "@/data/site";
+
+export const dynamic = "force-dynamic";
 
 const prompt = Prompt({
   subsets: ["latin", "thai"],
@@ -40,11 +45,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const siteData = await getSiteData();
+  hydrateSiteData(siteData);
   return (
     <html lang="th" className={`${prompt.variable} ${mitr.variable}`}>
       <body>
@@ -59,9 +66,11 @@ export default function RootLayout({
               },
             }}
           >
-            {children}
-            <FangChat />
-            <BobaCursor />
+            <SiteDataHydrator data={siteData}>
+              {children}
+              <FangChat />
+              <BobaCursor />
+            </SiteDataHydrator>
           </ConfigProvider>
         </AntdRegistry>
       </body>

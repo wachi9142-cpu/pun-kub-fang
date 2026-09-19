@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { DRINK_CATEGORIES, MENU_SECTIONS, type CategoryId } from "@/data/site";
+import { DRINK_CATEGORIES, MENU_SECTIONS, hydrateSiteData, type CategoryId } from "@/data/site";
 import MenuPageShell from "@/components/sections/MenuPageShell";
 import CategoryMenuView from "@/components/sections/CategoryMenuView";
 import TeaMenuView from "@/components/sections/TeaMenuView";
@@ -18,7 +18,7 @@ import CoffeeHero from "@/components/sections/CoffeeHero";
 import MilkHero from "@/components/sections/MilkHero";
 import HotHero from "@/components/sections/HotHero";
 import IngredientNote from "@/components/sections/IngredientNote";
-import { getMenuItems } from "@/lib/api";
+import { getMenuItems, getSiteData } from "@/lib/api";
 
 export const dynamic = "force-dynamic";
 
@@ -43,6 +43,7 @@ export async function generateMetadata({
   params: Promise<{ category: string }>;
 }): Promise<Metadata> {
   const { category } = await params;
+  hydrateSiteData(await getSiteData());
   const sec = MENU_SECTIONS.find((s) => s.id === category);
   return {
     title: sec ? `${sec.label} | ปั่นกับฟ่าง` : "เมนู | ปั่นกับฟ่าง",

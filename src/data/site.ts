@@ -2453,7 +2453,7 @@ export const SODA_SYRUPS: SodaSyrup[] = [
     color: "#3ecf8e",
   },
 ];
-export const SODA_DIY_MAX = 3;
+export let SODA_DIY_MAX = 3;
 
 /** ซ่ามิกซ์กับฟ่าง — ข้อความ (ไม่เปิดเผยสูตร) */
 export const SODA_MYSTERY = {
@@ -2729,8 +2729,8 @@ export const STICKY_NOTE = {
   en: "Sticky milk alone, crackers alone, drink + sticky milk, or sticky milk + crackers — no drink required.",
 };
 
-export const WHIP_BASE_PRICE = 20;
-export const WHIP_FRUIT_PRICE = 10;
+export let WHIP_BASE_PRICE = 20;
+export let WHIP_FRUIT_PRICE = 10;
 
 export type WhipTopping = { nameTh: string; nameEn: string; price: number };
 export type WhipToppingGroup = {
@@ -3897,3 +3897,79 @@ export const GACHA_MENUS: GachaMenu[] = [
     isSpecial: true,
   },
 ];
+
+/* ---------- Runtime CMS hydration ---------- */
+export type SiteDataPayload = Record<string, unknown>;
+
+const CMS_ARRAYS: Record<string, unknown[]> = {
+  NAV_ITEMS,
+  FOOTER_LINKS,
+  DRINK_CATEGORIES,
+  MENU_SECTIONS,
+  MENU_ITEMS,
+  MIX_BASES,
+  MIX_HERBAL_TYPES,
+  FRESH_FRUITS,
+  FRESH_VEGGIES,
+  FRESH_FLAVORS,
+  MIX_TEA_TYPES,
+  MIX_SYRUPS,
+  MIX_FRUITS,
+  MIX_TOPPINGS,
+  TOPPING_GROUPS,
+  PRICE_TIERS,
+  HOMEMADE_BOTTLED,
+  HOMEMADE_BLENDED,
+  HOMEMADE_SWEETNESS,
+  HOMEMADE_PRICE_SUMMARY,
+  SODA_MODES,
+  SODA_SYRUPS,
+  STICKY_BASES,
+  STICKY_FLAVORS,
+  STICKY_PACKAGES,
+  STICKY_SERVE: STICKY_SERVE as unknown as unknown[],
+  STICKY_EXAMPLES,
+  WHIP_TOPPING_GROUPS,
+  WHIP_FRUITS,
+  SOFT_DRINKS,
+  SNACK_GROUPS,
+  SANDWICH_GROUPS,
+  PROMOTIONS,
+  PROMO_CAMPAIGNS,
+  DEFAULT_HERO_DECOR,
+  REVIEWS,
+  FEATURES,
+  GACHA_FROM_MENU,
+  GACHA_MENUS,
+};
+
+const CMS_OBJECTS: Record<string, Record<string, unknown>> = {
+  FRESH_BUFFET,
+  TOPPING_IMAGES,
+  HOMEMADE_NOTE,
+  SODA_MYSTERY,
+  STICKY_SEPARATE_NOTE,
+  STICKY_NOTE,
+  WHIP_NOTE,
+  FESTIVAL_DECOR,
+  CONTACT,
+  GACHA_RARITY,
+};
+
+/** เติมข้อมูลจาก PostgreSQL ลง constants เดิม เพื่อให้ UI เดิมไม่ต้องถูก redesign */
+export function hydrateSiteData(data: SiteDataPayload) {
+  for (const [key, target] of Object.entries(CMS_ARRAYS)) {
+    const value = data[key];
+    if (Array.isArray(value)) target.splice(0, target.length, ...value);
+  }
+  for (const [key, target] of Object.entries(CMS_OBJECTS)) {
+    const value = data[key];
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      for (const existingKey of Object.keys(target)) delete target[existingKey];
+      Object.assign(target, value);
+    }
+  }
+  if (typeof data.SODA_DIY_MAX === "number") SODA_DIY_MAX = data.SODA_DIY_MAX;
+  if (typeof data.WHIP_BASE_PRICE === "number") WHIP_BASE_PRICE = data.WHIP_BASE_PRICE;
+  if (typeof data.WHIP_FRUIT_PRICE === "number") WHIP_FRUIT_PRICE = data.WHIP_FRUIT_PRICE;
+}

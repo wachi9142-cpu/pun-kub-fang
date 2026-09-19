@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import MenuPageShell from "@/components/sections/MenuPageShell";
 import PromoCampaigns from "@/components/sections/PromoCampaigns";
+import { getSiteData } from "@/lib/api";
+import { hydrateSiteData } from "@/data/site";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "โปรโมชั่น | ปั่นกับฟ่าง",
@@ -8,7 +12,8 @@ export const metadata: Metadata = {
     "โปรโมชั่นเทศกาลของปั่นกับฟ่าง — วันเดียวเท่านั้นในแต่ละเทศกาล ปีใหม่ วาเลนไทน์ สงกรานต์ วันแม่ คริสต์มาส และอีกมากมาย",
 };
 
-export default function PromotionsPage() {
+export default async function PromotionsPage() {
+  hydrateSiteData(await getSiteData());
   return (
     <MenuPageShell backHref="/" backLabel="กลับหน้าแรก">
       <div className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">

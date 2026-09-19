@@ -1,9 +1,30 @@
-import { MENU_ITEMS, type CategoryId, type MenuItem } from "@/data/site";
+import { cache } from "react";
+import {
+  MENU_ITEMS,
+  type CategoryId,
+  type MenuItem,
+  type SiteDataPayload,
+} from "@/data/site";
 
 type ProductsResponse = { items: MenuItem[] };
 
 export const API_URL =
   process.env.NEXT_PUBLIC_API_URL ?? process.env.API_URL ?? "http://localhost:3001";
+
+export const getSiteData = cache(async (): Promise<SiteDataPayload> => {
+  try {
+    const response = await fetch(
+      new URL("/api/site", process.env.API_URL ?? API_URL),
+      { cache: "no-store" },
+    );
+    if (!response.ok) throw new Error(`Site API returned ${response.status}`);
+    const payload = (await response.json()) as { data: SiteDataPayload };
+    return payload.data;
+  } catch (error) {
+    console.warn("Site API unavailable; using bundled fallback data", error);
+    return {};
+  }
+});
 
 /** ดึงเมนูจาก backend และ fallback เป็นข้อมูลเดิมเมื่อ API ยังไม่พร้อม */
 export async function getMenuItems(category?: CategoryId): Promise<MenuItem[]> {
