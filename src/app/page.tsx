@@ -15,6 +15,7 @@ import SiteFooter from "@/components/sections/SiteFooter";
 import BackToTop from "@/components/sections/BackToTop";
 import { getMenuItems, getSiteData } from "@/lib/api";
 import { hydrateSiteData } from "@/data/site";
+import AIRecommendationHero from "@/components/sections/AIRecommendationHero";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +26,7 @@ export default async function HomePage() {
     <CartProvider>
       <Navbar />
       <main>
+        <AIRecommendationHero />
         <Hero />
         <Categories />
         <BestSellers items={menuItems} />

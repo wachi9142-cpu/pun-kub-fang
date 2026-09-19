@@ -8,6 +8,32 @@ import {
 
 type ProductsResponse = { items: MenuItem[] };
 
+export type RecommendationMix = {
+  id: string;
+  name: string;
+  price: number;
+  reason: string;
+  base: { kind: "base" | "tea" | "herbal"; id: string; label: string; emoji: string };
+  syrups: { id: string; label: string; emoji: string }[];
+  topping: { nameTh: string; nameEn: string; price: number } | null;
+  palette: { foam: string; top: string; bottom: string };
+};
+
+export type DrinkRecommendations = {
+  interpretation: {
+    summary: string;
+    budget: number | null;
+    desired: string[];
+    flavors: string[];
+    likelyIngredients: string[];
+    avoid: string[];
+  };
+  summary: string;
+  mixes: RecommendationMix[];
+  products: (MenuItem & { reason: string })[];
+  meta: { steps: { step: string; provider: string; model: string; latencyMs: number }[] };
+};
+
 export const API_URL =
   process.env.NEXT_PUBLIC_API_URL ?? process.env.API_URL ?? "http://localhost:3001";
 
@@ -41,4 +67,15 @@ export async function getMenuItems(category?: CategoryId): Promise<MenuItem[]> {
       ? MENU_ITEMS.filter((item) => item.category === category)
       : MENU_ITEMS;
   }
+}
+
+export async function requestDrinkRecommendations(prompt: string): Promise<DrinkRecommendations> {
+  const response = await fetch(new URL("/api/recommendations", API_URL), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt }),
+  });
+  const payload = await response.json().catch(() => ({})) as DrinkRecommendations & { message?: string };
+  if (!response.ok) throw new Error(payload.message || "ยังจัดแก้วให้ไม่ได้ ลองใหม่อีกครั้งนะ");
+  return payload;
 }
